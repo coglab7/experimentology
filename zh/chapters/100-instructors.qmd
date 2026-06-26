@@ -1,0 +1,188 @@
+{{< include _setup.qmd >}}
+
+# 教师指南 {#sec-instructors}
+
+## 引言
+
+这是一份关于如何在课程中开展 replication projects 的教师指南。除了本书部分作者此前讨论过的、对整个领域的益处之外 [例如 @hawkins2018; @frank2012]，基于 replication 的课程也能让课程中的学生受益。在这份指南中，我们会描述这些益处，探讨如何根据学生水平和资源对课程作不同调整，并提供一些指导和示例，帮助你安排课程 logistics。
+
+## 为什么要教 project-based course（项目式课程）？
+
+多年来，我们观察到，与更传统的 lecture 和 problem set-based course 相比，我们基于 replication 的课程以许多额外方式让学生受益。这些益处包括：
+
+* **学生兴趣**：由于每个学生都可以自由选择一项符合自己研究兴趣的研究来 replicate，这种自由会促进学生把课程方法和课程内容更直接地应用到一个自己感兴趣的项目上。
+* **有用性**：如果这门课在项目第一年开设（我们建议如此），学生可以用自己的 replication project，在基于某个现象继续设计研究之前，先确认该现象的 robustness。
+* **现实性**：课程练习通常提供的 practice datasets 缺少真实数据的复杂性和混乱。通过开展 replication project 并处理真实数据，学生能学习如何应用课程提供的工具，而且这种方式更接近这些工具在课程之外的真实用途。
+* **直觉**：全班展示 replication outcomes，并讨论哪些因素似乎预测这些 outcomes，可以帮助学生在阅读文献时形成更好的直觉，判断研究有多可能 replicate。
+* **视角**：面对模糊性时令人沮丧的经历（无论是实验方法、材料还是分析方面的模糊性），可以激励学生在自己未来研究中采用 best practices。
+
+Project-based course 的样子可能会因为学生水平（本科 vs graduate/post-doc level）以及你所在机构为这类课程提供的资源而很不一样，资源主要包括 TA 支持和课程经费（用于数据收集）。本指南大部分内容会假设你拥有和我们类似的设置（即在 graduate/post-doc level 授课，并有课程经费和 TAs 支持课程），但我们也花了一些时间考虑如何调整课程，以适应不同学生水平和资源可用性（见 “Scenarios for different course layouts”）。
+
+
+## Logistics（课程事务）
+
+### Syllabus considerations（教学大纲考虑）
+
+如果这是你第一次教这门课，你可能需要提前决定：课程主要关注内容，还是同时覆盖内容和相关实践技能。例如，如果课程面向本科生，你可能决定主要关注内容；而如果课程面向研究生，他们可能会觉得同时覆盖内容和能用于自己研究的实践技能更有用。
+
+另一个重要考虑是课程持续多久。你的大学采用 quarter 还是 semester 制，会影响课程节奏。对于 Psych 251，因为我们采用 quarter system，所以使用下面展示的 10 周安排。不过，我们也把这个安排改编成 16 周课程，因为它更好代表其他多数机构的 academic calendars。本 appendix 末尾给出了一组 sample class schedules。
+
+### 评分
+
+根据你的课程格式和教学理念，你可能有自己偏好的评分标准。作为参考，在 Psych 251 中，我们希望同时涵盖 assignments（problem sets 和 project components）以及课堂出勤和参与。此外，因为 replication project 是课程的核心部分，我们给 project components 的权重略高于 problem sets：
+
+\clearpage
+* 40%：Problem sets（四次，每次 10%）
+* 50%：Final project components，包括 presentations、data collection、analysis 和 writeup
+* 10%：课堂出勤和参与
+
+### 课程预算
+
+对于我们的课程，通常会从 Psychology Department 获得约 US$1,000 的课程经费。此外，当其他系的学生选修时，我们也很幸运地从这些系获得额外经费，以进一步支持课程。尽管如此，确保课程经费能覆盖所有学生项目，仍然是课程中最有挑战的部分之一。假设你有可用预算，下面是我们在预算方面一路学到的一些经验（如果你没有任何经费，请参考 “Scenarios for different course layouts” 下标题为 “Course Funding” 的部分）：
+
+* 在学生选择要 replicate 的研究之前，先给他们估计一下，他们的项目大约能获得多少 participant hours
+* 学生一旦为 replication project 选择研究，就帮助每个学生做 power analysis，确认 replicate 该研究是否在预算范围内（TAs 可以帮忙）
+* 如果某个学生非常想做一项不符合预算的研究，可以考虑以下方式调整研究：（1）能否删除不必要的 measures，让研究变短？（2）如果是 multi-trial study，能否减少 trials 数量？（3）他们的 advisors 是否愿意提供额外经费？（4）能否在大学 participant pools 中运行研究？
+* 如上所述，如果有其他系的学生选修你的课程，获得更多经费的一种可能方式，是联系这些系的系主任，看看他们是否愿意帮助支持你的课程。
+
+一旦所有项目都被批准为在预算范围内，我们建议你创建一个 shared spreadsheet，包含每个学生的姓名，让他们填写 replication project 的细节。最终，这会帮助确保学生向参与者支付公平报酬，并跟踪课程经费如何分配。
+
+### 课程相关 Institutional Review Board 申请
+
+虽然可能为每个学生项目单独申请 IRB approval，但我们建议为班里所有 replication projects 申请 course-wide standard IRB approval。在课程 planning stages 早期联系你的 review board，应能澄清你有哪些可用选项。
+
+学生运行个人项目时，一个重要事项是，他们应该在研究开头放置 course-wide consent form（TAs 审查 paradigms 时也应检查这一点）。作为参考，下面是要求每个学生放在其研究开头的 consent form：
+
+“By answering the following questions, you are participating in a study being performed by cognitive scientists in the Stanford Department of Psychology. If you have questions about this research, please contact us at [CLASS EMAIL ADDRESS]. You must be at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.”
+
+## 不同课程布局的场景
+
+现在我们已经介绍了课程的标准格式，接下来想转向如何调整这个格式，以适应不同需求和资源。我们把本节组织成两个主要类别：学生水平和课程资源（例如 TAs 和课程经费）。
+
+### 学生水平
+
+Stanford 的 Psych 251 面向研究生（目前是 Psychology Department 入学第一年研究生的必修课），但我们也接受高年级本科生，以及其他系的研究生（例如 education、human-computer interaction、philosophy、computer science）。课程第一天，我们会告诉学生，他们应该对以下三个主题中的两个感到 comfortable：
+
+1. 对心理学实验主题有一些了解
+2. Statistical programming：例如 functions 和 variables
+3. 基础统计，例如 ANOVA 和 $t$-test
+
+如果学生只对上述三个主题中的一个感到 comfortable，我们会提前提醒他们，这门课可能比普通学生需要更多时间投入。
+
+如果你计划把这门课调整为面向本科生，他们很可能总体上接触这些主题更少，因此有多种方式可以相应 calibrate 课程：
+
+**Prerequisites**：要求学生已经完成覆盖上述三个主题中至少两个的课程（即一门 psychology class、一门覆盖 statistical programming 的课、一门覆盖基础统计的课，三者任选其二）。
+
+**节奏**：不同于 Psych 251 整门课只有 10 周，本科课程可能受益于更慢节奏，让学生在进入项目之前有更多时间覆盖基础原则。例如，这门课可以跨多个 academic semesters/quarters 开设，Course #1 的项目目标是选择并规划 replication study，Course #2 的项目目标是执行并解释 replication。
+
+**Pair-based 或 group-based projects**：在我们的课程中，每个学生都需要开展自己的 replication project。不过，对于可能不太有信心独自承担整个 replication project 的本科生来说，这种结构可能会让人 overwhelmed。一个能缓解这种压力的选项，是让学生以 pair 或 small team 形式开展这些项目，这样他们可以共同利用彼此优势。在分配 pairs 或 teams 时，尤其有帮助的做法是尽量确保学生在上述三个领域（psychology、statistical programming、basic statistics）中的信心相对均衡。
+
+### 课程资源
+
+我们认为，你的课程可能在两个主要资源方面不同于我们的模式：课程 assistance（即 teaching assistants）和学生项目的课程经费。本节会探讨如何绕开这些限制。
+
+**Teaching assistants**。作为比较，Psych 251 通常配备二到三名 teaching assistants（课程约 25-35 名学生）；通常约为每名 TA 负责 10-12 名学生。我们很幸运能有这种程度的 TA 支持。由于 project-based course 需要个体化关注和反馈，如果 TAs 少于这个数量，就会给 instructor 带来大量工作。如果你*没有* TAs 怎么办？经过一些调整，仍然有办法让课程在 sans-TA 情况下运转；下面列出几个想法：
+
+1. **Peer grading**。作为没有 TAs 的 instructor，最需要投入时间和注意力的领域是 grading。克服这个问题的一种方式，是引入 peer-grading system，让学生互相给作业评分。如果选择这条路线，有两件事可能鼓励学生公平评分：（1）提供清楚、具体的 rubric，尽可能减少评分过程中的主观性；（2）匿名化 assignments，让学生不知道自己正在评分谁的作业。如果可能，再次分配由不同领域知识相对较强的学生组成的 grading pairs 也可能有益，这样他们能针对彼此作品中的弱点提供反馈。
+
+2. **Collective troubleshooting**。第二个最耗时、需要你补上的领域，是学生在实施项目时遇到问题所需的 troubleshooting：从在设备上让 GitHub 和 R Markdown 跑起来，到 Amazon Mechanical Turk 上的数据收集问题。鼓励学生互助的一种方式，是为课程设置一个中心 discussion board（例如 Piazza 或 Slack 上的课程 channel），让学生可以公开（如果需要也可以匿名）发布自己遇到的问题。然后，你可以给帮助 troubleshoot 这些问题的学生 extra credit，以进一步激励 collective troubleshooting。很可能仍会有学生无法解决的问题，但这个系统至少能释放你的时间，把注意力集中在只有*你*能处理的问题上。
+
+3. **全班单一项目**。最后，如果上面提到的 collective grading 和 troubleshooting 方法还不能足够减少时间投入，可以考虑带着全班一起完成一个 replication project。^[这种方式确实会取消我们开头提到的 project-based course 的一些好处，尤其是项目可能不再符合每个学生的具体研究兴趣，因此在学生特定兴趣和对其研究项目有用性方面收益可能较小；但 realism 和 intuition 这两个好处仍然存在，尤其是如果把这个项目放到其他 replication findings 的语境中讨论。] 要让单一项目课程运转，你可以让学生提名他们想作为全班 replicate 的研究，然后投票决定最终选择。目标研究选定后，每个学生都可以独立完成项目所有步骤，包括 preregistering 和撰写 analysis script。之后，设置和运行数据收集阶段可以在课堂上进行；数据收集完后，你可以把数据分发给学生，让他们用自己的 analysis script 运行并解释结果。不管你选择让学生互相评分，还是自己评分，由于项目标准化，你原本需要花在了解每个个人项目细节上的大量时间都会减少。
+
+**Course funding**。除了 TAs 可用性之外，你的课程与我们不同的另一个方面可能是课程经费。如果你的课程经费很少或没有经费（即使联系了系里或机构中相关成员之后仍如此），我们建议以下调整：
+
+1. **Pair-group-based projects**。类似于上面处理不同学生水平的建议 3，对于有限课程预算，一个选项是让学生以 pairs 或 teams 形式开展 replication projects，以降低数据收集成本。这种结构还有一个额外好处，即鼓励学生共同解决问题。另一种做法是，让 pairs 或 teams 中的每个学生独立完成 replication 的每个步骤（例如撰写报告、分析数据、解释结果），这能确保每个学生对项目每一步都承担完整责任。这种结构也可能在课程结束时围绕 analytic reproducibility 提供有趣讨论机会，尤其是当同一 team 中的学生（使用同一个 dataset）对 replication outcome 得出不同结论时。
+
+2. **来自 advisors 的经费**。在某些情况下，学生会带着需要比我们能分配的经费更多的目标研究来找我们，但他们对该研究特别投入（例如因为该研究与他们自己的研究方向高度相关）。一旦我们排除了让研究适应预算的其他方式（例如删除额外 control conditions、运行研究的一个子集），我们通常会问学生，他们的 advisor 是否愿意资助这项研究。我们发现 advisors 往往愿意这样做，尤其是如果 replication 能在学生研究项目的发展中发挥重要作用。同样，减轻有限课程预算负担的一种方式，是鼓励所有学生先询问自己的 advisors 是否愿意资助 replication 的部分或全部数据收集。虽然很可能有些 advisors 不愿意或不能这样做，但课程需要资助的项目数量应该仍会有有意义的减少。
+
+3. **Reproduce a replication**。上面的建议适用于你至少有*一些*课程经费的情况；但如果你*完全没有*经费怎么办？虽然这个方案有明显局限，一个建议是让学生 reproduce 过去公开的 replications。例如，我们的 [course GitHub page](https://github.com/psych251) 包含课程中过去所有 replication projects 的 public repositories。由于每个 replication project 的数据都可以在这些 repositories 中获得，你可以为每个学生提供一个 dataset 和与其相关的原始论文，并要求他们 reproduce 该 replication 的结果。然后，学生应该能够按照下面描述的 replication project 每个步骤进行（例如写报告、识别 key analysis、运行分析）。这种格式只有在学生不查看其项目公开发布的原始 final replication reports 时才可行，因此可能需要在课程一开始就明确说明这一点。
+
+对于使用不同课程格式的你们（无论是在学生水平还是课程资源方面），我们希望这些建议有用。如果你在课程中尝试了一个新想法并发现它有帮助，我们会非常希望你和我们分享！
+
+## 课程安排示例
+
+下面列出的 sample syllabi 按以下决策分类：（1）material：课程只关注 content，还是同时关注 content 和 skills；（2）duration：课程持续 10 周还是 16 周。
+
+对于本科 instructors，我们用灰色标记 advanced topics。我们预计这些主题最适合高年级本科生。至于统计相关内容（例如 estimation、inference），instructors 应根据学生先前准备程度决定教授多少。
+
+```{r}
+adv_color <- "#ebe8fc"
+syllabus_table <- function(syllabus_file) {
+  
+  syllabi <- readr::read_csv(syllabus_file, na = character(),
+                             col_types = "cccccc")
+  adv_rows <- which(syllabi$Difficulty == "adv")
+
+  syllabus <- syllabi |> dplyr::select(-Difficulty)
+  
+  if (knitr::is_latex_output()) {
+    syllabus |>
+      knitr::kable(#format = "latex",
+        booktabs = TRUE,
+        longtable = TRUE,
+                   linesep = c("", "", "\\hline")) |>
+      kableExtra::row_spec(adv_rows, background = ".row")
+  } else if (knitr::is_html_output()) {
+    syllabus |>
+      knitr::kable(table.attr = 'data-quarto-disable-processing="true"') |>
+      kableExtra::kable_styling(bootstrap_options = c("condensed")) |>
+      kableExtra::row_spec(adv_rows, background = adv_color)
+  }
+}
+```
+
+\clearpage
+
+::: {.panel-tabset}
+
+### 10 weeks（10 周）
+
+\footnotesize
+
+同时包含 skills 和 content materials 的 10 周 sample syllabus：
+
+```{r}
+#| cache: false
+
+syllabus_table("data/instructor_guide/Content_Skills_10wk.csv")
+```
+
+\clearpage
+
+### 10 weeks, content only（10 周，仅内容）
+
+只包含 content materials 的 10 周 sample syllabus：
+
+```{r}
+#| cache: false
+
+syllabus_table("data/instructor_guide/Content_10wk.csv")
+```
+
+\clearpage
+
+### 16 weeks（16 周）
+
+同时包含 skills 和 content materials 的 16 周 sample syllabus：
+
+```{r}
+#| cache: false
+
+syllabus_table("data/instructor_guide/Content_Skills_16wk.csv")
+```
+
+\clearpage
+
+### 16 weeks, content only（16 周，仅内容）
+
+只包含 content materials 的 16 周 sample syllabus：
+
+```{r}
+#| cache: false
+
+syllabus_table("data/instructor_guide/Content_16wk.csv")
+```
+
+\normalsize
+
+:::

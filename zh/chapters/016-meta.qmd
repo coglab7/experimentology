@@ -1,0 +1,368 @@
+{{< include _setup.qmd >}}
+
+{{< include helper/meta/meta_prelims.qmd >}}
+
+# 元分析 {#sec-meta}
+
+::: {.callout-note title="学习目标"}
+- 讨论跨研究综合证据的好处
+- 进行简单的 fixed-effects 或 random-effects meta-analysis
+- 推理 within-study 和 across-study biases 在 meta-analysis 中的作用
+:::
+
+贯穿本书，我们一直关注如何设计单个实验，使 [测量精度]{.smallcaps} 最大化并尽量减少 bias。但即使我们尽最大努力，在单个实验中得到精确、无偏的估计，一项研究也永远不可能是决定性的。参与者人口统计特征、刺激和实验方法上的变异，可能限制我们发现的 [generalizability（可推广性）]{.smallcaps}。此外，即使 well-powered 的单个研究也会有一定统计误差，限制其精度。跨研究综合证据，对于形成一种平衡且能恰当演化的整体证据观至关重要；它也有助于理解感兴趣效应中的变异来源。
+
+严谨地综合证据，不只是把一个搜索词输入 Google Scholar，下载几篇看起来相关或有趣的文章，然后定性总结你对这些研究的印象。虽然这种 ad hoc 方法可能是做 literature review 的必要第一步 [@grant2009typology]，但它并不系统，也不能给出某个特定效应的*定量*总结。此外，它也不会告诉你文献中可能存在的 biases，例如偏向发表正向效应的 bias。
+
+为处理这些问题，一种更系统、定量的文献综述通常信息量更大。本章关注一种特定类型的定量综述，称为 **meta-analysis**：\ 一种把不同研究的 effect sizes 合并起来的方法。（如果你需要复习 effect size，见 @sec-estimation，那里介绍了这个概念。）^[我们主要会使用 Cohen's $d$，\indexC{Cohen's $d$} 也就是标准化均值差，我们在 @sec-estimation 中介绍过。Effect size 有许多其他种类，但这里关注 $d$，因为它很常见，而且在本书前面介绍过的统计工具语境中容易推理。] 我们在 *Experimentology* 中加入 meta-analysis 这一章，是因为我们相信它是一个重要工具，能让实验研究者关注 [测量精度]{.smallcaps} 和 [bias reduction（减少偏差）]{.smallcaps}，也就是本书两个关键主题。
+
+通过合并多个研究的信息，meta-analysis\ 往往能比任何单个研究更精确地估计 effect size。此外，meta-analysis 也允许研究者考察某个效应在不同研究之间变化到什么程度。如果一个效应确实跨研究变化，meta-analysis 还可以用于检验某些研究特征是否系统性地产生不同结果（例如，某个效应在特定 populations 中是否更大）。
+
+::: {.callout-note title="案例研究"}
+### 酒店住客重复使用毛巾 {-}
+
+想象你住在酒店里，刚洗完澡。你会把毛巾扔在地上，还是重新挂起来？在一项被广泛引用的关于社会规范力量的研究中，@goldstein2008room 操纵了鼓励住客重复使用毛巾的标语，是强调环境影响（例如“帮助减少用水”），还是强调社会规范（例如“大多数住客会重复使用毛巾”）。在两项研究中，他们发现，收到社会规范信息后，住客明显更可能重复使用毛巾（Study 1: odds ratio [OR] $= 1.46$, 95\% CI $[1.00, 2.16]$, $p = 0.05$; Study 2: OR $= 1.35$, 95\% CI $[1.04, 1.77]$, $p = 0.03$）。
+
+然而，其他研究者随后做的五项研究没有发现显著证据表明社会规范信息会增加毛巾重复使用。（ORs 范围从 $0.22$ 到 $1.34$，且没有任何与假设一致的 $p$-value 小于 $0.05$。）这让许多研究者怀疑是否根本不存在效应。为了考察这个问题，@scheibehenne2016 通过 meta-analysis\ 对这些研究中的证据进行统计合并。这个 meta-analysis 表明，平均而言，使用社会规范信息确实显著增加了酒店毛巾重复使用（OR $= 1.26$, 95\% CI $[1.07, 1.46]$, $p < 0.005$）。这个 [case study]{.smallcaps} 展示了 meta-analysis 的一个重要优势：通过 pooling 多项研究的证据，meta-analysis 能产生比任何单项研究更有力的 insight。我们还会看到，meta-analysis 如何用于评估效应在不同研究之间的变异性。
+:::
+
+<!-- All ES's come from Wagenmakers et al. SI -->
+
+Meta-analysis\ 经常教给我们一些东西，而这些东西是我们随便读一堆文章时无法直觉把握的。在上面的 [case study]{.smallcaps} 中，仅仅阅读单个研究，可能会让人以为社会规范信息不会增加酒店毛巾重复使用。但 meta-analysis 表明，平均效应是有益的，尽管 effect sizes 在不同研究之间可能存在 substantial variation。^[考虑到全球每年有数十亿次酒店预订，即使是一个小效应，也可能带来相当大的环境影响！]
+
+## 证据综合的基础
+
+在探索如何进行 meta-analysis\ 的细节时，我们会转向另一个贯穿全章的例子：一项研究 intergroup relations 中 “contact hypothesis” 的 meta-analysis。
+
+根据 contact hypothesis，针对 minority groups 成员的 prejudice 可以通过 intergroup contact interventions 减少；在这种干预中，majority 和 minority groups 成员一起合作追求共同目标 [@allport1954nature]。为了汇总 contact hypothesis 的证据，@paluck2019contact 对检验 randomized intergroup contact interventions 对长期 prejudice-related outcomes 影响的研究进行了 meta-analysis。
+
+@paluck2019contact 使用系统性文献搜索，寻找所有检验这些效应的论文，然后从每篇论文中提取 effect size estimates。^[本书不会介绍如何进行系统性文献搜索和提取 effect sizes，但如果你计划做 meta-analysis 或其他 evidence synthesis，这些主题非常关键。我们的经验是，从报告标准不一致的论文中提取 effect sizes 可能尤其棘手，因此向有 meta-analysis 经验的人请教会很有帮助。] 由于不是每篇论文都会报告 standardized effect sizes\indexC{standardized effect size}，甚至不一定为每组报告均值和标准差，这个过程常常需要从图、表和统计检验中抓取信息，尝试重构 effect sizes。^[例如，如果 outcome variable 是 continuous，即使不能访问原始数据，我们也可以根据论文报告的组均值和标准差估计 Cohen's $d$\indexC{Cohen's $d$}。]
+
+按照 meta-analysis 的 best practices（那里几乎从来不用担心隐私问题），@paluck2019contact 公开共享了他们的数据。前几行显示在 @tbl-meta-dataset。我们会在全章把这些数据作为贯穿例子。
+
+<!-- \vspace{1em} -->
+\footnotesize
+```{r meta-dataset}
+#| label: tbl-meta-dataset
+#| tbl-cap: "@paluck2019contact meta-analysis 中提取出的 effect sizes (d) 及其 variances (var\\_d) 的前几行。"
+
+head(df) |>
+  select(name = name_short, pub_date, target = target_spelled_out, n_total, d, var_d)
+```
+\normalsize
+\vspace{-1em}
+
+正如我们在本书中反复看到的，在分析前后可视化数据，有助于 benchmark 并检查我们对正式统计结果的直觉。在 meta-analysis\ 中，绘制 effect sizes 的一种常见方式是 **forest plot**\indexC{forest plot}，它描绘单个研究的估计值和 confidence intervals\indexC{confidence interval (CI)}。在 @fig-meta-forest 中的 forest plot\indexC{forest plot} 里，^[暂时可以忽略最后一行 “RE Model”；我们稍后会回到这里。] 较大的方块对应更精确的研究；注意它们的 confidence intervals 比不那么精确的研究窄得多。
+
+```{r meta-forest}
+#| label: fig-meta-forest
+#| fig-cap: "@paluck2019contact meta-analysis 的 forest plot\\indexC{forest plot}。研究按 standard error 从小到大排序。"
+#| fig-alt: 一个 forest plot，展示每项研究的 estimated standardized mean difference points 和 95% confidence interval error bars。
+#| cap-location: margin
+#| out-width: 80%
+#| fig-width: 6
+#| fig-height: 7
+
+par(mar = c(4, 0, 0, 0))
+metafor::forest(re_model, header = TRUE, xlab = "Standardized mean difference")
+                # fonts = .font)
+```
+
+\vfill
+::: {.callout-note title="代码"}
+本章使用很棒的 `metafor` package [@viechtbauer2010]。使用这个 package 时，你必须先拟合 meta-analytic model。但一旦拟合了模型 `mod`，只需调用 `forest(mod)` 就能创建类似上面的图。
+:::
+
+<!-- Cohen's $d$---which, if you recall from @sec-estimation, represents the standardized mean difference---was used as the effect size index. As we show in the remainder of the chapter, the meta-analytic tools @paluck2019contact used provide several useful insights about this proposed prejudice-reduction intervention. -->
+
+### 如何不应该综合证据
+
+许多人在 evidence synthesis 中的第一反应，是数一数有多少研究支持、多少研究不支持被考察的假设。这个技术通常相当于计算有多少研究有 “significant” $p$-values，因为不管好坏，“significance” 在很大程度上驱动了研究者报告的 take-home conclusions [@mcshane2017statistical; @nelson1986interpretation]。在 meta-analysis\ 中，我们把这种计算 significant $p$-values 数量的做法称为 **vote-counting**\indexC{vote-counting} [@borenstein2021introduction]。例如，在 @paluck2019contact 的 meta-analysis 中，几乎所有研究都有正的 effect size，但 `r sum(df$sig)` 项研究中只有 `r nrow(df)` 项显著。因此，基于这种 vote-count，我们会得到大多数研究不支持 contact hypothesis 的印象。
+
+许多定性 literature reviews 使用这种 vote-counting\indexC{vote-counting} 方法，尽管通常并不明说。尽管它很直观，vote-counting 可能非常误导，因为它只用二分化的 $p$-values 来刻画证据，同时完全忽略 effect sizes。在 @sec-replication 中，我们看到，在考虑单项研究时，迷恋 statistical significance 会如何误导我们。考虑多项研究时，这些问题同样适用。
+
+例如，小研究可能因为 power 有限而持续产生 nonsignificant effects。但当许多这类研究在 meta-analysis\ 中合并起来，meta-analysis 可能会提供关于 positive average effect 的强证据。反过来，许多研究可能有 statistically significant effects，但如果它们的 effect sizes 很小，那么 meta-analysis 可能表明 average effect size 小到没有实际意义。在这些情况下，基于 statistical significance 的 vote-counting\indexC{vote-counting} 会让我们严重误入歧途 [@borenstein2021introduction]。为了避免这些陷阱，meta-analysis 会合并每项研究的 effect size estimates（而不只是它们的 $p$-values），并以有原则的方式加权。
+
+### Fixed-effects meta-analysis（固定效应元分析）\indexC{meta-analysis!fixed-effects}
+
+如果 vote-counting\indexC{vote-counting} 是坏主意，那么我们该如何合并跨研究结果？另一种直观方法也许是平均每项研究的 effect sizes。例如，在 Paluck et al. 的 meta-analysis 中，各研究 effect size estimates 的均值是 $`r round(mean(df$d), digits)`$。这种平均方法朝正确方向迈了一步，但有一个重要局限：平均 effect size estimates 会给每项研究相同权重。一个小研究 [例如 @clunies1989changing，$N = 30$] 对 mean effect size 的贡献，与一个大研究 [例如 @boisjoly2006empathy，$N = 1,243$] 一样大。较大研究比小研究提供更精确的 effect sizes 估计，所以给所有研究相同权重并不理想。相反，较大研究应在分析中承担更多权重。
+
+为处理这个问题，**fixed-effects meta-analysis**\indexC{meta-analysis!fixed-effects} 使用 **weighted average** 方法。更大、更精确的研究，在计算总体 effect size 时得到更高权重。具体来说，每项研究按其 variance 的倒数加权（也就是 squared standard error 的倒数）。这很合理，因为更大、更精确的研究有更小 variances，因此在分析中得到更高权重。
+
+一般而言，fixed-effect pooled estimate 是：
+$$\widehat{\mu} = \frac{ \sum_{i=1}^k w_i \widehat{\theta}_i}{\sum_{i=1}^k w_i}$$
+其中 $k$ 是研究数量，$\widehat{\theta}_i$ 是第 $i^{\text{th}}$ 项研究的 point estimate，$w_i = 1/\widehat{\sigma}^2_i$ 是研究 $i$ 在分析中的权重（即其 variance 的倒数）。^[如果你好奇，fixed-effect $\widehat{\mu}$ 的 standard error 是 $\frac{1}{\sum_{i=1}^k w_i}$。这个 standard error 可以用来构造 confidence interval\indexC{confidence interval (CI)} 或 $p$-value，如 @sec-inference 中所述。]
+
+<!-- In Paluck et al.'s meta-analysis, we would calculate the fixed-effect estimate, $\widehat{\mu}$, as: -->
+
+<!-- <!-- hard-coded from df$d[1:2] and df$se_d[1:2] -->
+<!-- $$\widehat{\mu} = \frac{ \frac{\widehat{\theta}_{study1}}{\widehat{\sigma}^2_{study1}} + \frac{\widehat{\theta}_{study2}}{\widehat{\sigma}^2_{study2}} + \cdots}{ \frac{1}{\widehat{\sigma}^2_{study1}} + \frac{1}{\widehat{\sigma}^2_{study2}} + \cdots } = -->
+<!-- \frac{ \frac{0.03}{0.08^2} + \frac{0.30}{0.08^2} + \cdots }{ \frac{1}{0.08^2} + \frac{1}{0.08^2} + \cdots }$$ -->
+
+\clearpage
+使用 fixed-effects 公式，我们可以估计 Paluck et al. 的 meta-analysis\ 中的 overall effect size 是 standardized mean difference，$\widehat{\mu} = `r round(as.numeric(fe_model$b), 2)`$；95\% confidence interval $[`r paste0(round(fe_model$ci.lb, 2), ", ", round(fe_model$ci.ub, 2))`]$；$p < 0.001$。因为 Cohen's $d$\indexC{Cohen's $d$} 是我们的 effect size index，这个估计表明 intergroup contact 使 prejudice 降低了 $`r round(as.numeric(fe_model$b), 2)`$ 个标准差。
+
+::: {.callout-note title="代码"}
+在 `metafor` 中拟合 meta-analytic models 非常简单。例如，对于上面的 fixed-effects model，我们只是运行 `rma()` 函数，并指定想要 fixed-effects analysis。
+
+```{r, opts.label='code'}
+fe_model <- rma(yi = d, vi = var_d, data = paluck, method = "FE")
+```
+
+然后 `summary(fe_model)` 会给出拟合模型的相关信息。
+:::
+
+### Fixed-effects meta-analysis 的局限\indexC{meta-analysis!fixed-effects}
+
+Fixed-effect meta-analysis 的一个局限，是它假设 true effect size 是，嗯，*固定*的！换句话说，fixed-effect meta-analysis 假设存在一个所有研究都在估计的单一 effect size。这是一个很强的假设。很容易想象它会被违反。例如，想象 intergroup contact 在群体成功达成共同目标时降低 prejudice，但在群体失败时*增加* prejudice。如果我们在这些条件下 meta-analyze 两项研究，其中一项 intergroup contact 大幅增加 prejudice，另一项 intergroup contact 大幅降低 prejudice，那么看起来 intergroup contact 的真实效应可能接近零，而实际上被 meta-analyzed 的两项研究都有大效应。
+
+在 Paluck et al. 的 meta-analysis 中，各研究在多个方面不同，可能导致不同 true effects。例如，有些研究招募成人参与者，有些研究招募儿童。如果 intergroup contact 对成人和儿童的有效性不同，那么谈论单一（也就是 “fixed”）intergroup contact effect 就会误导人。相反，我们会说 intergroup contact 的 effects 在不同研究之间变化，这个想法称为 **heterogeneity**\indexC{heterogeneity}。
+
+Heterogeneity\indexC{heterogeneity} 这个概念是否让你想起 @sec-models 中分析 repeated-measures data 时的什么东西？回想一下，对于 repeated-measures data，我们必须处理参与者之间存在 heterogeneity 的可能性；我们处理它的一种方式，是在 regression model 中引入 participant-level random intercepts。事实证明，在 meta-analysis 中，我们也可以做类似事情来处理研究之间的 heterogeneity。
+
+### Random-effects meta-analysis（随机效应元分析）\indexC{meta-analysis!random-effects}
+
+Fixed-effect meta-analysis 本质上假设 meta-analysis 中所有研究都有相同的 population effect size，$\mu$；random-effects meta-analysis 则假设 study effects 来自一个均值为 $\mu$、标准差为 $\tau$ 的 normal distribution\indexC{normal distribution}。^[技术上，random-effects meta-analysis 还有其他 specification。例如，robust variance estimation 不要求对跨研究 effects 分布作假设 [@hedges2010robust]。这些方法还有其他重要优势，例如能够处理 clustered effects，比如某些论文贡献多个 estimates [@hedges2010robust; @pustejovsky2021meta]，也能在研究数量较少的 meta-analyses 中提供更好的 inference [@tipton2015small]。基于这些原因，我们经常使用这些 robust methods。] 标准差 $\tau$ 越大，说明 effects 在不同研究之间越 heterogeneous。Random-effects model 随后会估计 $\mu$ 和 $\tau$，例如通过 maximum likelihood [@dersimonian1986meta; @brockwell2001comparison]。
+<!-- ^[A confidence interval and $p$-value for the random-effects estimate $\widehat{\mu}$ can be obtained using standard theory for maximum likelihood estimates with an additional adjustment that helps account for uncertainty in estimating $\tau$ [@knapp2003improved].] -->
+
+和 fixed-effect meta-analysis\indexC{meta-analysis!fixed-effects} 一样，$\widehat{\mu}$ 的 random-effects estimate\indexC{meta-analysis!random-effects} 仍然是各研究 effect size estimates 的 weighted average：
+$$\widehat{\mu} = \frac{ \sum_{i=1}^k w_i \widehat{\theta}_i}{\sum_{i=1}^k w_i}$$
+不过，在 random-effects meta-analysis 中，inverse-variance weights 现在纳入了 heterogeneity：\indexC{heterogeneity} $w_i = 1/\left(\widehat{\tau}^2 + \widehat{\sigma}^2_i \right)$。之前权重中只有一个项，现在有两个。这是因为这些权重代表研究的 *marginal* variances 的倒数，同时考虑了有限样本量导致的统计误差（和之前一样的 $\widehat{\sigma}^2_i$），以及真实 effect heterogeneity（$\widehat{\tau}^2$）。
+<!--^[The estimate of $\widehat{\tau}^2$ is a bit more complicated, but is essentially a weighted average of studies' squared residuals, $\widehat{\theta_i} - \widehat{\mu}$, while subtracting away variation due to statistical error, $\widehat{\sigma}^2_i$ [@dersimonian1986meta; @brockwell2001comparison].]  -->
+
+<!-- \clearpage -->
+```{r meta-densities}
+#| label: fig-meta-densities
+#| fig-cap: "Paluck et. al 数据集 random-effects meta-analysis 得到的 population effects 估计分布（粗红线），以及 studies' point estimates 的估计密度（细黑线）。"
+#| fig-alt: 一张图，2 条表示 observed 和 estimated effect sizes 分布的钟形曲线相似但不完全相同。
+#| fig-width: 3.5
+#| fig-height: 2.25
+#| column: margin
+
+# red line: fitted density of *population* effects from meta-analysis
+# gray line: just a dumb density estimate from the *point estimates*
+ggplot(tibble(x = c(-2, 2)), aes(x = x)) +
+  
+  # reference lines
+  geom_vline(xintercept = 0, lineweight = 1, color = pal$grey) +
+  geom_vline(xintercept = re_model$b, linetype = "dashed", lineweight = 1,
+             color = pal$red) +
+  
+  # estimated density of estimates (nonparametric)
+  geom_density(aes(x = d), data = df, adjust = 1.2) +
+  
+  # estimated density from meta-analysis (parametric)
+  stat_function(fun = dnorm, n = 101, lineweight = 1.2, color = pal$red,
+                args = list(mean = re_model$b, sd = sqrt(re_model$tau2) )) +
+
+  scale_x_continuous(breaks = seq(-2, 2, 0.5)) +
+  scale_y_continuous(breaks = NULL) +
+  labs(x = "Standardized mean difference", y = "")
+```
+
+对 Paluck et al. 的数据集进行 random-effects meta-analysis\indexC{meta-analysis!random-effects} 会得到 $\widehat{\mu} = `r round(as.numeric(re_model$b), 2)`$；95\% confidence interval $[`r paste0(round(re_model$ci.lb, 2), ", ", round(re_model$ci.ub, 2))`]$；$p < 0.001$。也就是说，*跨研究平均而言*，intergroup contact 与 prejudice 降低 $`r round(as.numeric(re_model$b), 2)`$ 个标准差相关，明显大于 fixed-effects model 的估计。这个 meta-analytic estimate 显示为 @fig-meta-forest 的最底线。
+
+根据 random-effects model，intergroup contact effects 似乎因研究而异。Paluck et al. 估计，跨研究 effects 的标准差为 $\widehat{\tau} = `r tau_stats[1]`$；95\% confidence interval $[`r tau_stats[2]`, `r tau_stats[3]`]$。这个估计表明存在大量 heterogeneity！\indexC{heterogeneity} 为了可视化这些结果，我们可以绘制 population effects 的估计密度，它只是一个均值为 $\widehat{\mu}$、标准差为 $\widehat{\tau}$ 的 normal distribution\indexC{normal distribution}（@fig-meta-densities）。
+
+\vfill
+::: {.callout-note title="代码"}
+拟合 random-effects model 只需要稍微改动 `rma()` 的 methods argument。（我们还加入 `knha` flag，它会对 standard errors 和 $p$-values 的计算添加一个 correction。）
+
+```{r, opts.label='code'}
+re_model <- rma(yi = d, vi = var_d, data = paluck, method = "REML", knha = TRUE)
+```
+:::
+
+这个 meta-analysis\ 突出了一个重要点：overall effect size estimate $\widehat{\mu}$ 只代表跨研究 population effect 的*均值*。它没有告诉我们 effects 在不同研究之间*变化*多少。因此，我们建议始终报告 heterogeneity\indexC{heterogeneity} estimate $\widehat{\tau}$，最好同时报告其他相关指标，帮助总结 effect sizes 跨研究的分布 [@riley2011interpretation; @wang2019simple; @mathur_mam; @npphat]。报告 heterogeneity 能帮助读者知道 effects 在跨研究之间有多一致或不一致，这可能提示需要考察该 effect 的 *moderators*\indexC{moderator}（即与较大或较小 effects 相关的因素，例如参与者是成人还是儿童）。
+
+在 meta-analysis 中考察 moderators 的一种常见方法是 meta-regression，其中 moderators 会作为 covariates 纳入 random-effects meta-analysis model\indexC{meta-analysis!random-effects} [@thompson2002should]。和标准 regression 一样，随后可以为每个 moderator 估计 coefficient，表示有无该 moderator 的研究之间 population effect 的平均差异。
+
+\vfill
+::: {.callout-note title="深入"}
+### Single-paper meta-analysis 和 pooled analysis {-}
+
+到目前为止，我们把 meta-analysis\ 描述为总结多篇论文所报告结果的工具。然而，有些人主张，meta-analysis 也应该用于总结单篇论文中多项研究的结果 [@goh2016mini]。例如，在一篇论文中，如果你描述了关于某个假设的三个不同实验，就可以（1）从每项研究中提取 summary information（例如均值和标准差），（2）计算 effect size，然后（3）在 meta-analysis 中合并这些 effect sizes。
+
+Single-paper meta-analyses 具有我们讨论过的许多相同优缺点。不过，一个独特弱点是，研究数量少通常意味着检测 heterogeneity\indexC{heterogeneity} 和 moderators\indexC{moderator} 的 power 很低。这种低 power 可能导致研究者声称他们的研究之间没有显著差异。但另一种解释是，根本没有足够 power 检测这些差异！
+
+作为替代方案，你也可以 pool 三项研究的实际数据，而不是只 pooling summary statistics。例如，如果三项实验各有 10 名参与者的数据，就可以把它们合并为一个包含 30 名参与者的数据集，并纳入条件操纵跨实验的 random effects（如 @sec-models 所述）。这种策略通常称为 **pooled**\indexC{pooled data analysis} 或 **integrative** data analysis（偶尔也称为 “mega-analysis”，听起来很酷）。\indexC{mega-analysis|see{pooled data analysis}}
+
+Pooled data analysis\indexC{pooled data analysis} 的一个好处是，它可以给你更高 power 来检测 moderators。\indexC{moderator} 例如，想象 intergroup contact treatment 的 effect 被 age moderated。如果我们进行传统 meta-analysis，数据集中只有三个 observations，power 会非常低。然而，在 pooled data analysis 中，我们有更多 observations（以及 moderator 中更多 variation），这可能带来更高 power（@fig-meta-v-ipd）。
+
+Pooled data analysis\indexC{pooled data analysis} 也有自己的局限 [@cooper2009relative]。有时 pooling datasets 并不太有意义（例如 measures 彼此不同）。尽管如此，我们相信，在报告多个实验的论文中，pooled data analysis 和 meta-analysis\ 都是值得记住的有用工具！
+
+![三项单独研究中的示例数据（左）可以被 pool 到一个数据分析中（中），也可以作为三个 effect sizes 进行 meta-analysis（右）。](images/meta/meta_v_ipd.png){#fig-meta-v-ipd width=95% fig-alt="Spreadsheets where: 3 studies each have 10 rows of data; pooled analysis has all 30 rows; meta-analysis has a row per study."}
+
+<!-- \vspace{-1em} -->
+:::
+
+
+## Meta-analysis 中的 bias
+
+Meta-analysis 是跨研究综合证据的好工具，但 meta-analysis 的准确性可能被 bias 损害。这里我们讨论两类 bias：**within-study**\indexC{within-study bias} 和 **across-study** biases\indexC{across-study bias}。任一类型都可能导致 meta-analytic estimates 过大、过小，甚至方向完全错误。
+<!-- We will now discuss examples of each type of bias as well as ways to address these biases when conducting a meta-analysis. This includes mitigating the biases at the outset through sound meta-analysis design and also assessing the robustness of the ultimate conclusions to possible remaining bias. -->
+
+### Within-study biases（研究内偏差）
+
+Within-study biases\indexC{within-study bias}，例如 demand characteristics\indexC{demand characteristics}、confounds 和 order effects（都在实验设计章节中讨论过），不仅会影响单项研究的 validity，也会影响任何综合这些研究的尝试。<!-- @sec-design---not --> 当然，如果单项研究结果受到 analytic flexibility\indexC{analytic flexibility}（$p$-hacking）\index{p-hacking} 影响，那么对它们进行 meta-analysis 会导致 inflated effect size estimates。换句话说：garbage in, garbage out。
+
+例如，@paluck2019contact 指出，关于 intergroup contact 的早期研究几乎全都使用 nonrandomized designs。想象一个 hypothetical study：研究者考察一个完全无效的 intergroup contact intervention，并非随机地把 low-prejudice people 分配到 intergroup contact condition，把 high-prejudice people 分配到 control condition。在这种场景下，研究者当然会发现 intergroup contact condition 中的 prejudice 更低。但这个 effect 并不是真正的 contact intervention effect，而是 nonrandom assignment 的虚假效应（即 confounding）。现在想象对许多设计同样糟糕的研究进行 meta-analysis。即使实际上不存在效应，meta-analyst 也可能发现 intergroup contact effect 的惊人证据。
+
+为缓解这个问题，meta-analysts 经常排除可能特别受 within-study bias\indexC{within-study bias} 影响的研究。[例如，@paluck2019contact 排除了 nonrandomized studies。] 当然，这些决定不能基于它们对 meta-analytic estimate 的影响，否则这种 post hoc exclusion 本身就会导致 bias！因此，meta-analyses 的 inclusion and exclusion criteria 应尽可能预注册。
+
+有时，某些 bias 来源无法通过排除研究来消除，通常是因为特定领域中的研究共享某些根本局限（例如药物试验中的 attrition）。收集数据后，meta-analysts 也应使用既有 rating tools 对研究的 risks of bias 进行定性评估 [@sterne2016robins]。这样做可以让 meta-analyst 传达可能存在多少 within-study bias\indexC{within-study bias}。^[如果你对评估 within-study bias 感兴趣，可以看看 Cochrane 开发的 Risk of Bias tool（<https://sites.google.com/site/riskofbiastool/welcome/rob-2-0-tool>）。Cochrane 是一个致力于 evidence synthesis 的组织。]
+<!-- @paluck2019contact did not use such tools, but they could have used it to communicate, for example, the extent to which participants might have differentially dropped out of the study.]  -->
+
+Meta-analysts 还可以进行 sensitivity analyses\indexC{sensitivity analysis}，评估结果可能受到不同 within-study biases\indexC{within-study bias} 或排除某些研究类型影响的程度 [@art]。例如，如果 nonrandom assignment 是一个担忧，meta-analyst 可以分别运行只纳入 randomized studies 的分析，以及纳入所有研究的分析，以确定纳入 nonrandomized studies 会在多大程度上改变 meta-analytic estimate。
+
+这两个选项和 @sec-prereg: 中关于实验预注册的讨论是平行的：为了缓解对 results-dependent meta-analysis 的担忧，研究者可以提前预注册分析，或者在事后透明说明自己的选择。Sensitivity analyses\indexC{sensitivity analysis} 可以缓解一种担忧：某个特定 exclusion criteria 的选择是否关键地关系到报告结果。
+
+### Across-study biases（研究间偏差）
+
+Across-study biases\indexC{across-study bias|(} 会发生在例如研究者 **selectively report**\indexC{selective reporting} 某些类型的 findings，或选择性发表某些类型的 findings（publication bias，\indexC{publication bias} 见 @sec-replication 和 @sec-prereg）时。这些 across-study biases 常常偏向 statistically significant positive results，这意味着基于这些研究的 meta-analytic estimate 会相对于 true effect 被 inflated。
+
+::: {.callout-note title="事故报告"}
+### 量化社会科学中的 publication bias {-}
+
+Publication bias\indexC{publication bias} 通常很难量化，因为你不知道研究者的 “file drawers” 里到底有多少研究；未发表研究按定义就是不可获得的。但最近一项研究利用了一个独特机会，尝试在一组已知研究中量化 publication bias。
+
+Time-sharing Experiments in the Social Sciences (TESS)\indexC{Time-sharing Experiments in the Social Sciences (TESS)} 是一个创新项目，允许研究者申请在美国 nationally representative samples\indexC{representative sample} 上运行实验。2014 年，@franco2014 及其同事利用这个申请过程，考察了通过 TESS 进行的全部 221 项研究的 population。
+
+利用这些信息，Franco 及其同事检查这些研究记录，以确定研究者是否发现了 statistically significant results、一组 statistically significant 和 nonsignificant results 的混合，还是只有 nonsignificant results。随后，他们考察这些结果发表在科学文献中的可能性。
+
+超过 60% 有 statistically significant results 的研究被发表，相比之下，只产生 statistically nonsignificant results 的研究只有 25% 被发表。这个发现很重要，因为它量化了 publication bias 实际有多强，至少在一个特定研究 population 中如此。这个估计不一定 general：例如，也许 TESS\indexC{Time-sharing Experiments in the Social Sciences (TESS)} 研究更容易被放进 file drawer，因为研究者运行这些研究不需要成本。但即使较低水平的 publication bias 也会对 meta-analysis 产生 substantial effect，这意味着检查，并且可能纠正 publication bias\indexC{publication bias} 至关重要。
+:::
+
+和 within-study biases\indexC{within-study bias} 一样，meta-analysts 通常会谨慎决定哪些研究进入 meta-analysis，以缓解 across-study biases\indexC{across-study bias}。Meta-analysts 不只想捕捉关于其感兴趣效应的 high-profile 已发表研究，也想捕捉发表在低知名度期刊上的研究，以及所谓 gray literature [即未发表的 dissertations 和 theses\; @lefebvre2019searching]。^[关于纳入 gray literature 是否真的能减少 meta-analysis 中的 across-study biases，证据是混合的 [@tsuji2020addressing; @sapbe]，但尝试纳入这类文献仍然是常见实践。]
+
+也有一些统计方法可以帮助评估结果对 across-study biases\indexC{across-study bias} 的 robust 程度。评估并纠正 publication bias 的最流行工具之一是 **funnel plot**\indexC{funnel plot} [@duval2000trim; @egger1997bias]。Funnel plot 展示研究 effect estimates 与其 precision（通常是 standard error）之间的关系。这些图被称为 “funnel plots”，是因为如果没有 publication bias，那么随着 precision 增加，effects 会向 meta-analytic estimate “funnel” 过去。当 precision 较小时，由于更大的 measurement error\indexC{measurement error}，它们会分散得更开。
+
+@Fig-meta-funnel-unbiased 是一种 funnel plot\indexC{funnel plot} [@sapb] 的例子，用于一个没有 publication bias\indexC{publication bias} 的 100 项研究模拟 meta-analysis。
+
+```{r meta-funnel-unbiased}
+#| label: fig-meta-funnel-unbiased
+#| fig-cap: "一个 significance funnel plot\\indexC{funnel plot}，用于模拟为没有 publication bias 的 meta-analysis。橙色点：$p < 0.05$ 且 estimates 为正的研究。灰色点：$p \\ge 0.05$ 或 estimates 为负的研究。黑色菱形：$\\widehat{\\mu}$ 的 random-effects estimate。"
+#| fig-alt: 一张图，展示 observed effect sizes 及其对应 standard errors 之间的漏斗形分布。
+#| cap-location: margin
+#| out.width: 80%
+
+# simulate meta with publication bias, but keep all studies
+set.seed(451)
+d_all <- sim_data2(
+  tibble(k = 100, per.cluster = 1, mu = .5, V = 1, V.gam = 0, # no clustering
+         sei.min = 0.05, sei.max = 3, true.dist = "norm",
+         SE.corr = FALSE, select.SE = FALSE, eta = 10),  # set publication bias
+  keep.all.studies = TRUE)
+
+# published studies only
+dp <- d_all |> filter(publish == 1)
+
+meta_all <- metafor::rma(yi = yi, vi = vi, data = d_all, method = "REML",
+                         knha = TRUE)
+
+PublicationBias::significance_funnel(yi = meta_all$yi, vi = meta_all$vi,
+                                     xmin = -8, xmax = 8) +
+  labs(color = "") +
+  theme_get() +
+  theme(legend.position = "top")
+```
+
+::: {.callout-note title="代码"}
+这张图使用 `PublicationBias` package [@braginsky2023pubbias] 和 `significance_funnel()` 函数。（另一个可替代函数是 `metafor` 函数 `funnel()`，会产生更 “classic” 的 funnel plot。\indexC{funnel plot}）我们使用拟合好的模型 `re_model`：
+
+```{r, opts.label='code'}
+significance_funnel(yi = re_model$yi, vi = re_model$vi)
+```
+
+因为 meta-analysis 是一种非常成熟的方法，许多相关操作都是 “plug and play”。
+:::
+
+正如 “funnel” 这个名称\indexC{funnel plot} 所暗示的，我们的图看起来有点像漏斗。较大研究（standard errors 较小的研究）比小研究更紧密地聚集在 $`r round(meta_all$b, digits)`$ 的均值附近，但大小研究的 point estimates 都以均值为中心。也就是说，funnel plot 是对称的。^[经典 funnel plots 更像 @fig-meta-classic-funnel。我们的版本有几个不同。最明显的是，我们没有反转纵轴（我们觉得那很令人困惑）。我们也没有突出左边界，因为我们认为人们通常不会选择负向研究。]
+
+<!-- \clearpage -->
+```{r meta-classic-funnel}
+#| label: fig-meta-classic-funnel
+#| fig-column: margin
+#| fig-cap: "一个 classic funnel plot。\\indexC{funnel plot}"
+#| fig-alt: 一张图，展示 observed effect sizes 及其对应 standard errors 之间的倒漏斗形分布。
+#| fig-height: 3
+#| fig-width: 3.75
+##| out.width: 80%
+##| cap-location: margin
+
+meta_p <- metafor::rma(yi = yi, vi = vi, data = dp, method = "REML", knha = TRUE)
+
+par(mar = c(4, 4, 0.1, 0.1))
+metafor::funnel(meta_all, xlab = "Standardized mean difference", family = .font)
+```
+
+并不是所有 funnel plots\indexC{funnel plot} 都对称！@Fig-meta-funnel-biased 展示的是，如果所有 $p<0.05$ 且 estimates 为正的研究都被发表，但 $p \ge 0.05$ 或 estimates 为负的研究只有 10\% 被发表，我们这个 hypothetical meta-analysis 会发生什么。Publication bias\indexC{publication bias} 的引入会把 pooled estimate 从 $`r round(meta_all$b, digits)`$ 显著 inflate 到 $`r round(meta_p$b, digits)`$。此外，研究 estimates 和 standard errors 之间似乎存在 correlation，使得小研究往往比大研究有更大 estimates。这种 correlation 常被称为 funnel plot asymmetry，因为 funnel plot 开始看起来像一个直角三角形，而不是漏斗。Funnel plot\indexC{funnel plot} asymmetry *可以*作为 publication bias 的 diagnostic，尽管它并不总是完美指标，下一小节会看到这一点。
+
+```{r meta-funnel-biased}
+#| label: fig-meta-funnel-biased
+#| fig-cap: "同一模拟 meta-analysis 在发生 publication bias 后的 significance funnel plot\\indexC{funnel plot}。橙色点：$p < 0.05$ 且 estimates 为正的研究。灰色点：$p \\ge 0.05$ 或 estimates 为负的研究。黑色菱形：$\\widehat{\\mu}$ 的 random-effects estimate。"
+#| fig-alt: 一张图，展示 observed effect sizes 与其对应 standard errors 之间的正斜率线性分布。
+#| cap-location: margin
+#| out.width: 80%
+
+PublicationBias::significance_funnel(yi = meta_p$yi, vi = meta_p$vi,
+                                     xmin = -8, xmax = 8) +
+  labs(color = "") +
+  theme_get() +
+  theme(legend.position = "top")
+```
+
+### Across-study bias correction（研究间偏差校正）\indexC{across-study bias}
+
+我们如何识别和纠正研究间 bias？鉴于某些形式的 publication bias\indexC{publication bias} 会诱发研究 point estimates 与 standard errors 之间的 correlation，几个流行统计方法，例如 trim-and-fill [@duval2000trim] 和 Egger's regression [@egger1997bias]，被设计用来量化 funnel plot\indexC{funnel plot} asymmetry。
+
+不过，funnel plot asymmetry\indexC{funnel plot} 并不总是意味着存在 publication bias。Publication bias 也不总会导致 funnel plot asymmetry。有时 funnel plot asymmetry 由小研究和大研究中所研究 effects 的真实差异驱动 [@egger1997bias; @lau2006case]。例如，在一项 intervention studies 的 meta-analysis 中，如果最有效的 interventions 也是最昂贵或最难实施的，那么这些高度有效的 interventions 可能主要用于最小的研究（“small study effects”）。
+
+Funnel plots\indexC{funnel plot} 及相关方法最适合检测这样一种 publication bias：（1）point estimates 较大的小型正向研究，比 point estimates 较小或为负的小研究更可能发表；（2）最大的研究无论 point estimates 大小如何都会发表。这种 publication bias 模型有时确实发生，但并不总是如此！
+
+一种更灵活的 publication bias\indexC{publication bias} 检测方法使用 **selection models**\indexC{selection model}。这些模型可以检测 funnel plots\indexC{funnel plot} 可能检测不到的其他 publication bias 形式，例如偏向*显著*结果的 publication bias。这里不详细介绍这些方法，但我们认为它们连同相关 sensitivity analyses\indexC{sensitivity analysis}，是处理这个问题的更好方法。^[Selection models 的高层次综述见 @mcshane2016adjusting 和 @smt。更多方法细节见 @hedges1984estimation、@iyengar1988 和 @vevea1995。拟合和解释 selection models 的教程见 @smt。Sensitivity analyses 见 @sapb。]
+
+你可能也听说过用于检测 across-study biases\indexC{across-study bias} 的 “$p$-methods”，例如 $p$-curve 和 $p$-uniform [@simonsohn2014p; @van2015meta]。这些方法本质上评估 significant $p$-values 是否刚好在 $0.05$ 下方“聚成一堆”，这被视为 publication bias 的指示。这些方法在心理学中越来越流行，也有其优点。不过，它们实际上是 selection models [例如 @hedges1984estimation] 的简化版本，而且只适用于比原始 selection models\indexC{selection model} 限制更多得多的情境 [例如当研究之间没有 heterogeneity\indexC{heterogeneity} 时\; @mcshane2016adjusting]。因此，通常（尽管并不总是）最好用 selection models 代替限制更强的 $p$-methods。
+
+回到贯穿例子，Paluck et al. 使用一种基于 regression 的方法来评估和纠正 publication bias。这个方法提供了 standard error 与 effect size 之间存在关系的显著证据（也就是 asymmetric funnel plot\indexC{funnel plot}）。再次强调，这种 asymmetry 可能反映 publication bias，也可能反映研究 estimates 与 standard errors 之间 correlation 的其他来源。Paluck et al. 也使用同一个 regression-based approach，尝试纠正潜在 publication bias。\indexC{publication bias} 这个模型的结果表明，bias-corrected effect size estimate 接近零。换句话说，即使所有研究都估计 intergroup contact 会降低 prejudice，仍然可能存在一些未发表研究没有发现这一点（或发现 intergroup contact 增加 prejudice）。
+
+\vfill
+::: {.callout-note title="事故报告"}
+### Garbage in, garbage out? 对可能有问题的研究做 meta-analysis {-}
+
+Botox 可以帮助消除皱纹。但一些研究者提出，当 Botox 用于麻痹与皱眉相关的肌肉时，它也可能帮助治疗临床抑郁。这个说法听起来可能令人惊讶，但快速查看文献会让许多人得出这个 treatment 有效的结论。随机分配抑郁患者接受 Botox 或 saline injections 的研究确实发现，Botox 接受者的抑郁下降。而当你把所有可得证据合并进 meta-analysis，会发现这个 effect 相当大：$d = 0.83$, 95\% CI $[0.52, 1.14]$。
+
+不过，正如 @coles2019does 所论证的，这个 estimated effect 可能受到 within- 和 between-study bias 的影响。首先，参与者本不应该知道自己被随机分配到接受 Botox 还是 control saline injections。但这两种 treatment 中只有一种会让你上半张脸瘫痪！几周后，你很可能知道自己接受的是 Botox treatment 还是 control saline injection。因此，Botox 对抑郁的表面效应可能其实是 placebo effect。\indexC{placebo effect}
+
+第二，研究者测量的 outcomes 中只有 50\% 出现在最终发表论文中，这引发了对 selective reporting\indexC{selective reporting} 的担忧。也许研究 Botox 对抑郁影响的研究者只报告了显示正向 effect 的 measures，而没有报告那些不显示正向 effect 的 measures。
+
+合在一起，这两点批评表明，尽管 meta-analytic estimate 看起来很惊人，Botox 对抑郁的 effect 仍远不能确定。
+:::
+
+\indexC{across-study bias|)}
+
+## 本章小结：Meta-analysis
+
+综合来看，Paluck 及其同事使用 meta-analysis 得到了几个重要 insight，而这些 insight 在非定量 review 中很容易被错过。第一，尽管 nonsignificant findings 占多数，intergroup contact interventions 被估计为平均降低 prejudice $`r round(as.numeric(re_model$b), 2)`$ 个标准差。另一方面，intergroup contact effects 中存在 considerable heterogeneity\indexC{heterogeneity}，提示这些 interventions 的有效性存在重要 moderators\indexC{moderator}。最后，publication bias\indexC{publication bias} 是一个 substantial concern，表明需要使用 registered report\indexC{registered report} 格式做 follow-up research；这种格式无论 outcome 是否为 positive 都会发表（@sec-prereg）。
+
+总体而言，meta-analysis 是跨研究聚合证据的一项关键技术。Meta-analysis 让研究者能越过 vote counting 这类 naive techniques 的 bias，转向对实验效应更定量的总结。不幸的是，meta-analysis 的质量取决于它所基于的文献质量，所以有志于做 meta-analysis 的人必须意识到 within- 和 between-study biases！
+
+\vfill
+::: {.callout-note title="讨论问题"}
+1. 想象你在一篇 meta-analysis 的 abstract 中读到如下结果：“在 83 项针对初中儿童的随机研究中，用 mindfulness meditation 替换一小时课堂时间，显著提高了 standardized test scores（standardized mean difference\indexC{standardized mean difference (SMD)} $\widehat{\mu} = 0.05$；95\% confidence interval: $[0.01, 0.09]$；$p<0.05$）。” 这种报告 meta-analysis 结果的方式为什么有问题？请提出一个更好的句子来替代它。
+
+2. 当你继续阅读这篇 meta-analysis 时，发现作者总结说：“这些发现证明 meditation 对儿童有 robust benefits，说明即使把 meditation 作为正常课堂时间的替代，test scores 也会提高。” 你记得 heterogeneity\indexC{heterogeneity} estimate 是 $\widehat{\tau} = 0.90$。你认为这个关于 heterogeneity 的结果倾向于支持，还是倾向于削弱这篇 meta-analysis 的结论句？为什么？
+
+3. 对前两个问题中描述的 meta-analysis，你会担心哪些 within-study biases\indexC{within-study bias}？考虑到这些可能的 biases，你会如何评估被 meta-analyzed 的研究，以及整个 meta-analysis 的 credibility？
+
+4. 想象你对一篇文献做 meta-analysis，在这篇文献中，任一方向 statistically significant 的结果都比 nonsignificant results 更可能发表。画出你预期看到的 funnel plot\indexC{funnel plot}。这张图是对称的还是不对称的？
+
+5. 你认为为什么小研究在 random-effects meta-analysis\indexC{meta-analysis!random-effects} 中比在 fixed-effects meta-analysis\indexC{meta-analysis!fixed-effects} 中获得更大权重？根据上面给出的方程，你能在数学上看出为什么这是真的，并且也能用简单语言解释直觉吗？
+:::
+
+<!-- \clearpage -->
+::: {.callout-note title="延伸阅读"}
+* 一本不错的免费教材，包含很多好的代码示例：Harrer, Mathias, Pim Cuijpers, Furukawa Toshi A, and David D. Ebert [-@harrer2021]. *Doing Meta-Analysis with R: A Hands-On Guide*. Chapman & Hall/CRC Press. 可在线免费获取：<https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R>.
+:::
+
+\addtocontents{toc}{\protect\setlength{\protect\cftbeforechapskip}{\protect\bigskip}}

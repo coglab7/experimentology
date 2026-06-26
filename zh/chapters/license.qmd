@@ -1,0 +1,5 @@
+本地中文版翻译稿。原作：_Experimentology: An Open Science Approach to Experimental Psychology Methods_，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。
+
+本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。
+
+原作许可见项目 README 和原书页面。

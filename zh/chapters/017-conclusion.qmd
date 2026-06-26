@@ -1,0 +1,43 @@
+{{< include _setup.qmd >}}
+
+::: {.content-visible when-format="pdf"}
+# 结语 {#sec-conclusion}
+:::
+
+::: {.content-visible when-format="html"}
+# 结语 {#sec-conclusion .unnumbered}
+:::
+
+你已经读到了 *Experimentology* 的最后。这本书是我们关于如何开展好的心理学实验的一份指南，有时也带着一点明确的立场。在这本书中，我们试图用一种统一的方式来说明为什么要做实验、以及如何做实验，而这个方式围绕着实验的目标展开：
+
+> 实验旨在对特定因果效应做出尽可能无偏、可推广且精确的估计。
+
+这种表述并不完全是更广泛领域中谈论实验的常见方式，但我们希望你已经开始看到这一取向背后的理由。在最后这一章中，我们会简要回顾这一取向的几个方面，以及它如何连接到本书的四个主题：[transparency（透明性）]{.smallcaps}、[measurement precision（测量精度）]{.smallcaps}、[bias reduction（减少偏差）]{.smallcaps} 和 [generalizability（可推广性）]{.smallcaps}。最后，我们会提到这一领域中一些令人兴奋的新趋势，这些趋势让我们对 experimentology 以及更广义的心理学未来保持希望。
+
+## 总结我们的取向
+
+*Experimentology* 的取向，同时建立在两种认识之上：一方面，我们重视实验揭示人类心理重要方面的力量；另一方面，我们也理解实验可能以许多方式失败。尤其是，“replication crisis”（@sec-replication）揭示了，小样本、对二分式统计推断的关注，以及数据分析透明性的缺乏，可能产生一套既不可复现也不可重复的文献。我们的取向正是为了避开这些陷阱。
+
+我们关注 [measurement precision（测量精度）]{.smallcaps}，是为了更好地测量因果效应。之所以强调因果效应，是因为我们承认实验在建立因果推断中扮演关键角色（@sec-experiments），也承认因果关系对理论至关重要（@sec-theories）。在统计取向上，我们强调估计（@sec-estimation）和建模（@sec-models），这有助于我们避开二分式推断所带来的一些谬误（@sec-inference）。我们选择测量时，会努力最大化信度（@sec-measurement）。我们偏好简单的 within-participant 实验设计，因为它们通常能产生更精确的估计（@sec-design）。我们还会用 meta-analytic 的方式思考某个特定效应的总体证据，而不是只看单个实验（@sec-meta）。
+
+此外，我们承认估计中存在许多潜在偏差来源，因此关注 [bias reduction（减少偏差）]{.smallcaps}。在测量中，我们识别测量效度的论证，从而减少对关键目标构念进行估计时的偏差（@sec-measurement）；在设计中，我们力求最小化由 confounding 或实验者效应导致的偏差（@sec-design）。我们也努力降低数据收集决策（@sec-collection）和数据分析决策（@sec-prereg）中出现偏差的可能。最后，我们承认整个文献也可能存在偏差，并考虑如何在估计中进行补偿（@sec-meta）。
+
+最后，我们在整个过程中都考虑 [generalizability（可推广性）]{.smallcaps}。我们围绕特定总体来建构理论（@sec-theories），并选择样本，以最大化发现对目标总体的可推广性（@sec-sampling）。在统计分析中，我们会考虑 generalizability 的多个维度，包括跨参与者和跨实验刺激项目的推广（@sec-models）。在报告中，我们会把研究发现放在其 generalizability 限制之内来解释（@sec-writing）。
+
+贯穿这条叙事线索的，是这样一种希望：在整个实验过程中拥抱 [transparency（透明性）]{.smallcaps}，会帮助你最大化自己工作的价值。公开分享你的工作不仅是一种伦理责任（@sec-ethics），也是一种减少错误、创造有价值成果的好方法。这些成果既能推动科学进步，也能加速你自己的职业发展（@sec-management）。
+
+## 推动领域向前
+
+我们尤其关注 reproducibility 和 replicability 问题，但在这本书的不同地方，我们也看到心理学中存在 replication crisis [@osc2015]、theory crisis [@oberauer2019] 和 generalizability crisis [@yarkoni2020]。基于所有这些危机，你可能会以为我们对心理学的未来很悲观。并非如此。
+
+自从我们 2012 年开始教授 Experimental Methods 以来，心理学方法已经发生了巨大变化。刚开始时，入门研究生常常会描述他们在本科实验室中被鼓励去做的普遍 $p$-hacking。现在，学生进入课堂时已经知道 preregistration 这样的新实践，也意识到 generalizability 和理论建构中的问题。一个领域的改变需要很长时间，但我们已经在每个层面都看到了巨大进步：从要求科学透明性的政府政策，到个体研究者采用能够提高工作效率、降低错误概率的工具和实践。
+
+最令人兴奋的趋势之一，是 metascience 的兴起。在 metascience 中，研究者使用科学工具来理解如何让科学本身变得更好 [@hardwicke2020b]。reproducibility 和 replicability 项目（见 @sec-replication 的回顾）可以帮助我们测量科学文献的稳健性。此外，评估新政策影响的研究 [e.g., @hardwicke2018b]，可以帮助期刊编辑、资助方等利益相关者做出更明智的选择，从而推动领域走向更稳健的科学。
+
+除了纠正方法问题的变化之外，过去十年也见证了 “big team science” 的兴起，这些努力以新的方式推动了领域发展 [@coles2022]。Psychological Science Accelerator [@moshontz2018] 和 ManyBabies [@frank2017b] 等合作项目，让来自世界各地的数百名研究者能够聚在一起运行共同项目。这些项目由数据和代码共享等 open science 实践所支持，也为研究者提供了通过参与来学习最佳实践的机会。此外，通过纳入更广泛、更多样的样本，它们也能帮助应对 generalizability 方面的挑战 [@klein2018b]。
+
+最后，过去十年中，统计模型的使用也取得了巨大进展：这些模型既被用于理解数据 [@mcelreath2018]，也被用于描述具体的心理机制 [@ma2023]。在我们自己的工作中，我们广泛使用这些模型，并相信它们为建构定量理论提供了一套令人兴奋的工具，使我们能够解释并预测人类心智。
+
+## 最后的想法
+
+做实验是一门 craft，需要练习和专注。你运行的第一个实验会有局限和问题。第 100 个也一样。但随着你不断打磨自己的技能，你所设计研究的质量会越来越好。此外，你判断他人实验的能力也会随之提高，让你成为一个更有辨别力的实证结果读者。希望你享受这段旅程！

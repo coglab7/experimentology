@@ -1,0 +1,108 @@
+project:
+  type: book
+  output-dir: _book
+
+reference-location: margin
+link-citations: true
+
+bibliography: experimentology.bib
+reference-section-title: ""
+
+crossref:
+  fig-prefix: 图
+  tbl-prefix: 表
+  sec-prefix: 节
+  appendix-title: 附录
+
+language:
+  crossref-ch-prefix: 章
+  crossref-apx-prefix: 附录
+
+df-print: kable
+
+format:
+  html:
+    theme:
+      light: [flatly, resources/scss/global.scss]
+      dark: [darkly, resources/scss/global.scss]
+    published-title: "更新"
+
+knitr:
+  opts_chunk:
+    comment: "#>"
+    collapse: TRUE
+    cache.lazy: FALSE
+    dev: "png"
+    dpi: 300
+
+execute:
+  echo: false
+  message: false
+  warning: false
+  error: false
+  cache: true
+  code-overflow: wrap
+  tidy: true
+
+lang: zh-CN
+
+book:
+  title: "Experimentology 中文版"
+  subtitle: "实验心理学方法的开放科学取向"
+  author:
+    - name: Michael C. Frank
+      orcid: 0000-0002-7551-4378
+    - name: Mika Braginsky
+      orcid: 0000-0001-9039-3220
+    - name: Julie Cachia
+      orcid: 0000-0001-9584-457X
+    - name: Nicholas A. Coles
+      orcid: 0000-0001-8583-5610
+    - name: Tom E. Hardwicke
+      orcid: 0000-0001-9485-4952
+    - name: Robert D. Hawkins
+      orcid: 0000-0003-0434-8736
+    - name: Maya B. Mathur
+      orcid: 0000-0001-6698-2607
+    - name: Rondeline Williams
+      orcid: 0000-0002-2690-1603
+  date: last-modified
+  downloads: []
+  sidebar:
+    style: "docked"
+    footer: license.qmd
+  chapters:
+    - index.qmd
+    - part: "基础"
+      chapters:
+        - 001-experiments.qmd
+        - 002-theories.qmd
+        - 003-replication.qmd
+        - 004-ethics.qmd
+    - part: "统计"
+      chapters:
+        - 005-estimation.qmd
+        - 006-inference.qmd
+        - 007-models.qmd
+    - part: "规划"
+      chapters:
+        - 008-measurement.qmd
+        - 009-design.qmd
+        - 010-sampling.qmd
+    - part: "执行"
+      chapters:
+        - 011-prereg.qmd
+        - 012-collection.qmd
+        - 013-management.qmd
+    - part: "报告"
+      chapters:
+        - 014-writing.qmd
+        - 015-viz.qmd
+        - 016-meta.qmd
+    - 017-conclusion.qmd
+  appendices:
+    - 100-instructors.qmd
+    - 101-github.qmd
+    - 102-rmarkdown.qmd
+    - 103-tidyverse.qmd
+    - 104-ggplot.qmd

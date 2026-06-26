@@ -1,0 +1,292 @@
+{{< include _setup.qmd >}}
+
+# Quarto (and R Markdown) {#sec-rmarkdown}
+
+::: {.callout-note title="learning goals"}
+* 说明 Markdown 是什么，以及它的语法如何工作
+* 练习如何在 Quarto 文档中整合代码和数据
+* 理解 Quarto 的不同输出格式，以及如何生成这些格式
+* 了解如何用 apaquarto 和 bibtex 生成 APA 格式文件
+:::
+
+这是一个简短教程，介绍如何用 Quarto 把正文和代码混合在一起，从而创建可重复的科学文档。^[本附录改编自 Mike Frank 和 Chris Hartgerink 在 SIPS 2017 一起讲授的教程。]
+
+简短地说：Quarto 让你创建可以和代码一起编译的文档，从而生成你的下一篇科学论文。^[Quarto 的前身是 R Markdown。Quarto 的工作方式和 R Markdown 很相似，但功能扩展了很多，尤其是它并不局限于 R，也可以和 Python、Javascript、Julia 一起使用。本教程围绕 Quarto 展开，但其中很多内容也适用于 R Markdown，只需要对语法做相对小的修改。] 这个教程会帮助你掌握完成这件事所需要的基本细节。本附录，实际上整本书，都是用 Quarto 写的。它是一个非常灵活的平台，可以用来写出漂亮的文档。^[如果你对这个教程的源代码感兴趣，可以在[这里](https://github.com/langcog/experimentology/blob/main/102-rmarkdown.qmd)找到。]
+
+## 开始使用
+
+打开 Rstudio，新建一个 Quarto 文档（`File > New File > Quarto Document`）。现在先不用担心各种设置，我们后面会讲。
+
+如果你点击 "Render" 按钮（或者在 Mac 上按 `Cmd+Shift+K`，在 Windows 上按 `Ctrl+Shift+K`），就会生成一个包含正文和嵌入代码输出的文档，结果是一个可以在浏览器中打开的 HTML 文件。如果 RStudio 要求你安装 packages，就点 yes，先看看一切是否能正常运行。
+
+在继续讲更多 Quarto 内容之前，我们需要先确认这一步能跑通。但如果你已经到了这里，应该可以稍微安心一点，因为说实话，你已经完成了写基础 Quarto 文档所需工作的 80% 左右。它就是这么容易。
+
+::: {.callout-note title="exercises"}
+把 Quarto 模板 render 成 PDF（把 `format: html` 改成 `format: pdf`）和 Word（`format: docx`），确认这些格式都能正常生成。是不是挺有成就感？
+所有可用输出格式的完整列表可以在[这里](https://quarto.org/docs/output-formats/all-formats.html)看到。
+:::
+
+## Quarto 文件的结构
+
+一个 Quarto 文件包含几个部分。最核心的是 header、body text 和 code chunks。当你 render 生成的文档时，会得到输出，也就是正文和代码运行结果合并在一起的文档，格式可以是多种输出格式之一。
+
+### Header（文件头）
+
+Quarto 文件的 header 包含一些关于文档的 metadata，你可以按自己的需要自定义。下面是一个简单例子，只声明了 title、author name(s)、date 和 output format。^[Header 是用 "YAML" 写的，YAML 的意思是 "yet another markup language"。你不需要知道这个，也不用太担心。只要注意缩进就行，因为 YAML 确实很在意缩进。]
+
+```yaml
+---
+title: "Untitled"
+author: "NAME"
+date: "September 26, 2025"
+format: html
+---
+```
+
+### Body text（正文）
+
+文档的 body 是你实际撰写报告的地方。它主要使用 Markdown 格式书写，后面的 [Markdown syntax](#markdown-syntax) 一节会解释。
+
+Quarto 的一个好处是，你可以直接在正文中计算 `R` 代码。做法是用 `` `{r} `` 开始 inline code，输入你想运行的代码，然后再用另一个反引号 `` ` `` 结束。（通常这个键在 `ESC` 键下面，或者在左 `SHIFT` 键旁边。）
+
+例如，如果你想在正文中显示 48 减 35 的结果，就输入 `` `{{r}} 48-35` ``，render 之后会变成 `{r} 48 - 35`。请注意，如果你返回的值有很多小数位，它也会根据你的设置把这些小数打印出来（例如，`` `{{r}} pi` `` 会变成 `{r} pi`）。如果想改变输出的小数位数，有很多做法，取决于你想为整个文档设置小数位，还是只为特定 code chunks 设置。可以看[这里](https://stackoverflow.com/questions/48199137/set-number-of-decimal-places-to-show-in-output)的例子。
+
+### Code chunks（代码块）
+
+上一节介绍了如何在正文中运行代码，但你常常需要经过好几个步骤才能得到需要的结果。而且你当然不想在正文句子里做 data cleaning！这就是 code chunks 的用途。一个简单例子是用 code chunk 加载 packages。
+
+首先，通过 `Code > Insert Chunk` 插入一个 code chunk，或者在 Mac 上按 `Cmd+Option+I`，在 Windows 上按 `Ctrl+Alt+I`。然后你就可以在这个 code chunk 里输入例如 `library(ggplot2)`，并创建一个对象 `x`。
+
+```{r rmarkdown-chunk}
+library(ggplot2)
+
+x <- 1 + 1
+```
+
+如果你不想让 code chunk 本身的内容出现在文档中，就把 `#| echo: false` 作为这个 code chunk 的第一行。现在我们可以使用上面 code chunk 里的内容来打印结果（例如，"`` `{{r}} x` ``" 会变成 "`{r} x`"）。
+
+这些 code chunks 可以包含你需要的任何内容，包括表格和图（后面会更详细地讲）。注意，所有 code chunks 都把源文件所在位置视为 working directory，所以当你读取数据或访问其他文件时，要使用相对于源文件的相对路径。
+
+### Output formats（输出格式）
+
+默认情况下，Quarto 会 render 成 HTML，也就是网页的标准格式。这些输出文件可以在 RStudio viewer 和任何网页浏览器中查看。这些文件可以分享到网上，也很适合把你的研究输出提供给合作者（例如分享中间分析结果）。
+
+通过一个叫 pandoc 的程序，Quarto 也可以 render 成 Microsoft Word 的 `docx` 格式。这个功能在和合作者共享可编辑的写作草稿时很有用（见下文）。
+
+最后，render 成 PDF 对于创建投稿 manuscript 或其他需要特定静态格式的研究输出很有用。
+如果你想从 Quarto 创建 PDF，你需要在电脑上安装 \LaTeX。（\LaTeX，简称 tex，是一个强大的排版系统。）可用的 tex 安装有很多。一个较新的选择是 [TinyTEX](https://yihui.org/tinytex/)，这是一个为 `R` 用户制作的最小化 tex 安装。如果你想完整安装，可以在 Windows 上试试 [MikTeX](https://miktex.org/)，在 Mac 上试试 [MacTeX](https://tug.org/mactex/)，或者在 Linux 上试试 [TeX Live](https://www.tug.org/texlive/)。
+
+
+## Markdown syntax（Markdown 语法）
+
+Markdown 是最简单的文档语言之一。它是一个 open standard，可以转换成 `.tex`、`.docx`、`.html`、`.pdf` 等格式。这是 Quarto 的主要工作语言，而且非常强大。你可以[五分钟学会 Markdown](https://learnxinyminutes.com/docs/markdown/)。其他资源包括[这个教程](https://quarto.org/docs/authoring/markdown-basics.html)，以及在 RStudio 中进入 `Help > Markdown Quick Reference` 后弹出的帮助页面。
+
+下面是一些基础语法：
+
+* 很容易写出 `*italic*` 和 `**bold**`（或者等价地写成 `_italic_` 和 `__bold__`）。
+* 可以用 `# heading1` 表示一级标题，`## heading2` 表示二级标题，`### heading3` 表示三级标题。一定要在 `#` 后面留一个空格！
+* 列表的每一项可以用开头的 `*` 分隔（无序列表），也可以用开头的任意数字分隔（有序列表）。
+* 可以用 `[here's my link](http://foo.com)` 这样的写法写链接。
+
+Markdown 的好处在于它本来就被设计得很容易阅读，而且被很多平台使用，例如 GitHub、OSF、Slack 和许多 wiki。
+
+## Chunk options（代码块选项）
+
+在每个 code chunk 的开头，你可以加入各种 options，影响 Quarto 如何处理这个 chunk。例如，`echo: false` option 会阻止代码显示在输出中：
+
+```{r}
+#| echo: fenced
+
+2 + 2
+```
+
+常见的 chunk options 包括：
+
+* 代码是否 inline 显示（`echo` option）
+* 是否隐藏 warnings 和 messages（`warning` 和 `message` option）
+* 是否缓存计算结果（`cache` option）
+
+Caching 对大文件很有帮助，但如果存在会变化的外部依赖，也可能带来问题。你也可以在 YAML header 中设置 chunk options；除非单个 chunk 覆盖这些设置，否则它们会应用到文档中的所有 chunks。
+
+```yaml
+---
+execute:
+  echo: false
+  warning: false
+  message: false
+  cache: true
+---
+```
+
+还有[许多其他 chunk options](https://yihui.org/knitr/options/)，不一定都和代码执行有关。它们可以像上面那样为单个 chunk 设置，也可以在 YAML 中通过 `knitr` 在文档级别指定，例如：
+
+```yaml
+---
+knitr:
+  opts_chunk:
+    comment: "#>"
+---
+```
+
+<!-- * figures are shown at various sizes (`fig.width` and `fig.height` option) -->
+
+## Headings、figures 和 tables
+
+下面几节我们会需要再加载一些 libraries。
+
+```{r}
+#| echo: true
+
+library(knitr)
+library(ggplot2)
+library(broom)
+```
+
+
+### Headings（标题）
+
+如上所述，headings 在 Markdown 中用 `# level 1 heading`、`## level 2 heading` 等语法指定。
+
+::: {.callout-note title="exercises"}
+1. 用 headings 做大纲是保持内容有组织的好办法！试着创建一堆 headings，然后 render 你的文档。
+
+2. 为了展示你在上一个练习中创建的 headings，加一个 table of contents。到文档的 YAML header，在 `format` 下面加一个 option。你希望它看起来像这样（缩进必须正确）：
+
+```yaml
+format:
+  html:
+    toc: true
+```
+:::
+
+### Figures（图）
+
+插入 plots 很容易，比如下面这个图。（这里使用 `R` 自带的 `penguins` dataset。）
+
+```{r}
+#| echo: fenced
+
+ggplot(penguins, aes(x = flipper_len, y = body_mass, colour = species)) + 
+  geom_point()
+```
+
+你只要输出 plot，它就会被直接 render 到正文中。Chunk options 可以用来控制 figure 的大小，并添加 caption 和可 cross-reference 的 label。
+
+```{r}
+#| echo: fenced
+#| fig-cap: "Body mass (g) vs. flipper length (mm) for three species of penguins."
+#| label: fig-penguins
+#| fig-width: 6
+#| fig-height: 3
+
+ggplot(penguins, aes(x = flipper_len, y = body_mass, colour = species)) + 
+  geom_point()
+```
+
+也可以像下面这样插入外部图片（`{}` 中的部分是可选的）：
+
+`![Penguins!](images/penguins.png){#fig-penguin-art width=4in}`
+
+![Penguins!](images/penguins.png){#fig-penguin-art width=4in}
+
+### Tables（表格）
+
+在 Quarto 中有很多方法可以做出好看的表格，具体取决于你的展示目的。
+
+* `knitr` package 自带 `kable()` function。它很灵活，在多种输出格式中都能生成相当合理的表格。它也有一个 `digits` argument，可以用来控制 rounding。
+* `flextable` package 提供了一个用于报告/发表表格的框架，比 `kable()` 有更多功能，也更可自定义。
+* 如果专门做 HTML tables，可以用 `DT` package。它提供 `datatable()`，这是一种好看、交互式、基于 JavaScript 的表格，你可以点击和搜索。不过它不太适合静态文档。
+* 对于 APA manuscripts\indexC{American Psychological Association (APA)} 或其他 PDF，使用 `xtable` package 也可能有帮助；它会创建非常灵活的 `LaTeX` 表格。要把这些表格调好可能有点麻烦，但只要你愿意搜索并学一点 `LaTeX`，它们完全可以自定义。
+
+我们建议从 `kable()` 开始。例如：
+
+```{r}
+#| echo: fenced
+
+kable(head(penguins), digits = 1)
+```
+
+::: {.callout-note title="exercises"}
+使用 `penguins` dataset，在你的 Quarto 文档中插入一个表格和一个你自己选择的 plot。如果你一时没灵感，可以试试 `hist(penguins$body_mass)`。
+:::
+
+
+### Statistics（统计）
+
+插入各种统计检验也很容易。一种选择是使用 `broom` package，它会把各种检验的输出整理成很好用的格式。和 `kable()` 配合使用时，只需要几行代码就能做出很简单的表格。例如：
+
+```{r}
+#| echo: fenced
+
+mod <- lm(body_mass ~ flipper_len + bill_len, data = penguins)
+kable(tidy(mod), digits = 2)
+```
+
+要把这些表格清理成发表格式通常还需要一些工作。例如，我们需要重命名不少字段，让表格使用我们想要的 labels（例如把 `flipper_len` 改成 `Flipper length (mm)`）。
+
+不过，我们经常需要在正文中打印 APA-formatted\indexC{American Psychological Association (APA)} statistics。一个好做法是先计算它们，然后 inline 打印出来。首先，我们会运行类似这样的代码：
+
+```{r rmarkdown-t-test, echo=TRUE}
+penguins_subset <- penguins[penguins$species %in% c("Chinstrap", "Gentoo"),]
+ts <- t.test(bill_len ~ species, data = penguins_subset)
+```
+
+然后我们会打印类似下面的内容：
+
+> There is a statistically significant difference in bill length between Chinstrap and Gentoo penguins <br> ($t(`{r} round(ts$parameter, 2)`) = `{r} round(ts$statistic, 2)`$, $p = `{r} round(ts$p.value, 3)`$).
+
+我们是用 inline code blocks 做到这一点的，例如 `` `{{r}} round(ts$parameter, 2)`  ``。
+
+对 $p$-values 做 rounding 有时会让你遇到麻烦。很容易得到 $p = 0$ 的输出，但事实上 $p$ 永远不可能精确等于 0。即便如此，这种做法仍然可以帮助你避免那类会被 `statcheck` 之类软件抓到的 rounding errors。
+
+## 撰写 APA-format papers
+
+可重复研究的最终目标，是把你的整篇论文 render 成可以提交的 APA-style writeup\indexC{American Psychological Association (APA)}。即使在最顺利的时候，管理 APA 格式也很烦。[apaquarto extension](https://wjschne.github.io/apaquarto/) 可以让这件事简单一些，因为它允许你直接从 Quarto render manuscript。^[R Markdown 中对应的 package 是 [papaja](https://frederikaust.com/papaja_man/)。]
+
+要使用 apaquarto，首先安装 `quarto` R package（`install.packages("quarto")`）。新建一个文件夹，用来放你的文档和相关文件，把它设为 working directory（`Session > Set Working Directory`），然后运行：
+```r
+quarto::quarto_use_template("wjschne/apaquarto")
+```
+这会创建一堆文件，然后你的文档就可以开始用了！
+
+<!-- When you click RStudio's *Knit* button `papaja`, `rmarkdown,` and `knitr` work together to create an APA conform manuscript that includes both your manuscript text and the results of any embedded R code. -->
+
+<!-- If you don't have TeX installed on your computer, or if you would like to create a Word document replace `output: papaja::apa6_pdf` with `output: papaja::apa6_word` in the document YAML header. -->
+
+<!-- `papaja` provides some rendering options that only work if you use `output: papaja::apa6_pdf`. -->
+<!-- `figsintext` indicates whether figures and tables should be included at the end of the document---as required by APA guidelines---or rendered in the body of the document. -->
+<!-- If `figurelist`, `tablelist`, or `footnotelist` are set to `yes` a list of figure captions, table captions, or footnotes is given following the reference section. -->
+<!-- `lineno` indicates whether lines should be continuously numbered through out the manuscript. -->
+
+::: {.callout-note title="exercises"}
+按照上面的步骤设置一个 apaquarto 文档。Render 它（render 成一个或多个可用格式），看看效果有多好。试着把你另一个文档里的 figure 和 table 粘贴进来（别忘了加载运行它们所需的 libraries）。
+:::
+
+
+## Bibliographic management（文献管理）
+
+手工管理 bibliography 是很大的工作量。让软件帮你做这件事要容易得多。在 Quarto 中，可以用 `@ref` 语法通过 `bibtex` 引用文献。
+
+做法很简单。你在一个 bibtex 文件中整理一组 paper citations；然后当你在正文中引用它们时，citations 会以正确格式出现，并且也会被放入 bibliography。例如，`@nuijten2016` 会生成正文引用 "@nuijten2016"，或者也可以用 `[@nuijten2016]` [@nuijten2016] 进行括号引用。更多 citation options 可以看 [Quarto docs](https://quarto.org/docs/authoring/citations.html)。
+
+怎样创建你的 bibtex 文件？你可以手工写，但这很麻烦。管理 references 的一种选择是 [bibdesk](https://bibdesk.sourceforge.net/)，它可以和 google scholar 集成。^[还有很多其他选择。例如，我们中有些人也经常使用 Zotero。]
+`citr` 是一个 R package，它提供了一个易用的 [RStudio addin](https://rstudio.github.io/rstudioaddins/)，方便插入 citations。
+这个 addin 会自动查找 YAML front matter 中指定的 Bib(La)TeX-file(s)。
+插入 citations 对应的 references 会自动添加到文档的 reference section 中。安装 `citr`（`install.packages("citr")`）并重启 R session 后，这个 addin 会出现在菜单中，你也可以定义一个 [keyboard shortcut](https://rstudio.github.io/rstudioaddins/#keyboard-shorcuts) 来调用它。
+
+## Collaboration（协作）
+
+我们如何用 Quarto 协作？人们会使用很多不同的 workflows。下面是几种：
+
+* Lead author 创建一个包含 Quarto 文档的 Git repository。其他人阅读 render 后的 PDF，并发送文字评论或 PDF annotations，然后 lead 根据这些评论修改源文件。^[Dropbox 有很好用的 PDF annotation tools，可以在特定文本行上写评论。] 当 lead author 比较有经验，并且想在不进行太多逐行重写的情况下控制 manuscript 时，这个 workflow 很适合。
+* Lead author 也像上面那样创建 repository，但 coauthors 通过向 Git repository push changes 来协作，可以 push 到 main branch，也可以创建 pull requests。当作者们都比较熟悉 Git 时，这个 workflow 很适合；由于 Git 可以自动 merge，它也非常适合快速并行撰写不同部分。^[我们就是用全 GitHub workflow 写这本书的，整体效果相当不错，除了有一些 merge conflicts。]
+* 作者们在 Google Docs、Word 或 Overleaf 这样的编辑器中一起协作。（我们更偏好云平台，而不是来回发邮件，原因见 @sec-management 的讨论。）等实质性的 text sections 基本定稿后，lead author 再把这些文本放回 Quarto 文档，并添加 references 和其他程序化元素。当共同作者不用 Git 或 Markdown，而 introduction writing 又需要高度协作时，这个 workflow 很好。它有点笨重，但也还可以。关键是，每次 render 时，所有 figures 和 numbers 都会重新生成，所以在编辑过程中不会被意外改动。
+* Lead author 从 Quarto render results section，然后在生成的 Word 文档中写正文（或上传到 Google Docs）。这个 workflow 最接近许多人熟悉的“老办法”，但引入并向后传播错误的风险最大，因为不可能从头重新 render 整个文档。如果有人修改 results section，必须把这些修改同步回源文件，并保持两边一致。
+
+总之，协作有很多方式。最好的做法是和你的 coauthors 讨论，选择一种适合整个团队的方式。
+
+## Quarto：本章小结
+
+Quarto 是写可重复论文的好工具。它不太难学，一旦掌握之后，你可以通过快速自动地重新格式化、自动管理 bibliography，甚至创建漂亮的 web-compatible documents 来节省时间。
+
+\refs

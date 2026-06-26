@@ -1,0 +1,25 @@
+source,translation,phase,status,structure_check,html_render,notes
+index.qmd,zh/chapters/index.qmd,sample,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+001-experiments.qmd,zh/chapters/001-experiments.qmd,sample,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+002-theories.qmd,zh/chapters/002-theories.qmd,foundations,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+003-replication.qmd,zh/chapters/003-replication.qmd,foundations,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+004-ethics.qmd,zh/chapters/004-ethics.qmd,foundations,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+005-estimation.qmd,zh/chapters/005-estimation.qmd,statistics,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+006-inference.qmd,zh/chapters/006-inference.qmd,statistics,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+007-models.qmd,zh/chapters/007-models.qmd,statistics,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+008-measurement.qmd,zh/chapters/008-measurement.qmd,planning,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+009-design.qmd,zh/chapters/009-design.qmd,planning,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+010-sampling.qmd,zh/chapters/010-sampling.qmd,planning,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+011-prereg.qmd,zh/chapters/011-prereg.qmd,execution,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+012-collection.qmd,zh/chapters/012-collection.qmd,execution,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+013-management.qmd,zh/chapters/013-management.qmd,execution,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+014-writing.qmd,zh/chapters/014-writing.qmd,reporting,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+015-viz.qmd,zh/chapters/015-viz.qmd,reporting,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+016-meta.qmd,zh/chapters/016-meta.qmd,reporting,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+017-conclusion.qmd,zh/chapters/017-conclusion.qmd,conclusion,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+100-instructors.qmd,zh/chapters/100-instructors.qmd,appendices,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+101-github.qmd,zh/chapters/101-github.qmd,appendices,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+102-rmarkdown.qmd,zh/chapters/102-rmarkdown.qmd,appendices,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+103-tidyverse.qmd,zh/chapters/103-tidyverse.qmd,appendices,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+104-ggplot.qmd,zh/chapters/104-ggplot.qmd,appendices,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library
+license.qmd,zh/chapters/license.qmd,footer,translated,passed,passed,Rendered with zh/scripts/render_html.sh using Quarto 1.9.38 and temporary R library

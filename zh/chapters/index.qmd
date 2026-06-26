@@ -1,0 +1,221 @@
+::: {.content-visible when-format="html"}
+::: {.quarto-title-citeas .csl-entry}
+Frank, M. C., Braginsky, M., Cachia, J., Coles, N. A., Hardwicke, T. E., Hawkins, R. D., Mathur, M. B., & Williams, R. 2025. _Experimentology: An Open Science Approach to Experimental Psychology Methods_. Stanford University. <a href="https://doi.org/10.25936/3JP6-5M50">https://doi.org/10.25936/3JP6-5M50</a>. (Also published by MIT Press, ISBN 978-0-262-55256-1)
+:::
+:::
+
+# 前言 {.unnumbered #sec-preface}
+
+> 说明：这是一个个人阅读用的 AI 辅助中文翻译版本，并非官方译本，也未面向公开出版做完整人工审校。原项目见 <https://github.com/langcog/experimentology>，原书网站见 <https://experimentology.io>。
+
+作为科学家和实践者，我们常常希望建立关于人类行为的、具有可推广性的因果理论。事实证明，实验是一种非常有效的工具：在实验中，我们使用 random assignment 来测量因果效应。但问题是，我们应该如何做好实验？
+
+这本书介绍心理学以及更广义的行为科学中，实验研究者的工作流程。本书按研究过程的时间顺序组织，从研究规划开始，经过设计、数据收集、分析，最后到报告写作。我们会通过认知、发展、社会心理学等多个子领域中的叙事性例子来介绍这些概念。贯穿全书，我们也会说明哪些陷阱导致了心理学中的 “replication crisis”。
+
+为了帮助研究者避开这些陷阱，我们主张一种基于 open science 的取向：transparency 应该成为整个实验工作流程的内在组成部分。本书会提供关于 preregistration、项目管理、数据共享和可复现报告写作的指导。
+
+## 这本书的由来 {-}
+
+Experimental Methods（Psych 251）是 Stanford 心理学系新入学研究生的基础课程。这门课的目标，是让学生熟悉行为实验的具体操作：如何规划和设计一个扎实的实验，以及如何避开设计、测量和抽样方面的常见陷阱。
+
+几乎所有学生在研究生阶段之前和研究生阶段的课程，关注的都是研究内容本身，包括他们所在领域的理论和结果。相比之下，我们这门课有时是唯一一门关注研究*过程*的课程：从“为什么要做实验”“因果推断意味着什么”这样的大问题，一直到项目组织中的细节，比如目录该怎么命名、怎样确保电脑崩溃时数据不会丢失。
+
+这一观察引出了本书的标题。“Experimentology” 指的是一组实践、发现和取向，它们使我们能够构建 robust、precise 且 generalizable 的实验。
+
+Experimental Methods 课程的核心是一项 replication project，它反映了一种教学模式：这一模式最早由 [@frank2012]{.content-visible when-format="html"} [Frank and Saxe (\citeproc{ref-frank2012}{2012})]{.content-visible when-format="pdf"} 描述，后来在 [@hawkins2018]{.content-visible when-format="html"} [Hawkins et al. (\citeproc{ref-hawkins2018}{2018})]{.content-visible when-format="pdf"} 中得到扩展。每位学生都会从文献中选择一个已发表的实验，并基于同一实验范式的 preregistered 版本收集新数据，将自己的结果与原始发表结果进行比较。在整个学季中，我们会一步步讲解如何设置 replication experiment，如何 preregister confirmatory analyses，以及如何围绕研究发现撰写可复现报告。这个项目会教授 reliability 和 validity 等概念，使学生能够分析原研究者做出的选择，而这些选择往往在事后看来本可以不同。
+
+在课程结束时，我们会收获这些项目的成果。项目展示很好地说明了学生在一个学季中能完成多少工作，也说明了已发表文献有多难 reproduce（用原始数据重新得到相同计算结果）和 replicate（用新数据得到相似结论）。我们这门课的 replication 成功率常常只略高于 50%，这会让那些以为已发表文献报告的是绝对真理的学生感到不安甚至沮丧。
+
+这本书试图把课程中的一些经验（以及学生课程项目中的经验）提炼成一本教材。我们会讲述过去十年心理学发生的重大变化，包括 “replication crisis” 以及由此产生的积极方法改革。以这个故事作为动机，我们会强调 transparency 在实验过程所有环节中的重要性，从规划到材料、数据和代码的传播都是如此。
+
+## 这本书讨论什么，不讨论什么 {-}
+
+这本书讨论的是心理学实验。这些实验通常是短时研究，可能在线上进行，也可能在实验室的一次访问中完成；它们常常使用 convenience sample，尽管并不总是如此。当我们在这里说“实验”时，指的是 **随机化实验**：实验者会 **操纵** 参与者体验的某个方面，然后 **测量** 某个 outcome variable。^[我们使用 **粗体** 来表示新技术术语的引入。]
+
+\clearpage
+本书的中心论点是：
+
+> 实验旨在对特定因果效应做出尽可能无偏、可推广且精确的估计。
+
+\noindent 我们会探讨这一论点对许多主题的含义，包括因果推断、实验设计、测量、抽样、preregistration、数据分析，以及其他许多问题。
+
+因为我们的焦点是实验，所以不会太多讨论观察性设计、调查方法或 qualitative research。这些都是重要工具，也适用于许多问题，但它们不是本书的重点。我们也不会深入讨论 single-participant case studies、纵向研究、田野研究或其他方法变体带来的许多有趣方法学和统计问题。我们提出的许多关切对这些研究类型仍然重要，但我们的一些建议无法直接迁移到这些较少见的设计中。
+
+即便学生从事的是非实验研究，我们也预期本书相当一部分内容仍然有用，包括关于 replication（@sec-replication）、伦理（@sec-ethics）、统计（chapters [-@sec-estimation], [-@sec-inference], [-@sec-models]）、抽样（@sec-sampling）、项目管理（@sec-management）和报告写作（chapters [-@sec-writing], [-@sec-viz], [-@sec-meta]）的章节。
+
+在写作时，我们假设读者至少有心理学导论层面的背景。此外，虽然我们会介绍若干统计主题，但如果读者上过本科统计课程，这些部分可能会更容易读。最后，我们的例子使用 R statistical programming language；特别是在统计和可视化章节（chapters [-@sec-estimation]--[-@sec-models], [-@sec-viz]--[-@sec-meta]）中，熟悉 R 会有助于理解代码。阅读本书并不要求这些前提条件，但我们提出它们，是为了帮助读者校准自己的预期。
+
+## 如何使用这本书 {-}
+
+本书分为五个主要部分，对应一个实验的时间线：（1）“基础”，（2）“统计”，（3）“规划”，（4）“执行”，以及（5）“报告”。我们希望这样的组织方式使它既适合教学，也适合作为参考书使用。^[如果你是准备在课程中采用本书的教师，你可能会对我们的教师资源感兴趣，其中包括 @sec-instructors 中的样例课程安排。]
+
+本书是为研究生或高年级本科生课程设计的，但任何对实验方法感兴趣的人，无论是在学术心理学中，还是在学术界内外其他与行为实验相关的情境中，都可以用它来 self-study。我们也希望，有些读者会因为对测量（@sec-measurement）或抽样（@sec-sampling）等特定主题感兴趣而阅读某些章节，并把这些章节作为独立参考。最后，对于那些对 “replication crisis” 及其后续改革感兴趣的读者，chapters [-@sec-replication], [-@sec-prereg], and [-@sec-management] 会尤其有意思。
+
+归根结底，我们希望给你规划和执行自己研究所需要的东西。我们不会罗列各种不同取向，而是尝试提供一个连贯的、也常常带有明确立场的视角，并通过边注和参考文献指向更进阶的材料或替代取向。全书中，我们提供：
+
+* [**case study**]{.smallcaps} boxes，用来说明某章的核心概念
+* [**accident report**]{.smallcaps} boxes，描述一些糟糕研究实践在文献中造成问题的例子
+* [**depth**]{.smallcaps} boxes，提供 simulations、与高级技术的连接，或更细致的讨论
+
+虽然 case studies 往往是章节不可或缺的一部分，但其他 boxes 通常可以跳过，不会影响理解主线。
+
+## 主题 {-}
+
+我们强调四个贯穿全书的主题：[transparency（透明性）]{.smallcaps}、[measurement precision（测量精度）]{.smallcaps}、[bias reduction（减少偏差）]{.smallcaps} 和 [generalizability（可推广性）]{.smallcaps}。^[这些主题会用 [small caps]{.smallcaps} 标出。]
+
+* [transparency（透明性）]{.smallcaps}: 为了让实验可复现，其他研究者需要能够准确判断你做了什么。因此，研究过程的每个阶段都应该以 transparency 为首要关切。例如，preregistration 为研究者不断发展的预期和思考过程提供 transparency；公开材料和分析脚本则为程序细节提供 transparency。
+* [measurement precision（测量精度）]{.smallcaps}: 我们希望研究者在规划实验时先问自己：“我想测量什么因果效应？”并据此做出规划、抽样、设计和分析选择，使这一测量尽可能 precise。这一思维方式的下游结果是，我们会从关注统计显著性这类二分式推断，转向关注连续效应量和置信区间的分析模型与 meta-analytic 模型。
+* [bias reduction（减少偏差）]{.smallcaps}: precision 指的是测量中的随机误差，而测量也存在系统性误差来源，会使测量偏离真实数量。在样本、分析、实验设计以及整个文献中，我们都需要认真思考被估计数量中的偏差来源。
+* [generalizability（可推广性）]{.smallcaps}: 复杂行为很少能跨所有情境和总体普遍成立，而任何单个实验最多只能覆盖感兴趣行为可能发生条件中的一小部分。因此，心理学家必须在研究过程的每个阶段考虑发现的 generalizability，从刺激选择、抽样程序，到分析方法和报告写作都是如此。
+
+全书中，我们会一次又一次回到这四个主题，讨论实验者在设计、数据收集和分析每个阶段做出的决定，如何影响我们能够从结果中得出的推断。每章的引言都会突出这些主题之间的联系。
+
+## 本书的软件工具箱 {-}
+
+我们介绍并倡导一种用于可复现研究规划、分析和写作的取向。这一取向依赖一个开源软件工具生态，我们会在附录中介绍：^[这些附录可在 <https://experimentology.io> 在线阅读，但不包含在本书纸质版中，因为它们的内容最适合以网页形式呈现。]
+
+* R statistical programming language 和 [RStudio](https://posit.co/download/rstudio-desktop) integrated development environment
+* 版本控制工具 Git\indexC{Git} 和 [GitHub](https://github.com)，用于在文本文件（如代码、prose 和数据）上协作，存储并整合一段时间内的贡献（@sec-git）
+* RMarkdown 和 Quarto publishing systems，用于创建可以渲染成多种格式的可复现报告（@sec-rmarkdown）
+* `tidyverse` 系列 R packages，它们用优雅的工具扩展 base R 的数据整理、分析和可视化功能（@sec-tidyverse）
+* `ggplot2` plotting package，它让 confirmatory 和 exploratory data analyses 中的灵活数据可视化变得容易（@sec-ggplot）
+
+在合适的地方，我们会提供 [**code**]{.smallcaps} boxes，展示用于创建例子的具体 R 代码。
+
+## 继续前进！ {-}
+
+感谢你阅读 *Experimentology*！无论你只是随便浏览、为课程阅读，还是把这本书作为自己实验工作的参考，我们都希望它对你有用。贯穿全书，我们试图在 reproducibility 方面身体力行，因此本书的完整源代码可以在 <https://github.com/langcog/experimentology> 获取。我们鼓励你浏览、评论，并记录 issues 或建议。^[给我们具体反馈的最佳方式，是在 GitHub 仓库 <https://github.com/langcog/experimentology/issues> 上创建 issue。]
+
+<!-- ## Integrating this book into an experimental methods course {-} -->
+
+<!-- The project-based approach (argument for doing replication/reproducibility study as part of learning methods)  -->
+<!-- Each chapter ends with a mixture of discussion questions, exercises, and project milestones that can be integrated into course assignments.  -->
+<!-- We include links to appendices, references, and recurring boxes with ethical content and ‘accident reports’ from documented problems in the literature.  -->
+
+::: {.content-visible when-format="html"}
+
+## 引用本书
+
+::: {#quarto-appendix .default}
+BibTeX citation:
+<pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@book{experimentology2025,
+  author    = {Frank, Michael C. and Braginsky, Mika and Cachia, Julie and Coles, Nicholas A. and Hardwicke, Tom E. and Hawkins, Robert D. and Mathur, Maya B. and Williams, Rondeline},
+  title     = {{Experimentology: An Open Science Approach to Experimental Psychology Methods}},
+  year      = {2025},
+  publisher = {Stanford University},
+  doi       = {10.25936/3JP6-5M50},
+  note      = {Also published by MIT Press, ISBN 978-0-262-55256-1}
+}</code></pre>
+
+署名时，请按如下方式引用本作品：
+<div id="ref-experimentology2025" class="csl-entry quarto-appendix-citeas">
+Frank, M. C., Braginsky, M., Cachia, J., Coles, N. A., Hardwicke, T. E., Hawkins, R. D., Mathur, M. B., & Williams, R. 2025. _Experimentology: An Open Science Approach to Experimental Psychology Methods_. Stanford University. <a href="https://doi.org/10.25936/3JP6-5M50">https://doi.org/10.25936/3JP6-5M50</a>. (Also published by MIT Press, ISBN 978-0-262-55256-1)
+</div>
+:::
+
+:::
+
+## 致谢
+
+首先感谢 Stanford Psych 251 多届学生和助教。通过他们的问题和兴趣，他们共同影响了本书的内容。
+
+感谢 MIT Press 的工作人员，特别是 Philip Laughlin 和 Amy Brand，感谢他们接受这样一种愿景：一本完全开放的网页教材，同时也经过传统出版社的审稿和出版。我们感谢你们的支持和灵活性。
+
+我们采用 Contributor Roles (CRediT) Taxonomy^[Learn more at <https://credit.niso.org>.] 来描述我们对这份手稿的贡献，也推荐你在自己的工作中这样做。
+
+\small
+
+- [前言](#sec-preface)
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.e >}}: {{< var authors.tom >}}
+- [Chapter @sec-experiments]
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.c >}}: {{< var authors.nicholas >}}
+  - {{< var roles.e >}}: {{< var authors.tom >}}
+- [Chapter @sec-theories]
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.e >}}s: {{< var authors.nicholas >}} and {{< var authors.tom >}}
+- [Chapter @sec-replication]
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.e >}}s: {{< var authors.maya >}}, {{< var authors.tom >}}, and {{< var authors.nicholas >}}
+- [Chapter @sec-ethics]
+  - {{< var roles.w >}}: {{< var authors.rondeline >}}
+  - {{< var roles.c >}}: {{< var authors.mike >}}
+  - {{< var roles.e >}}s: {{< var authors.tom >}} and {{< var authors.julie >}}
+- [Chapter @sec-estimation]
+  - {{< var roles.c >}}s: {{< var authors.maya >}}, {{< var authors.nicholas >}}, and {{< var authors.mike >}}
+  - {{< var roles.e >}}s: {{< var authors.julie >}} and {{< var authors.tom >}}
+- [Chapter @sec-inference]
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.c >}}: {{< var authors.maya >}}
+  - {{< var roles.e >}}s: {{< var authors.julie >}} and {{< var authors.tom >}}
+- [Chapter @sec-models]
+  - {{< var roles.c >}}s: {{< var authors.maya >}} and {{< var authors.mike >}}
+  - {{< var roles.e >}}s: {{< var authors.tom >}} and {{< var authors.robert >}}
+- [Chapter @sec-measurement]
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.e >}}s: {{< var authors.robert >}}, {{< var authors.tom >}}, and {{< var authors.rondeline >}}
+- [Chapter @sec-design]
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.e >}}s: {{< var authors.nicholas >}} and {{< var authors.tom >}}
+- [Chapter @sec-sampling]
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.e >}}s: {{< var authors.julie >}}, {{< var authors.tom >}}, and {{< var authors.maya >}}
+- [Chapter @sec-prereg]
+  - {{< var roles.w >}}: {{< var authors.tom >}}
+  - {{< var roles.e >}}: {{< var authors.mike >}}
+- [Chapter @sec-collection]
+  - {{< var roles.c >}}s: {{< var authors.rondeline >}} and {{< var authors.mike >}}
+  - {{< var roles.e >}}: {{< var authors.tom >}}
+- [Chapter @sec-management]
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.e >}}: {{< var authors.tom >}}
+- [Chapter @sec-writing]
+  - {{< var roles.w >}}: {{< var authors.tom >}}
+  - {{< var roles.e >}}: {{< var authors.mike >}}
+- [Chapter @sec-viz]
+  - {{< var roles.w >}}: {{< var authors.robert >}}
+  - {{< var roles.e >}}s: \raggedright {{< var authors.mike >}}, {{< var authors.tom >}}, and {{< var authors.mika >}}
+- [Chapter @sec-meta]
+  - {{< var roles.c >}}s: {{< var authors.nicholas >}} and {{< var authors.maya >}}
+  - {{< var roles.e >}}s: {{< var authors.mike >}} and {{< var authors.tom >}}
+- [结语](#sec-conclusion)
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.e >}}: {{< var authors.tom >}}
+- [Appendix @sec-instructors]
+  - {{< var roles.w >}}: {{< var authors.julie >}}
+  - {{< var roles.e >}}: {{< var authors.mike >}}
+- [Appendix @sec-git]
+  - {{< var roles.w >}}: {{< var authors.julie >}}
+  - {{< var roles.e >}}: {{< var authors.mike >}}
+- [Appendix @sec-rmarkdown]
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.e >}}: {{< var authors.julie >}}
+- [Appendix @sec-tidyverse]
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.e >}}s: {{< var authors.julie >}} and {{< var authors.mika >}}
+- [Appendix @sec-ggplot]
+  - {{< var roles.w >}}: {{< var authors.mike >}}
+  - {{< var roles.e >}}s: {{< var authors.julie >}} and {{< var authors.mika >}}
+- Technical infrastructure
+  - {{< var roles.d >}}s: {{< var authors.mika >}} and {{< var authors.natalie >}}
+
+\normalsize
+
+\begin{CSLReferences}{1}{0}
+
+\bibitem[\citeproctext]{ref-frank2012}
+Frank, Michael C., and Rebecca Saxe. 2012. {``Teaching Replication.''}
+\emph{Perspectives on Psychological Science} 7 (6): 600--604.
+\url{https://doi.org/10.1177/1745691612460686}.
+
+\bibitem[\citeproctext]{ref-hawkins2018}
+Hawkins, Robert D., Eric N. Smith, Carolyn Au, Juan Miguel Arias, Rhia
+Catapano, Eric Hermann, Martin Keil, et al. 2018. {``Improving the
+Replicability of Psychological Science through Pedagogy.''}
+\emph{Advances in Methods and Practices in Psychological Science} 1 (1):
+7--18. \url{https://doi.org/10.1177/2515245917740427}.
+
+\end{CSLReferences}
+
+\addtocontents{toc}{\protect\setlength{\protect\cftchapindent}{\chapindent}}
