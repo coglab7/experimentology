@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; 模型 – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./008-measurement.html" rel="next">
+<link href="./006-inference.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./005-estimation.html">统计</a></li><li class="breadcrumb-item"><a href="./007-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#regression-models回归模型" id="toc-regression-models回归模型" class="nav-link active" data-scroll-target="#regression-models回归模型"><span class="header-section-number">7.1</span> Regression models（回归模型）</a>
+  <ul class="collapse">
+  <li><a href="#用-regression-估计简单-treatment-effect" id="toc-用-regression-估计简单-treatment-effect" class="nav-link" data-scroll-target="#用-regression-估计简单-treatment-effect"><span class="header-section-number">7.1.1</span> 用 regression 估计简单 treatment effect</a></li>
+  <li><a href="#adding-predictors加入预测变量" id="toc-adding-predictors加入预测变量" class="nav-link" data-scroll-target="#adding-predictors加入预测变量"><span class="header-section-number">7.1.2</span> Adding predictors（加入预测变量）</a></li>
+  <li><a href="#interactions交互作用" id="toc-interactions交互作用" class="nav-link" data-scroll-target="#interactions交互作用"><span class="header-section-number">7.1.3</span> Interactions（交互作用）</a></li>
+  <li><a href="#linear-regression线性回归什么时候有效" id="toc-linear-regression线性回归什么时候有效" class="nav-link" data-scroll-target="#linear-regression线性回归什么时候有效"><span class="header-section-number">7.1.4</span> Linear regression（线性回归）什么时候有效？</a></li>
+  </ul></li>
+  <li><a href="#generalized-linear-models广义线性模型" id="toc-generalized-linear-models广义线性模型" class="nav-link" data-scroll-target="#generalized-linear-models广义线性模型"><span class="header-section-number">7.2</span> Generalized linear models（广义线性模型）</a></li>
+  <li><a href="#linear-mixed-effects-models线性混合效应模型" id="toc-linear-mixed-effects-models线性混合效应模型" class="nav-link" data-scroll-target="#linear-mixed-effects-models线性混合效应模型"><span class="header-section-number">7.3</span> Linear mixed effects models（线性混合效应模型）</a>
+  <ul class="collapse">
+  <li><a href="#建模-clusters-中的随机变异" id="toc-建模-clusters-中的随机变异" class="nav-link" data-scroll-target="#建模-clusters-中的随机变异"><span class="header-section-number">7.3.1</span> 建模 clusters 中的随机变异</a></li>
+  <li><a href="#random-slopes-与-mixed-effects-models-的挑战" id="toc-random-slopes-与-mixed-effects-models-的挑战" class="nav-link" data-scroll-target="#random-slopes-与-mixed-effects-models-的挑战"><span class="header-section-number">7.3.2</span> Random slopes 与 mixed effects models 的挑战</a></li>
+  </ul></li>
+  <li><a href="#sec-models-practical" id="toc-sec-models-practical" class="nav-link" data-scroll-target="#sec-models-practical"><span class="header-section-number">7.4</span> 如何使用模型分析数据？</a>
+  <ul class="collapse">
+  <li><a href="#modeling-rules-of-thumb建模经验法则" id="toc-modeling-rules-of-thumb建模经验法则" class="nav-link" data-scroll-target="#modeling-rules-of-thumb建模经验法则"><span class="header-section-number">7.4.1</span> Modeling rules of thumb（建模经验法则）</a></li>
+  <li><a href="#一个-worked-example完整示例" id="toc-一个-worked-example完整示例" class="nav-link" data-scroll-target="#一个-worked-example完整示例"><span class="header-section-number">7.4.2</span> 一个 worked example（完整示例）</a></li>
+  <li><a href="#robustness-checks-与-multiverse" id="toc-robustness-checks-与-multiverse" class="nav-link" data-scroll-target="#robustness-checks-与-multiverse"><span class="header-section-number">7.4.3</span> Robustness checks 与 multiverse</a></li>
+  </ul></li>
+  <li><a href="#本章小结模型" id="toc-本章小结模型" class="nav-link" data-scroll-target="#本章小结模型"><span class="header-section-number">7.5</span> 本章小结：模型</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography"></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./005-estimation.html">统计</a></li><li class="breadcrumb-item"><a href="./007-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-models" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="学习目标">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>学习目标
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>说明如何使用统计模型估计实验效应</li>
+<li>建立关于经典统计检验如何对应到 linear regression models 的直觉</li>
+<li>探索 linear model 的变体，包括 generalized linear models 和 mixed effects models</li>
+<li>推理 model specification 中的权衡与策略，包括 control variables 的使用</li>
+</ul>
+</div>
+</div>
+<p>在前两章中，我们介绍了围绕实验效应估计，以及关于这个效应与 population 中效应之间关系的推断概念。那里介绍的工具适用于相当具体的研究问题，因此适用范围有限。一旦你走出“两条件实验、每名参与者贡献一个来自连续测量的数据点”的世界，简单的 <span class="math inline">\(t\)</span>-test 就不够用了。</p>
+<p>在一些统计学教材中，下一步会是呈现一大堆为其他特殊情况设计的统计检验。我们甚至可以展示一个决策树：你有 repeated measures？ 用 Test X！或者有 categorical data？用 Test Y！或者有三个 conditions？用 Test Z！但这不是一本统计学书；而且即使它是，我们也不主张这种方法。为你的情境寻找某个狭窄定制的具体检验，是上一章我们试图劝你远离的二分式 NHST 方法的一部分。如果你想要的只是 <span class="math inline">\(p&lt;0.05\)</span>，那么去查找一个能在你的具体案例中计算 <span class="math inline">\(p\)</span>-value 的检验是合理的。但我们更喜欢一种更聚焦于准确估计（因果）效应大小的方法。</p>
+<p>在本章中，我们开始探索如何选择合适的 <strong>statistical model</strong>，以清晰且灵活地推理这些效应。统计模型是一种写下关于特定数据如何生成的一组假设的方式，也就是 <strong>data generating process</strong>。统计模型是从经验数据中估计感兴趣的特定 <strong>parameters</strong> 的基础工具——例如，与实验操纵相关的因果效应大小。它们也可以量化 <span class="smallcaps">measurement precision</span>。</p>
+<p>例如，假设你看着某人抛硬币，并观察到一串正面和反面。一个简单统计模型可能假定，观察到的数据是由一枚有权重的硬币抛掷生成的。从前两章的视角看，我们可以为估计出的正面比例估计 standard error（例如，八次抛掷中有六次正面，我们有 <span class="math inline">\(\hat{p}= 0.75 \pm 0.17\)</span>），也可以把观察到的比例与 null hypothesis 比较。然而，从 model-based perspective 看，我们会先思考数据从哪里来：我们可能假定被抛的硬币有某种权重（data generating process 中一个 <strong>latent</strong>、即不可观察的 parameter），而我们的目标是在给定观察数据的情况下确定这个权重最可能的值。这个单一的统一模型随后也可以用来推断硬币权重是否不同于某个 null model（也许是一枚公平硬币），或者预测未来的抛掷。</p>
+<p>这个例子听起来很像上一章谈到的简单 inferential tests；并不很“model-y”。但当需要估计多个 parameters 时，事情会变得更有意思，而这正是许多真实世界实验的情况。在过去两章反复使用的茶品尝情境中，一个真实实验可能让多人以不同顺序品尝不同类型的茶，同时随机把一些杯子分派为 milk-first 或 tea-first。本章我们要学会做的是，为这种情境建立一个模型，使我们能够推理 milk-order effect 的大小，同时估计由不同人、顺序和茶类型导致的变异。这就是使用模型的优势：一旦你能够用 model-based terms 推理 estimation 和 inference，就不再受长长的决策树限制，而能够灵活做出适合数据的假设。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;这里我们不会探索它与 DAGs 和 Bayesian models 的联系，但理解这种 model building 的一种方式，是把它看作在创建实验的因果理论。<span class="citation" data-cites="mcelreath2018">McElreath (<a href="#ref-mcelreath2018" role="doc-biblioref">2018</a>)</span> 倡导的这种方法，把我们在 chapters <a href="001-experiments.html" class="quarto-xref"><span>1</span></a> 和 <a href="002-theories.html" class="quarto-xref"><span>2</span></a> 中呈现的 theory 想法，与这里关于 models 的想法有力连接起来。如果这听起来很吸引你，我们鼓励你跳进这个 rabbit hole！</p></div><div id="fn2"><p><sup>2</sup>&nbsp;Regression 这个名称最初来自 Galton 的 <span class="citation" data-cites="galton1877">(<a href="#ref-galton1877" role="doc-biblioref">1877</a>)</span> 遗传研究。他关注的是父母身高与子女身高之间的关系。他发现子女身高会 <em>regress</em>，并通过创建一个 <em>regression model</em> 来做到这一点。现在我们用 “regression” 指代这种形式的任何模型。</p></div></div><p>我们会先讨论构建统计模型中无处不在的框架：<strong>linear regression</strong>。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> 随后，我们会建立 regression 与 <span class="math inline">\(t\)</span>-test 之间的联系。本节会讨论如何向 regression models 添加 covariates，以及 linear regression 什么时候有效、什么时候无效。在下一节中，我们会讨论 <strong>generalized linear model</strong>，这是一项创新，使我们能够为更广泛的数据类型建立模型，包括 <strong>logistic regression</strong>。随后，我们会简要介绍 <strong>mixed models</strong>，它们让我们能够对数据集中的 clustering 建模（例如来自同一个人或同一个刺激项目的一组 observations）。最后，我们会给出一些带有立场的 model building 实践建议。</p>
+<p>如果你有兴趣建立关于统计 model building 的直觉，那么我们建议你从头到尾读完本章。另一方面，如果你已经在做数据分析，并想看一个例子，我们建议你跳到最后一节；在那里我们会给出一些关于 model building 的实践建议，并提供一个拟合 mixed effects model、并在 context 中解释它的 worked example。</p>
+<section id="regression-models回归模型" class="level2 page-columns page-full" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="regression-models回归模型"><span class="header-section-number">7.1</span> Regression models（回归模型）</h2>
+<p>统计模型有很多类型，但本章主要聚焦 regression，这是一类广泛而极其灵活的模型。Regression model 把一个 dependent variable 与一个或多个 independent variables 联系起来。Dependent variables 有时叫做 <strong>outcome variables</strong>，independent variables 有时叫做 <strong>predictor variables</strong>、<strong>covariates</strong> 或 <strong>features</strong>。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> 我们会看到，许多常见统计估计量（如样本均值）和推断方法（如 <span class="math inline">\(t\)</span>-test）实际上都是简单的 regression models。理解这一点会帮助你把许多统计方法看作同一个底层框架的特殊情况，而不是彼此无关的 ad hoc tests。</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;反过来并不成立——不是每个 predictor 或 covariate 都是 independent variable！把 regression models 与 causal hypotheses 联系起来的棘手之处之一是：某个东西出现在 regression equation 右侧，并不意味着它是因果操纵。当然，仅仅因为你在 regression 中得到了某个 predictor 的估计，也不意味着这个估计告诉你<em>因果</em>效应的大小。它可能告诉你，但也可能不是！</p></div></div><section id="用-regression-估计简单-treatment-effect" class="level3 page-columns page-full" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="用-regression-估计简单-treatment-effect"><span class="header-section-number">7.1.1</span> 用 regression 估计简单 treatment effect</h3>
+<p>我们从这些特殊情况之一开始，即在 two-group design 中估计 treatment effect <span class="math inline">\(\beta\)</span>。在 <a href="005-estimation.html" class="quarto-xref"><span>章 5</span></a> 中，我们已经为茶品尝实验解决了完全相同的挑战。我们应用了一个经典模型，其中 milk-first 评分被假定为服从 normal distribution，均值为 <span class="math inline">\(\theta_{\text{M}} = \theta_{\text{T}} + \beta\)</span>，标准差为 <span class="math inline">\(\sigma\)</span>。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;这里快速提醒一下，“model” 是在说“关于 data generating procedure 的一组假设”。所以，说某个方程是一个 “model”，就等同于说我们认为数据是从这里来的。我们可以 “turn the crank”——也就是通过这些方程所指定的过程生成数据，例如从均值为 <span class="math inline">\(\theta_{\text{T}} + \beta\)</span>、标准差为 <span class="math inline">\(\sigma\)</span> 的 normal distribution 中抽取数字。本质上，我们承诺这样一个想法：这个过程会给出与我们已有数据在实质上相似的数据。</p></div><div id="fn5"><p><sup>5</sup>&nbsp;使用 0 和 1 被称为 <strong>dummy coding</strong>，它允许我们把参数解释为 treatment group（tea-first）相对于 baseline（milk-first）的差异。Categorical variables 还有许多其他编码方式，对应不同解释。实践提示：报告任何东西之前，都要小心检查你的变量是如何编码的！</p></div></div><p>现在我们把这个模型写成 regression model——也就是说，写成一个模型：给定参与者的 treatment assignment <span class="math inline">\(X_i\)</span>，预测每个参与者的茶评分 <span class="math inline">\(Y_i\)</span>。<span class="math inline">\(X_i=0\)</span> 表示 control（milk-first）组，<span class="math inline">\(X_i=1\)</span> 表示 treatment（tea-first）组。<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> 这里，<span class="math inline">\(Y_i\)</span> 是 dependent variable，<span class="math inline">\(X_i\)</span> 是 independent variable。下标 <span class="math inline">\(i\)</span> 索引参与者。为了让它具体起来，你可以在下面看到一些茶品尝样本数据（每个 condition 的前三个 observations；<a href="#tbl-models-datatable" class="quarto-xref">表&nbsp;<span>7.1</span></a>），其中包含 index <span class="math inline">\(i\)</span>、condition 及其 predictor <span class="math inline">\(X_i\)</span>，以及评分 <span class="math inline">\(Y\)</span>。</p>
+<p>我们把这个模型更正式地写成“<span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span> 的 linear regression”。按照惯例，regression models 会用 <span class="math inline">\(\beta\)</span> 符号表示所有参数，所以现在我们用 <span class="math inline">\(\beta_0 = \theta_M\)</span> 表示 milk-first 组均值，用 <span class="math inline">\(\beta_1 = \theta_T - \theta_M\)</span> 表示 tea-first 和 milk-first 组之间的平均差。这个 <span class="math inline">\(\beta\)</span> 是我们之前两章和上面用来表示因果效应的那个符号的 generalization。</p>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_1 X_i + \epsilon_i
+\]</span></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="cell">
+<div id="tbl-models-datatable" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-models-datatable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;7.1: Example tea tasting data (first three observations from each condition).
+</figcaption>
+<div aria-describedby="tbl-models-datatable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div></div><p><span class="math inline">\(\beta_0 + \beta_1 X_i\)</span> 这一项称为 <strong>linear predictor</strong>，它描述的是给定参与者 treatment group <span class="math inline">\(X_i\)</span>（该模型中的单个 independent variable）时，个体茶评分 <span class="math inline">\(Y_i\)</span> 的 expected value。也就是说，对于 control group 中的参与者（<span class="math inline">\(X_i=0\)</span>），linear predictor 就等于 <span class="math inline">\(\beta_0\)</span>，这确实是我们上面指定的 control group 均值。另一方面，对于 treatment group 中的参与者，linear predictor 等于 <span class="math inline">\(\beta_0 + \beta_1\)</span>，也就是我们指定的 treatment group 均值。在 regression jargon 中，<span class="math inline">\(\beta_0\)</span> 和 <span class="math inline">\(\beta_1\)</span> 是 <strong>regression coefficients</strong>，其中 <span class="math inline">\(\beta_1\)</span> 表示 independent variable <span class="math inline">\(X\)</span> 与 outcome <span class="math inline">\(Y\)</span> 的 association。</p>
+<p><span class="math inline">\(\epsilon_i\)</span> 这一项是 <strong>error term</strong>，指参与者评分围绕组均值的随机变异。<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> 注意，这是一种非常具体的 “error”；它不包括例如 bias 导致的 “error”。相反，你可以把 error terms 理解为：只基于 linear predictor 预测任意给定参与者评分时会出现的“误差”。如果你把 control group 参与者的评分预测为 <span class="math inline">\(\beta_0\)</span>，这是一个不错的猜测——但你仍然预期该参与者的评分会在某种程度上偏离 <span class="math inline">\(\beta_0\)</span>（也就是由于 treatment groups 没有捕捉到的参与者间变异）。在我们的 regression model 中，linear predictor 和 error terms 合在一起说明，参与者评分会围绕其组均值随机（实际上是 normally）散布，标准差为 <span class="math inline">\(\sigma\)</span>。这与我们在 <a href="005-estimation.html" class="quarto-xref"><span>章 5</span></a> 中提出的模型完全相同。<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;形式上，我们会写成 <span class="math inline">\(\epsilon_i \sim \mathcal{N}(0, \sigma^2)\)</span>。波浪号表示 “is distributed as”，后面是均值为 <span class="math inline">\(0\)</span>、方差为 <span class="math inline">\(\sigma^2\)</span> 的 normal distribution。</p></div><div id="fn7"><p><sup>7</sup>&nbsp;你可能会想，既然统一框架一直可用，为什么还要费这么大力气为这些特殊情况建立 boutique solutions。部分答案是，统计学的经典基础设施是在计算机广泛普及之前发展起来的，而这些特殊情况之所以被选中，是因为它们容易 “analytically” 处理（也就是用大型数值表中的值手工算出所有数学）。现在我们有了具备更灵活算法的计算机，model-based perspective 比过去更实用、更容易获得。</p></div></div><p>现在我们有了模型。但我们如何估计 regression coefficients <span class="math inline">\(\beta_0\)</span> 和 <span class="math inline">\(\beta_1\)</span>？通常方法叫做 <strong>ordinary least squares (OLS)</strong>。基本想法如下。对于任意给定 regression coefficient estimates <span class="math inline">\(\widehat{\beta}_0\)</span> 和 <span class="math inline">\(\widehat{\beta}_1\)</span>，每名参与者都会得到不同的 <strong>predicted values</strong>，<span class="math inline">\(\widehat{Y}_i = \widehat{\beta}_0 + \widehat{\beta}_1 X_i\)</span>。有些 regression coefficient estimates 会比另一些产生更好的预测。Ordinary least squares estimation 旨在找到能优化这些预测的 regression coefficients 值，也就是让预测尽可能接近参与者真实 outcomes <span class="math inline">\(Y_i\)</span>。</p>
+<p><a href="#fig-models-ols-plot" class="quarto-xref">图&nbsp;<span>7.1</span></a> 展示了每个 condition 中的茶品尝数据（点），以及每个 condition 的模型预测 <span class="math inline">\(\beta_0\)</span> 和 <span class="math inline">\(\beta_0 + \beta_1\)</span>（蓝线）。每个数据点与对应预测之间的距离（也就是 OLS 想要最小化的东西）用虚线显示。<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> 这些距离是 true errors（<span class="math inline">\(\epsilon_i\)</span>）的 sample estimates，称为 <strong>residuals</strong>。左图显示 OLS coefficient values——这些值会把模型预测尽可能移近数据点，也就是最小化虚线总平方长度。右图显示一组明显更差的 coefficient values。</p>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;Ordinary least squares 最小化 squared error loss，也就是会选择那些让预测最小化 <span class="math inline">\(\sum_{i=1}^n \left( Y_i - \widehat{Y}_i\right)^2\)</span> 的 regression coefficient estimates，其中 <span class="math inline">\(n\)</span> 是样本量。OLS 的一个美妙之处在于，这些最优 regression coefficients（一般记作 <span class="math inline">\(\widehat{\pmb{\beta}}\)</span>）有一个非常简单的 closed-form solution：<span class="math inline">\(\widehat{\pmb{\beta}} = \left( \mathbf{X}'\mathbf{X} \right)^{-1} \mathbf{X}'\mathbf{y}\)</span>。这里我们使用了更一般的记号，以支持多个 independent variables：<span class="math inline">\(\widehat{\pmb{\beta}}\)</span> 是一个向量，<span class="math inline">\(\mathbf{X}\)</span> 是每名 subject 的 independent variables 矩阵，<span class="math inline">\(\mathbf{y}\)</span> 是参与者 outcomes 的向量。还有一个好消息：<span class="math inline">\(\widehat{\pmb{\beta}}\)</span> 的 standard error 也有类似简单的 closed form！</p></div></div><div class="cell page-columns page-full" data-cap-location="margin">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-models-ols-plot" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" alt="A plot with lines from each rating point to horizontal line beta_0 for milk-first and beta_0 + beta_1 for tea-first.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-models-ols-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="007-models_files/figure-html/fig-models-ols-plot-1.png" class="img-fluid figure-img" style="width:90.0%" alt="A plot with lines from each rating point to horizontal line beta_0 for milk-first and beta_0 + beta_1 for tea-first.">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-models-ols-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;7.1: (left) Best-fitting regression coefficients for the tea-tasting experiment. (right) Much worse coefficients for the same data. Dotted lines: residuals. Circles: data points for individual participants.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>你会注意到，本章并没有太多谈 <span class="math inline">\(p\)</span>-values。Regression models 可以用来为特定 coefficients 产生 <span class="math inline">\(p\)</span>-values，表示在关于 coefficients 的某个 null hypothesis 下，观察数据 likelihood 的推断。你也可以为特定 regression coefficients 计算 Bayes Factors，或者使用 Bayesian inference 在关于这些 coefficients 分布的某种 prior expectation 下拟合它们。我们不会太多讨论这一点，也不会更一般地讨论如何拟合我们描述的模型。相反，我们想帮助你开始思考如何为自己的数据建模。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>事实证明，在 R 中拟合 OLS regression model 非常容易。底层函数是 <code>lm()</code>，代表 linear model。你可以用一次函数调用拟合模型，并把一个 “formula” 作为参数。调用如下：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(rating <span class="sc">~</span> condition, <span class="at">data =</span> tea_data)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>R 中的 formulas 是 regression equations 的一种特殊简洁记法；你写 outcome、<code>~</code>（distributed as）和 predictors。R 默认假定你想要 intercept，而且还有一些方便的默认设置，使 R formulas 成为指定相对复杂 regression models 的一种简单方式，下面我们会看到。</p>
+<p>一旦你拟合了模型并把它赋给一个变量，就可以调用 <code>summary()</code> 查看参数摘要：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>你也可以使用 <code>coef(mod)</code> 提取 coefficient values，并使用 <code>broom</code> package <span class="citation" data-cites="robinson2023">(<a href="#ref-robinson2023" role="doc-biblioref">Robinson, Hayes, 和 Couch 2023</a>)</span> 中的 <code>tidy(mod)</code> 把它们放入一个方便的 dataframe。</p>
+</div>
+</div>
+</section>
+<section id="adding-predictors加入预测变量" class="level3 page-columns page-full" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="adding-predictors加入预测变量"><span class="header-section-number">7.1.2</span> Adding predictors（加入预测变量）</h3>
+<p>我们刚才写下的 regression model，与 <a href="006-inference.html" class="quarto-xref"><span>章 6</span></a> 中 <span class="math inline">\(t\)</span>-test 背后的模型相同。但 regression modeling 的美妙之处在于，复杂得多的估计问题也可以写成 regression models，只要扩展上面的模型即可。例如，我们可能想加入另一个 predictor variable，比如参与者年龄。<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;同时估计多个 coefficients 的能力，是 regression modeling 的巨大优势；以至于人们有时会用 <strong>multiple regression</strong> 这个标签来表示存在不止一个 predictor + coefficient pair。</p></div></div><p>让我们把这个新的 independent variable 及对应的 regression coefficient 添加到模型中： <span class="math display">\[
+Y_i = \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2}  + \epsilon_i
+\]</span> 现在我们有多个 independent variables，为清楚起见，把它们标记为 <span class="math inline">\(X_{1}\)</span>（treatment group）和 <span class="math inline">\(X_{2}\)</span>（age）。</p>
+<p>为了说明如何解释这个模型中的 regression coefficients，我们使用 linear predictor 比较两个假想参与者的模型预测茶评分，他们都在 treatment group 中：20 岁的 Alice 和 21 岁的 Bob。Alice 的 linear predictor 告诉我们，她的 expected rating 是 <span class="math inline">\(\beta_0 + \beta_1 + \beta_2 \cdot 20\)</span>。相比之下，Bob 的 linear predictor 是 <span class="math inline">\(\beta_0 + \beta_1 + \beta_2 \cdot 21\)</span>。因此，我们可以用 Bob 的 linear predictor 减去 Alice 的 linear predictor，计算 21 岁相对于 20 岁的 expected difference in ratings，结果就是 <span class="math inline">\(\beta_2\)</span>。</p>
+<p>如果 Alice 和 Bob 分别是 50 岁和 51 岁，我们会得到同样结果。这个等价说明了 linear regression models 的一个关键点：</p>
+<blockquote class="blockquote">
+<p>Regression coefficient 表示：比较任意两名在相关 independent variable 上相差 1 个单位、且在模型中其他 independent variables 上没有差异的参与者时，outcome 的 expected difference。</p>
+</blockquote>
+<p>这里，coefficient 比较的是年龄相差一岁的参与者。在 <a href="#sec-models-practical" class="quarto-xref"><span>小节 7.4</span></a> 中，我们讨论是否以及何时要 “control for” 额外变量（也就是何时把它们加入模型）。</p>
+</section>
+<section id="interactions交互作用" class="level3 page-columns page-full" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="interactions交互作用"><span class="header-section-number">7.1.3</span> Interactions（交互作用）</h3>
+<p>在我们的贯穿例子中，现在有两个 predictors：condition 和 age。但如果 condition 的效应取决于参与者年龄呢？这种情况会对应于这样一个案例：（比如）年龄较大的人对 tea ordering 更敏感，也许因为他们有更多喝茶经验。我们把这称为 <strong>interaction</strong> effect： 一个 predictor 的效应取决于另一个 predictor 的状态。</p>
+<p>Interaction effects 很容易纳入我们的 modeling framework。我们只需向模型添加一个项，它是 condition（<span class="math inline">\(X_1\)</span>）和 age（<span class="math inline">\(X_2\)</span>）的乘积，并用另一个 beta 对这个乘积加权；这个 beta 表示 interaction 的强度： <span class="math display">\[
+Y_i = \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2}  + \beta_3 X_{i1} X_{i2}  + \epsilon_i
+\]</span> Statistical interactions 是非常强大的 modeling tool，可以帮助我们理解不同实验操纵之间，或操纵与 covariates（如年龄）之间的关系。我们会在 <a href="009-design.html" class="quarto-xref"><span>章 9</span></a> 中更详细讨论它们在 experimental design 中的角色，以及它们带来的一些解释挑战。<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;这里我们不会深入这个话题，但想指出一个持久挑战：当你用 categorical predictors 指定 regression models 时，尤其是指定它们的 interactions 时，如何对这些 categorical predictors 进行 “code”。上面我们创建了一个 “dummy” 变量 <span class="math inline">\(X\)</span>，把 milk-first tea 编码为 0，把 tea-first tea 编码为 1。Dummy variables 很容易理解，但在有 interactions 的模型中会造成一些问题。因为我们示例模型中的 interaction 是 dummy-coded condition variable 与 age 的乘积，interaction term <span class="math inline">\(\beta_3\)</span> 被解释为 <em>tea-first condition</em>（<span class="math inline">\(X=1\)</span>）中的 age effect，因此 age effect <span class="math inline">\(\beta_2\)</span> 实际上是 <em>milk-first condition</em> 中的 age effect。处理这个问题的方法是使用不同编码系统，例如 <strong>effects coding</strong>。<span class="citation" data-cites="davis2010">Davis (<a href="#ref-davis2010" role="doc-biblioref">2010</a>)</span> 对这个棘手话题有很好的教程。</p></div></div></section>
+<section id="linear-regression线性回归什么时候有效" class="level3 page-columns page-full" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="linear-regression线性回归什么时候有效"><span class="header-section-number">7.1.4</span> Linear regression（线性回归）什么时候有效？</h3>
+<p>使用 OLS 的 linear regression modeling，是一种极其强大的技术，可以建立模型来估计多个 predictors 对单个 dependent variable 的影响。事实上，从数学意义上说，OLS 是拟合 linear model 的<em>最佳</em>方式！<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> 但 OLS 只有在满足三个大条件时才“有效”——也就是能够给出好的估计。</p>
+<div class="no-row-height column-margin column-container"><div id="fn11"><p><sup>11</sup>&nbsp;有一种精确意义是：OLS 给出了我们从任何假设 independent variables 与 outcome 之间存在线性关系的模型中所能得到的<em>最优</em>预测。也就是说，你可以提出任何其他你想要的 linear、unbiased model，但如果 OLS 的假设被满足，OLS 的预测总会比你的模型噪声更小。这是因为一个优雅的数学结果，称为 Gauss-Markov Theorem。</p></div></div><ol type="1">
+<li><strong>Predictor 与 outcome 之间的关系必须是线性的。</strong> 在我们基于 Alice 和 Bob 的一岁年龄差比较 expected outcomes 时，能够把 coefficient <span class="math inline">\(\beta_2\)</span> 解释为比较年龄相差一岁的参与者时 <span class="math inline">\(Y_i\)</span> 的平均差异，<em>无论</em>这些年龄是 20 vs 21 还是 50 vs 51。如果我们认为这种关系是 <strong>nonlinear</strong>，那么可以变换 predictor——例如通过加入 <span class="math inline">\(\beta_3 X_2^2\)</span> 项来包含年龄的 <strong>quadratic</strong> effect。不过，这个新 predictor 与 outcome 之间的<em>关系</em>仍然是线性的。使用 scatter plots 等可视化来寻找 predictor 与 outcome 之间线性关系假设可能存在的问题，始终是个好主意。</li>
+</ol>
+<!-- [Suggested Figure. Panel A: Scatter plot showing a nice linear relationship with OLS fit superimposed. Panel B: Scatter plot showing a nonlinear relationship with OLS fit, OLS fit with x^2 term, and LOESS superimposed.] -->
+<ol start="2" type="1">
+<li><strong>Errors 必须相互独立。</strong> 在我们的例子中，regression model 中的 observations（也就是数据集中的行）是独立抽样的：每位参与者被独立招募到研究中，并各自完成一个 trial。另一方面，假设我们有 repeated-measures data，先抽样参与者，然后对每名参与者获得多次测量。在每名参与者内部，测量很可能相关（也许因为参与者在总体上喜欢茶的程度不同）。这种相关会使一个没有容纳这种相关的模型所做推断失效。下面我们会详细讨论这个问题。</li>
+</ol>
+<!-- Usually, outcome measurements within a participant will be correlated: if we measure 10 participants' blood pressures every day for a week, some participants will typically have high values whereas others will typically have low values, even though any given participant will also have some variation in their own measurements over time.[^models-3] To help identify such situations, it can be helpful to plot the distribution of **residuals** for each participant (or a random sample thereof) to see whether this distribution seems to differ across participants.  -->
+<!-- [^models-3] To be specific, it is not the blood pressure values ($Y_i$) themselves that must be independent, but rather the error terms\indexC{error term} ($\epsilon$). The error terms are what is "left over" after accounting for systematic variation that is predicted by the independent variables. If, in principle, we managed to include in the linear predictor all variables that might explain individual differences in typical blood pressure (e.g., genetic factors, sex, age, etc.), then the errors would be independent even though the outcomes themselves are not. However, as a heuristic, considering possible sources of correlation in the outcomes themselves is often a reasonable proxy for thinking about the error terms. -->
+<!-- [Suggested Figure. Violin plots, or similar, showing residuals for different subjects. The residuals exhibit non-independence.] -->
+<ol start="3" type="1">
+<li><strong>Errors 必须服从 normal distribution，并且与 predictor 无关。</strong> 想象年龄较大的人有非常一致的 tea-ordering preferences，而年轻人没有。在这种情况下，模型的 error term 对年龄较大的参与者会比对年轻参与者变异更小。这个问题称为 <strong>heteroskedasticity</strong>。把每个 independent variable 与 residuals 画出来，看看 residuals 是否在 independent variable 的某些值上比其他值更 variable，是一个好主意。</li>
+</ol>
+<p><!-- This is often the case for highly skewed outcome variables. For example, if we regressed participants' incomes on their years of education, we will find that higher education is associated with higher income. However, because income is highly right-skewed in many samples (some people have extremely high incomes), income will typically be more variable for individuals with more education than for those with less education. For this reason, if we predicted incomes for individuals with 16 years of education (i.e., they completed 4-year college and then stopped) and also for individuals with 8 years (i.e., they completed middle school and then stopped), the errors in the former predictions will probably be more variable than the errors in the latter predictions.  --></p>
+<!-- [Suggested Figure. X vs residuals, showing heteroskedasticity.] -->
+<p>如果这三个条件中任何一个被违反，都可能削弱你从模型中得出的估计和推断。</p>
+</section>
+</section>
+<section id="generalized-linear-models广义线性模型" class="level2 page-columns page-full" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="generalized-linear-models广义线性模型"><span class="header-section-number">7.2</span> Generalized linear models（广义线性模型）</h2>
+<p>到目前为止，我们考虑的是连续 outcome measures，例如茶评分。如果我们改用 binary outcome，比如参与者喜欢或不喜欢这杯茶，或者 count outcome，比如参与者选择喝几杯茶，会怎样？这些以及其他非连续 outcomes 常常违反 OLS 的假设，尤其是因为它们经常诱导 heteroskedastic errors。</p>
+<p>Binary outcomes 本质上会产生 heteroskedastic errors，因为 binary variable 的方差直接取决于 outcome probability。当 outcome probability 接近 <span class="math inline">\(0.50\)</span> 时，errors 会更 variable；当概率接近 <span class="math inline">\(0\)</span> 或 <span class="math inline">\(1\)</span> 时，errors 的变异会小得多。<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> 这种 heteroskedasticity 反过来意味着，模型的推断（例如 <span class="math inline">\(p\)</span>-values）可能不正确，有时只偏一点，有时则会严重错误。<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>&nbsp;具体来说，一个 outcome 概率为 <span class="math inline">\(p\)</span> 的 binary variable 的方差就是 <span class="math inline">\(p(1-p)\)</span>，它在 <span class="math inline">\(p=0.50\)</span> 时最大。</p></div><div id="fn13"><p><sup>13</sup>&nbsp;Ordinary least squares 也可以用于 binary outcomes，在这种情况下 coefficients 表示概率差异。不过，通常的 model-based standard errors 会是错的。</p></div></div><p>幸运的是，<strong>generalized linear models</strong>（GLMs） 是与 OLS 紧密相关的 regression models，可以处理非连续 outcomes。这些模型称为 “generalized”，因为 OLS 是这一大类模型中的许多成员之一。为了看到这种联系，我们先更一般地写一个 OLS model，用它对 outcome 的 expected value 说什么来表达；我们把它记为 <span class="math inline">\(E[Y_i]\)</span>： <span class="math display">\[
+E[Y_i] = \beta_0 + \sum_{j=1}^p \beta_j X_{ij}
+\]</span> 其中 <span class="math inline">\(p\)</span> 是 independent variables 的数量，<span class="math inline">\(\beta_0\)</span> 是 intercept，<span class="math inline">\(\beta_j\)</span> 是第 <span class="math inline">\(j^{th}\)</span> 个 independent variable 的 regression coefficient。这个方程只是用数学方式说：你通过把每个 predictor 对 expected outcome 的贡献（<span class="math inline">\(\beta_j X_{ij}\)</span>）加起来，来从 regression model 做预测。</p>
+<p>GLM 的 linear predictor（即 <span class="math inline">\(\beta_0 + \sum_{j=1}^p \beta_j X_{ij}\)</span>）看起来与 OLS 完全相同，但 GLM 并不是直接建模 <span class="math inline">\(E[Y_i]\)</span>，而是建模 expectation 的某种 <strong>transformation</strong>，<span class="math inline">\(g(.)\)</span>： <span class="math display">\[
+g( E[Y_i] ) = \beta_0 + \sum_{j=1}^p \beta_j X_{ij}
+\]</span> GLMs 变换的是 outcome 的 <em>expectation</em>，不是 outcome 本身！也就是说，在 GLMs 中，我们并不是简单地拿数据集中的 outcome variable 做变换，然后拟合 OLS model；而是在拟合一个完全不同的模型，它提出 predictors 与 expected outcomes 之间存在一种根本不同的关系。这种 transformation 称为 <strong>link function</strong>。换句话说，为了拟合不同类型的 outcomes，我们只需要构建一个标准 linear model，然后通过合适的 link function 变换其输出即可。</p>
+<p>也许最常见的 link function 是 <strong>logit</strong> link，它适用于 binary data。这个 link function 如下，其中 <span class="math inline">\(w\)</span> 是任意严格位于 <span class="math inline">\(0\)</span> 和 <span class="math inline">\(1\)</span> 之间的概率： <span class="math display">\[g(w) = \log \left( \frac{w}{1 - w} \right)\]</span> <span class="math inline">\(w / (1 - w)\)</span> 这一项称为 <strong>odds</strong>，表示某事件发生的概率除以它不发生的概率。得到的模型称为 <strong>logistic regression</strong>，形式如下： <span class="math display">\[
+\text{logit}( E[Y_{it}] ) = \log \left( \frac{ E[Y_i] }{1 - E[Y_i] } \right) = \beta_0 + \sum_{j=1}^p \beta_j X_{ij}
+\]</span> 对 coefficients 取指数（即 <span class="math inline">\(e^{\beta}\)</span>）会得到 <strong>odds ratios</strong>，也就是与相关 predictor variable 增加一个单位相关的 <span class="math inline">\(Y_i=1\)</span> odds 的<em>乘法式</em>增加。</p>
+<div class="cell page-columns page-full">
+
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div id="fig-models-logistic-ex" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot with probability of outcome Y vs. independent variable X. Section of the curve near X = 0 is steeper than at larger X.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-models-logistic-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="007-models_files/figure-html/fig-models-logistic-ex-1.png" class="img-fluid figure-img" alt="A plot with probability of outcome Y vs. independent variable X. Section of the curve near X = 0 is steeper than at larger X." width="1200">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-models-logistic-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;7.2: An example of how logistic regression transforms a change in the mean-centered predictor <span class="math inline">\(X\)</span> into a change in the expected outcome <span class="math inline">\(Y\)</span>. The same absolute change in <span class="math inline">\(X\)</span> is associated in a large difference in the probability of the outcome when <span class="math inline">\(X\)</span> is near its mean (blue) vs a small change in the outcome when <span class="math inline">\(X\)</span> is large (red) or small.
+</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p><a href="#fig-models-logistic-ex" class="quarto-xref">图&nbsp;<span>7.2</span></a> 展示了 logistic regression model 如何把 predictor（<span class="math inline">\(X\)</span>）变换成一个被限制在 <span class="math inline">\(0\)</span> 和 <span class="math inline">\(1\)</span> 之间的 outcome probability。关键的是，虽然 predictor 仍然是线性的，logit link 意味着 <span class="math inline">\(X\)</span> 中相同的变化，可能导致 <span class="math inline">\(Y\)</span> 的绝对概率出现不同变化，具体取决于你位于 <span class="math inline">\(X\)</span> 尺度的什么位置。在这个例子中，如果你处于 predictor range 中间，<span class="math inline">\(X\)</span> 变化一个单位会导致概率变化 <span class="math inline">\(0.24\)</span>（蓝色）。在较高值处，变化要小得多（<span class="math inline">\(0.02\)</span>）。注意，这与上面的 linear regression model 不同；在那里，年龄的相同变化总是导致 preference 的相同变化！</p>
+<div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>在 R 中拟合 GLMs 与拟合标准 LMs 一样容易。你只需要调用 <code>glm()</code> 函数——并指定 link function。 对于上面 binary “liking” judgment 的例子，调用会是：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(liked_tea <span class="sc">~</span> condition, <span class="at">data =</span> tea_data, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>family</code> 参数指定所使用的分布类型，其中 <code>binomial</code> 是 logistic link function。</p>
+</div>
+</div>
+<p>我们这里只是触及 GLMs 的表面。第一，有许多不同 link functions 适合不同 outcome types。第二，GLMs 与 OLS 不仅在 link functions 上不同，也在处理 error terms 的方式上不同。本章更广泛的目标，是向你展示 regression models 是<em>数据的模型</em>。在这个 context 中，GLMs 使用 link functions 来建立能够生成许多不同类型 outcome data 的模型。<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn14"><p><sup>14</sup>&nbsp;我们有时把 linear models 想象成一套可以拼接的 tinker toys，用来堆叠一组 predictors。在这个 context 中，link functions 是一个额外的 “attachment”，可以扣到你的 linear model 上，让它生成不同 response type。</p></div></div></section>
+<section id="linear-mixed-effects-models线性混合效应模型" class="level2 page-columns page-full" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="linear-mixed-effects-models线性混合效应模型"><span class="header-section-number">7.3</span> Linear mixed effects models（线性混合效应模型）</h2>
+<p>实验数据常常包含每名参与者的多次测量（所谓 <strong>repeated measures</strong>）。此外，这些测量常常基于一组 stimulus items 样本（于是每个 item 也有多次测量）。这种 clustering 对 OLS models 来说有问题，因为每个 datapoint 的 error terms 并不独立。</p>
+<p>Datapoints 的 non-independence 乍看可能是一个小问题，但它会给推断带来深层问题。以我们上面看过的茶品尝数据为例，每个 condition 中有 24 个 observations。如果拟合 OLS model，我们会观察到一个高度显著的 tea-first effect。下面是该 coefficient 的 estimate 和 confidence interval：<span class="math inline">\(\hat{\beta} = -2.42\)</span>, 95% CI <span class="math inline">\([-3.50, -1.33]\)</span>。基于上一章的讨论，我们似乎有理由拒绝“这个效应是由 sampling variation 导致的”这一 null hypothesis，并把它解释为我们 sampled population 中存在 generalizable tea preference 差异的证据。</p>
+<p>但假设我们告诉你，这全部 48 个 observations（每个 condition 中 24 个）都来自一个叫 George 的人。画面就会大不相同。现在我们完全不知道观察到的大效应是否反映 population 中的差异，但我们会非常清楚 George 的 preference 是什么！<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> 来自 OLS model 的 confidence intervals 和 <span class="math inline">\(p\)</span>-values 现在会是错的，因为所有 error terms 都高度相关——它们全都反映 George 的 preferences。</p>
+<div class="no-row-height column-margin column-container"><div id="fn15"><p><sup>15</sup>&nbsp;我们在 <a href="009-design.html" class="quarto-xref"><span>章 9</span></a> 中讨论这类 repeated-measures designs 的优缺点，并在 <a href="010-sampling.html" class="quarto-xref"><span>章 10</span></a> 中讨论“许多人、每人少量 observations”与“少量人、每人许多 observations”之间的统计权衡。</p></div></div><p>我们如何建立能处理 clustered data 的模型？解决这个问题有许多广泛使用的方法，包括 <strong>linear mixed effects models</strong>、<strong>generalized estimating equations</strong> 和 <strong>clustered standard errors</strong>（常用于经济学）。这里我们会展示 linear mixed models 如何解决这个问题；它们是 OLS models 的扩展，并且正在迅速成为心理学许多领域的标准 <span class="citation" data-cites="bates2015">(<a href="#ref-bates2015" role="doc-biblioref">Bates 等 2015</a>)</span>。</p>
+<section id="建模-clusters-中的随机变异" class="level3 page-columns page-full" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="建模-clusters-中的随机变异"><span class="header-section-number">7.3.1</span> 建模 clusters 中的随机变异</h3>
+<p>在 linear mixed effects models 中，我们修改 linear predictor 本身，以建模 clusters 之间的差异。不要只是测量 George 的 preferences，假设我们修改原始茶品尝实验（不包含 age covariate），从每名参与者那里收集十个评分：五个 milk-first，五个 tea-first。我们用和之前相同的方式定义模型，只有一些小差异： <span class="math display">\[
+Y_{it} = \beta_0 + \beta_1 X_{it} + \gamma_i + \epsilon_{it}
+\]</span> 其中 <span class="math inline">\(Y_{it}\)</span> 是参与者 <span class="math inline">\(i\)</span> 在 trial <span class="math inline">\(t\)</span> 中的评分，<span class="math inline">\(X_{it}\)</span> 是该参与者在 trial <span class="math inline">\(t\)</span> 中被分派到的 treatment（即 milk-first 或 tea-first）。</p>
+<p>如果把这个方程与上面的 OLS 方程比较，你会注意到我们添加了两件事。第一，我们添加了区分 trials 与 participants 的下标。但更重要的是，我们添加了 <span class="math inline">\(\gamma_i\)</span>，也就是每名参与者各自的 intercept value。我们称之为 <strong>random intercept</strong>，因为它在参与者之间变动（而参与者是从 population 中随机选择的）。<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn16"><p><sup>16</sup>&nbsp;形式上，我们会把这种随机变异记作 <span class="math inline">\(\gamma_i \sim N(0, \tau^2)\)</span>——换句话说，参与者的 random intercepts 是从围绕共享 intercept <span class="math inline">\(\beta_0\)</span>、标准差为 <span class="math inline">\(\tau\)</span> 的 normal distribution 中抽样得到的。</p></div><div id="fn17"><p><sup>17</sup>&nbsp;当然，这会是一个很糟糕的实验！理想情况下，我们会在实验设计上游处理这个问题；见 <a href="009-design.html" class="quarto-xref"><span>章 9</span></a>。</p></div></div><p>Random intercept 意味着我们假定每名参与者都有自己的典型 “baseline” tea rating——有些参与者总体上就是比其他人更喜欢茶——而这些 baseline ratings 在参与者之间服从 normal distribution。因此，ratings 在参与者内部相关，因为 ratings 围绕每名参与者<em>独特</em>的 baseline tea rating 聚集。这个模型更能阻止误导性推断。例如，假设每个 condition 中只有一名参与者（比如 George 提供 24 个 milk-first 评分，Alice 提供 24 个 tea-first 评分）。如果我们发现某个 condition 中评分更高，就能够把这种差异归因于 participant-level variation，而不是 treatment。<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a></p>
+<p>沿着相同逻辑，我们也可以为不同 stimulus items 拟合 random intercepts（例如，如果在不同 trials 中使用不同类型的茶）。我们把参与者建模为具有 normally distributed variation，也可以用同样方式建模 stimulus variation。每个 stimulus item 都被假定产生一个特定 average outcome（也就是某些茶比其他茶更好喝），这些 average outcomes 则从一个 normal distribution population 中抽样。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>值得注意的是，linear mixed effects models 在 R 中并不比标准 linear models 难指定多少。一个非常流行的 package 是 <code>lme4</code> <span class="citation" data-cites="bates2015">(<a href="#ref-bates2015" role="doc-biblioref">Bates 等 2015</a>)</span>，它提供 <code>lmer()</code> 和 <code>glmer()</code> 函数（后者用于 generalized linear mixed effects models ）。对于这里的例子，我们会写：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(rating <span class="sc">~</span> condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">data =</span> tea_data)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>在这个模型中，语法 <code>(1 | id)</code> 指定我们想为 <code>id</code> 的每个水平拟合一个 random intercept。</p>
+</div>
+</div>
+</section>
+<section id="random-slopes-与-mixed-effects-models-的挑战" class="level3 page-columns page-full" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="random-slopes-与-mixed-effects-models-的挑战"><span class="header-section-number">7.3.2</span> Random slopes 与 mixed effects models 的挑战</h3>
+<p>Linear mixed effects models 可以进一步扩展，用来建模 independent variables 的<em>效应</em>在 subjects 内部的 clustering，而不仅仅是平均 <em>outcomes</em> 在 subjects 内部的 clustering。为此，我们可以向模型引入 <strong>random slopes</strong>（<span class="math inline">\(\delta_i\)</span>），它们与 condition variable <span class="math inline">\(X\)</span> 相乘，表示参与者之间在 tea tasting 效应上的差异： <span class="math display">\[
+Y_i = \beta_0 + \beta_1 X_{it} + \gamma_i + \delta_{i} X_{it} + \epsilon_{it}
+\]</span> 就像 random intercepts 一样，这些 random slopes 会被假定为在参与者之间变动，并遵循 normal distribution。<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn18"><p><sup>18</sup>&nbsp;这些 random slopes 和 intercepts 可以被假定为彼此独立，也可以假定为相关，取决于 modeler 的偏好。</p></div><div id="fn19"><p><sup>19</sup>&nbsp;关于 mixed effects models 的最佳 random effect structure，文献中有很多争论。这是一个非常棘手且技术性很强的主题。简言之，有些人主张所谓 <strong>maximal</strong> models，即包含所有由设计正当化的 random effect <span class="citation" data-cites="barr2013">(<a href="#ref-barr2013" role="doc-biblioref">Barr 等 2013</a>)</span>。在这里，这意味着为每名参与者包含 random slopes。问题是，这些模型可能变得非常复杂，而且用标准软件很难拟合。我们不会对这个话题表态，但当你开始在更复杂 experimental designs 上使用这些模型时，值得读一读相关内容。</p></div></div><p>这个模型现在描述了两种随机变异：一个人总体上有多喜欢茶，<em>以及</em>他们的 ordering preference 有多强。这两者在 population 中都很可能会变动，因此把它们放入模型看起来是好事。事实上，在某些情况下，有人认为添加 random slopes 对做出合适推断非常重要。<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a></p>
+<p>另一方面，这个模型复杂得多。上面的简单 OLS model 中，我们只有两个 parameters 要拟合（<span class="math inline">\(\beta_0\)</span> 和 <span class="math inline">\(\beta_1\)</span>），但现在除了这两个之外，还有两个表示 individual participant intercepts 和 slopes 的标准差的 parameters，还包括每名参与者的 parameters 和每名参与者的 condition effect。因此，我们从两个 parameters 增加到了 24 个！<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a> 这种复杂性可能导致模型拟合问题，尤其是在非常小的数据集中（这些 parameters 没有受到数据充分约束）或非常大的数据集中（计算所有这些 parameters 可能很棘手）。<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn20"><p><sup>20</sup>&nbsp;不过需要说明，由于 mixed effects model 的结构，这些 parameters 在技术上并不都是彼此独立的。</p></div><div id="fn21"><p><sup>21</sup>&nbsp;许多 R 用户可能熟悉广泛使用的 <code>lme4</code> package <span class="citation" data-cites="bates2015">(<a href="#ref-bates2015" role="doc-biblioref">Bates 等 2015</a>)</span>，它使用与 maximum likelihood 相关的 frequentist tools 拟合 mixed effects models。这类模型也可以使用 <code>brms</code> package <span class="citation" data-cites="burkner2021">(<a href="#ref-burkner2021" role="doc-biblioref">Bürkner 2021</a>)</span> 通过 Bayesian inference 拟合；该 package 提供了许多指定复杂模型的强大方法。</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>在 <code>lme4</code> package 中指定 random slopes 也相对直接：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lmer</span>(rating <span class="sc">~</span> condition <span class="sc">+</span> (condition <span class="sc">|</span> id), <span class="at">data =</span> tea_data)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>这里，<code>(condition | id)</code> 表示“应为 <code>id</code> 的每个水平拟合一个单独的 <code>condition</code> random slope”。当然，指定这样的模型比正确拟合它容易。</p>
+</div>
+</div>
+<p>更一般地说，linear mixed effects models 非常灵活，并且已经在心理学中相当常见。但它们确实有显著局限。正如我们讨论过的，它们在标准软件包中可能很难拟合。此外，这些模型的准确性依赖于我们能否正确指定 random effects 的结构。<a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a> 如果我们指定了错误模型，我们的推断就会错！但有时很难知道如何检查模型是否合理，尤其是在 clusters 或 observations 数量较少时。</p>
+<div class="no-row-height column-margin column-container"><div id="fn22"><p><sup>22</sup>&nbsp;一种尤其有问题的情况是 errors 的 correlation structure 被错误指定，例如，如果 treatment group 中参与者内部 observations 的相关高于 control group；在这类情况下，mixed model estimates 可能有显著 bias <span class="citation" data-cites="bie2021fitting">(<a href="#ref-bie2021fitting" role="doc-biblioref">Bie 等 2021</a>)</span>。</p></div></div></section>
+</section>
+<section id="sec-models-practical" class="level2 page-columns page-full" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="sec-models-practical"><span class="header-section-number">7.4</span> 如何使用模型分析数据？</h2>
+<p>在本章前面的部分，我们描述了一组 regression-based techniques——标准 OLS、generalized linear model 和 linear mixed effects models——它们可以用于建模随机化实验产生的数据（以及许多其他类型的数据）。相比前两章描述的更简单 estimation 和 inference 方法，regression models 的优势在于，它们可以更有效地考虑多种不同类型的变异，包括 covariates、多个 manipulations 和 clustered structure。此外，当它们被恰当地用于分析设计良好的随机化实验时，regression models 可以给出我们感兴趣的因果效应的无偏估计，而这正是我们做实验的主要目标。</p>
+<p>但——从实践角度说——你应该如何为自己的实验建立模型？应该包含哪些 covariates，又应该排除哪些？使用模型探索数据集有很多方式，但在本节中，我们会尝试勾勒一个默认方法，用模型以最直接方式估计实验中的因果效应。把它看作一个起点。我们会先给出一组 rules of thumb，然后讨论一个 worked example。最后几个小节会处理两个问题：什么时候应在模型中包含 covariates，以及如何检查你的结果是否在多种不同 model specifications 下 robust。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="深入">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>深入
+</div>
+</div>
+<section id="另一种方法generalized-estimating-equations" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="另一种方法generalized-estimating-equations">另一种方法：Generalized estimating equations</h3>
+<p>帮助解决 clustering 问题的第二类方法是 <strong>generalized estimating equations</strong>（GEE）。在这种方法中，我们不改变 linear predictor。我们不添加 random intercepts 或 slopes，也不对 errors 的分布做任何假设（也就是不再假定它们 normal、independent 且 homoskedastic）。</p>
+<p>在 GEE 中，我们反而给模型提供一个关于 errors 可能如何相互关联的初始 “guess”；例如，在 repeated-measures experiment 中，我们可能猜测 errors 是 exchangeable 的，也就是说，它们在每名参与者内部以相同程度相关，但在参与者之间不相关。不同于 linear mixed models（LMM） 那样<em>假定</em>我们的猜测是正确的，GEE 以我们的猜测为起点，经验性地估计 errors 的 correlation structure，并使用这个 correlation structure 得到 regression coefficients 的 point estimates 和 inference。值得注意的是，随着 clusters 和 observations 数量变得非常大，GEE <em>总是</em>会提供 unbiased point estimates 和 valid inference，<em>即使</em>我们关于 correlation structure 的猜测很差。此外，配合简单的 finite-sample corrections <span class="citation" data-cites="mancl2001covariance">(<a href="#ref-mancl2001covariance" role="doc-biblioref">Mancl 和 DeRouen 2001</a>)</span>，GEE 似乎在 clusters 数量较小时比 LMM 提供更 valid 的推断。</p>
+<p>为这些防止 model misspecification 的良好保障付出的代价是：原则上，如果 LMM 实际上被正确指定，GEE 通常会比 LMM 有更低 statistical power，但实践中的差异可能出人意料地小 <span class="citation" data-cites="bie2021fitting">(<a href="#ref-bie2021fitting" role="doc-biblioref">Bie 等 2021</a>)</span>。基于这些原因，本书的一些作者实际上更偏好把带 finite-sample corrections 的 GEE，而不是 LMM，作为 clustered data 的默认模型，尽管它们在心理学中不太常见。 <!-- In general, we tend to favor LMM over GEE only when the number of observations and clusters are quite large, and when careful diagnostics also indicate that distributional assumptions are fulfilled. --></p>
+</section>
+</div>
+<section id="modeling-rules-of-thumb建模经验法则" class="level3 page-columns page-full" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="modeling-rules-of-thumb建模经验法则"><span class="header-section-number">7.4.1</span> Modeling rules of thumb（建模经验法则）</h3>
+<p>我们进行 statistical modeling 的方法，是从一个“default model”开始；它在文献中称为 <strong>saturated model</strong>。一个实验的 saturated model 包含实验的完整设计——所有 main effects 和 interactions——除此之外什么也不包含。如果你操纵了一个变量，就把它纳入模型。如果你操纵了两个变量，就把二者及其 interaction 都纳入模型。如果你的设计包含参与者的重复测量，就包含 participant 的 random effect；如果设计中包含有重复测量的 experimental items，就包含 stimulus 的 random effect。<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn23"><p><sup>23</sup>&nbsp;如上所述，你也可以包含 maximal random effect structure <span class="citation" data-cites="barr2013">(<a href="#ref-barr2013" role="doc-biblioref">Barr 等 2013</a>)</span>，这涉及 random slopes 和 intercepts——但要认识到你并不总是能拟合这类模型。</p></div><div id="fn24"><p><sup>24</sup>&nbsp;拥有这种关于数据分析的默认视角，还有一个推论：当你看到某个分析显著偏离默认做法时，这些偏离应该引发一些问题。如果某人从分析中删除一个 manipulation、添加一两个 covariates，或者没有控制数据中的某些 clustering，他们偏离默认做法是因为其子领域有不同规范，还是有其他理由？这条推理路线有时会引出这样的问题：某些 analytic decisions 在多大程度上是 post hoc 且由数据驱动的（换句话说，是 <span class="math inline">\(p\)</span>-hacked）。例子见 <a href="011-prereg.html" class="quarto-xref"><span>章 11</span></a> 中的 <span class="smallcaps">case study</span>。</p></div></div><p>不要在 default model 中包含很多其他东西。你做的是随机化实验，而随机化实验的优势在于，你不必担心基于 population 的 confounding（见 <a href="001-experiments.html" class="quarto-xref"><span>章 1</span></a>）。所以不要在 default model 中放入很多 covariates——通常一个也不要放！<a href="#fn24" class="footnote-ref" id="fnref24" role="doc-noteref"><sup>24</sup></a></p>
+<p>这个 default saturated model 随后代表了实验结果的一个简单摘要。它的 coefficients 可以被解释为感兴趣效应的估计，并且它可以作为使用 frequentist 或 Bayesian tools 推断实验效应与 population 关系的基础。</p>
+<p>关于这种 modeling strategy，下面有更多指导。</p>
+<ol type="1">
+<li><p><strong>Preregister your model</strong>。如果你在看到数据之后改变分析方法，就会冒 <span class="math inline">\(p\)</span>-hacking 的风险——选择一种会使你感兴趣的效应估计产生 bias 的分析。正如我们在 <a href="003-replication.html" class="quarto-xref"><span>章 3</span></a> 中讨论过、并将在 <a href="011-prereg.html" class="quarto-xref"><span>章 11</span></a> 中更详细讨论的，最小化这个问题的一个重要策略是 <strong>preregister</strong> 你的分析。<a href="#fn25" class="footnote-ref" id="fnref25" role="doc-noteref"><sup>25</sup></a></p></li>
+<li><p><strong>把模型预测与观察数据一起可视化</strong>。正如我们会在 <a href="015-viz.html" class="quarto-xref"><span>章 15</span></a> 中讨论的，一个实验的 “default model” 应该搭配一个 “default visualization”，即 <strong>design plot</strong>；后者同样反映实验的完整设计结构和任何主要 clusters。检查模型是否拟合数据的一种方式，就是把它画在这些数据上。有时，模型和数据的组合可以像带 regression line 的 scatter plot 一样简单。但把模型与数据一起画出来，常常能揭示二者之间的不匹配。一个不能很好描述数据的模型，不是 generalizable inferences 的好来源！</p></li>
+<li><p><strong>解释模型预测</strong>。一旦你有了模型，不要只是读出感兴趣 coefficients 的 <span class="math inline">\(p\)</span>-values。逐一走过每个 coefficient，考虑它如何与 outcome variable 相关。对于我们一直在考虑的简单 two-group design，condition coefficient 就是你打算测量的 causal effect 的估计！考虑它的方向、大小和精确度（standard error 或 confidence interval）。</p></li>
+</ol>
+<div class="no-row-height column-margin column-container"><div id="fn25"><p><sup>25</sup>&nbsp;Preregistration 的一个附带好处是，它会让你想清楚自己的 experimental design 是否合适——也就是说，是否真的存在一种分析，能够从你打算收集的数据中估计你想要的效应？</p></div></div><p>话虽如此，在一些 contexts 中，偏离 default saturated model 是合理的。例如，可能没有足够 statistical power 来估计多个 interaction terms，或者 covariates 可能被纳入模型，以帮助处理某些形式的 missing data。 Default model 只是一个非常好的起点。</p>
+</section>
+<section id="一个-worked-example完整示例" class="level3 page-columns page-full" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="一个-worked-example完整示例"><span class="header-section-number">7.4.2</span> 一个 worked example（完整示例）</h3>
+
+<div class="no-row-height column-margin column-container"><div id="fig-models-sgf-stim" class="quarto-float quarto-figure quarto-figure-center anchored" alt="An illustration of three cartoon faces: one with hat and glasses, one with glasses, and one with neither hat nor glasses.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-models-sgf-stim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/models/sgf.png" class="img-fluid figure-img" alt="An illustration of three cartoon faces: one with hat and glasses, one with glasses, and one with neither hat nor glasses.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-models-sgf-stim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;7.3: 与 <span class="citation" data-cites="stiller2015">Stiller, Goodman, 和 Frank (<a href="#ref-stiller2015" role="doc-biblioref">2015</a>)</span> 中使用材料类似的示例刺激材料。
+</figcaption>
+</figure>
+</div></div><p>所有这些建议可能显得抽象，所以让我们在一个简单例子中付诸实践。换个口味，我们来看一个不是关于品茶的实验。这里考虑一项测试学龄前儿童语言理解的实验数据 <span class="citation" data-cites="stiller2015">(<a href="#ref-stiller2015" role="doc-biblioref">Stiller, Goodman, 和 Frank 2015</a>)</span>。在这个实验中，两到五岁的儿童会看到类似 <a href="#fig-models-sgf-stim" class="quarto-xref">图&nbsp;<span>7.3</span></a> 的显示。在 experimental condition 中，一个 puppet 可能会说：“My friend has glasses! Which one is my friend?” 目标是测量有多少儿童做出 “pragmatic inference”：puppet 的朋友是那个戴眼镜但<em>没</em>戴帽子的脸。</p>
+<p>为了估计效应，参与者被随机分派到 experimental condition，或 control condition；在 control condition 中，puppet 吃了太多花生酱而不能说话，但孩子们仍然需要猜哪张脸是他的朋友。实验中还有三种其他 experimental stimuli（房子、床和意大利面盘）。这个实验的数据包含来自 147 名儿童的总计 588 个 observations，每名儿童都看到全部四个 stimuli。该实验的主要假设是，学龄前儿童能够做出 pragmatic inferences，正确推断 puppet（例如）描述的是三张脸中的哪一张。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>如果你想跟着这个例子做，需要加载示例数据并做一点 preprocessing（<a href="103-tidyverse.html" class="quarto-xref"><span>附录 D</span></a> 中也介绍过）：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>repo <span class="ot">&lt;-</span> <span class="st">"https://github.com/langcog/experimentology/raw/main"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sgf <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(repo, <span class="st">"data/tidyverse/stiller_scales_data.csv"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">cut</span>(age, <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">include.lowest =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">condition =</span> <span class="fu">fct_recode</span>(condition,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Experimental"</span> <span class="ot">=</span> <span class="st">"Label"</span>, <span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"No Label"</span>))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full" data-cap-location="margin">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-models-sgf-plot" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" alt="A plot with data points, means, and confidence intervals for proportion correct over age group, for experimental and control.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-models-sgf-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="007-models_files/figure-html/fig-models-sgf-plot-1.png" class="img-fluid figure-img" style="width:85.0%" alt="A plot with data points, means, and confidence intervals for proportion correct over age group, for experimental and control.">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-models-sgf-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;7.4: Data for <span class="citation" data-cites="stiller2015">Stiller, Goodman, 和 Frank (<a href="#ref-stiller2015" role="doc-biblioref">2015</a>)</span>. Each point shows a single participant’s proportion correct trials (out of four experimental stimuli) plotted by age group, jittered slightly to avoid overlap. Larger points and associated confidence intervals show mean and 95% confidence intervals for each condition.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>这个 experimental design 看起来很像我们茶品尝实验的某些版本。我们有一个主要 condition manipulation（puppet 提供信息 vs 不提供），以 between participants 方式呈现，因此一些参与者在 experimental condition 中，另一些在 control condition 中。我们的 measurements 在参与者内部跨不同 experimental stimuli 重复。最后，我们有一个重要的、预先计划的 covariate：儿童年龄。实验数据绘制在 <a href="#fig-models-sgf-plot" class="quarto-xref">图&nbsp;<span>7.4</span></a> 中。<a href="#fn26" class="footnote-ref" id="fnref26" role="doc-noteref"><sup>26</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn26"><p><sup>26</sup>&nbsp;这个实验的 sampling plan 实际上是在年龄上 <strong>stratified</strong> 的，也就是说，我们有意为每个一岁年龄组招募相同数量的参与者——因为我们预期年龄与儿童成功完成这项任务的能力高度相关。我们会在 <a href="010-sampling.html" class="quarto-xref"><span>章 10</span></a> 中更详细描述这种 sampling。</p></div><div id="fn27"><p><sup>27</sup>&nbsp;这个实验没有 preregistered，但论文包含一个使用相同分析的单独 replication dataset。</p></div><div id="fn28"><p><sup>28</sup>&nbsp;如上所述，这是一个棘手决策点；我们也完全可以合理地添加 random slopes。</p></div></div><p>我们应该如何为这个数据集建立 default model？<a href="#fn27" class="footnote-ref" id="fnref27" role="doc-noteref"><sup>27</sup></a> 我们只需把这些 design factors 都放入 mixed effects model；因为我们想预测每个 trial 上的 correct performance，而这是 binary variable，所以对 mixed effects model 使用 logistic link function（即 <strong>generalized linear mixed effects model</strong>）。因此，模型中有 condition effect，并把 age 作为 covariate。我们进一步添加 condition 与 age 之间的 interaction，以防 condition effect 在不同年龄组之间有 meaningful variation。最后，我们添加 participant 的 random effects <span class="math inline">\(\gamma_i\)</span> 和 experimental item 的 random effects <span class="math inline">\(\delta_t\)</span>。<a href="#fn28" class="footnote-ref" id="fnref28" role="doc-noteref"><sup>28</sup></a></p>
+<p>得到的模型如下： <span class="math display">\[
+\text{logit}( E[Y_{it}] ) = \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i1} X_{i2} + \gamma_i + \delta_t
+\]</span></p>
+<p>让我们从左到右拆解这个复杂方程：</p>
+<ul>
+<li><span class="math inline">\(\text{logit}( E[Y_{it}] )\)</span> 表示我们正在预测 <span class="math inline">\(E[Y_{it}]\)</span> 的 logistic function（其中 <span class="math inline">\(Y_{it}\)</span> 表示儿童 <span class="math inline">\(i\)</span> 在 trial <span class="math inline">\(t\)</span> 上是否正确）。</li>
+<li><span class="math inline">\(\beta_0\)</span> 是 <strong>intercept</strong>，也就是我们对 control condition 中参与者正确反应 average log-odds（即 odds ratio 的 log）的估计。</li>
+<li><span class="math inline">\(\beta_1 X_{i1}\)</span> 是 condition predictor。<span class="math inline">\(\beta_1\)</span> 表示处于 experimental condition 相关的 log-odds 变化（我们感兴趣的 causal effect！），而 <span class="math inline">\(X_{i1}\)</span> 是一个 indicator variable：如果儿童 <span class="math inline">\(i\)</span> 处于 experimental condition，它为 1；如果处于 control condition，它为 0。把 <span class="math inline">\(\beta_1\)</span> 乘以这个 indicator，意味着这个 predictor 对 control condition 参与者取值为 0，对 experimental condition 参与者取值为 <span class="math inline">\(\beta_1\)</span>。</li>
+<li><span class="math inline">\(\beta_2 X_{i2}\)</span> 是 age predictor。<span class="math inline">\(\beta_2\)</span> 表示在 control condition 中，年龄增加一岁相关的 log-odds 差异<a href="#fn29" class="footnote-ref" id="fnref29" role="doc-noteref"><sup>29</sup></a>，而 <span class="math inline">\(X_{i2}\)</span> 是每名参与者的年龄。<a href="#fn30" class="footnote-ref" id="fnref30" role="doc-noteref"><sup>30</sup></a></li>
+<li><span class="math inline">\(\beta_3 X_{i1} X_{i2}\)</span> 是 experimental condition 和 age 之间的 interaction。<span class="math inline">\(\beta_3\)</span> 表示年龄增加一岁<em>且</em>处于 experimental condition 而不是 control condition 相关的 log odds（即 odds ratio 的 log）差异。这个项同时乘以每名儿童的年龄和 condition indicator <span class="math inline">\(X_i\)</span>。</li>
+<li><span class="math inline">\(\gamma_i\)</span> 是参与者 <span class="math inline">\(i\)</span> 的 random intercept，捕捉 trials 之间成功 odds 的个体变异。</li>
+<li><span class="math inline">\(\delta_t\)</span> 是 stimulus <span class="math inline">\(t\)</span> 的 random intercept，捕捉四种不同 stimuli 之间成功 odds 的变异。</li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn29"><p><sup>29</sup>&nbsp;Age coefficient 是 <strong>simple effect</strong>，意味着它只是 control condition 中 age 的效应。这是因为我们对 condition predictor 做了 dummy coded。如果想要 average age effect（<strong>main effect</strong>），就需要使用 effects coding，参见上面 “Interactions” 小节的注释。</p></div><div id="fn30"><p><sup>30</sup>&nbsp;在这个例子中，我们对 age predictor 做了 <strong>centered</strong>，因此模型中所有估计都是针对参与者平均年龄的。对 continuous predictors 做 centering 是良好的建模实践，因为它会增加模型其他部分的可解释性。例如，因为这个模型中的 age 是 centered，intercept <span class="math inline">\(\beta_0\)</span> 可以解释为在 control condition 中、平均年龄参与者正确完成一个 trial 的 predicted odds。</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>要拟合上面描述的模型，第一步是准备 predictors。在这个案例中，我们对 <code>age</code> predictor 做 centering，并把 control condition 设置为 reference level。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sgf<span class="sc">$</span>age_centered <span class="ot">&lt;-</span> <span class="fu">scale</span>(sgf<span class="sc">$</span>age, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sgf<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">fct_relevel</span>(sgf<span class="sc">$</span>condition, <span class="st">"Control"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>我们再次使用 <code>lme4</code> package，这次使用 <code>glmer()</code> 函数。和标准 GLM 一样，我们同样必须通过选择 distribution family 来指定 link function。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glmer</span>(correct <span class="sc">~</span> age_centered <span class="sc">*</span> condition <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subid) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>item), </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">data =</span> sgf)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>你可以像之前一样用 <code>summary(mod)</code> 查看 fitted model 的摘要。与 <code>lm()</code> 的唯一大差异是，这里可以分别提取 fixed effects 和 random effects（分别用 <code>fixef(mod)</code> 和 <code>ranef(mod)</code>）。</p>
+</div>
+</div>
+<!-- ::: {.margin-caption} -->
+<!-- \vspace{.5em} -->
+<div class="cell">
+<div id="tbl-models-sgf-model-print" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-models-sgf-model-print-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;7.2: Estimated effects for our generalized linear mixed effects model on data from <span class="citation" data-cites="stiller2015">Stiller, Goodman, 和 Frank (<a href="#ref-stiller2015" role="doc-biblioref">2015</a>)</span>.
+</figcaption>
+<div aria-describedby="tbl-models-sgf-model-print-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 18%">
+<col style="width: 19%">
+<col style="width: 7%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: right;"><span class="math inline">\(\hat{\beta}\)</span></th>
+<th style="text-align: right;">95% CI</th>
+<th style="text-align: right;"><span class="math inline">\(z\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Control condition</td>
+<td style="text-align: right;">−1.46</td>
+<td style="text-align: right;">[−1.88, −1.04]</td>
+<td style="text-align: right;">−6.76</td>
+<td style="text-align: right;">&lt; .001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Age (years)</td>
+<td style="text-align: right;">−0.38</td>
+<td style="text-align: right;">[−0.75, −0.01]</td>
+<td style="text-align: right;">−1.99</td>
+<td style="text-align: right;">.046</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Experiment condition</td>
+<td style="text-align: right;">2.26</td>
+<td style="text-align: right;">[1.82, 2.70]</td>
+<td style="text-align: right;">10.07</td>
+<td style="text-align: right;">&lt; .001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Age (years) * Experiment condition</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">[0.42, 1.43]</td>
+<td style="text-align: right;">3.60</td>
+<td style="text-align: right;">&lt; .001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<!-- ::: -->
+<p>让我们估计这个模型，看看它是什么样。这里我们会聚焦于所谓 <strong>fixed effects</strong>（主要 predictors）的解释，而不是 participant 和 item random effects。<a href="#fn31" class="footnote-ref" id="fnref31" role="doc-noteref"><sup>31</sup></a> <a href="#tbl-models-sgf-model-print" class="quarto-xref">表&nbsp;<span>7.2</span></a> 显示了 coefficients。</p>
+<div class="no-row-height column-margin column-container"><div id="fn31"><p><sup>31</sup>&nbsp;Participant means 的 estimated standard deviation 是 <span class="math inline">\(0.23\)</span>（以 log-odds 表示），items 的 standard deviation 是 <span class="math inline">\(0.27\)</span>。这些表明我们的两个 random effects 都捕捉了 meaningful variation。</p></div></div><p>同样，让我们逐项走过每一个 term：</p>
+<ul>
+<li><p><strong>Intercept</strong>（control condition estimate）是 <span class="math inline">\(\hat{\beta} = -1.46\)</span>, 95% CI <span class="math inline">\([-1.88, -1.04]\)</span>, <span class="math inline">\(z = -6.76\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>。这个估计反映的是，control condition 中平均年龄参与者正确反应的 log-odds 为 <span class="math inline">\(-1.46\)</span>，对应概率为 <span class="math inline">\(0.19\)</span>。如果看 <a href="#fig-models-sgf-plot" class="quarto-xref">图&nbsp;<span>7.4</span></a>，这个估计是合理的：<span class="math inline">\(0.19\)</span> 看起来接近 control condition 的平均值。</p></li>
+<li><p><em>Age effect</em> estimate 是 <span class="math inline">\(\hat{\beta} = -0.38\)</span>, 95% CI <span class="math inline">\([-0.75, -0.01]\)</span>, <span class="math inline">\(z = -1.99\)</span>, <span class="math inline">\(p = 0.046\)</span>。这意味着在 control condition 中，年龄较大的儿童正确反应的 log-odds 略微下降。同样，看 <a href="#fig-models-sgf-plot" class="quarto-xref">图&nbsp;<span>7.4</span></a>，这个估计可以解释：我们看到最年长年龄组的正确反应概率有小幅下降。</p></li>
+<li><p>关键的 experimental condition estimate 是 <span class="math inline">\(\hat{\beta} = 2.26\)</span>, 95% CI <span class="math inline">\([1.82, 2.70]\)</span>, <span class="math inline">\(z = 10.07\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>。这个估计意味着，experimental condition 中平均年龄参与者正确反应的 log-odds，是 control（intercept）和 experimental condition 两个估计之和：<span class="math inline">\(-1.46 +  2.26\)</span>，对应概率为 <span class="math inline">\(0.69\)</span>。把解释落回 <a href="#fig-models-sgf-plot" class="quarto-xref">图&nbsp;<span>7.4</span></a>，这个估计对应于 experimental condition 的平均值。</p></li>
+<li><p>最后，age 和 condition 的 <em>interaction</em> 是 <span class="math inline">\(\hat{\beta} = 0.92\)</span>, 95% CI <span class="math inline">\([0.42, 1.43]\)</span>, <span class="math inline">\(z = 3.60\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>。这个正 coefficient 反映的是，年龄每增加一年，control 和 experimental conditions 之间的差异都会增长。</p></li>
+</ul>
+<p>总之，这个模型提示 experimental 和 control conditions 之间存在 substantial performance difference，从而支持这样一个假设：样本年龄组中的儿童能够以高于 chance 的水平执行 pragmatic inferences。</p>
+<p>这个例子说明了我们推荐的 “default saturated model” 框架——即一个对应于实验设计的单一 regression model，可以在存在其他变异来源时，仍然给出可解释的、对感兴趣 causal effect 的估计。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="深入">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>深入
+</div>
+</div>
+<section id="什么时候把-covariates-纳入模型是合理的" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="什么时候把-covariates-纳入模型是合理的">什么时候把 covariates 纳入模型是合理的？</h3>
+<p>让我们回到上面关于为实验建立 “default” model 的一个建议：不要包含 covariates。这个建议可能让人惊讶。许多 demographic factors 是心理学家和其他行为科学家感兴趣的，而且在观察性研究中，这些 factors 几乎总是与重要 life outcomes 相关。那么，为什么不把它们放进我们的实验模型里呢？毕竟，我们确实在上面的 worked example 中包含了 age！</p>
+<p>好吧，如果你有一个，或者至多少数几个你认为与 outcome 有 meaningful relationship 的 covariates，你<em>可以</em>提前计划把它们放进模型。如果你认为自己的效应很可能被某个特定 demographic characteristic <strong>moderated</strong>——就像上面 developmental example 中的 age——那么纳入它会相当有用。</p>
+<p>此外，如果你假设 covariates 与 outcome 交互，纳入 covariates 可以通过减少 outcome 中的“噪声”来提高估计精确度。不过令人惊讶的是，除非 covariate 与 outcome 之间的相关非常强，否则这种调整对整体精确度的提升其实<em>很小</em>。</p>
+<p><a href="#fig-models-precision" class="quarto-xref">图&nbsp;<span>7.5</span></a> 展示了一个简单模拟的结果，用来考察 estimation error 与纳入 covariates 之间的关系。只有当 covariate 和 outcome（例如 age 和 tea rating）之间的相关大于 <span class="math inline">\(r=0.6\)</span> 到 <span class="math inline">\(r=0.8\)</span> 时，这种调整才真正有帮助。</p>
+<div id="fig-models-precision" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-models-precision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="007-models_files/figure-html/models-precision-1.png" class="img-fluid figure-img" style="width:60.0%" alt="A plot with error over N per group by correlation of X and Z. Lines steeply decrease, are lower for higher correlation."></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-models-precision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;7.5: 调整 covariates 所带来的 estimation error 降低，按每组参与者数量（<span class="math inline">\(N\)</span>）以及 outcome（<span class="math inline">\(X\)</span>）与 covariate（<span class="math inline">\(Z\)</span>）之间相关绘制。
+</figcaption>
+</figure>
+</div>
+<p>话虽如此，也有不少理由不纳入 covariates。这些理由推动我们给出建议：除非你基于理论有非常强的预期，认为 covariate 要么（A）与 outcome 相关，要么（B）存在强 moderation relationship，否则在 default model 中跳过它们。</p>
+<p>不纳入 covariates 的第一个理由很简单：我们不需要。因为随机化切断了因果联系，我们的 experimental estimate 是对感兴趣因果效应的无偏估计（至少在大样本中如此）。我们可以保证，在许多不同实验的极限中，即使不同年龄的人进入了不同 tea-tasting conditions，这个变异来源也会被平均掉。实际上，把不必要的 covariates 纳入模型，会（轻微）降低模型检测到真实效应的概率（也就是说，它会降低 statistical precision 和 power）。只是出于 chance，covariates 可能会“soak up” outcome 中的变异，留给真实效应解释的就更少了！</p>
+<p>第二个理由是，纳入某些 covariates 实际上可能损害你的 causal inference，尤其是那些在 randomization <em>之后</em>收集的 covariates。随机化的逻辑是，你切断了样本特征与 condition manipulation 之间的所有因果联系。但如果把与 group status 有关的变量添加到模型中，你可能会意外地把这些联系“uncut”。这个问题一般称为 <em>conditioning on post-treatment variables</em>；完整讨论超出本书范围，但这是应该避免的事情 <span class="citation" data-cites="montgomery2018">(如果你担心它，值得读一读，见 <a href="#ref-montgomery2018" role="doc-biblioref">Montgomery, Nyhan, 和 Torres 2018</a>)</span>。</p>
+<p>最后，添加 covariates 的一个标准理由——因为你的组不平衡——其实也没有很好根据。人们常常谈到 “unhappy randomization”： 例如，你随机分派到不同 tea-tasting groups，但随后发现两组平均年龄有点不同。然后你做一个 <span class="math inline">\(t\)</span>-test 或其他统计检验，发现确实存在显著年龄差异。这种做法没有意义！因为你已经随机化了，所以你知道年龄差异是 chance 造成的。此外，组之间偶然 demographic differences 不太可能重要，除非该特征与 outcome 高度相关（见上文）。相反，如果样本量小到重要 confounders 中可能出现有意义的大偶然差异，那么更好的做法是在一开始就对该 confounder 进行 stratify——我们会在 <a href="010-sampling.html" class="quarto-xref"><span>章 10</span></a> 中对这个问题说更多。</p>
+<p>所以，这些就是我们的选择：如果某个 covariate 已知与 outcome 有非常强的关系，可以把它纳入 default model。否则，把 covariates 留在模型外，会避免许多麻烦。</p>
+</section>
+</div>
+</section>
+<section id="robustness-checks-与-multiverse" class="level3 page-columns page-full" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="robustness-checks-与-multiverse"><span class="header-section-number">7.4.3</span> Robustness checks 与 multiverse</h3>
+<p>使用心理学文献中常见的 NHST 统计检验方法时，即使是一个简单 two-factor experimental design，也会提供大量不同的 <span class="math inline">\(t\)</span>-tests 和 ANOVAs，<a href="#fn32" class="footnote-ref" id="fnref32" role="doc-noteref"><sup>32</sup></a> 给 <span class="math inline">\(p\)</span>-hacking 和 selective reporting 提供许多机会。我们在这里倡导的是一种 “default model” 方法：预先规划并 preregister 一个单一 regression model，捕捉 experimental design 中计划好的特征，包括 manipulations 和 clustering 来源。这种方法可以通过提供一个几乎每次都会采用的标准方法，帮助你应对数据分析的一部分复杂性。</p>
+<div class="no-row-height column-margin column-container"><div id="fn32"><p><sup>32</sup>&nbsp;虽然这里不讨论 analysis of variance（ANOVA），但 ANOVA 基本上就是 linear regression。</p></div><div id="fn33"><p><sup>33</sup>&nbsp;公平地说，“Many Analysts” projects 中调查的 analytic questions 往往比我们建议做的简单实验更复杂，而且关于这些研究究竟揭示了多少真实变异，也存在争论 <span class="citation" data-cites="breznau2022 mathur2023b">(<a href="#ref-breznau2022" role="doc-biblioref">Breznau 等 2022</a>; <a href="#ref-mathur2023b" role="doc-biblioref">Mathur, Covington, 和 VanderWeele 2023</a>)</span>。</p></div></div><p>不过，并非每个数据集都适合这种方法。对于复杂 experimental designs 或 unusual measures，有时很难弄清楚如何指定或拟合 default saturated model。 而且尤其在这些情况下，模型选择可能会对报告效应的大小产生很大影响。为了量化 model choice 导致的 effect size 变异，“Many Analysts” projects 要求一组团队使用不同分析方法处理同一个数据集。这些项目的结果是：根据所采用的方法不同，outcomes 存在 substantial variability <span class="citation" data-cites="silberzahn2018 botvinik-nezer2020">(<a href="#ref-silberzahn2018" role="doc-biblioref">Silberzahn 等 2018</a>; <a href="#ref-botvinik-nezer2020" role="doc-biblioref">Botvinik-Nezer 等 2020</a>)</span>。<a href="#fn33" class="footnote-ref" id="fnref33" role="doc-noteref"><sup>33</sup></a></p>
+<p><strong>Robustness analysis</strong>（有时也叫 “sensitivity analysis” 或听起来更酷的 “multiverse analysis”）是一种技术，用来处理单个分析可能因 chance 高估或低估某个特定效应的可能性 <span class="citation" data-cites="steegen2016">(<a href="#ref-steegen2016" role="doc-biblioref">Steegen 等 2016</a>)</span>。一般想法是，分析者探索不同可能分析构成的空间。在最简单形式中，可以在 supplement 中报告 alternative model specifications；更复杂版本则要求在一系列可能 specifications 上对 estimates 取平均，并把这个平均值报告为 primary effect estimate。</p>
+<p>这类分析的细节会随着你担心模型对什么敏感而变化。一名分析者可能担心添加不同 covariates 的影响；另一名分析者可能使用 Bayesian framework，并担心对特定 prior values 的敏感性。如果你在许多不同 specifications 下得到相似结果，晚上就能睡得更踏实。需要带走的主要原则，是对我们的模型保持一点谦卑。任何给定模型在某些细节上都很可能是错的。考察你的 estimates 对 model specification 细节的敏感性，是个好主意。</p>
+</section>
+</section>
+<section id="本章小结模型" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="本章小结模型"><span class="header-section-number">7.5</span> 本章小结：模型</h2>
+<p>在过去三章中，我们阐明了一个数据分析框架，聚焦于我们的关键实验目标：对某个特定因果效应的测量。我们从估计效应的基本技术开始，并推断这些从样本估计出的效应如何 generalize 到 population。本章展示了这些想法如何自然引出为数据建立模型的想法；模型允许我们在更复杂设计中估计效应。Simple regression models 在最基本情况下与其他 inference methods 形式上相同，并且可以通过 generalized linear model 以及 mixed effects models 进行扩展。最后，我们给出了一些关于如何建立 “default model” 的指导——它是一个（常常 preregistered 的）regression model，映射到你的 experimental design，并提供关键 causal effect 的主要估计。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="讨论问题">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>讨论问题
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>选择一篇你为自己的研究读过的论文，看一下其中的 statistical analysis。报告更关注 hypothesis testing，还是更关注 estimating effect sizes？</p></li>
+<li><p>这里我们聚焦 linear model，把它作为建立模型的工具，并把这种视角与常见的 “statistical testing” mindset 对比。但——让人脑洞大开的地方在于——这些统计检验中的大多数本来就是 linear model 的特殊情况。看看这篇关于 tests 与 models 等价关系的扩展沉思：<a href="https://lindeloev.github.io/tests-as-linear/#9_teaching_materials_and_a_course_outline" class="uri">https://lindeloev.github.io/tests-as-linear/#9_teaching_materials_and_a_course_outline</a>。如果你在问题 1 中选择的论文使用了 tests，它们的 tests 是否可以轻松转换为 models？使用 model-based perspective 会如何改变这篇论文的 results section？</p></li>
+<li><p>看看这个关于 hierarchical（mixed effect）models 的酷可视化：<a href="http://mfviz.com/hierarchical-models" class="uri">http://mfviz.com/hierarchical-models</a>。在你自己的研究中，最常把 observations 聚在一起的 units 是什么？</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="阅读材料">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>阅读材料
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>一份带有立场的 regression modeling 和 data description 实用指南：Gelman, Andrew, Jennifer Hill, and Aki Vehtari <span class="citation" data-cites="gelman2020">(<a href="#ref-gelman2020" role="doc-biblioref">2020</a>)</span>. <em>Regression and Other Stories</em>. Cambridge University Press. Free online at <a href="https://avehtari.github.io/ROS-Examples" class="uri">https://avehtari.github.io/ROS-Examples</a>.</p></li>
+<li><p>对开发数据的 Bayesian models 这一过程更深入的介绍；这些模型允许在复杂数据集中进行 estimation 和 inference：McElreath, Richard <span class="citation" data-cites="mcelreath2018">(<a href="#ref-mcelreath2018" role="doc-biblioref">2018</a>)</span>. <em>Statistical Rethinking: A Bayesian Course with Examples in R and Stan</em>. Chapman and Hall/CRC. Free materials available at <a href="https://xcelab.net/rm/statistical-rethinking" class="uri">https://xcelab.net/rm/statistical-rethinking</a>.</p></li>
+</ul>
+</div>
+</div>
+
+
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-barr2013" class="csl-entry" role="listitem">
+Barr, Dale J, Roger Levy, Christoph Scheepers, 和 Harry J Tily. 2013. <span>《Random effects structure for confirmatory hypothesis testing: Keep it maximal》</span>. <em>Journal of memory and language</em> 68 (3): 255–78.
+</div>
+<div id="ref-bates2015" class="csl-entry" role="listitem">
+Bates, Douglas, Martin Mächler, Ben Bolker, 和 Steve Walker. 2015. <span>《Fitting Linear Mixed-Effects Models Using <span>lme4</span>》</span>. <em>Journal of Statistical Software</em> 67 (1): 1–48. <a href="https://doi.org/10.18637/jss.v067.i01">https://doi.org/10.18637/jss.v067.i01</a>.
+</div>
+<div id="ref-bie2021fitting" class="csl-entry" role="listitem">
+Bie, Ruofan, Sebastien Haneuse, Nathan Huey, Jonathan Schildcrout, 和 Glen McGee. 2021. <span>《Fitting marginal models in small samples: A simulation study of marginalized multilevel models and generalized estimating equations》</span>. <em>Statistics in Medicine</em> 40 (24): 5298–5312.
+</div>
+<div id="ref-botvinik-nezer2020" class="csl-entry" role="listitem">
+Botvinik-Nezer, Rotem, Felix Holzmeister, Colin F Camerer, Anna Dreber, Juergen Huber, Magnus Johannesson, Michael Kirchler, 等. 2020. <span>《Variability in the analysis of a single neuroimaging dataset by many teams》</span>. <em>Nature</em> 582 (7810): 84–88.
+</div>
+<div id="ref-breznau2022" class="csl-entry" role="listitem">
+Breznau, Nate, Eike Mark Rinke, Alexander Wuttke, Hung H V Nguyen, Muna Adem, Jule Adriaans, Amalia Alvarez-Benjumea, 等. 2022. <span>《Observing many researchers using the same data and hypothesis reveals a hidden universe of uncertainty》</span>. <em>Proceedings of the National Academy of Sciences</em> 119 (44): e2203150119.
+</div>
+<div id="ref-burkner2021" class="csl-entry" role="listitem">
+Bürkner, Paul-Christian. 2021. <span>《Bayesian Item Response Modeling in <span>R</span> with <span>brms</span> and <span>Stan</span>》</span>. <em>Journal of Statistical Software</em> 100 (5): 1–54. <a href="https://doi.org/10.18637/jss.v100.i05">https://doi.org/10.18637/jss.v100.i05</a>.
+</div>
+<div id="ref-davis2010" class="csl-entry" role="listitem">
+Davis, Matthew J. 2010. <span>《Contrast coding in multiple regression analysis: Strengths, weaknesses, and utility of popular coding structures》</span>. <em>Journal of data science</em> 8 (1): 61–73.
+</div>
+<div id="ref-galton1877" class="csl-entry" role="listitem">
+Galton, Francis. 1877. <em>Typical laws of heredity</em>. Royal Institution of Great Britain.
+</div>
+<div id="ref-gelman2020" class="csl-entry" role="listitem">
+Gelman, Andrew, Jennifer Hill, 和 Aki Vehtari. 2020. <em>Regression and other stories</em>. Cambridge University Press.
+</div>
+<div id="ref-mancl2001covariance" class="csl-entry" role="listitem">
+Mancl, Lloyd A, 和 Timothy A DeRouen. 2001. <span>《A covariance estimator for GEE with improved small-sample properties》</span>. <em>Biometrics</em> 57 (1): 126–34.
+</div>
+<div id="ref-mathur2023b" class="csl-entry" role="listitem">
+Mathur, Maya B, Christian Covington, 和 Tyler J VanderWeele. 2023. <span>《Variation <span>a</span>cross analysts in statistical significance, <span>Y</span>et consistently small effect sizes》</span>. <em>Proceedings of the National Academy of Sciences</em> 120 (3): e2218957120.
+</div>
+<div id="ref-mcelreath2018" class="csl-entry" role="listitem">
+McElreath, Richard. 2018. <em>Statistical rethinking: A Bayesian course with examples in <span>R</span> and Stan</em>. <span>Chapman &amp; Hall/CRC</span>.
+</div>
+<div id="ref-montgomery2018" class="csl-entry" role="listitem">
+Montgomery, Jacob M, Brendan Nyhan, 和 Michelle Torres. 2018. <span>《How conditioning on posttreatment variables can ruin your experiment and what to do about it》</span>. <em>American Journal of Political Science</em> 62 (3): 760–75.
+</div>
+<div id="ref-robinson2023" class="csl-entry" role="listitem">
+Robinson, David, Alex Hayes, 和 Simon Couch. 2023. <em><span>broom</span>: Convert Statistical Objects into Tidy Tibbles</em>. <a href="https://CRAN.R-project.org/package=broom">https://CRAN.R-project.org/package=broom</a>.
+</div>
+<div id="ref-silberzahn2018" class="csl-entry" role="listitem">
+Silberzahn, Raphael, Eric L Uhlmann, Daniel P Martin, Pasquale Anselmi, Frederik Aust, Eli Awtrey, Štěpán Bahník, 等. 2018. <span>《Many analysts, one data set: Making transparent how variations in analytic choices affect results》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 1 (3): 337–56.
+</div>
+<div id="ref-steegen2016" class="csl-entry" role="listitem">
+Steegen, Sara, Francis Tuerlinckx, Andrew Gelman, 和 Wolf Vanpaemel. 2016. <span>《Increasing transparency <span>t</span>hrough a multiverse analysis》</span>. <em>Perspectives on Psychological Science</em> 11 (5): 702–12. <a href="https://doi.org/10.1177/1745691616658637">https://doi.org/10.1177/1745691616658637</a>.
+</div>
+<div id="ref-stiller2015" class="csl-entry" role="listitem">
+Stiller, Alex J, Noah D Goodman, 和 Michael C Frank. 2015. <span>《Ad-hoc implicature in preschool children》</span>. <em>Language Learning and Development</em> 11 (2): 176–90.
+</div>
+</div>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./006-inference.html" class="pagination-link" aria-label="推断">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./008-measurement.html" class="pagination-link" aria-label="测量">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

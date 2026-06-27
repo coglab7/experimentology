@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; 推断 – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./007-models.html" rel="next">
+<link href="./005-estimation.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./005-estimation.html">统计</a></li><li class="breadcrumb-item"><a href="./006-inference.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#sampling-variation抽样变异" id="toc-sampling-variation抽样变异" class="nav-link active" data-scroll-target="#sampling-variation抽样变异"><span class="header-section-number">6.1</span> Sampling variation（抽样变异）</a>
+  <ul class="collapse">
+  <li><a href="#standard-errors标准误" id="toc-standard-errors标准误" class="nav-link" data-scroll-target="#standard-errors标准误"><span class="header-section-number">6.1.1</span> Standard errors（标准误）</a></li>
+  <li><a href="#the-central-limit-theorem中心极限定理" id="toc-the-central-limit-theorem中心极限定理" class="nav-link" data-scroll-target="#the-central-limit-theorem中心极限定理"><span class="header-section-number">6.1.2</span> The central limit theorem（中心极限定理）</a></li>
+  </ul></li>
+  <li><a href="#从变异到推断" id="toc-从变异到推断" class="nav-link" data-scroll-target="#从变异到推断"><span class="header-section-number">6.2</span> 从变异到推断</a></li>
+  <li><a href="#做出推断" id="toc-做出推断" class="nav-link" data-scroll-target="#做出推断"><span class="header-section-number">6.3</span> 做出推断</a>
+  <ul class="collapse">
+  <li><a href="#bayes-factors贝叶斯因子" id="toc-bayes-factors贝叶斯因子" class="nav-link" data-scroll-target="#bayes-factors贝叶斯因子"><span class="header-section-number">6.3.1</span> Bayes Factors（贝叶斯因子）</a></li>
+  <li><a href="#p-values" id="toc-p-values" class="nav-link" data-scroll-target="#p-values"><span class="header-section-number">6.3.2</span> <span class="math inline">\(p\)</span>-values</a></li>
+  <li><a href="#sec-neyman-pearson" id="toc-sec-neyman-pearson" class="nav-link" data-scroll-target="#sec-neyman-pearson"><span class="header-section-number">6.3.3</span> The Neyman-Pearson approach（Neyman-Pearson 取向）</a></li>
+  </ul></li>
+  <li><a href="#inference推断及其不满" id="toc-inference推断及其不满" class="nav-link" data-scroll-target="#inference推断及其不满"><span class="header-section-number">6.4</span> Inference（推断）及其不满</a>
+  <ul class="collapse">
+  <li><a href="#p-values-解释中的问题" id="toc-p-values-解释中的问题" class="nav-link" data-scroll-target="#p-values-解释中的问题"><span class="header-section-number">6.4.1</span> <span class="math inline">\(p\)</span>-values 解释中的问题</a></li>
+  <li><a href="#关于概率的哲学和经验观点" id="toc-关于概率的哲学和经验观点" class="nav-link" data-scroll-target="#关于概率的哲学和经验观点"><span class="header-section-number">6.4.2</span> 关于概率的哲学（和经验）观点</a></li>
+  <li><a href="#使用什么框架" id="toc-使用什么框架" class="nav-link" data-scroll-target="#使用什么框架"><span class="header-section-number">6.4.3</span> 使用什么框架？</a></li>
+  </ul></li>
+  <li><a href="#计算精确度" id="toc-计算精确度" class="nav-link" data-scroll-target="#计算精确度"><span class="header-section-number">6.5</span> 计算精确度</a>
+  <ul class="collapse">
+  <li><a href="#confidence-intervals置信区间" id="toc-confidence-intervals置信区间" class="nav-link" data-scroll-target="#confidence-intervals置信区间"><span class="header-section-number">6.5.1</span> Confidence intervals（置信区间）</a></li>
+  <li><a href="#对-confidence-intervals-有多少-confidence" id="toc-对-confidence-intervals-有多少-confidence" class="nav-link" data-scroll-target="#对-confidence-intervals-有多少-confidence"><span class="header-section-number">6.5.2</span> 对 confidence intervals 有多少 confidence？</a></li>
+  </ul></li>
+  <li><a href="#本章小结推断" id="toc-本章小结推断" class="nav-link" data-scroll-target="#本章小结推断"><span class="header-section-number">6.6</span> 本章小结：推断</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography"></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./005-estimation.html">统计</a></li><li class="breadcrumb-item"><a href="./006-inference.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-inference" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="学习目标">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>学习目标
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>讨论统计推断的目的</li>
+<li>定义 <span class="math inline">\(p\)</span>-values 和 Bayes Factors</li>
+<li>思考关于推断的常见谬误，尤其是关于 <span class="math inline">\(p\)</span>-values 的谬误</li>
+<li>推理 sampling variability</li>
+<li>定义并推理 confidence intervals</li>
+</ul>
+</div>
+</div>
+<p>我们一直在论证：实验是关于测量效应的。我们感兴趣的效应，是某一群人的因果效应；但这个群体几乎总是大于实验中的参与者。<strong>Statistical inference</strong> 是这样一个过程：从你测量到的样本的具体特征出发，对更广泛的 <strong>population</strong> 做出 generalizations。</p>
+<p><a href="005-estimation.html" class="quarto-xref"><span>章 5</span></a> 已经向我们展示了如何做一个简单推断：同时使用 frequentist 和 Bayesian techniques 来估计 population parameters。估计 population parameters 是重要的第一步。但我们常常想做更复杂的推断，以回答如下问题：</p>
+<ol type="1">
+<li>这种测量模式有多大可能是由 chance variation 产生的？</li>
+<li>这些数据是否更支持某个假设，而不是另一个假设？</li>
+<li>我们对某个效应的估计有多精确？</li>
+<li>数据中的变异有多大一部分是由某个特定操纵导致的，而不是由参与者、刺激项目或其他操纵之间的变异导致的？</li>
+</ol>
+<p>问题（1）与一种特定类型的统计推断方法相关：<strong>null hypothesis significance testing</strong>（NHST），它属于 <strong>frequentist</strong> 统计传统。NHST 已经变得几乎等同于数据分析，以至于在绝大多数研究论文（和研究方法课程）中，所有报告的分析都是这类检验。然而，这种等同相当有问题。</p>
+<p>在可视化数据并尝试理解变异来源（参与者、项目、操纵及其他来源）之前，就转向“去做显著性检验”，对实验者来说是最没有帮助的策略之一。不管 <span class="math inline">\(p &lt; 0.05\)</span> 与否，这类检验都只会给你关于数据的字面上 <em>one bit</em> 信息。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 更整体地考虑 effect sizes 及其变异，包括使用我们在 <a href="015-viz.html" class="quarto-xref"><span>章 15</span></a> 中倡导的那类可视化，会让你对实验中发生了什么有丰富得多的理解！</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;既是信息论意义上的，也是常识意义上的！</p></div></div><p>在本章中，我们会描述 NHST，也就是许多学生仍然会学到、许多科学家仍然会用作处理数据主要方法的传统方法。所有实践中的实验者都需要理解 NHST，这既是为了阅读文献，也是为了在合适情境中应用这种方法。例如，NHST 可能是一个合理工具，用来检验某个 intervention 是否导致 treatment condition 与合适 control 之间出现差异。但我们也会尝试把 NHST 放入更广泛的统计推断策略集合中来理解，把它看作其中一个非常特殊的案例。此外，我们会继续充实我们的说明：NHST 的某些病理特征如何成为 replication crisis 的驱动因素之一。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-inference-krushke" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A table with measurement: frequentist = confidence interval, Bayesian = credible interval; hypothesis: p-value, Bayes factor.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inference-krushke-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inference/krushke.png" class="img-fluid figure-img" alt="A table with measurement: frequentist = confidence interval, Bayesian = credible interval; hypothesis: p-value, Bayes factor.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inference-krushke-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6.1: 澄清 Bayesian 与 Frequentist paradigms 之间的区别，以及它们为 measurement 和 hypothesis testing 提供的工具。在许多情境中，我们认为 measurement mindset 更有用。Adapted from <span class="citation" data-cites="kruschke2018">Kruschke 和 Liddell (<a href="#ref-kruschke2018" role="doc-biblioref">2018b</a>)</span>.
+</figcaption>
+</figure>
+</div></div><p>如果 NHST 方法有这么多问题，那应该用什么取代它？<a href="#fig-inference-krushke" class="quarto-xref">图&nbsp;<span>6.1</span></a> 展示了一种组织不同推断方法的方式。最近有一种转向：使用 Bayes Factors 来量化支持不同候选假设的证据。Bayes Factors 可以帮助回答像问题（2）这样的问题。我们会介绍这些工具，并认为它们比 NHST 框架有更广的适用性，学生应该知道它们。另一方面，Bayes Factors 也不是万灵药。当它们被二分化使用时，会有许多与 NHST 相同的问题。</p>
+<p>与其做二分式 frequentist 或 Bayesian hypothesis testing，我们会延续本书对 <span class="smallcaps">measurement precision</span> 的主题强调，倡导一种 <em>measurement</em> 策略；它更适合问题（3）和（4）<span class="citation" data-cites="cumming2014 kruschke2018">(<a href="#ref-cumming2014" role="doc-biblioref">Cumming 2014</a>; <a href="#ref-kruschke2018" role="doc-biblioref">Kruschke 和 Liddell 2018b</a>)</span>。这些策略的目标，是对数据中观察到的变异背后的关系，给出准确而精确的估计。</p>
+<p>这不是一本统计学教材，我们也不会试图教授所有重要统计概念，让学生能够为各种各样的数据集建立好模型（抱歉！）。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> 但我们确实希望你能够推理 inference 和 modeling。在本章中，我们会先对上一章的茶品尝例子做一些推断，用这个例子建立关于 hypothesis testing 和 inference 的直觉。然后，在 <a href="007-models.html" class="quarto-xref"><span>章 7</span></a> 中，我们会开始看更复杂的模型，以及如何把它们拟合到真实数据集上。</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;如果你有兴趣深入学习，这里有两本书对我们影响很大。第一本是 <span class="citation" data-cites="gelman2006b">Gelman 和 Hill (<a href="#ref-gelman2006b" role="doc-biblioref">2006</a>)</span> 及其后续版本 <span class="citation" data-cites="gelman2020">Gelman, Hill, 和 Vehtari (<a href="#ref-gelman2020" role="doc-biblioref">2020</a>)</span>，它们从数据描述的视角教授 regression 和 multi-level modeling。第二本是 <span class="citation" data-cites="mcelreath2018">McElreath (<a href="#ref-mcelreath2018" role="doc-biblioref">2018</a>)</span>，这是一门关于建立数据因果结构的 Bayesian models 的课程。坦率说，这两本书都不是可以轻松坐下来读完的书（除非你是那种会在地铁上为了好玩读统计书的人），但二者都非常值得细读。我们鼓励你组织一个 reading group，一起做其中一本书的练习。这会对你的统计思维和科学思维产生很有价值的影响。</p></div></div><section id="sampling-variation抽样变异" class="level2 page-columns page-full" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sampling-variation抽样变异"><span class="header-section-number">6.1</span> Sampling variation（抽样变异）</h2>
+<p>在 <a href="005-estimation.html" class="quarto-xref"><span>章 5</span></a> 中，我们介绍了 Fisher 的茶品尝实验，并讨论了如何根据观察数据估计均值和均值差。这些所谓 point estimates 代表了在给定数据——也可能给定我们的 prior beliefs——时，我们对 population parameters 的最佳猜测。我们还可以报告这些 point estimates 中包含多少 statistical uncertainty。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> 量化并推理这种不确定性是一个重要目标：在原始研究中，每组只有九名参与者，这只能提供一个低精度（也就是高度不确定）的总体估计。相比之下，如果我们用每组 200 名参与者重复实验，数据噪声会小得多，即使 point estimates 恰好完全相同，我们的不确定性也会小得多。</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;和上一章一样，我们这里只捕捉 <em>statistical</em> uncertainty。对某个估计 credibility 的整体看法，还应包括你关于研究设计知道的所有其他事情。</p></div><div id="fig-inference-sampling-small" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot with a bell curve distribution of treatment effects and points under it.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inference-sampling-small-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inference/sampling-small.png" class="img-fluid figure-img" alt="A plot with a bell curve distribution of treatment effects and points under it.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inference-sampling-small-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6.2: 茶品尝实验中 treatment effect 的 sampling distribution，给定对同一实验的许多次不同重复，每组 <span class="math inline">\(n = 9\)</span>。圆点表示不同单个实验的 average treatment effects，粗线表示底层分布的形状。
+</figcaption>
+</figure>
+</div></div>
+<section id="standard-errors标准误" class="level3 page-columns page-full" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="standard-errors标准误"><span class="header-section-number">6.1.1</span> Standard errors（标准误）</h3>
+<p>要刻画一个估计中的不确定性，想象它的 <strong>sampling distribution</strong> 会很有帮助；sampling distribution 是这个估计在不同假想样本之间的分布。也就是说，让我们想象自己不是只做一次茶实验，而是做几十次、几百次，甚至几千次。这个想法常被简称为 <strong>repeated sampling</strong>。对于每个假想样本，我们使用类似招募方法招募一批新的参与者，并为该样本计算 <span class="math inline">\(\widehat{\beta}\)</span>。每次都会得到完全相同的答案吗？不会，原因很简单：样本会有一些随机变异（噪声）。如果我们把这些估计 <span class="math inline">\(\widehat{\beta}\)</span> 画出来，就会得到 <a href="#fig-inference-sampling-small" class="quarto-xref">图&nbsp;<span>6.2</span></a> 中的 sampling distribution。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>在本章以及后续统计和可视化章节中，我们会尝试通过在这些 <span class="smallcaps"><strong>code</strong></span> 框中给出构建示例时使用的 R 代码，来帮助理解并展示如何在实践中使用这些概念。我们会假定你对 base R 和 Tidyverse 有一些了解——如果还没有，可以先看看 <a href="103-tidyverse.html" class="quarto-xref"><span>附录 D</span></a>。虽然我们的图常常是手绘的，但即使是手绘图，也基于真实模拟结果！</p>
+<p>因为我们会处理很多来自茶品尝例子的数据，所以写了一个叫 <code>make_tea_data()</code> 的函数，它会创建一个 <code>tibble</code>，其中包含一些来自现代茶品尝实验的（虚构）数据。如果你想跟着做，可以在 GitHub 上找到这个函数（<a href="https://github.com/langcog/experimentology/blob/main/helper/tea_helper.qmd" class="uri">https://github.com/langcog/experimentology/blob/main/helper/tea_helper.qmd</a>）。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tea_data <span class="ot">&lt;-</span> <span class="fu">make_tea_data</span>(<span class="at">n_total =</span> <span class="dv">18</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div id="fig-inference-sampling-big" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot with two panels: small sample size (same as 6.2); big sample size (more points, narrower curve).">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inference-sampling-big-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inference/sampling-big.png" class="img-fluid figure-img" alt="A plot with two panels: small sample size (same as 6.2); big sample size (more points, narrower curve).">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inference-sampling-big-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6.3: 按样本量比较 treatment effect 的 sampling distributions。
+</figcaption>
+</figure>
+</div></div><p>现在想象一下，我们还用每组 <span class="math inline">\(n = 200\)</span> 而不是每组 <span class="math inline">\(n = 9\)</span>，把实验重复了几千次。<a href="#fig-inference-sampling-big" class="quarto-xref">图&nbsp;<span>6.3</span></a> 展示了那种情况下 sampling distribution 可能是什么样子。注意，当我们增加样本量时，sampling distribution 变窄了很多，这说明我们的不确定性降低了。更正式地说，sampling distribution 本身的标准差，称为 <strong>standard error</strong>，会随着样本量增加而降低。</p>
+<p>Sampling distribution 不是单个样本中茶评分的分布。相反，它是<em>给定大小的多个样本中的估计值分布</em>。本质上，它告诉我们：如果用某个特定样本量运行一个新实验，这个实验的均值可能是什么样。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>为了模拟反复进行茶品尝实验，我们使用 <code>purrr</code> library 中一个特殊 tidyverse 函数：<code>map()</code>。<code>map()</code> 是一个非常强大的函数，它允许我们用不同输入多次运行另一个函数（这里就是上一章引入的 <code>make_tea_data()</code> 函数）。这里我们创建了一个 tibble，由 <code>make_tea_data()</code> 函数的 1,000 次运行组成。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>samps <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">sim =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map</span>(sim, \(i) <span class="fu">make_tea_data</span>(<span class="at">n_total =</span> <span class="dv">18</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> data)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>接下来，我们只需使用 <a href="103-tidyverse.html" class="quarto-xref"><span>附录 D</span></a> 中的 <code>group_by()</code> 和 <code>summarize()</code> workflow，得到每次模拟的 estimated treatment effect。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tea_summary <span class="ot">&lt;-</span> samps <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sim, condition) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_rating =</span> <span class="fu">mean</span>(rating)) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sim) <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">delta =</span> mean_rating[condition <span class="sc">==</span> <span class="st">"milk first"</span>] <span class="sc">-</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>              mean_rating[condition <span class="sc">==</span> <span class="st">"tea first"</span>])</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>这个 tibble 给出了绘制上面 <a href="#fig-inference-sampling-small" class="quarto-xref">图&nbsp;<span>6.2</span></a> 和 <a href="#fig-inference-sampling-big" class="quarto-xref">图&nbsp;<span>6.3</span></a> 中 sampling distributions 所需的内容。</p>
+</div>
+</div>
+</section>
+<section id="the-central-limit-theorem中心极限定理" class="level3 page-columns page-full" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="the-central-limit-theorem中心极限定理"><span class="header-section-number">6.1.2</span> The central limit theorem（中心极限定理）</h3>
+<p>上一章我们讨论了 normal distribution，它是量化测量分布的一种方便且无处不在的工具。关于许多种估计——以及<em>所有</em> maximum likelihood estimates——的 sampling distributions，有一件令人惊讶的事：随着样本量越来越大，它们会变成 normal distribution。即便这些估计在小样本中一点也不像 normal distribution，这个结果也成立！</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-inference-coin-2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot with 3 vertical bars at horizontal positions 0, 0.5, 1.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inference-coin-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inference/cl-2.png" class="img-fluid figure-img" style="width:80.0%" alt="A plot with 3 vertical bars at horizontal positions 0, 0.5, 1.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inference-coin-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6.4: 来自一枚 biased coin 的样本的 sampling distribution（每个样本 <span class="math inline">\(n = 2\)</span> 次抛掷）。柱高表示导致特定均值的抛掷比例。
+</figcaption>
+</figure>
+</div><div id="fig-inference-coin-ns" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot with 4 panels with varying numbers of vertical bars (2, 8, 32, 128), increasingly approximating a normal distribution.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inference-coin-ns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inference/cl-ns.png" class="img-fluid figure-img" alt="A plot with 4 panels with varying numbers of vertical bars (2, 8, 32, 128), increasingly approximating a normal distribution.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inference-coin-ns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6.5: 2、8、32 和 128 次抛掷的 sampling distribution。
+</figcaption>
+</figure>
+</div></div>
+<p>例如，假设我们在抛硬币，并想估计它正面朝上的概率（<span class="math inline">\(p_H\)</span>）。如果我们抽取的每个样本都只包含 <span class="math inline">\(n = 2\)</span> 次抛硬币，那么 <a href="#fig-inference-coin-2" class="quarto-xref">图&nbsp;<span>6.4</span></a> 就是估计值（<span class="math inline">\(\widehat{p}_H\)</span>）的 sampling distribution。这个 sampling distribution 看起来一点也不像 normal distribution——它没有典型的“钟形曲线”形状！在两次抛硬币的样本中，<span class="math inline">\(\widehat{p}_H\)</span> 只能取 <span class="math inline">\(0\)</span>、<span class="math inline">\(0.5\)</span> 或 <span class="math inline">\(1\)</span>。</p>
+<p>但看看当我们在 <a href="#fig-inference-coin-ns" class="quarto-xref">图&nbsp;<span>6.5</span></a>: 中抽取越来越大的样本时会发生什么：我们得到了 normal distribution！ Sampling distributions 随着 <span class="math inline">\(n\)</span> 变得很大而趋向 normal 的这种倾向，反映了一个深刻而优雅的数学定律，叫做 <strong>central limit theorem</strong>。</p>
+<p>实际要点是，central limit theorem 直接帮助我们刻画 sample estimates 的不确定性。例如，当样本量足够大时（对样本均值来说大约是 <span class="math inline">\(n&gt;30\)</span>），样本均值的 standard error（也就是 sampling distribution 的标准差）近似为 <span class="math inline">\(\widehat{\text{SE}} = \sigma/\sqrt{n}\)</span>。Sampling distribution 会随着样本量增加而变窄，因为我们除以的是观察数量的平方根。</p>
+<!-- \vspace{2em} -->
+<div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>虽然我们的图是手绘的，但它们基于真实模拟。对于 central limit theorem 模拟，我们再次使用 <code>map()</code> 函数。我们设置一个 tibble，其中包含想尝试的不同值（我们称为 <code>n_flips</code>）。然后使用 <code>map()</code> 函数，为每个 <code>n_flips</code> 值运行 <code>rbinom()</code>（random binomial samples）。</p>
+<p>这里使用的一个技巧是，<code>rbinom()</code> 接受一个额外参数，用来说明你想生成多少这样的随机值。这里我们生成 <code>nsamps = 1000</code> 个样本，也就是在每个 <code>n</code> 下给出 1,000 个 independent replicates。但对于单个 <code>n_flips</code> 值返回 1,000 个值的 array，会导致一个有点奇怪的结果：<code>flips</code> 的每个元素值都是一个 array。为处理这个问题，我们使用 <code>unnest()</code> 函数，把 array 展开回普通 tibble。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n_samps <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n_flips_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">8</span>, <span class="dv">32</span>, <span class="dv">128</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>sample_p <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">n_flips =</span> n_flips_list) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">flips =</span> <span class="fu">map</span>(n_flips, \(f) <span class="fu">rbinom</span>(<span class="at">n =</span> n_samps, <span class="at">size =</span> f, <span class="at">prob =</span> .<span class="dv">7</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> flips) <span class="sc">|&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> flips <span class="sc">/</span> n_flips)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="从变异到推断" class="level2 page-columns page-full" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="从变异到推断"><span class="header-section-number">6.2</span> 从变异到推断</h2>
+<p>让我们回到 Fisher 的茶品尝实验。这个实验的第一个创新，是使用随机化来恢复 milk ordering 因果效应的估计。但 Fisher 的分析不止我们已经描述的这些。</p>
+<p>茶品尝实验的第二个创新，是创造一个关于实验中可能发生什么的模型。具体地说，Fisher 描述了一个假想的 <strong>null model</strong>：如果这位女士是随机选择杯子，而不是基于某种对茶的敏感性来选择，就会出现这种模型。在我们的茶评分实验中，null model 描述的是 tea-first 和 milk-first 杯子的评分之间没有差异时会发生什么。在 null model 下，真实 treatment effect（<span class="math inline">\(\beta\)</span>）为零。</p>
+<p>即使实际 treatment effect 为零，在 repeated sampling 中，我们仍应看到 <span class="math inline">\(\widehat{\beta}\)</span>，也就是 treatment effect 的<em>估计</em>，存在一些变异。有时会得到一个小的正效应，有时会得到一个小的负效应。偶尔，仅仅因为 chance，我们会得到一个大效应。这正是上面描述的 sampling variation。</p>
+<p>Fisher 的创新，是在给定 null model 的情况下，量化观察到 <span class="math inline">\(\hat{\beta}\)</span> 各种取值的概率。然后，如果观察到的数据在 null model 下概率很低，我们就可以宣布 null 被拒绝。观察数据必须多不可能，才能拒绝 null？Fisher 宣称，“usual and convenient for experimenters to take 5% as a standard level of convenience”，由此确立了后来在整个科学中几乎被奉为圭臬的 <span class="math inline">\(0.05\)</span> cutoff。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;实际上，在确立 <span class="math inline">\(0.05\)</span> 作为 cutoff 后，Fisher 随即写道：“in the statistical sense, we thereby admit that no isolated experiment, however significant in itself, can suffice for the experimental demonstration of any natural phenomenon … in order to assert that a natural phenomenon is experimentally demonstrable we need, not an isolated record, but a reliable method of procedure. In relation to the test of significance, we may say that a phenomenon is experimentally demonstrable when we know how to conduct an experiment which will rarely fail to give us a statistically significant result.” 换句话说，Fisher 完全支持 replication！</p></div></div><p>让我们看看 null model 可能是什么样。前面讨论 sampling 时，我们已经尝试过把茶品尝实验重复几千次。现在，在 <a href="#fig-inference-null-model" class="quarto-xref">图&nbsp;<span>6.6</span></a> 中，我们做同样的事情，但假定没有 treatment effect 的 <strong>null hypothesis</strong> 为真。图中显示了我们观察到的 treatment effects <span class="math inline">\(\hat{\beta}\)</span> 的分布：有些略负，有些略正，还有少数明显正或负，但多数接近零。</p>
+<p>让我们应用 <span class="math inline">\(p&lt;0.05\)</span> 标准。如果我们的观察在 null model 下概率小于 5%，那么 null model 很可能是错的。<a href="#fig-inference-null-model" class="quarto-xref">图&nbsp;<span>6.6</span></a> 上的红色虚线显示了两个点：低于左边这个点的数据只占 2.5%，高于右边这个点的数据也只占 2.5%。这些区域称为分布的 <strong>tails</strong>。因为无论是 milk-first tea 更好还是 tea-first tea 更好，我们都同样愿意接受，所以正向和负向观察都被视为可能。<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;因为我们查看分布两端，所以这叫做 “two-tailed” test。</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>为了模拟 null model，我们可以做和之前同类的事情，只是向 <code>make_tea_data()</code> 函数指定真实效应差为零！</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">sim =</span> <span class="dv">1</span><span class="sc">:</span>n_sims, <span class="at">n =</span> <span class="dv">18</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map</span>(sim, \(i) <span class="fu">make_tea_data</span>(<span class="at">n_total =</span> n, <span class="at">delta =</span> <span class="dv">0</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> data)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>我们再次使用 <code>group_by()</code> 和 <code>summarize()</code>，得到 null hypothesis 下 treatment effects 的分布。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>null_model_summary <span class="ot">&lt;-</span> null_model <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sim, condition) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_rating =</span> <span class="fu">mean</span>(rating)) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sim) <span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">delta =</span> mean_rating[condition <span class="sc">==</span> <span class="st">"milk first"</span>] <span class="sc">-</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>              mean_rating[condition <span class="sc">==</span> <span class="st">"tea first"</span>])</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div id="fig-inference-null-model" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="A plot the same as 6.2 with regions below 2.5% and above 97.5% shaded.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-inference-null-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inference/p-region.png" class="img-fluid figure-img" style="width:75.0%" alt="A plot the same as 6.2 with regions below 2.5% and above 97.5% shaded.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-inference-null-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6.6: Null model 下 treatment effects 分布的一个例子（每组 <span class="math inline">\(n = 9\)</span>）。红色区域表示观察值应落入其中的概率小于 5% 的分布部分。
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-inference-null-model" class="quarto-xref">图&nbsp;<span>6.6</span></a> 捕捉了 NHST 的逻辑：如果观察数据落在 null model 下概率小于 <span class="math inline">\(0.05\)</span> 的区域中，那么我们拒绝 null。因此，当我们在实验的某个（真实）单次实例中观察到某个特定 treatment effect <span class="math inline">\(\hat{\beta}\)</span> 时，就可以计算在 null model 下这些数据或任何更极端数据的概率。<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> 这个概率就是我们的 <span class="math inline">\(p\)</span>-value；如果它很小，就授权我们得出 null 为 false 的结论。</p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;“更极端”这一部分需要稍微解释。任何单个 outcome 本身都相对不太可能，因为估计值恰好等于那个精确值本来就令人惊讶（这里我们做了简化；谈论实数时会更复杂）。我们真正关心的是一<em>组</em>值。分布中间那些值作为一组来看相当可能；尾部那些值作为一组来看不太可能。我们想知道，包括我们的观察值以及尾部上更远值在内的那组数据点，其总概率是否小于 <span class="math inline">\(0.05\)</span>。</p></div></div><p>正如前面所见，样本量越大，standard error 越小。这对 null model 也成立！<a href="#fig-inference-null-model2" class="quarto-xref">图&nbsp;<span>6.7</span></a> 展示了更大实验的预期 null distribution。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-inference-null-model2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot the same as 6.2 but with more points and a narrower curve.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inference-null-model2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inference/p-region-bigger.png" class="img-fluid figure-img" alt="A plot the same as 6.2 but with more points and a narrower curve.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inference-null-model2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6.7: 更大实验中 null model 下的 treatment effects 分布。
+</figcaption>
+</figure>
+</div></div><p>实验参与者越多，null distribution 就越紧，因此我们预期 null treatment effect 落入的区域越小。因为我们基于 null 的预期更加精确，所以能够基于更小的 treatment effects 拒绝 null。在这种 hypothesis testing 中，与 estimation 一样，我们的目标很重要。如果我们只是出于好奇检验一个假设，也许并不想测量太多杯茶。但如果我们是在为一家大型咖啡连锁设计茶策略，stakes 就更高；在这种情况下，也许我们会想做一个更广泛的实验！</p>
+<div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>只要给模拟加一个参数，我们就可以对不同样本量下的 null regions 做更系统的模拟。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>null_model_multi_n <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(<span class="at">sim =</span> <span class="dv">1</span><span class="sc">:</span>n_sims, <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">24</span>, <span class="dv">48</span>, <span class="dv">96</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sim_data =</span> <span class="fu">map</span>(n, \(n_i) <span class="fu">make_tea_data</span>(<span class="at">n_total =</span> n_i, <span class="at">delta =</span> <span class="dv">0</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> sim_data)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>null_model_summary_multi_n <span class="ot">&lt;-</span> null_model_multi_n <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(n, sim, condition) <span class="sc">|&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_rating =</span> <span class="fu">mean</span>(rating)) <span class="sc">|&gt;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(n, sim) <span class="sc">|&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">delta =</span> mean_rating[condition <span class="sc">==</span> <span class="st">"milk first"</span>] <span class="sc">-</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>              mean_rating[condition <span class="sc">==</span> <span class="st">"tea first"</span>])</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>null_model_quantiles_multi_n <span class="ot">&lt;-</span> null_model_summary_multi_n <span class="sc">|&gt;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(n) <span class="sc">|&gt;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">q_025 =</span> <span class="fu">quantile</span>(delta, .<span class="dv">025</span>),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">q_975 =</span> <span class="fu">quantile</span>(delta, .<span class="dv">975</span>)) </span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>下面是生成与我们插图相 comparable figure 的绘图代码：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(null_model_summary_multi_n, <span class="fu">aes</span>(<span class="at">x =</span> delta)) <span class="sc">+</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(n), <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">labeller =</span> label_both) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">data =</span> null_model_quantiles_multi_n, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">xintercept =</span> q_025), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">data =</span> null_model_quantiles_multi_n, </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">xintercept =</span> q_975), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span> </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="fl">2.5</span>, <span class="fl">2.5</span>) <span class="sc">+</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Difference in rating"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>最后一点：你可能会注意到，NHST paradigm 与 Popper 的 falsificationist 哲学（在 <a href="002-theories.html" class="quarto-xref"><span>章 2</span></a> 中介绍）之间有一个有趣的平行。在这两种情况下，你都永远无法<em>接受</em>真正感兴趣的假设。你唯一能做的，是观察与 null hypothesis 不一致的证据。NHST 的额外限制是，你唯一能够 falsify 的假设是 null！<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;一个历史注记：我们这里描述为 NHST 的东西，既不是 Fisher 的方法，<em>也不是</em>下面介绍的 Neyman-Pearson 方法。它是 <span class="citation" data-cites="gigerenzer1989">Gigerenzer (<a href="#ref-gigerenzer1989" role="doc-biblioref">1989</a>)</span> 所称的 “the silent hybrid solution”：Fisher 倡导的更连续的 <span class="math inline">\(p\)</span>-value 方法，被卷入 Neyman 和 Pearson 的 hypothesis testing 方法中。这个 hybrid——Fisher、Neyman 和 Pearson 都不会喜欢——就是我们现在大多视为理所当然的 received NHST approach。</p></div></div></section>
+<section id="做出推断" class="level2 page-columns page-full" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="做出推断"><span class="header-section-number">6.3</span> 做出推断</h2>
+<p>在刚才考虑的茶品尝例子中，我们试图从样本推断到更广泛的 population。具体来说，我们试图检验 milk-first tea 是否比 tea-first tea 评分更高。我们的 inferential goal 是一个清晰的二元答案：milk-first tea 更好吗？</p>
+<p>通过定义 <span class="math inline">\(p\)</span>-value，我们得到了一个回答这个问题的程序。如果 <span class="math inline">\(p &lt; 0.05\)</span>，我们拒绝 null。然后可以看差异方向；如果方向为正，就宣布 milk-first tea “显著”更好。让我们把这个程序与另一个不同过程比较一下；后者建立在上一章描述的 Bayesian estimation 想法之上。随后，我们可以回过头，在这个框架下考察 NHST。</p>
+<section id="bayes-factors贝叶斯因子" class="level3 page-columns page-full" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="bayes-factors贝叶斯因子"><span class="header-section-number">6.3.1</span> Bayes Factors（贝叶斯因子）</h3>
+<p>Bayes Factors 是一种方法，用于基于观察数据集量化一个假设相对于另一个假设获得了多少支持。它们不会告诉你某个特定假设为真的概率，但允许你比较两个不同假设。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-inference-bf" class="quarto-float quarto-figure quarto-figure-center anchored" alt="An equation of Bayes Factor: numerator likelihood under difference hypothesis, denominator likelihood under null hypothesis.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inference-bf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inference/bf.png" class="img-fluid figure-img" alt="An equation of Bayes Factor: numerator likelihood under difference hypothesis, denominator likelihood under null hypothesis.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inference-bf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6.8: Bayes Factor（BF）。
+</figcaption>
+</figure>
+</div><div id="fn8"><p><sup>8</sup>&nbsp;有时人们把支持 <span class="math inline">\(H_1\)</span> 的 BF 称为 <span class="math inline">\(\text{BF}_{10}\)</span>，把支持 <span class="math inline">\(H_0\)</span> 的 BF 称为 <span class="math inline">\(\text{BF}_{01}\)</span>。这个记号有点让人困惑，因为前者看起来像数字 <span class="math inline">\(10\)</span>。</p></div></div><p>非正式地说，我们现在已经讨论了关于茶情境的两个不同假设：参与者可能<em>没有</em>茶辨别能力——导致 chance performance。我们称之为 <span class="math inline">\(H_0\)</span>。或者，他们可能有某种非零能力——导致高于 chance 的表现。我们称之为 <span class="math inline">\(H_1\)</span>。Bayes Factor 简单来说就是，在 <span class="math inline">\(H_1\)</span> 下数据的 likelihood（以上面使用的技术意义），与在 <span class="math inline">\(H_0\)</span> 下数据的 likelihood 之比（<a href="#fig-inference-bf" class="quarto-xref">图&nbsp;<span>6.8</span></a>）。Bayes Factor 是一个比值，所以如果它大于 <span class="math inline">\(1\)</span>，数据在 <span class="math inline">\(H_1\)</span> 下比在 <span class="math inline">\(H_0\)</span> 下更 likely；介于 <span class="math inline">\(1\)</span> 和 <span class="math inline">\(0\)</span> 之间的值则反过来。BF 为 <span class="math inline">\(3\)</span> 意味着支持 <span class="math inline">\(H_1\)</span> 的证据是支持 <span class="math inline">\(H_0\)</span> 的三倍，或者等价地，支持 <span class="math inline">\(H_0\)</span> 的证据是支持 <span class="math inline">\(H_1\)</span> 的 <span class="math inline">\(1/3\)</span>。<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bayes Factors 用 <code>BayesFactor</code> R package <span class="citation" data-cites="morey2023">(<a href="#ref-morey2023" role="doc-biblioref">Morey 和 Rouder 2023</a>)</span> 计算起来非常容易。我们只需要把两组评分传给 <code>ttestBF()</code> 函数！</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BayesFactor)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>tea_bf <span class="ot">&lt;-</span> <span class="fu">ttestBF</span>(<span class="at">x =</span> <span class="fu">filter</span>(tea_data, condition <span class="sc">==</span> <span class="st">"milk first"</span>)<span class="sc">$</span>rating,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> <span class="fu">filter</span>(tea_data, condition <span class="sc">==</span> <span class="st">"tea first"</span>)<span class="sc">$</span>rating,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>关于 Bayes Factor，有两点值得注意。第一，和 <span class="math inline">\(p\)</span>-value 一样，它本质上是一个连续测量。你可以通过宣布某个 cutoff（比如 <span class="math inline">\(\text{BF} &gt; 3\)</span> 或 <span class="math inline">\(\text{BF} &gt; 10\)</span>）来人为二分基于 Bayes Factor 的决策，但并不存在一个内在阈值，让你可以说证据是 “significant”。<a href="#tbl-inference-goodman" class="quarto-xref">表&nbsp;<span>6.1</span></a> 中展示了一些解释指南 <span class="citation" data-cites="goodman1999">(from <a href="#ref-goodman1999" role="doc-biblioref">S. N. Goodman 1999</a>)</span>。<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> 另一方面，像 <span class="math inline">\(\text{BF} &gt; 5\)</span> 或 <span class="math inline">\(p &lt; 0.05\)</span> 这样的 cutoffs 并不太有信息量。所以，虽然我们提供这张表来指导解释，但我们提醒你：应该始终报告并解释实际 Bayes Factor，而不是它高于还是低于某个 cutoff。</p>
+<!-- {{< include md/006-inference/goodman.md >}} -->
+<div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;有些人喜欢 <span class="citation" data-cites="jeffreys1998">Jeffreys (<a href="#ref-jeffreys1998" role="doc-biblioref">1961</a>)</span> 提供的指南，其中包含 “barely worth mentioning”（<span class="math inline">\(1 &gt; \text{BF} &gt; 3\)</span>）这类类别。</p></div><div class="">
+<div class="cell">
+<div id="tbl-inference-goodman" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-inference-goodman-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;6.1: <span class="citation" data-cites="goodman1999">S. N. Goodman (<a href="#ref-goodman1999" role="doc-biblioref">1999</a>)</span> interpretation guidelines for Bayes Factors.
+</figcaption>
+<div aria-describedby="tbl-inference-goodman-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div></div>
+<p>关于 Bayes Factor 的第二点，是它不依赖我们对 <span class="math inline">\(H_1\)</span> vs <span class="math inline">\(H_0\)</span> 的 prior probability。我们可能认为 <span class="math inline">\(H_1\)</span> 非常不可信。但 BF 独立于那个 prior belief。因此，这意味着它测量的是证据应该让我们的信念相对于 prior 移动多少。理解这一点的一个好方式是：Bayes Factor 计算的是，我们的信念——不管它们是什么——应该因数据而改变多少 <span class="citation" data-cites="morey2011">(<a href="#ref-morey2011" role="doc-biblioref">Morey 和 Rouder 2011</a>)</span>。</p>
+<p>实践中，Bayes Factors 既棘手又有价值的地方在于，你需要定义 <span class="math inline">\(H_0\)</span> 和 <span class="math inline">\(H_1\)</span> 到底是什么的实际模型。这个过程会迫使一些假设变得明确。这里我们不会深入讲如何建立这些模型——这是一个很大的话题，Bayesian data analysis 的书中会大量讨论。<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> 这里的目标只是给出一个关于 Bayes Factors 是什么的大致感觉。</p>
+<!-- That's the Bayes Factor.  -->
+<!-- ```{r inference-milk-first, fig.cap="Ratings of the quality of milk-first tea."} -->
+<!-- sigma <- 1.25 -->
+<!-- n_total <- 48 -->
+<!-- tea_data <- make_tea_data(n_total, sigma) -->
+<!-- ggplot(tea_data, aes(x = rating, fill = condition)) +  -->
+<!--   geom_dotplot(position = position_dodge(),  -->
+<!--                aes(y = ..count..)) +  -->
+<!--   xlim(1,7) +  -->
+<!--   ylab("Number of ratings") +  -->
+<!--   xlab("Quality rating (1-7)") +  -->
+<!--   theme(axis.text.y=element_blank(), -->
+<!--         axis.ticks.y=element_blank())  -->
+<!-- tea_bf <- BayesFactor::ttestBF(x = tea_data$rating[tea_data$condition == "milk first"], -->
+<!--                                y = tea_data$rating[tea_data$condition == "tea first"],  -->
+<!--                                paired = FALSE) -->
+<!-- tea_data_large <- make_tea_data(n_total *2, sigma) -->
+<!-- tea_bf_large <- BayesFactor::ttestBF(x = tea_data_large$rating[tea_data_large$condition == "milk first"], -->
+<!--                                y = tea_data_large$rating[tea_data_large$condition == "tea first"],  -->
+<!--                                paired = FALSE) -->
+<!-- ``` -->
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;除了上面提到的 McElreath 那本书之外，还有两本不错的书：<span class="citation" data-cites="gelman1995">Gelman 等 (<a href="#ref-gelman1995" role="doc-biblioref">1995</a>)</span> 更偏统计，<span class="citation" data-cites="kruschke2014">Kruschke (<a href="#ref-kruschke2014" role="doc-biblioref">2014</a>)</span> 更聚焦心理学数据分析。<span class="citation" data-cites="nicenboim2024">Nicenboim, Schad, 和 Vasishth (<a href="#ref-nicenboim2024" role="doc-biblioref">2024</a>)</span> 正在准备的一本 web-book 看起来也很好（<a href="https://bruno.nicenboim.me/bayescogsci" class="uri">https://bruno.nicenboim.me/bayescogsci</a>）。</p></div></div></section>
+<section id="p-values" class="level3 page-columns page-full" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="p-values"><span class="header-section-number">6.3.2</span> <span class="math inline">\(p\)</span>-values</h3>
+<p>现在让我们回到 NHST 和 <span class="math inline">\(p\)</span>-value。通过上面的讨论，我们已经有了一个关于 <span class="math inline">\(p\)</span>-value 是什么的工作定义：它是在 null hypothesis 下，数据（或任何更极端数据）的概率。这个数量与我们的 Bayesian estimate 或 BF 有什么关系？首先要注意，<span class="math inline">\(p\)</span>-value 非常接近 likelihood 本身（但并不相同）。<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn11"><p><sup>11</sup>&nbsp;Likelihood——对 Bayesians 和 frequentists 都一样——是数据的概率，和 <span class="math inline">\(p\)</span>-value 类似。但不同于 <span class="math inline">\(p\)</span>-value，它不额外包含更极端数据的概率。</p></div><div id="fn12"><p><sup>12</sup>&nbsp;<span class="math inline">\(t\)</span>-tests 也可以用于把一个样本与某个 baseline 比较的情况。</p></div></div><p>接下来，我们可以使用一个简单的统计检验，也就是 <span class="math inline">\(t\)</span>-test，来为实验计算 <span class="math inline">\(p\)</span>-values。如果你还没遇到过，<span class="math inline">\(t\)</span>-test 是一种计算 <span class="math inline">\(p\)</span>-value 的程序，它通过使用“两个变量之间没有差异”的 null hypothesis，来比较两个变量的分布。<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> <span class="math inline">\(t\)</span>-test 使用数据计算一个 <strong>test statistic</strong>，这个统计量在 null hypothesis 下的分布是已知的。然后，这个统计量的值可以被转换为用于推断的 <span class="math inline">\(p\)</span>-values。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>标准 <code>t.test()</code> 函数通过默认 <code>stats</code> package 内置在 R 中。这里我们只是确保通过 <code>paired = FALSE</code> 和 <code>var.equal = TRUE</code> 这两个 flags 指定想要的检验类型（后者表示 equal variances 假设）。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tea_t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="at">x =</span> <span class="fu">filter</span>(tea_data, condition <span class="sc">==</span> <span class="st">"milk first"</span>)<span class="sc">$</span>rating,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="fu">filter</span>(tea_data, condition <span class="sc">==</span> <span class="st">"tea first"</span>)<span class="sc">$</span>rating,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>想象我们用 <span class="math inline">\(n = 48\)</span> 开展一次茶品尝实验，并对实验结果执行 <span class="math inline">\(t\)</span>-test。在这个案例中，我们看到两组之间的差异在 <span class="math inline">\(p&lt;0.05\)</span> 下显著：<span class="math inline">\(t(46) = 2.86\)</span>, <span class="math inline">\(p = 0.006\)</span>。</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="cell">
+<div id="tbl-p-bf-comparison" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-p-bf-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;6.2: Comparison of <span class="math inline">\(p\)</span>-value and BF for several different (randomly generated) tea-tasting scenarios.
+</figcaption>
+<div aria-describedby="tbl-p-bf-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div></div><p>表达式 <span class="math inline">\(t(46) = 2.86\)</span>, <span class="math inline">\(p = 0.006\)</span> 是按照 American Psychological Association 报告 <span class="math inline">\(t\)</span>-test 的标准方式。这个报告的第一部分给出 <span class="math inline">\(t\)</span> 值，并在括号中用该检验的 <strong>degrees of freedom</strong> 限定。这里我们不会太关注 degrees of freedom 的概念；现在只需要知道，这个数字量化了数据提供的信息量，在本例中是 48 个数据点减去两个均值（每个样本一个均值）。</p>
+<p>让我们比较 <span class="math inline">\(p\)</span>-values 和 Bayes Factors（使用 <code>BayesFactor</code> R package 中的默认设置计算）。在 <a href="#tbl-p-bf-comparison" class="quarto-xref">表&nbsp;<span>6.2</span></a> 中，行表示模拟实验，它们有不同的参与者总数（N）和不同的 average treatment effects。随着参与者更多、效应更大，<span class="math inline">\(p\)</span> 和 BF 都会上升。一般来说，BFs 往往比 <span class="math inline">\(p\)</span>-values 稍微保守一些，所以 <span class="math inline">\(p&lt;0.05\)</span> 有时可能对应不到 3 的 BF <span class="citation" data-cites="benjamin2018">(<a href="#ref-benjamin2018" role="doc-biblioref">Benjamin 等 2018</a>)</span>。例如，看一下 48 名参与者、effect size 为 1 的那一行：<span class="math inline">\(p\)</span>-value 小于 <span class="math inline">\(0.05\)</span>，但 Bayes Factor 只有 <span class="math inline">\(2.0\)</span>。</p>
+<p>不过，关于 <span class="math inline">\(p\)</span>-values 的关键点，不只是它们是一种 data likelihoods，而是它们被用于一个<em>特定推断程序</em>中。NHST 的逻辑是，我们对效应是否存在做出二元决定。如果 <span class="math inline">\(p &lt; 0.05\)</span>，null hypothesis 被拒绝；否则不拒绝。 正如 <span class="citation" data-cites="fisher1949">Fisher (<a href="#ref-fisher1949" role="doc-biblioref">1949</a>, p.&nbsp;19)</span> 写道：</p>
+<blockquote class="blockquote">
+<p>It should be noted that the null hypothesis is never proved or established, but is possibly disproved, in the course of experimentation. Every experiment may be said to exist only in order to give the facts a chance of disproving the null hypothesis.</p>
+</blockquote>
+<p>从科学视角看，<span class="math inline">\(p\)</span>-values 的主要问题是，研究者通常不只对拒绝 null hypothesis 感兴趣，也对 alternative（我们感兴趣的那个假设）的证据感兴趣。Bayes Factor 是在 Bayesian 框架中量化 alternative hypothesis 的正向证据的一种方法。不过，Fisher 式 <span class="math inline">\(p\)</span>-values 方法中的这个问题早已为人所知，因此也有一种替代性的 frequentist 方法。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-inference-power-alpha" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A table of inference (reject/fail) vs reality (true/false): false positive, correct rejection, true positive, false negative.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inference-power-alpha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inference/power-alpha.png" class="img-fluid figure-img" alt="A table of inference (reject/fail) vs reality (true/false): false positive, correct rejection, true positive, false negative.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inference-power-alpha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6.9: Neyman-Pearson 统计推断方法的标准 decision matrix。
+</figcaption>
+</figure>
+</div></div></section>
+<section id="sec-neyman-pearson" class="level3 page-columns page-full" data-number="6.3.3">
+<h3 data-number="6.3.3" class="anchored" data-anchor-id="sec-neyman-pearson"><span class="header-section-number">6.3.3</span> The Neyman-Pearson approach（Neyman-Pearson 取向）</h3>
+<p>一种“修补” NHST 的方式，是引入一种 decision-theoretic view，如 <a href="#fig-inference-power-alpha" class="quarto-xref">图&nbsp;<span>6.9</span></a> 所示。<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> 在这种被称为 Neyman-Pearson view 的观点中，存在一个真实的 <span class="math inline">\(H_1\)</span>，尽管它没有被具体指定。因此，世界的真实状态可能是 <span class="math inline">\(H_0\)</span> 为真，也可能是 <span class="math inline">\(H_1\)</span> 为真。<span class="math inline">\(p&lt;0.05\)</span> criterion 是我们愿意拒绝 null 的阈值，因此它构成了我们的 false positive rate <span class="math inline">\(\alpha\)</span>。但我们还需要定义 false negative rate，惯例上称为 <span class="math inline">\(\beta\)</span>。<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn13"><p><sup>13</sup>&nbsp;这里有一点有用历史见 <span class="citation" data-cites="cohen1990">Cohen (<a href="#ref-cohen1990" role="doc-biblioref">1990</a>)</span>；更广泛的视角也推荐 <span class="citation" data-cites="gigerenzer1989">Gigerenzer (<a href="#ref-gigerenzer1989" role="doc-biblioref">1989</a>)</span>。</p></div><div id="fn14"><p><sup>14</sup>&nbsp;不幸的是，<span class="math inline">\(\beta\)</span> 也非常常用于 regression coefficients——也正因为如此，我们把它用作因果效应的符号。下一章我们还会使用这些 <span class="math inline">\(\beta\)</span>。这些 <span class="math inline">\(\beta\)</span> 不要与 false negative rates 混淆。抱歉，这里只是统计学家用同一个希腊字母表示两个不同东西的地方。</p></div><div id="fn15"><p><sup>15</sup>&nbsp;要做出真正理性的决策，你可以把这张图与某种 utility function 结合起来，用来评估不同 outcomes 的成本。例如，你可能认为，推进一个不起作用的 intervention 比维持 business as usual 更糟。在那种情况下，你会给 false positive 分配更高成本，并相应尝试采用更保守 criterion。这里我们不会介绍这类 decision analysis，但如果你感兴趣，<span class="citation" data-cites="pratt1995">Pratt 等 (<a href="#ref-pratt1995" role="doc-biblioref">1995</a>)</span> 是一本关于 statistical decision theory 的经典教材。</p></div></div><p>设定这些 rates 是一个决策问题：如果你判断 intervention 有效的标准过于保守，就会冒 false negative 的风险，也就是错误地得出它不起作用的结论。如果你对证据的评估过于宽松，就会冒 false positive 的风险。<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> 然而，实践中，人们通常把 <span class="math inline">\(\alpha\)</span> 留在 <span class="math inline">\(0.05\)</span>，并试图通过增加样本量来控制 false negative rate。</p>
+<p>正如在 <a href="#fig-inference-null-model" class="quarto-xref">图&nbsp;<span>6.6</span></a> 中看到的，样本越大，对于任何给定的非 null effect，你拒绝 null 的机会越高。但这些机会也会取决于你估计的 effect size。这种表述催生了 classical power analysis 的想法，我们会在 <a href="010-sampling.html" class="quarto-xref"><span>章 10</span></a> 中介绍。多数为 binary inference 辩护的人，都对使用 Neyman-Pearson approach 感兴趣。在我们看来，这种方法有其位置（它对 power analysis 尤其有用），但仍然遭受所有 binary inference techniques 都有的实质性问题。</p>
+<!-- \vspace{2.5em} -->
+<div class="callout callout-style-default callout-note callout-titled" title="深入">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>深入
+</div>
+</div>
+<section id="null零假设下的-nonparametric-resampling" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="null零假设下的-nonparametric-resampling">Null（零假设）下的 nonparametric resampling</h3>
+<p>Hypothesis testing 需要知道 null distribution。在上面的例子中，使用统计理论，并根据 binomial 或 normal distribution 的知识推导 null distribution 很容易。但有时我们不知道 null distribution 会是什么样。如果茶品尝实验中的评分数据非常 skewed，比如有很多低评分和少数很高评分（如 <a href="#fig-inference-permutation" class="quarto-xref">图&nbsp;<span>6.10</span></a>），该怎么办？</p>
+<div id="fig-inference-permutation" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot with points for tea-first and milk-first varying along rating; distributions have more points lower in rating.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inference-permutation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inference/skewed.png" class="img-fluid figure-img" style="width:40.0%" alt="A plot with points for tea-first and milk-first varying along rating; distributions have more points lower in rating.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inference-permutation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6.10: 一个小型茶品尝实验中 skewed 评分分布的示意数据（很多低评分和少数很高评分）。
+</figcaption>
+</figure>
+</div>
+<p>面对这样的 skewed data，我们不能心安理得地继续使用 <span class="math inline">\(t\)</span>-test，因为在只有 <span class="math inline">\(n = 18\)</span> 时，我们不一定能相信 central limit theorem 已经充分“启动”，使检验即便在 skewness 下仍能工作。换句话说，我们不能确定这个案例中的 null distribution 是 normal（Gaussian）的。</p>
+<p>近似 null distribution 的另一种方式，是通过 nonparametric resampling。<strong>Resampling</strong> 意味着我们会<em>从现有样本中</em>抽取新样本；<strong>nonparametric</strong> 意味着我们这样做时，会避免关于 null distribution 形状的假设——这与依赖此类假设的 <strong>parametric</strong> 方法相对）。这些技术有时称为 “bootstrapping” techniques。</p>
+<p>其想法是，如果 treatment 真的对 outcome 没有效应，那么观察值在 treatment 和 control groups 之间就是 <strong>exchangeable</strong> 的。也就是说，treatment 和 control groups 之间不会存在系统性差异。这个属性在我们的样本中可能为真，也可能不为真（这正是我们做 hypothesis test 的原因），但我们可以用一种强制 exchangeability 的方式，从现有样本中抽取新样本。</p>
+<p>要用茶品尝数据做这种检验，我们会在数据集中随机打乱评分，同时保持 condition assignments 固定。如果这样做几千次，并在每次都计算 treatment effect，结果就是一个 null distribution：当<em>没有</em> condition effect 时，我们可能预期 treatment effect 看起来是什么样。本质上，我们这里使用的是一个模拟版本的 “random assignment”，以<em>打破</em> condition manipulation 与 observed data 之间的依赖。</p>
+<p>随后，我们可以把<em>实际</em> treatment effect 与这个 nonparametric null distribution 比较。如果实际 treatment effect 小于 null distribution 的 2.5th percentile，或大于 97.5th percentile，那么我们会以 <span class="math inline">\(p &lt; 0.05\)</span> 拒绝 null，就像使用 <span class="math inline">\(t\)</span>-test 一样。</p>
+<p>基于 resampling 的 检验在各种情形中都极其有用。它们有时不如 parametric approaches 有 power，而且几乎总是需要更多计算，但其通用性让它们成为数据分析中很好的 generic tool。</p>
+</section>
+</div>
+</section>
+</section>
+<section id="inference推断及其不满" class="level2 page-columns page-full" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="inference推断及其不满"><span class="header-section-number">6.4</span> Inference（推断）及其不满</h2>
+<p>在本章前面几节中，我们回顾了 NHST 和 Bayesian approaches to inference。现在是时候退一步，思考 inference practices——尤其是与 NHST 相关的实践——以哪些方式给心理学研究带来了问题。我们会先讨论围绕 <span class="math inline">\(p\)</span>-values 的一些问题，然后给出一个与 “<span class="math inline">\(p\)</span>-hacking” 过程相关的具体 <span class="smallcaps">事故报告</span>，并对统计检验如何与人类推理相关做一些一般性的哲学讨论。</p>
+<section id="p-values-解释中的问题" class="level3 page-columns page-full" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="p-values-解释中的问题"><span class="header-section-number">6.4.1</span> <span class="math inline">\(p\)</span>-values 解释中的问题</h3>
+<p><span class="math inline">\(p\)</span>-values 基本上就是 likelihoods，用的是上一章介绍的意义。<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> 它们是在 null hypothesis 下数据的 likelihood！这个 likelihood 是一个需要知道的关键数字——原因之一是用于计算 Bayes Factor。但它并不会告诉我们许多我们想知道的东西！</p>
+<div class="no-row-height column-margin column-container"><div id="fn16"><p><sup>16</sup>&nbsp;唯一不同的是，它们是 observed data <em>or any more extreme</em> 的 likelihood。</p></div></div><p>例如，<span class="math inline">\(p\)</span>-values 不会告诉我们，在我们可能感兴趣的某个具体 alternative hypothesis 下数据的概率——那是 posterior probability <span class="math inline">\(p(H_1 | \text{data})\)</span>。当我们的茶品尝 <span class="math inline">\(t\)</span>-test 得到 <span class="math inline">\(t(46) = 2.86\)</span>, <span class="math inline">\(p = 0.006\)</span> 时，那个 <span class="math inline">\(p\)</span> <em>不是</em> null hypothesis 为真的概率！它当然也不是 milk-first tea 更好的概率。</p>
+<p>当 <span class="math inline">\(p&gt;0.05\)</span> 时，你能得出什么结论？按照 NHST 的经典逻辑，答案是“什么也没有”！未能拒绝 null hypothesis，并不会给你任何额外证据来<em>支持</em> null。即使数据（或某些更极端数据）在 <span class="math inline">\(H_0\)</span> 下的概率很高，它们在 <span class="math inline">\(H_1\)</span> 下的概率也可能一样高，甚至更高。<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> 但许多实践中的研究者会犯这个错误。<span class="citation" data-cites="aczel2018">Aczel 等 (<a href="#ref-aczel2018" role="doc-biblioref">2018</a>)</span> 编码了 2015 年的一组文章，发现 72% 的负性陈述都与其所选统计 paradigm 的逻辑不一致——多数是研究者在只是未能拒绝 null 时，说某个效应不存在。</p>
+<div class="no-row-height column-margin column-container"><div id="fn17"><p><sup>17</sup>&nbsp;当然，把这二者相互权衡，又会把你带回 Bayes Factor。</p></div></div><p>这些并不是 <span class="math inline">\(p\)</span>-values 的唯一问题。事实上，人们很难理解 <span class="math inline">\(p\)</span>-values <em>到底</em>说了什么，以至于有整篇文章专门讨论这些误解。<a href="#tbl-dirty-dozen" class="quarto-xref">Table&nbsp;<span>6.3</span></a> 展示了一组由 <span class="citation" data-cites="goodman2008">S. N. Goodman (<a href="#ref-goodman2008" role="doc-biblioref">2008</a>)</span> 记录并反驳的误解。</p>
+<p>我们只看其中几个。误解 1 是：如果 <span class="math inline">\(p=0.05\)</span>，null 为真的概率就是 5%。这个误解来自混淆 <span class="math inline">\(p(H_0 | \text{data})\)</span>（posterior）和 <span class="math inline">\(p(\text{data} | H_0)\)</span>（likelihood——也就是 <span class="math inline">\(p\)</span>-value）。误解 2——<span class="math inline">\(p &gt; 0.05\)</span> 允许我们<em>接受</em> null——也源于 posterior 和 likelihood 的这种反转。误解 3 则是把 <span class="math inline">\(p\)</span>-value 误解为 effect size（上一章我们学过 effect size）：大效应可能具有临床重要性，但只要样本量足够大，即使是非常小的效应也可以得到很小的 <span class="math inline">\(p\)</span>-value。这里我们不会逐条讲完所有误解，但鼓励你挑战自己，把它们都推演一遍（就像下面的练习一样）。</p>
+<!-- ::: {.margin-caption} -->
+<!-- \vspace{.5em} -->
+<div id="tbl-dirty-dozen" class="quarto-float quarto-figure quarto-figure-center anchored" data-tbl-cap-location="bottom">
+<figure class="quarto-float quarto-float-tbl figure">
+<div aria-describedby="tbl-dirty-dozen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 97%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;"></th>
+<th>Misconception</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td>“If <span class="math inline">\(p = 0.05\)</span>, the null hypothesis has only a 5% chance of being true.”</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td>“A nonsignificant difference (e.g., <span class="math inline">\(p \geq 0.05\)</span>) means there is no difference between groups.”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td>“A statistically significant finding is clinically important.”</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td>“Studies with <span class="math inline">\(p\)</span>-values on opposite sides of <span class="math inline">\(0.05\)</span> are conflicting.”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td>“Studies with the same <span class="math inline">\(p\)</span>-value provide the same evidence against the null hypothesis.”</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td>“<span class="math inline">\(p = 0.05\)</span> means that we have observed data that would occur only 5% of the time under the null hypothesis.”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td>“<span class="math inline">\(p = 0.05\)</span> and <span class="math inline">\(p \leq 0.05\)</span> mean the same thing.”</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td>“<span class="math inline">\(p\)</span>-values are properly written as inequalities (e.g., ‘<span class="math inline">\(p \leq 0.02\)</span>’ when <span class="math inline">\(p = 0.015\)</span>).”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td>“<span class="math inline">\(p = 0.05\)</span> means that if you reject the null hypothesis, the probability of a false positive error is only 5%.”</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td>“With a <span class="math inline">\(p = 0.05\)</span> threshold for significance, the chance of a false positive error will be 5%.”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td>“You should use a one-sided <span class="math inline">\(p\)</span>-value when you don’t care about a result in one direction, or a difference in that direction is impossible.”</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td>“A scientific conclusion or treatment policy should be based on whether or not the <span class="math inline">\(p\)</span>-value is significant.”</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-dirty-dozen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;6.3: A “dirty dozen” <span class="math inline">\(p\)</span>-value misconceptions. Adapted from <span class="citation" data-cites="goodman2008">S. N. Goodman (<a href="#ref-goodman2008" role="doc-biblioref">2008</a>)</span>.
+</figcaption>
+</figure>
+</div>
+<!-- ::: -->
+<p>除了这些误解之外，还有另一个问题。<span class="math inline">\(p\)</span>-value 是某一组事件发生的概率（对应于 observed data 或任何 “more extreme” data——也就是说，更远离 null 的数据）。既然 <span class="math inline">\(p\)</span>-values 是概率，我们可以把它们跨不同事件结合起来。如果我们运行一个 “null experiment”——也就是真实效应为零的实验——得到 <span class="math inline">\(p &lt; 0.05\)</span> 的数据集的概率当然是 <span class="math inline">\(0.05\)</span>。但如果运行两个这样的实验，我们以概率 <span class="math inline">\(0.1\)</span> 得到 <span class="math inline">\(p &lt; 0.05\)</span>。等运行到 20 个实验时，我们得到阳性结果的概率是 <span class="math inline">\(0.64\)</span>。</p>
+<p>如果运行 20 个实验，然后只报告其中阳性的那些（按设计，它们是 false positives），却假装它们仍然是 “statistically significant”，显然是重大错误。同样的事情也适用于在单个实验中做 20 个不同统计检验。针对这个被称为 <strong>multiple comparisons</strong> 的问题，可以做许多统计校正。<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> 但更广泛的问题是 transparency：除非你<em>知道</em>合适的实验或检验集合是什么，否则不可能实施这些校正！<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn18"><p><sup>18</sup>&nbsp;最简单且最通用的一种是 Bonferroni correction，它只是把 <span class="math inline">\(0.05\)</span>（或者技术上说，无论你的阈值是什么）除以你正在做的比较次数。使用这个校正，如果你做 20 个 null experiments，false positive 的概率会是 3%。</p></div><div id="fn19"><p><sup>19</sup>&nbsp;这个问题在 <span class="math inline">\(p\)</span>-values 上尤其麻烦，因为它们常被呈现为一组彼此独立的检验；但当你计算许多独立 Bayes Factors 时，multiple comparisons 问题同样会出现。通过选择性报告 Bayes Factors 来进行 “Posterior hacking” 完全是可能的 <span class="citation" data-cites="simonsohn2014">(<a href="#ref-simonsohn2014" role="doc-biblioref">Simonsohn 2014</a>)</span>。</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="事故报告">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>事故报告
+</div>
+</div>
+<section id="extraordinary-claims-是否需要-extraordinary-evidence" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="extraordinary-claims-是否需要-extraordinary-evidence">Extraordinary claims 是否需要 extraordinary evidence？</h3>
+<p>在一篇轰动论文中，<span class="citation" data-cites="bem2011">Bem (<a href="#ref-bem2011" role="doc-biblioref">2011</a>)</span> 提出了九个实验，并声称它们为 precognition 提供了证据——也就是参与者不知何故预先知道未来；这篇论文可能无意中启动了 replication crisis。在第一个实验中，Bem 给 100 名本科生中的每个人展示 36 个 two-alternative forced choice trials；在图片出现之前，他们必须猜测屏幕上两个位置中哪一个会出现图片。当然，按 chance，参与者应有 50% 的时间选择正确一侧。Bem 发现，专门对 erotic pictures 来说，参与者猜测正确率为 53.1%。在 chance guessing 的 null hypothesis 下，这个猜测率是意外的（<span class="math inline">\(p = 0.01\)</span>）。另外八项研究总计超过 1,000 名参与者，也产生了看似支持的证据；参与者甚至在刺激呈现之前，就似乎表现出各种心理效应！</p>
+<p>基于这些证据，我们是否应该得出 precognition 存在的结论？大概不应该。<span class="citation" data-cites="wagenmakers2011">Wagenmakers 等 (<a href="#ref-wagenmakers2011" role="doc-biblioref">2011</a>)</span> 提出了对 Bem 发现的批评，认为（1）Bem 的实验本质上是 exploratory（没有 preregistered），（2）Bem 的结论 <em>a priori</em> 不太可能，（3）其实验中的统计证据水平很低。我们认为这些论点单独看都很有说服力；合在一起，它们构成了反对 Bem 解释的决定性案例。</p>
+<p>首先，我们已经讨论过，在实验者有机会在测量、操纵、样本和分析选择上进行 analytic flexibility 的情境中，需要保持怀疑。Flexibility 会让研究者有可能从 “garden of forking paths” 中 cherry-pick 那组能给其偏好假设带来阳性结果的决策（更多细节见 <a href="011-prereg.html" class="quarto-xref"><span>章 11</span></a>）。即使在 Bem 论文的实验 1 中，也有大量 flexibility 展示出来。虽然研究中有 100 名参与者，但他们可能是事后由两个不同样本合并而来，一个 40 人、一个 60 人，且二者看到不同 conditions。40 人猜测 erotic、negative 和 neutral pictures 的位置；60 人看到 erotic、positive non-romantic 和 positive romantic pictures。每个 condition 的均值大概都被拿来与 chance 比较（至少六次比较，false positive rate 为 <span class="math inline">\(0.26\)</span>）。如果 positive romantic pictures 显著，Bem 当然也可以像解释 erotic pictures 那样解释这个发现。</p>
+<p>第二，正如我们讨论过的，接近 <span class="math inline">\(0.05\)</span> 的 <span class="math inline">\(p\)</span>-value 并不一定提供反对 null hypothesis 的强证据。Wagenmakers 等人为 Bem 论文中的每个实验计算了 Bayes Factor，发现很多情况下，在默认 Bayesian <span class="math inline">\(t\)</span>-test 下，支持 <span class="math inline">\(H_1\)</span> 的证据量相当 modest。实验 1 也不例外：BF 为 <span class="math inline">\(1.64\)</span>，即便在考虑上面提到的 multiple-comparisons 问题之前，也只给某种非零效应假设提供了 “anecdotal” 支持。</p>
+<p>最后，由于 precognition 没有任何先前有说服力的科学证据支持（尽管有许多人尝试获得这种证据），而且它违背了已确立的物理定律，也许我们应该给 Bem 的 <span class="math inline">\(H_1\)</span>，即非零 precognition effect，分配很低的 prior probability。采取强 Bayesian 立场，Wagenmakers 等人建议，我们最好采用一个反映 precognition 有多不可能的 prior，比如 <span class="math inline">\(p(H_1) = 10^{-20}\)</span>。如果采用这个 prior，那么即便是一个设计非常好、信息量很高的实验（Bayes Factor 传递 substantial 甚至 decisive 证据），仍会导向很低的 precognition posterior probability。</p>
+<p>Wagenmakers 等人得出结论：Bem 的论文并不支持 precognition；相反，它的结论应该是心理学家需要修改自己关于分析数据的想法（并避免 <span class="math inline">\(p\)</span>-hacking）！</p>
+</section>
+</div>
+</section>
+<section id="关于概率的哲学和经验观点" class="level3 page-columns page-full" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="关于概率的哲学和经验观点"><span class="header-section-number">6.4.2</span> 关于概率的哲学（和经验）观点</h3>
+<p>到目前为止，我们把 Bayesian 和 frequentist tools 呈现为两组不同计算。但事实上，这些不同工具来自关于概率到底是什么的根本不同哲学视角。非常粗略地说，frequentist approaches 倾向于认为，概率量化的是某些事件的长期频率。因此，如果我们说某个事件 outcome 的概率是 0.5，就是在说如果这个事件发生几千次，这个 outcome 的长期频率会是总事件的 50%。相比之下，Bayesian viewpoint 并不依赖事件可以被精确重复的这种意义。相反，概率的 subjective Bayesian interpretation 是：它量化的是一个人对某个 outcome 的信念程度。<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn20"><p><sup>20</sup>&nbsp;这确实是一个非常粗略的描述。如果你有兴趣更多了解这一哲学背景，我们推荐 Stanford Encyclopedia of Philosophy 中的 “Interpretations of Probability” 条目（<a href="https://plato.stanford.edu/entries/probability-interpret" class="uri">https://plato.stanford.edu/entries/probability-interpret</a>）。</p></div></div><p>关于概率是什么的深层哲学辩论，你不必选边站。但有用的是知道：人们实际推理世界的方式，似乎可以被 subjective Bayesian view of probability 很好地描述。近期认知科学研究在把推理描述为 Bayesian inference 过程方面取得了很大进展；在这个过程中，概率描述对不同假设的信念程度 <span class="citation" data-cites="probmods2">(for a textbook review of this approach, see <a href="#ref-probmods2" role="doc-biblioref">N. D. Goodman, Tenenbaum, 和 The ProbMods Contributors 2016</a>)</span>。这些假设又很像我们在 <a href="002-theories.html" class="quarto-xref"><span>章 2</span></a>: 中描述的理论：它们描述不同抽象实体之间的关系 <span class="citation" data-cites="tenenbaum2011">(<a href="#ref-tenenbaum2011" role="doc-biblioref">Tenenbaum 等 2011</a>)</span>。你可能以为科学家在这方面不同于普通人，但概率推理和判断研究中的一个惊人发现是，expertise 并没有那么重要。受过统计训练的科学家——甚至统计学家——会犯许多与未受训练学生相同的推理错误 <span class="citation" data-cites="kahneman1979">(<a href="#ref-kahneman1979" role="doc-biblioref">Kahneman 和 Tversky 1979</a>)</span>。即使儿童也似乎以一种有点像 Bayesian inference 的方式进行直觉推理 <span class="citation" data-cites="gopnik2012">(<a href="#ref-gopnik2012" role="doc-biblioref">Gopnik 2012</a>)</span>。</p>
+<p>这些认知科学发现帮助解释了人们（包括科学家）在推理 <span class="math inline">\(p\)</span>-values 时遇到的一些问题。如果你是一个直觉上的 Bayesian reasoner，你大概追踪的是自己有多相信某个假设（它的 posterior probability）。因此，许多人会把 <span class="math inline">\(p\)</span>-value 当作 null hypothesis 的 posterior probability。<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a> 这正是 <a href="#tbl-dirty-dozen" class="quarto-xref">表&nbsp;<span>6.3</span></a> 中 fallacy 1 所说的——“If <span class="math inline">\(p = 0.05\)</span>, the null hypothesis has only a 5% chance of being true.” 但这种等价是错误的！写成数学形式，<span class="math inline">\(p(\text{data} | H_0)\)</span>（让我们计算 <span class="math inline">\(p\)</span>-value 的 likelihood）并不等同于 <span class="math inline">\(p(H_0 | \text{data})\)</span>（我们想要的 posterior）。借用上面 <span class="smallcaps">事故报告</span> 的例子，即使<em>在 null hypothesis 给定时观察到 ESP 数据的概率</em>很低，也不意味着 <em>ESP 的概率</em>很高。</p>
+<div class="no-row-height column-margin column-container"><div id="fn21"><p><sup>21</sup>&nbsp;<span class="citation" data-cites="cohen1994">Cohen (<a href="#ref-cohen1994" role="doc-biblioref">1994</a>)</span> 对这个问题有很好的处理。</p></div></div></section>
+<section id="使用什么框架" class="level3 page-columns page-full" data-number="6.4.3">
+<h3 data-number="6.4.3" class="anchored" data-anchor-id="使用什么框架"><span class="header-section-number">6.4.3</span> 使用什么框架？</h3>
+<p>Binary inferences 的问题在于，它们会促成一些能给科学生态系统引入 bias 的行为。按照 statistical significance 的逻辑，一个实验要么 “worked”，要么没有。因为几乎所有人通常都更想要一个 worked 的实验，而不是一个没 worked 的实验，像 <span class="math inline">\(p\)</span>-values 这样的 inference criteria 经常成为 selection 的目标，正如我们在 <a href="003-replication.html" class="quarto-xref"><span>章 3</span></a> 中讨论过的。<a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn22"><p><sup>22</sup>&nbsp;更一般地说，这种模式大概是 Goodhart’s law 的例子：当一个测量变成目标，它就不再是好测量 <span class="citation" data-cites="strathern1997">(<a href="#ref-strathern1997" role="doc-biblioref">Strathern 1997</a>)</span>。一旦统计推断程序的 outcomes 成为发表目标，它们就会受到 selection biases 的影响——例如 <span class="math inline">\(p\)</span>-hacking——从而变得不那么有意义。</p></div></div><p>如果你想量化支持或反对某个假设的证据，值得考虑 Bayes Factors 是否比 <span class="math inline">\(p\)</span>-values 更能回答你的问题。实践中，<span class="math inline">\(p\)</span>-values 很难理解，也常被误用——不过公平地说，BFs 也经常被误用。这些问题可能根植于人类如何推理概率的基本事实。</p>
+<p>尽管有理由担心 <span class="math inline">\(p\)</span>-values，但对许多实践中的科学家来说（至少在写作时），是否使用它们并没有唯一正确答案。即使我们希望一直做 Bayesian，也存在一些障碍。首先，虽然新的计算工具让拟合 Bayesian models 和提取 Bayes Factors 比以前容易得多，但平均而言，拟合 Bayesian model 仍然比拟合 frequentist model 难不少。第二，因为 Bayesian analyses 没那么熟悉，要说服导师、审稿人和资助者使用它们，可能是一场 uphill battle。</p>
+<p>作为一组作者，我们中有些人更 Bayesian 而不是 frequentist，有些人更 frequentist 而不是 Bayesian——但我们都认识到，需要根据正在处理的问题在 statistical paradigms 之间移动。此外，很多时候我们并不那么担心自己使用的是哪种 paradigm。Paradigms 在进行 binary inferences 时差异最大；而当它们用于量化 measurement precision 时，常常看起来相似得多。</p>
+</section>
+</section>
+<section id="计算精确度" class="level2 page-columns page-full" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="计算精确度"><span class="header-section-number">6.5</span> 计算精确度</h2>
+<p>上一节提出了一个反对用 <span class="math inline">\(p\)</span>-values 做<em>二分式</em>推断的论证。但我们仍然想从自己有限样本中知道的东西，推进到关于 population 的某种推断。我们应该怎么做？</p>
+<section id="confidence-intervals置信区间" class="level3 page-columns page-full" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="confidence-intervals置信区间"><span class="header-section-number">6.5.1</span> Confidence intervals（置信区间）</h3>
+<p>Binary hypothesis testing 的一个替代方案，是询问估计的精确度——某个特定样本的估计与感兴趣的 population parameter 有多相似。例如，我们的茶品尝效应估计与 population 中的真实效应有多接近？我们不知道真实效应是什么，但关于 sampling distributions 的知识让我们能对估计有多精确做一些猜测。</p>
+<p><strong>Confidence interval</strong> 是一种方便的 frequentist 方式，用来概括 sampling distribution 的变异性——因此也概括 point estimate 有多精确。Confidence interval 表示在给定数据下，感兴趣参数可能具有的一系列 plausible values。更正式地说，对于某个估计（像我们的例子一样称为 <span class="math inline">\(\widehat{\beta}\)</span>），95% confidence interval 被定义为 <span class="math inline">\(\beta\)</span> 的一系列可能值；如果我们进行 repeated sampling，由这些样本生成的 intervals 中有 95% 会包含真实参数 <span class="math inline">\(\beta\)</span>。</p>
+<!-- ```{r inference-tea-se} -->
+<!-- tea_ratings <- tea_data$rating[tea_data$condition == "tea first"] -->
+<!-- milk_ratings <- tea_data$rating[tea_data$condition == "milk first"] -->
+<!-- n_tea <- length(tea_ratings) -->
+<!-- n_milk <- length(milk_ratings) -->
+<!-- sd_tea <- sd(tea_ratings) -->
+<!-- sd_milk <- sd(milk_ratings) -->
+<!-- tea_sd_pooled <- sqrt(((n_tea-1)*sd_tea^2 + (n_milk-1)*sd_milk^2) / -->
+<!--                         (n_tea + n_milk - 2)) -->
+<!-- tea_se <- tea_sd_pooled * sqrt((1/n_tea) + (1/n_milk)) -->
+<!-- delta_hat <- mean(milk_ratings) - mean(tea_ratings) -->
+<!-- tea_ci_lower <- delta_hat - tea_se *1.96 -->
+<!-- tea_ci_upper <- delta_hat + tea_se *1.96 -->
+<!-- ``` -->
+<p>Confidence intervals（CIs） 是通过估计 <span class="math inline">\(\widehat{\beta}\)</span> 的 sampling distribution 中间 95% 来构建的。由于我们的英雄 central limit theorem，对于合理大的样本，我们可以把 sampling distribution 当作 normal。基于这一点，常见做法是构建 95% confidence interval <span class="math inline">\(\widehat{\beta} \pm 1.96 \; \widehat{\text{SE}}\)</span>。<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a> 如果我们开展 100 次实验，并每次都计算一个 confidence interval，我们应该预期其中 95 个 intervals 包含真实 <span class="math inline">\(\beta\)</span>，而剩下 5 个不包含 <span class="math inline">\(\beta\)</span>。<a href="#fn24" class="footnote-ref" id="fnref24" role="doc-noteref"><sup>24</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn23"><p><sup>23</sup>&nbsp;这种 CI 被称为 “Wald” confidence interval。</p></div><div id="fn24"><p><sup>24</sup>&nbsp;如果你没有足够的茶做 100 次实验来确认这一点，可以用这个很好的模拟工具虚拟完成：<a href="https://istats.shinyapps.io/ExploreCoverage" class="uri">https://istats.shinyapps.io/ExploreCoverage</a>。</p></div></div><p>Confidence intervals 就像是在押注你从样本中做出的推断。你抽到的样本像是拉了一次老虎机；它有 95% 的时间会中奖（也就是 confidence interval 包含真实参数）。更简洁地说：95% 的 95% confidence intervals 包含 population parameter 的真实值。</p>
+<div id="fig-inference-condition-cis" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="A plot with the same points as 6.10 overlaid with confidence intervals and a rating difference confidence interval.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-inference-condition-cis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inference/cis.png" class="img-fluid figure-img" style="width:75.0%" alt="A plot with the same points as 6.10 overlaid with confidence intervals and a rating difference confidence interval.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-inference-condition-cis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6.11: 两个 condition estimates 以及 condition 之间差异上的 confidence intervals。
+</figcaption>
+</figure>
+</div>
+<p>为了可视化，我们可以在单个 estimates 上显示 confidence intervals（<a href="#fig-inference-condition-cis" class="quarto-xref">图&nbsp;<span>6.11</span></a> 左侧）。这些告诉我们，每个数量的估计相对于 population estimate 有多精确。但我们主要一直在讨论 treatment effect <span class="math inline">\(\widehat{\beta}\)</span> 上的 CI（<a href="#fig-inference-condition-cis" class="quarto-xref">图&nbsp;<span>6.11</span></a> 右侧）。这个 CI 让我们能够推断它是否与零重叠——在这个案例中，这实际上等价于 <span class="math inline">\(t\)</span>-test 是否统计显著。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="代码">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>代码
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Analytically 计算 confidence intervals 相当容易。这里我们先计算 conditions 之间差异的 standard error。唯一稍微棘手的部分是，我们需要计算 pooled standard deviation。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tea_ratings <span class="ot">&lt;-</span> <span class="fu">filter</span>(tea_data, condition <span class="sc">==</span> <span class="st">"tea first"</span>)<span class="sc">$</span>rating</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>milk_ratings <span class="ot">&lt;-</span> <span class="fu">filter</span>(tea_data, condition <span class="sc">==</span> <span class="st">"milk first"</span>)<span class="sc">$</span>rating</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>n_tea <span class="ot">&lt;-</span> <span class="fu">length</span>(tea_ratings)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>n_milk <span class="ot">&lt;-</span> <span class="fu">length</span>(milk_ratings)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>sd_tea <span class="ot">&lt;-</span> <span class="fu">sd</span>(tea_ratings)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>sd_milk <span class="ot">&lt;-</span> <span class="fu">sd</span>(milk_ratings)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>tea_sd_pooled <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(((n_tea <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> sd_tea <span class="sc">^</span> <span class="dv">2</span> <span class="sc">+</span> (n_milk <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> sd_milk <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                        (n_tea <span class="sc">+</span> n_milk <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>tea_se <span class="ot">&lt;-</span> tea_sd_pooled <span class="sc">*</span> <span class="fu">sqrt</span>((<span class="dv">1</span> <span class="sc">/</span> n_tea) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">/</span> n_milk))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>有了 standard error 后，我们可以得到 conditions 之间的估计差异，并通过将 standard error 乘以 1.96 来计算 confidence intervals。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>delta_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(milk_ratings) <span class="sc">-</span> <span class="fu">mean</span>(tea_ratings)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>tea_ci_lower <span class="ot">&lt;-</span> delta_hat <span class="sc">-</span> tea_se <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>tea_ci_upper <span class="ot">&lt;-</span> delta_hat <span class="sc">+</span> tea_se <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="对-confidence-intervals-有多少-confidence" class="level3 page-columns page-full" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="对-confidence-intervals-有多少-confidence"><span class="header-section-number">6.5.2</span> 对 confidence intervals 有多少 confidence？</h3>
+<p>Confidence intervals 常常被学生和研究者误解 <span class="citation" data-cites="hoekstra2014">(<a href="#ref-hoekstra2014" role="doc-biblioref">Hoekstra 等 2014</a>)</span>。想象一位研究者开展了一项实验，并报告说 “the 95% confidence interval for the mean ranges from <span class="math inline">\(0.1\)</span> to <span class="math inline">\(0.4\)</span>.” <a href="#tbl-inference-ci-false" class="quarto-xref">表&nbsp;<span>6.4</span></a> 中的所有陈述，虽然在这种情境下很诱人，但<em>技术上都是错的</em>。</p>
+<!-- ::: {.margin-caption} -->
+<!-- \vspace{.5em} -->
+<div id="tbl-inference-ci-false" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl margin-caption" id="tbl-inference-ci-false-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;6.4: Confidence interval misconceptions for a confidence interval <span class="math inline">\([0.1,0.4]\)</span>. Adapted from <span class="citation" data-cites="hoekstra2014">Hoekstra 等 (<a href="#ref-hoekstra2014" role="doc-biblioref">2014</a>)</span>.
+</figcaption>
+<div aria-describedby="tbl-inference-ci-false-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 97%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Misconception</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>“The probability that the true mean is greater than <span class="math inline">\(0\)</span> is at least 95%.”</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>“The probability that the true mean equals <span class="math inline">\(0\)</span> is smaller than 5%.”</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>“The ‘null hypothesis’ that the true mean equals <span class="math inline">\(0\)</span> is likely to be incorrect.”</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>“There is a 95% probability that the true mean lies between <span class="math inline">\(0.1\)</span> and <span class="math inline">\(0.4\)</span>.”</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>“We can be 95% confident that the true mean lies between <span class="math inline">\(0.1\)</span> and <span class="math inline">\(0.4\)</span>.”</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>“If we were to repeat the experiment over and over, then 95% of the time the true mean falls between <span class="math inline">\(0.1\)</span> and <span class="math inline">\(0.4\)</span>.”</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<!-- ::: -->
+<p>所有这些陈述的问题在于，在 frequentist framework 中，population parameter 只有一个真实值，而 confidence intervals 捕捉的变异性是关于<em>样本</em>的，不是关于参数本身的。<a href="#fn25" class="footnote-ref" id="fnref25" role="doc-noteref"><sup>25</sup></a> 因此，我们不能对参数值的概率或自己对具体数字的 confidence 做任何陈述。重申一次，我们<em>能</em>说的是：如果我们重复许多次开展实验并计算 confidence interval 的程序，长期来看，其中 95% 的 confidence intervals 会包含真实参数。</p>
+<div class="no-row-height column-margin column-container"><div id="fn25"><p><sup>25</sup>&nbsp;相比之下，Bayesians 认为参数本身是 variable，而不是 fixed。</p></div></div><p>Confidence interval 的 Bayesian analog 是 <strong>credible interval</strong>。回忆一下，对 Bayesians 来说，参数本身被认为是 probabilistic（也就是受 random variation 影响的），而不是 fixed。对于一个估计 <span class="math inline">\(\widehat{\beta}\)</span> 来说，95% credible interval 表示 <span class="math inline">\(\beta\)</span> 的一系列可能值，使得 <span class="math inline">\(\beta\)</span> 有 95% 的概率落在该区间内。因为我们现在戴上了 Bayesian hats，所以被“允许”把 <span class="math inline">\(\beta\)</span> 当作 probabilistic 而不是 fixed 来谈。实践中，credible intervals 是通过找到 <span class="math inline">\(\beta\)</span> 的 posterior distribution 来构建的，就像 <a href="005-estimation.html" class="quarto-xref"><span>章 5</span></a> 中那样，然后例如取中间 95%。</p>
+<p>Credible intervals 很好，因为它们不会引发许多围绕 confidence intervals 的 inference fallacies。例如，它们实际上<em>确实</em>表示我们关于 <span class="math inline">\(\beta\)</span> 可能在哪里的信念。尽管 credible intervals 和 confidence intervals 在技术上有差异，但实践中——在样本量较大、priors 较弱时——许多情况下它们会彼此相当相似。<a href="#fn26" class="footnote-ref" id="fnref26" role="doc-noteref"><sup>26</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn26"><p><sup>26</sup>&nbsp;在数据较少或 priors 较强的情况下，它们可能明显分歧 <span class="citation" data-cites="morey2016">(<a href="#ref-morey2016" role="doc-biblioref">Morey 等 2016</a>)</span>，但根据我们的经验，这种情况相对少见。</p></div></div></section>
+</section>
+<section id="本章小结推断" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="本章小结推断"><span class="header-section-number">6.6</span> 本章小结：推断</h2>
+<p>Inference tools 帮助你从样本特征移动到 population 特征。这种移动是从研究数据进行 generalization 的关键部分。但我们希望已经说服你：inference 并不一定意味着对效应存在与否做出二元决定。寻求估计一个效应及其相关 precision 的策略，通常更有助于作为理论的 building block。随着我们转向在更复杂的实验设计中估计因果效应，这一过程会需要更复杂的模型。为此，下一章会为如何建立这类模型提供一些指导。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="讨论问题">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>讨论问题
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>你能不查资料写出 <span class="math inline">\(p\)</span>-value 和 Bayes Factor 的定义吗？试试看——定义中的哪些部分你写错了？</p></li>
+<li><p>从 <a href="#tbl-dirty-dozen" class="quarto-xref">表&nbsp;<span>6.3</span></a> 中选取 Goodman <span class="citation" data-cites="goodman2008">(<a href="#ref-goodman2008" role="doc-biblioref">2008</a>)</span> 的 “dirty dozen” 中三个，写一段说明，解释为什么每一个都是误解。（可以对照原文检查；原文对每一个都有很好的讨论。）</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="阅读材料">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>阅读材料
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>这里描述的许多概念，都通过交互式可视化得到了漂亮展示。我们推荐 <a href="https://seeing-theory.brown.edu" class="uri">https://seeing-theory.brown.edu</a> 作为统计概念的广泛概览，也推荐 <a href="https://rpsychologist.com/viz" class="uri">https://rpsychologist.com/viz</a>，其中有许多 specifically illustrate 本章和上一章讨论概念的 interactives，包括 <span class="math inline">\(p\)</span>-values、effect sizes、maximum likelihood estimation、confidence intervals 和 Bayesian inference。</p></li>
+<li><p>一篇有趣且 polemical 的 NHST 批评： Cohen, Jacob <span class="citation" data-cites="cohen1994">(<a href="#ref-cohen1994" role="doc-biblioref">1994</a>)</span>. “The Earth is Round (<span class="math inline">\(p &lt; .05\)</span>).” <em>American Psychologist</em> 49 (12):997–1003. <a href="https://doi.org/10.1037/0003-066X.49.12.997" class="uri">https://doi.org/10.1037/0003-066X.49.12.997</a>.</p></li>
+<li><p>一篇不错的 Bayesian data analysis 入门：Kruschke, John K., and Torrin M. Liddell <span class="citation" data-cites="kruschke2018newcomers">(<a href="#ref-kruschke2018newcomers" role="doc-biblioref">2018a</a>)</span>. “Bayesian Data Analysis for Newcomers.” <em>Psychonomic Bulletin &amp; Review</em> 25 (1): 155–-177. <a href="https://doi.org/10.3758/s13423-017-1272-1" class="uri">https://doi.org/10.3758/s13423-017-1272-1</a>.</p></li>
+</ul>
+</div>
+</div>
+<!-- \refs -->
+
+
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-aczel2018" class="csl-entry" role="listitem">
+Aczel, Balazs, Bence Palfi, Aba Szollosi, Marton Kovacs, Barnabas Szaszi, Peter Szecsi, Mark Zrubka, Quentin F Gronau, Don van den Bergh, 和 Eric-Jan Wagenmakers. 2018. <span>《Quantifying support for the null hypothesis in psychology: An empirical investigation》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 1 (3): 357–66.
+</div>
+<div id="ref-bem2011" class="csl-entry" role="listitem">
+Bem, Daryl J. 2011. <span>《Feeling the future: experimental evidence for anomalous retroactive influences on cognition and affect.》</span> <em>Journal of personality and social psychology</em> 100 (3): 407.
+</div>
+<div id="ref-benjamin2018" class="csl-entry" role="listitem">
+Benjamin, Daniel J., James O. Berger, Magnus Johannesson, Brian A. Nosek, E. -J. Wagenmakers, Richard Berk, Kenneth A. Bollen, 等. 2018. <span>《Redefine statistical significance》</span>. <em>Nature Human Behaviour</em> 2 (1): 6–10. <a href="https://doi.org/10.1038/s41562-017-0189-z">https://doi.org/10.1038/s41562-017-0189-z</a>.
+</div>
+<div id="ref-cohen1990" class="csl-entry" role="listitem">
+Cohen, Jacob. 1990. <span>《Things <span>I</span> Have Learned (<span>S</span>o Far)》</span>. <em>American Psychologist</em> 45: 1304–12.
+</div>
+<div id="ref-cohen1994" class="csl-entry" role="listitem">
+———. 1994. <span>《The earth <span>i</span>s round (<em>p</em> &lt; .05)》</span>. <em>American psychologist</em> 49 (12): 997–1003. <a href="https://doi.org/10.1037/0003-066X.49.12.997">https://doi.org/10.1037/0003-066X.49.12.997</a>.
+</div>
+<div id="ref-cumming2014" class="csl-entry" role="listitem">
+Cumming, Geoff. 2014. <span>《The new statistics: why and how》</span>. <em>Psychological Science</em> 25 (1): 7–29.
+</div>
+<div id="ref-fisher1949" class="csl-entry" role="listitem">
+Fisher, Ronald A. 1949. <em>The design of experiments</em>. 5th 本. Oliver &amp; Boyd.
+</div>
+<div id="ref-gelman1995" class="csl-entry" role="listitem">
+Gelman, Andrew, John B Carlin, Hal S Stern, 和 Donald B Rubin. 1995. <em>Bayesian data analysis</em>. <span>Chapman &amp; Hall/CRC</span>.
+</div>
+<div id="ref-gelman2006b" class="csl-entry" role="listitem">
+Gelman, Andrew, 和 Jennifer Hill. 2006. <em>Data analysis using regression and multilevel/hierarchical models</em>. Cambridge University Press.
+</div>
+<div id="ref-gelman2020" class="csl-entry" role="listitem">
+Gelman, Andrew, Jennifer Hill, 和 Aki Vehtari. 2020. <em>Regression and other stories</em>. Cambridge University Press.
+</div>
+<div id="ref-gigerenzer1989" class="csl-entry" role="listitem">
+Gigerenzer, Gerd. 1989. <em>The empire of chance: How probability changed science and everyday life</em>. 12. Cambridge University Press.
+</div>
+<div id="ref-probmods2" class="csl-entry" role="listitem">
+Goodman, Noah D., Joshua B. Tenenbaum, 和 The ProbMods Contributors. 2016. <span>《<span>Probabilistic Models of Cognition</span>》</span>. <a href="http://probmods.org/" class="uri">http://probmods.org/</a>.
+</div>
+<div id="ref-goodman1999" class="csl-entry" role="listitem">
+Goodman, Steven N. 1999. <span>《Toward evidence-based medical statistics. 2: The Bayes factor》</span>. <em>Annals of internal medicine</em> 130 (12): 1005–13.
+</div>
+<div id="ref-goodman2008" class="csl-entry" role="listitem">
+———. 2008. <span>《A dirty dozen: twelve p-value misconceptions》</span>. 收入 <em>Seminars in hematology</em>, 45:135–40. 3. Elsevier.
+</div>
+<div id="ref-gopnik2012" class="csl-entry" role="listitem">
+Gopnik, Alison. 2012. <span>《Scientific thinking in young children: Theoretical advances, empirical research, and policy implications》</span>. <em>Science</em> 337 (6102): 1623–27.
+</div>
+<div id="ref-hoekstra2014" class="csl-entry" role="listitem">
+Hoekstra, Rink, Richard D Morey, Jeffrey N Rouder, 和 Eric-Jan Wagenmakers. 2014. <span>《Robust misinterpretation of confidence intervals》</span>. <em>Psychonomic bulletin &amp; review</em> 21 (5): 1157–64.
+</div>
+<div id="ref-jeffreys1998" class="csl-entry" role="listitem">
+Jeffreys, Harold. 1961. <em>The theory of probability</em>. 3rd 本. OUP Oxford.
+</div>
+<div id="ref-kahneman1979" class="csl-entry" role="listitem">
+Kahneman, Daniel, 和 Amos Tversky. 1979. <span>《Prospect theory: An analysis of decision <span>under</span> risk》</span>. <em>Econometrica</em> 47 (2): 363–91.
+</div>
+<div id="ref-kruschke2014" class="csl-entry" role="listitem">
+Kruschke, John K. 2014. <em>Doing Bayesian data analysis: A tutorial with R, JAGS, and Stan</em>. Academic Press.
+</div>
+<div id="ref-kruschke2018newcomers" class="csl-entry" role="listitem">
+Kruschke, John K, 和 Torrin M Liddell. 2018a. <span>《Bayesian data analysis for newcomers》</span>. <em>Psychonomic Bulletin &amp; Review</em> 25 (1): 155–77.
+</div>
+<div id="ref-kruschke2018" class="csl-entry" role="listitem">
+———. 2018b. <span>《The Bayesian New Statistics: Hypothesis testing, estimation, meta-analysis, and power analysis from a Bayesian perspective》</span>. <em>Psychonomic Bulletin &amp; Review</em> 25 (1): 178–206.
+</div>
+<div id="ref-mcelreath2018" class="csl-entry" role="listitem">
+McElreath, Richard. 2018. <em>Statistical rethinking: A Bayesian course with examples in <span>R</span> and Stan</em>. <span>Chapman &amp; Hall/CRC</span>.
+</div>
+<div id="ref-morey2016" class="csl-entry" role="listitem">
+Morey, Richard D, Rink Hoekstra, Jeffrey N Rouder, Michael D Lee, 和 Eric-Jan Wagenmakers. 2016. <span>《The fallacy of placing confidence in confidence intervals》</span>. <em>Psychonomic bulletin &amp; review</em> 23 (1): 103–23.
+</div>
+<div id="ref-morey2011" class="csl-entry" role="listitem">
+Morey, Richard D, 和 Jeffrey N Rouder. 2011. <span>《Bayes factor approaches for testing interval null hypotheses.》</span> <em>Psychological methods</em> 16 (4): 406.
+</div>
+<div id="ref-morey2023" class="csl-entry" role="listitem">
+———. 2023. <em><span>BayesFactor</span>: Computation of Bayes Factors for Common Designs</em>. <a href="https://CRAN.R-project.org/package=BayesFactor">https://CRAN.R-project.org/package=BayesFactor</a>.
+</div>
+<div id="ref-nicenboim2024" class="csl-entry" role="listitem">
+Nicenboim, Bruno, Schad Daniel, 和 Shravan Vasishth. 2024. <em>An Introduction to Bayesian Data Analysis for Cognitive Science</em>. <a href="https://vasishth.github.io/bayescogsci/book/">https://vasishth.github.io/bayescogsci/book/</a>.
+</div>
+<div id="ref-pratt1995" class="csl-entry" role="listitem">
+Pratt, John Winsor, Howard Raiffa, Robert Schlaifer, 等. 1995. <em>Introduction to statistical decision theory</em>. MIT Press.
+</div>
+<div id="ref-simonsohn2014" class="csl-entry" role="listitem">
+Simonsohn, Uri. 2014. <span>《Posterior-hacking: Selective reporting invalidates Bayesian results also》</span>. <a href="https://doi.org/10.2139/ssrn.2374040">https://doi.org/10.2139/ssrn.2374040</a>.
+</div>
+<div id="ref-strathern1997" class="csl-entry" role="listitem">
+Strathern, Marilyn. 1997. <span>《<span>〈Improving ratings〉</span>: audit in the British University system》</span>. <em>European review</em> 5 (3): 305–21.
+</div>
+<div id="ref-tenenbaum2011" class="csl-entry" role="listitem">
+Tenenbaum, Joshua B, Charles Kemp, Thomas L Griffiths, 和 Noah D Goodman. 2011. <span>《How to grow a mind: Statistics, structure, and abstraction》</span>. <em>science</em> 331 (6022): 1279–85.
+</div>
+<div id="ref-wagenmakers2011" class="csl-entry" role="listitem">
+Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, 和 Han L J Van Der Maas. 2011. <span>《Why psychologists must change the way they analyze their data: The case of psi: Comment on Bem (2011)》</span>. <em>Journal of Personality and Social Psychology</em> 100 (3): 426–32. <a href="https://doi.org/10.1037/a0022790">https://doi.org/10.1037/a0022790</a>.
+</div>
+</div>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./005-estimation.html" class="pagination-link" aria-label="估计">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./007-models.html" class="pagination-link" aria-label="模型">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

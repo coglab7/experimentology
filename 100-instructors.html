@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>附录 A — 教师指南 – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./101-github.html" rel="next">
+<link href="./017-conclusion.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./100-instructors.html">附录</a></li><li class="breadcrumb-item"><a href="./100-instructors.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#引言" id="toc-引言" class="nav-link active" data-scroll-target="#引言"><span class="header-section-number">A.1</span> 引言</a></li>
+  <li><a href="#为什么要教-project-based-course项目式课程" id="toc-为什么要教-project-based-course项目式课程" class="nav-link" data-scroll-target="#为什么要教-project-based-course项目式课程"><span class="header-section-number">A.2</span> 为什么要教 project-based course（项目式课程）？</a></li>
+  <li><a href="#logistics课程事务" id="toc-logistics课程事务" class="nav-link" data-scroll-target="#logistics课程事务"><span class="header-section-number">A.3</span> Logistics（课程事务）</a>
+  <ul class="collapse">
+  <li><a href="#syllabus-considerations教学大纲考虑" id="toc-syllabus-considerations教学大纲考虑" class="nav-link" data-scroll-target="#syllabus-considerations教学大纲考虑"><span class="header-section-number">A.3.1</span> Syllabus considerations（教学大纲考虑）</a></li>
+  <li><a href="#评分" id="toc-评分" class="nav-link" data-scroll-target="#评分"><span class="header-section-number">A.3.2</span> 评分</a></li>
+  <li><a href="#课程预算" id="toc-课程预算" class="nav-link" data-scroll-target="#课程预算"><span class="header-section-number">A.3.3</span> 课程预算</a></li>
+  <li><a href="#课程相关-institutional-review-board-申请" id="toc-课程相关-institutional-review-board-申请" class="nav-link" data-scroll-target="#课程相关-institutional-review-board-申请"><span class="header-section-number">A.3.4</span> 课程相关 Institutional Review Board 申请</a></li>
+  </ul></li>
+  <li><a href="#不同课程布局的场景" id="toc-不同课程布局的场景" class="nav-link" data-scroll-target="#不同课程布局的场景"><span class="header-section-number">A.4</span> 不同课程布局的场景</a>
+  <ul class="collapse">
+  <li><a href="#学生水平" id="toc-学生水平" class="nav-link" data-scroll-target="#学生水平"><span class="header-section-number">A.4.1</span> 学生水平</a></li>
+  <li><a href="#课程资源" id="toc-课程资源" class="nav-link" data-scroll-target="#课程资源"><span class="header-section-number">A.4.2</span> 课程资源</a></li>
+  </ul></li>
+  <li><a href="#课程安排示例" id="toc-课程安排示例" class="nav-link" data-scroll-target="#课程安排示例"><span class="header-section-number">A.5</span> 课程安排示例</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography"></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./100-instructors.html">附录</a></li><li class="breadcrumb-item"><a href="./100-instructors.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-instructors" class="quarto-section-identifier">附录 A — 教师指南</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="引言" class="level2" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="引言"><span class="header-section-number">A.1</span> 引言</h2>
+<p>这是一份关于如何在课程中开展 replication projects 的教师指南。除了本书部分作者此前讨论过的、对整个领域的益处之外 <span class="citation" data-cites="hawkins2018 frank2012">(例如 <a href="#ref-hawkins2018" role="doc-biblioref">Hawkins 等 2018</a>; <a href="#ref-frank2012" role="doc-biblioref">Frank 和 Saxe 2012</a>)</span>，基于 replication 的课程也能让课程中的学生受益。在这份指南中，我们会描述这些益处，探讨如何根据学生水平和资源对课程作不同调整，并提供一些指导和示例，帮助你安排课程 logistics。</p>
+</section>
+<section id="为什么要教-project-based-course项目式课程" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="为什么要教-project-based-course项目式课程"><span class="header-section-number">A.2</span> 为什么要教 project-based course（项目式课程）？</h2>
+<p>多年来，我们观察到，与更传统的 lecture 和 problem set-based course 相比，我们基于 replication 的课程以许多额外方式让学生受益。这些益处包括：</p>
+<ul>
+<li><strong>学生兴趣</strong>：由于每个学生都可以自由选择一项符合自己研究兴趣的研究来 replicate，这种自由会促进学生把课程方法和课程内容更直接地应用到一个自己感兴趣的项目上。</li>
+<li><strong>有用性</strong>：如果这门课在项目第一年开设（我们建议如此），学生可以用自己的 replication project，在基于某个现象继续设计研究之前，先确认该现象的 robustness。</li>
+<li><strong>现实性</strong>：课程练习通常提供的 practice datasets 缺少真实数据的复杂性和混乱。通过开展 replication project 并处理真实数据，学生能学习如何应用课程提供的工具，而且这种方式更接近这些工具在课程之外的真实用途。</li>
+<li><strong>直觉</strong>：全班展示 replication outcomes，并讨论哪些因素似乎预测这些 outcomes，可以帮助学生在阅读文献时形成更好的直觉，判断研究有多可能 replicate。</li>
+<li><strong>视角</strong>：面对模糊性时令人沮丧的经历（无论是实验方法、材料还是分析方面的模糊性），可以激励学生在自己未来研究中采用 best practices。</li>
+</ul>
+<p>Project-based course 的样子可能会因为学生水平（本科 vs graduate/post-doc level）以及你所在机构为这类课程提供的资源而很不一样，资源主要包括 TA 支持和课程经费（用于数据收集）。本指南大部分内容会假设你拥有和我们类似的设置（即在 graduate/post-doc level 授课，并有课程经费和 TAs 支持课程），但我们也花了一些时间考虑如何调整课程，以适应不同学生水平和资源可用性（见 “Scenarios for different course layouts”）。</p>
+</section>
+<section id="logistics课程事务" class="level2" data-number="A.3">
+<h2 data-number="A.3" class="anchored" data-anchor-id="logistics课程事务"><span class="header-section-number">A.3</span> Logistics（课程事务）</h2>
+<section id="syllabus-considerations教学大纲考虑" class="level3" data-number="A.3.1">
+<h3 data-number="A.3.1" class="anchored" data-anchor-id="syllabus-considerations教学大纲考虑"><span class="header-section-number">A.3.1</span> Syllabus considerations（教学大纲考虑）</h3>
+<p>如果这是你第一次教这门课，你可能需要提前决定：课程主要关注内容，还是同时覆盖内容和相关实践技能。例如，如果课程面向本科生，你可能决定主要关注内容；而如果课程面向研究生，他们可能会觉得同时覆盖内容和能用于自己研究的实践技能更有用。</p>
+<p>另一个重要考虑是课程持续多久。你的大学采用 quarter 还是 semester 制，会影响课程节奏。对于 Psych 251，因为我们采用 quarter system，所以使用下面展示的 10 周安排。不过，我们也把这个安排改编成 16 周课程，因为它更好代表其他多数机构的 academic calendars。本 appendix 末尾给出了一组 sample class schedules。</p>
+</section>
+<section id="评分" class="level3" data-number="A.3.2">
+<h3 data-number="A.3.2" class="anchored" data-anchor-id="评分"><span class="header-section-number">A.3.2</span> 评分</h3>
+<p>根据你的课程格式和教学理念，你可能有自己偏好的评分标准。作为参考，在 Psych 251 中，我们希望同时涵盖 assignments（problem sets 和 project components）以及课堂出勤和参与。此外，因为 replication project 是课程的核心部分，我们给 project components 的权重略高于 problem sets：</p>
+<ul>
+<li>40%：Problem sets（四次，每次 10%）</li>
+<li>50%：Final project components，包括 presentations、data collection、analysis 和 writeup</li>
+<li>10%：课堂出勤和参与</li>
+</ul>
+</section>
+<section id="课程预算" class="level3" data-number="A.3.3">
+<h3 data-number="A.3.3" class="anchored" data-anchor-id="课程预算"><span class="header-section-number">A.3.3</span> 课程预算</h3>
+<p>对于我们的课程，通常会从 Psychology Department 获得约 US$1,000 的课程经费。此外，当其他系的学生选修时，我们也很幸运地从这些系获得额外经费，以进一步支持课程。尽管如此，确保课程经费能覆盖所有学生项目，仍然是课程中最有挑战的部分之一。假设你有可用预算，下面是我们在预算方面一路学到的一些经验（如果你没有任何经费，请参考 “Scenarios for different course layouts” 下标题为 “Course Funding” 的部分）：</p>
+<ul>
+<li>在学生选择要 replicate 的研究之前，先给他们估计一下，他们的项目大约能获得多少 participant hours</li>
+<li>学生一旦为 replication project 选择研究，就帮助每个学生做 power analysis，确认 replicate 该研究是否在预算范围内（TAs 可以帮忙）</li>
+<li>如果某个学生非常想做一项不符合预算的研究，可以考虑以下方式调整研究：（1）能否删除不必要的 measures，让研究变短？（2）如果是 multi-trial study，能否减少 trials 数量？（3）他们的 advisors 是否愿意提供额外经费？（4）能否在大学 participant pools 中运行研究？</li>
+<li>如上所述，如果有其他系的学生选修你的课程，获得更多经费的一种可能方式，是联系这些系的系主任，看看他们是否愿意帮助支持你的课程。</li>
+</ul>
+<p>一旦所有项目都被批准为在预算范围内，我们建议你创建一个 shared spreadsheet，包含每个学生的姓名，让他们填写 replication project 的细节。最终，这会帮助确保学生向参与者支付公平报酬，并跟踪课程经费如何分配。</p>
+</section>
+<section id="课程相关-institutional-review-board-申请" class="level3" data-number="A.3.4">
+<h3 data-number="A.3.4" class="anchored" data-anchor-id="课程相关-institutional-review-board-申请"><span class="header-section-number">A.3.4</span> 课程相关 Institutional Review Board 申请</h3>
+<p>虽然可能为每个学生项目单独申请 IRB approval，但我们建议为班里所有 replication projects 申请 course-wide standard IRB approval。在课程 planning stages 早期联系你的 review board，应能澄清你有哪些可用选项。</p>
+<p>学生运行个人项目时，一个重要事项是，他们应该在研究开头放置 course-wide consent form（TAs 审查 paradigms 时也应检查这一点）。作为参考，下面是要求每个学生放在其研究开头的 consent form：</p>
+<p>“By answering the following questions, you are participating in a study being performed by cognitive scientists in the Stanford Department of Psychology. If you have questions about this research, please contact us at [CLASS EMAIL ADDRESS]. You must be at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.”</p>
+</section>
+</section>
+<section id="不同课程布局的场景" class="level2 page-columns page-full" data-number="A.4">
+<h2 data-number="A.4" class="anchored" data-anchor-id="不同课程布局的场景"><span class="header-section-number">A.4</span> 不同课程布局的场景</h2>
+<p>现在我们已经介绍了课程的标准格式，接下来想转向如何调整这个格式，以适应不同需求和资源。我们把本节组织成两个主要类别：学生水平和课程资源（例如 TAs 和课程经费）。</p>
+<section id="学生水平" class="level3" data-number="A.4.1">
+<h3 data-number="A.4.1" class="anchored" data-anchor-id="学生水平"><span class="header-section-number">A.4.1</span> 学生水平</h3>
+<p>Stanford 的 Psych 251 面向研究生（目前是 Psychology Department 入学第一年研究生的必修课），但我们也接受高年级本科生，以及其他系的研究生（例如 education、human-computer interaction、philosophy、computer science）。课程第一天，我们会告诉学生，他们应该对以下三个主题中的两个感到 comfortable：</p>
+<ol type="1">
+<li>对心理学实验主题有一些了解</li>
+<li>Statistical programming：例如 functions 和 variables</li>
+<li>基础统计，例如 ANOVA 和 <span class="math inline">\(t\)</span>-test</li>
+</ol>
+<p>如果学生只对上述三个主题中的一个感到 comfortable，我们会提前提醒他们，这门课可能比普通学生需要更多时间投入。</p>
+<p>如果你计划把这门课调整为面向本科生，他们很可能总体上接触这些主题更少，因此有多种方式可以相应 calibrate 课程：</p>
+<p><strong>Prerequisites</strong>：要求学生已经完成覆盖上述三个主题中至少两个的课程（即一门 psychology class、一门覆盖 statistical programming 的课、一门覆盖基础统计的课，三者任选其二）。</p>
+<p><strong>节奏</strong>：不同于 Psych 251 整门课只有 10 周，本科课程可能受益于更慢节奏，让学生在进入项目之前有更多时间覆盖基础原则。例如，这门课可以跨多个 academic semesters/quarters 开设，Course #1 的项目目标是选择并规划 replication study，Course #2 的项目目标是执行并解释 replication。</p>
+<p><strong>Pair-based 或 group-based projects</strong>：在我们的课程中，每个学生都需要开展自己的 replication project。不过，对于可能不太有信心独自承担整个 replication project 的本科生来说，这种结构可能会让人 overwhelmed。一个能缓解这种压力的选项，是让学生以 pair 或 small team 形式开展这些项目，这样他们可以共同利用彼此优势。在分配 pairs 或 teams 时，尤其有帮助的做法是尽量确保学生在上述三个领域（psychology、statistical programming、basic statistics）中的信心相对均衡。</p>
+</section>
+<section id="课程资源" class="level3 page-columns page-full" data-number="A.4.2">
+<h3 data-number="A.4.2" class="anchored" data-anchor-id="课程资源"><span class="header-section-number">A.4.2</span> 课程资源</h3>
+<p>我们认为，你的课程可能在两个主要资源方面不同于我们的模式：课程 assistance（即 teaching assistants）和学生项目的课程经费。本节会探讨如何绕开这些限制。</p>
+<p><strong>Teaching assistants</strong>。作为比较，Psych 251 通常配备二到三名 teaching assistants（课程约 25-35 名学生）；通常约为每名 TA 负责 10-12 名学生。我们很幸运能有这种程度的 TA 支持。由于 project-based course 需要个体化关注和反馈，如果 TAs 少于这个数量，就会给 instructor 带来大量工作。如果你<em>没有</em> TAs 怎么办？经过一些调整，仍然有办法让课程在 sans-TA 情况下运转；下面列出几个想法：</p>
+<ol type="1">
+<li><p><strong>Peer grading</strong>。作为没有 TAs 的 instructor，最需要投入时间和注意力的领域是 grading。克服这个问题的一种方式，是引入 peer-grading system，让学生互相给作业评分。如果选择这条路线，有两件事可能鼓励学生公平评分：（1）提供清楚、具体的 rubric，尽可能减少评分过程中的主观性；（2）匿名化 assignments，让学生不知道自己正在评分谁的作业。如果可能，再次分配由不同领域知识相对较强的学生组成的 grading pairs 也可能有益，这样他们能针对彼此作品中的弱点提供反馈。</p></li>
+<li><p><strong>Collective troubleshooting</strong>。第二个最耗时、需要你补上的领域，是学生在实施项目时遇到问题所需的 troubleshooting：从在设备上让 GitHub 和 R Markdown 跑起来，到 Amazon Mechanical Turk 上的数据收集问题。鼓励学生互助的一种方式，是为课程设置一个中心 discussion board（例如 Piazza 或 Slack 上的课程 channel），让学生可以公开（如果需要也可以匿名）发布自己遇到的问题。然后，你可以给帮助 troubleshoot 这些问题的学生 extra credit，以进一步激励 collective troubleshooting。很可能仍会有学生无法解决的问题，但这个系统至少能释放你的时间，把注意力集中在只有<em>你</em>能处理的问题上。</p></li>
+<li><p><strong>全班单一项目</strong>。最后，如果上面提到的 collective grading 和 troubleshooting 方法还不能足够减少时间投入，可以考虑带着全班一起完成一个 replication project。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 要让单一项目课程运转，你可以让学生提名他们想作为全班 replicate 的研究，然后投票决定最终选择。目标研究选定后，每个学生都可以独立完成项目所有步骤，包括 preregistering 和撰写 analysis script。之后，设置和运行数据收集阶段可以在课堂上进行；数据收集完后，你可以把数据分发给学生，让他们用自己的 analysis script 运行并解释结果。不管你选择让学生互相评分，还是自己评分，由于项目标准化，你原本需要花在了解每个个人项目细节上的大量时间都会减少。</p></li>
+</ol>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;这种方式确实会取消我们开头提到的 project-based course 的一些好处，尤其是项目可能不再符合每个学生的具体研究兴趣，因此在学生特定兴趣和对其研究项目有用性方面收益可能较小；但 realism 和 intuition 这两个好处仍然存在，尤其是如果把这个项目放到其他 replication findings 的语境中讨论。</p></div></div><p><strong>Course funding</strong>。除了 TAs 可用性之外，你的课程与我们不同的另一个方面可能是课程经费。如果你的课程经费很少或没有经费（即使联系了系里或机构中相关成员之后仍如此），我们建议以下调整：</p>
+<ol type="1">
+<li><p><strong>Pair-group-based projects</strong>。类似于上面处理不同学生水平的建议 3，对于有限课程预算，一个选项是让学生以 pairs 或 teams 形式开展 replication projects，以降低数据收集成本。这种结构还有一个额外好处，即鼓励学生共同解决问题。另一种做法是，让 pairs 或 teams 中的每个学生独立完成 replication 的每个步骤（例如撰写报告、分析数据、解释结果），这能确保每个学生对项目每一步都承担完整责任。这种结构也可能在课程结束时围绕 analytic reproducibility 提供有趣讨论机会，尤其是当同一 team 中的学生（使用同一个 dataset）对 replication outcome 得出不同结论时。</p></li>
+<li><p><strong>来自 advisors 的经费</strong>。在某些情况下，学生会带着需要比我们能分配的经费更多的目标研究来找我们，但他们对该研究特别投入（例如因为该研究与他们自己的研究方向高度相关）。一旦我们排除了让研究适应预算的其他方式（例如删除额外 control conditions、运行研究的一个子集），我们通常会问学生，他们的 advisor 是否愿意资助这项研究。我们发现 advisors 往往愿意这样做，尤其是如果 replication 能在学生研究项目的发展中发挥重要作用。同样，减轻有限课程预算负担的一种方式，是鼓励所有学生先询问自己的 advisors 是否愿意资助 replication 的部分或全部数据收集。虽然很可能有些 advisors 不愿意或不能这样做，但课程需要资助的项目数量应该仍会有有意义的减少。</p></li>
+<li><p><strong>Reproduce a replication</strong>。上面的建议适用于你至少有<em>一些</em>课程经费的情况；但如果你<em>完全没有</em>经费怎么办？虽然这个方案有明显局限，一个建议是让学生 reproduce 过去公开的 replications。例如，我们的 <a href="https://github.com/psych251">course GitHub page</a> 包含课程中过去所有 replication projects 的 public repositories。由于每个 replication project 的数据都可以在这些 repositories 中获得，你可以为每个学生提供一个 dataset 和与其相关的原始论文，并要求他们 reproduce 该 replication 的结果。然后，学生应该能够按照下面描述的 replication project 每个步骤进行（例如写报告、识别 key analysis、运行分析）。这种格式只有在学生不查看其项目公开发布的原始 final replication reports 时才可行，因此可能需要在课程一开始就明确说明这一点。</p></li>
+</ol>
+<p>对于使用不同课程格式的你们（无论是在学生水平还是课程资源方面），我们希望这些建议有用。如果你在课程中尝试了一个新想法并发现它有帮助，我们会非常希望你和我们分享！</p>
+</section>
+</section>
+<section id="课程安排示例" class="level2" data-number="A.5">
+<h2 data-number="A.5" class="anchored" data-anchor-id="课程安排示例"><span class="header-section-number">A.5</span> 课程安排示例</h2>
+<p>下面列出的 sample syllabi 按以下决策分类：（1）material：课程只关注 content，还是同时关注 content 和 skills；（2）duration：课程持续 10 周还是 16 周。</p>
+<p>对于本科 instructors，我们用灰色标记 advanced topics。我们预计这些主题最适合高年级本科生。至于统计相关内容（例如 estimation、inference），instructors 应根据学生先前准备程度决定教授多少。</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">10 weeks（10 周）</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">10 weeks, content only（10 周，仅内容）</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">16 weeks（16 周）</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">16 weeks, content only（16 周，仅内容）</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>同时包含 skills 和 content materials 的 10 周 sample syllabus：</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-condensed caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Week</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Day</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Topic</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Appendix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Class introduction</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Theories</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Version control</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Reproducible reports</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">W</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Tidyverse tutorial</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">D</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">F</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Tidyverse tutorial continued (with TAs)</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Measurement, reliability, and validity</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Design of experiments</td>
+<td style="text-align: left;">9</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Sampling</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Project management</td>
+<td style="text-align: left;">13</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Experiments 1: Simple survey experiments using Qualtrics</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Experiments 2: Project-specific implementation (TAs)</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Estimation</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Inference</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Sample size planning</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Survey design</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Midterm presentations 1</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Midterm presentations 2</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Preregistration</td>
+<td style="text-align: left;">11</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">7</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">W</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Meta-analysis</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">16</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Open science</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">8</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">M</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Visualization 1</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">15</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">E</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">8</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">W</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Visualization 2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">8</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">F</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Exploratory data analysis workshop</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Sampling, representativeness, and generalizability</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Data and participant ethics</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Authorship and research ethics</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Open discussion</td>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Final Project presentations 1</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Final Project presentations 2</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>只包含 content materials 的 10 周 sample syllabus：</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-condensed caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Week</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Day</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Topic</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Class introduction</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Theories</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Replication and reproducibility</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Open Science</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Measurement</td>
+<td style="text-align: left;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Design of experiments 1</td>
+<td style="text-align: left;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Design of experiments 2</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Sampling</td>
+<td style="text-align: left;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Experimental strategy</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Preregistration</td>
+<td style="text-align: left;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Data collection</td>
+<td style="text-align: left;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">4</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">F</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Visualization 1</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">5</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">M</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Visualization 2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Midterm exam</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Introduction to statistics</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Estimation 1</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Estimation 2</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Inference 1</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Inference 2</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">7</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">W</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Models 1</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">7</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">F</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Models 2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">8</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">M</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Meta-analysis</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Project management</td>
+<td style="text-align: left;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">[Instructor-specific topics]</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Sampling, representativeness, and generalizability</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Data and participant ethics</td>
+<td style="text-align: left;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Authorship and research ethics</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Conclusion</td>
+<td style="text-align: left;">17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">W</td>
+<td style="text-align: left;">Conclusion</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Final exam</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>同时包含 skills 和 content materials 的 16 周 sample syllabus：</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-condensed caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Week</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Day</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Topic</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Appendix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Class introduction</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Theories</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Version control</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Reproducible reports</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">3</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">1</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Tidyverse tutorial</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">D</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">3</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Tidyverse tutorial continued (with TAs)</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Measurement, reliability, and validity</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Design of experiments</td>
+<td style="text-align: left;">9</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Sampling</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Project management</td>
+<td style="text-align: left;">13</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Experiments 1: Simple survey experiments using Qualtrics</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Experiments 2: Project-specific implementation (TAs)</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Estimation</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Inference</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Sample size planning</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Survey design</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Midterm presentations 1</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Midterm presentations 2</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Preregistration</td>
+<td style="text-align: left;">11</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">10</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Meta-analysis</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">16</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Open science</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">11</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Visualization 1</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">15</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">E</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">12</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">1</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Visualization 2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">12</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Exploratory data analysis workshop</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">13</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Sampling, representativeness, and generalizability</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">13</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Data and participant ethics</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Authorship and research ethics</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">[Instructor-specific topics]</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Open discussion</td>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Open discussion</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Final project presentations 1</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Final project presentations 2</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<p>只包含 content materials 的 16 周 sample syllabus：</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-condensed caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Week</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Day</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Topic</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Class introduction</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Theories</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Replication and reproducibility</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Open science</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Measurement</td>
+<td style="text-align: left;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Design of experiments 1</td>
+<td style="text-align: left;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Design of experiments 2</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Sampling</td>
+<td style="text-align: left;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Experimental strategy</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Preregistration</td>
+<td style="text-align: left;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Data collection</td>
+<td style="text-align: left;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">6</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Visualization 1</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">7</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">1</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Visualization 2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Midterm exam</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Introduction to statistics</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Estimation 1</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Estimation 2</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Inference 1</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Inference 2</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">10</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Models 1</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">11</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">1</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Models 2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">11</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">2</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">Meta-analysis</td>
+<td style="text-align: left; background-color: rgba(235, 232, 252, 255) !important;">16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Project management</td>
+<td style="text-align: left;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">[Instructor-specific topics]</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">13</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">[Instructor-specific topics]</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">13</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Sampling, representativeness, and generalizability</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Data and participant ethics</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Authorship and research ethics</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Ethics: Open discussion</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Conclusion</td>
+<td style="text-align: left;">17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Conclusion</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Final exam</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-frank2012" class="csl-entry" role="listitem">
+Frank, Michael C, 和 Rebecca Saxe. 2012. <span>《Teaching Replication》</span>. <em>Perspectives on Psychological Science</em> 7 (6): 600–604. <a href="https://doi.org/10.1177/1745691612460686">https://doi.org/10.1177/1745691612460686</a>.
+</div>
+<div id="ref-hawkins2018" class="csl-entry" role="listitem">
+Hawkins, Robert D., Eric N. Smith, Carolyn Au, Juan Miguel Arias, Rhia Catapano, Eric Hermann, Martin Keil, 等. 2018. <span>《Improving the Replicability of Psychological Science <span>through</span> Pedagogy》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 1 (1): 7–18. <a href="https://doi.org/10.1177/2515245917740427">https://doi.org/10.1177/2515245917740427</a>.
+</div>
+</div>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./017-conclusion.html" class="pagination-link" aria-label="结语">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./101-github.html" class="pagination-link" aria-label="Git 和 GitHub">
+        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>11&nbsp; 预注册 – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./012-collection.html" rel="next">
+<link href="./010-sampling.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./011-prereg.html">执行</a></li><li class="breadcrumb-item"><a href="./011-prereg.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#迷失在分叉路径花园中" id="toc-迷失在分叉路径花园中" class="nav-link active" data-scroll-target="#迷失在分叉路径花园中"><span class="header-section-number">11.1</span> 迷失在分叉路径花园中</a>
+  <ul class="collapse">
+  <li><a href="#数据依赖的分析" id="toc-数据依赖的分析" class="nav-link" data-scroll-target="#数据依赖的分析"><span class="header-section-number">11.1.1</span> 数据依赖的分析</a></li>
+  <li><a href="#结果已知之后再提出假设" id="toc-结果已知之后再提出假设" class="nav-link" data-scroll-target="#结果已知之后再提出假设"><span class="header-section-number">11.1.2</span> 结果已知之后再提出假设</a></li>
+  </ul></li>
+  <li><a href="#用预注册降低偏差风险提高透明度并校准信心" id="toc-用预注册降低偏差风险提高透明度并校准信心" class="nav-link" data-scroll-target="#用预注册降低偏差风险提高透明度并校准信心"><span class="header-section-number">11.2</span> 用预注册降低偏差风险、提高透明度并校准信心</a></li>
+  <li><a href="#如何预注册" id="toc-如何预注册" class="nav-link" data-scroll-target="#如何预注册"><span class="header-section-number">11.3</span> 如何预注册</a></li>
+  <li><a href="#本章小结预注册" id="toc-本章小结预注册" class="nav-link" data-scroll-target="#本章小结预注册"><span class="header-section-number">11.4</span> 本章小结：预注册</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography"></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./011-prereg.html">执行</a></li><li class="breadcrumb-item"><a href="./011-prereg.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-prereg" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="learning goals">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>learning goals
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>识别 researcher degrees of freedom 的危险</li>
+<li>理解探索性和验证性研究模式之间的差异</li>
+<li>说明预注册如何降低偏差风险并提高透明度</li>
+</ul>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>如果事先没有计划，数据分析就可能近似于一种投射技术，比如 Rorschach，因为研究者可以把自己的期待、愿望或偏差投射到数据上，并从数据中提取出几乎任何他想要的“发现”。</p>
+<p>—Theodore X. Barber <span class="citation" data-cites="barber1976">(<a href="#ref-barber1976" role="doc-biblioref">1976 [1927]</a>)</span></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>第一条原则是，你绝不能欺骗自己，而你自己正是最容易被欺骗的人……当你没有欺骗自己之后，不欺骗其他科学家就很容易了。之后你只需要按常规方式诚实即可。</p>
+<p>—Richard Feynman <span class="citation" data-cites="feynman1974">(<a href="#ref-feynman1974" role="doc-biblioref">1974</a>)</span></p>
+</blockquote>
+<p>本书上一部分聚焦于规划研究，尤其是围绕测量、设计和抽样做决策。接下来这一部分，我们转向执行研究时的具体事务。我们从预注册开始（本章），然后讨论数据收集的后勤安排（<a href="012-collection.html" class="quarto-xref"><span>章 12</span></a>）和项目管理（<a href="013-management.html" class="quarto-xref"><span>章 13</span></a>）。这些章节触及<span class="smallcaps">透明度</span>和<span class="smallcaps">减少偏差</span>两个主题，重点是如何记录和组织数据收集。</p>
+<p>先从简单记录设计和分析选择开始。虽然设计和分析实验有很多<em>错误</em>方式，但并不存在单一的<em>正确</em>方式。事实上，多数研究决策都有许多可辩护的选择，有时称为“researcher degrees of freedom”。 例如，你会在 20、200 还是 2,000 名参与者之后停止收集数据？你会移除离群值吗？又会如何定义它们？你会做 subgroup analyses，看看结果是否受性别、年龄或其他因素影响吗？</p>
+<p>考虑一个简化的假想情形：你必须做出五个分析决策，每个决策都有五个可辩护的选择。仅此就会产生 3,125（<span class="math inline">\(5^5\)</span>）种独特的数据分析方式！如果你事后做这些决策（在观察数据之后），就有一个危险：你的决策会受到分析结果影响（“data-dependent decision making”），并偏向于那些更符合你个人偏好的结果。现在回想你上次读研究论文的时候。在数据所有可能的分析方式中，你怎么知道研究者不是只选择了最有利于他们心爱假设的那种方式？</p>
+<p>本章会说明，实验设计、分析、报告和解释中的灵活性，再加上数据依赖的决策，为什么会引入偏差，并导致科学家欺骗自己和彼此。我们还会学习<strong>预注册</strong>，也就是在观察数据之前写下并注册研究决策的过程。预注册与我们的两个主题交叉：它可以用于在数据分析中<span class="smallcaps">减少偏差</span>，也可以提供其他科学家恰当评估和解释我们结果所需的<span class="smallcaps">透明度</span> <span class="citation" data-cites="hardwicke2022">(<a href="#ref-hardwicke2022" role="doc-biblioref">Hardwicke 和 Wagenmakers 2023</a>)</span>。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="case study">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>case study
+</div>
+</div>
+<section id="未披露的分析灵活性" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="未披露的分析灵活性">未披露的分析灵活性？</h3>
+<p>面向儿童的教育 app 是一个巨大市场，但相对而言，很少有随机试验考察它们是否或何时会带来教育收益。为了填补这个重要空白，<span class="citation" data-cites="berkowitz2015">Berkowitz 等 (<a href="#ref-berkowitz2015" role="doc-biblioref">2015</a>)</span> 报告了一项高质量现场实验，研究一个免费教育 app “Bedtime Math at Home”。参与者在整个学年中被随机分配到数学或阅读条件。关键是，除了随机分配，这项研究还包含数学和阅读成就的标准化测量。这些测量让作者可以以年级水平等值计算效应；从政策角度看，这是一个有意义的单位。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-prereg-berkowitz" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一张图，显示频繁使用数学 app 的家庭比控制组有更大的数学进步。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prereg-berkowitz-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="011-prereg_files/figure-html/fig-prereg-berkowitz-1.png" class="img-fluid figure-img" style="width:35.0%" alt="一张图，显示频繁使用数学 app 的家庭比控制组有更大的数学进步。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prereg-berkowitz-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;11.1: <span class="citation" data-cites="berkowitz2015">Berkowitz 等 (<a href="#ref-berkowitz2015" role="doc-biblioref">2015</a>)</span> 图 1 报告的模型拟合。按 app 使用水平，估计各组在学年中获得的数学成就年数。
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>关键结果见 <a href="#fig-prereg-berkowitz" class="quarto-xref">图&nbsp;<span>11.1</span></a>。频繁使用数学 app 的家庭，在数学上显示出比控制组更大的进步。虽然这个发现看起来很醒目，但图并没有直接可视化主要目标因果效应，也就是研究条件对数学分数的效应大小。相反，数据被呈现为特定 app 使用水平下的估计效应。</p>
+<p>由于作者公开了数据，<span class="citation" data-cites="frank2016">Frank (<a href="#ref-frank2016" role="doc-biblioref">2016</a>)</span> 可以做一个简单分析来考察目标因果效应。如果不按使用量拆分数据，也不按协变量调整，干预对数学表现没有显著主效应（<a href="#fig-prereg-frank-berkowitz" class="quarto-xref">图&nbsp;<span>11.2</span></a>）。由于这个分析不利于主要干预，而且论文中没有报告它，因此有可能作者以多种方式分析了数据，并选择呈现一个有利于目标假设的分析。 <!-- ^[The authors responded that their analyses were chosen *a priori* (before observing the data) and based on prior research; they argued that the disagreement about how the data should be analyzed was a question of different approaches [@berkowitz2016; for a longitudinal followup using a similar approach see @schaeffer2018].] --></p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-prereg-frank-berkowitz" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一张图，显示不按 app 使用量拆分时，干预对数学表现没有显著效应。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prereg-frank-berkowitz-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="011-prereg_files/figure-html/fig-prereg-frank-berkowitz-1.png" class="img-fluid figure-img" style="width:35.0%" alt="一张图，显示不按 app 使用量拆分时，干预对数学表现没有显著效应。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prereg-frank-berkowitz-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;11.2: <span class="citation" data-cites="berkowitz2016">Berkowitz 等 (<a href="#ref-berkowitz2016" role="doc-biblioref">2016</a>)</span> 数学 app 试验中，各组在学年中获得的数学成就估计年数。误差条显示 bootstrap 95% 置信区间。基于 <span class="citation" data-cites="frank2016">Frank (<a href="#ref-frank2016" role="doc-biblioref">2016</a>)</span>。
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>就像预注册兴起之前的许多论文一样，我们无法确切知道 <span class="citation" data-cites="berkowitz2015">Berkowitz 等 (<a href="#ref-berkowitz2015" role="doc-biblioref">2015</a>)</span> 中报告的分析是否受到了作者期望结果的影响。正如下面会看到的，这类数据依赖的分析可能导致所报告效应中的实质性偏差。关于论文分析策略的不确定性，可以通过预注册来避免。在这个例子中，预注册会让读者相信分析决策没有受到数据影响，从而提高这项本来高质量研究的价值。</p>
+</section>
+</div>
+<section id="迷失在分叉路径花园中" class="level2 page-columns page-full" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="迷失在分叉路径花园中"><span class="header-section-number">11.1</span> 迷失在分叉路径花园中</h2>
+<p>可视化 researcher degrees of freedom 的一种方式，是把它想象成一棵巨大的决策树，或“分叉路径花园”（<a href="#fig-forking-paths" class="quarto-xref">图&nbsp;<span>11.3</span></a>）。每个节点代表一个决策点，每个分支代表一个可辩护的选择。穿过花园的每一条独特路径，最终都会通向一个单独的研究结果。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-forking-paths" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个流程图式示意，展示分叉路径花园在每个分析决策处分岔。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-forking-paths-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/prereg/forking-paths.png" class="img-fluid figure-img" alt="一个流程图式示意，展示分叉路径花园在每个分析决策处分岔。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-forking-paths-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;11.3: 分叉路径花园：对于单个数据集，存在许多可辩护但不同的分析选择。
+</figcaption>
+</figure>
+</div></div><p>由于科学观察通常同时包含噪声（这个样本独有的随机变异）和信号（会在其他样本中再次出现的规律），这些路径中有一些不可避免地会通向误导性结果（例如夸大的效应量、夸张的证据或 false positives）。你可能探索的花园路径越多，遇到误导性结果的概率就越高。</p>
+<p>统计学家把这个问题称为<strong>多重性</strong>（多重比较）问题。正如我们在 <a href="006-inference.html" class="quarto-xref"><span>章 6</span></a> 中谈到的，多重性可以在一定程度上通过统计对策处理，比如 Bonferroni correction；不过，这些调整方法需要考虑你<em>本可以</em>走过的每一条路径 <span class="citation" data-cites="gelman2014 degroot2014">(<a href="#ref-gelman2014" role="doc-biblioref">Gelman 和 Loken 2014</a>; <a href="#ref-degroot2014" role="doc-biblioref">de Groot 2014 [1956]</a>)</span>。当你一边处理数据，一边在分叉路径花园中导航时，很容易忘记，甚至根本意识不到，你本可以走过哪些路径，因此这些方法就无法再有效使用。</p>
+<p>在某些特定情境中，信噪比会更糟；这在心理学中很常见，例如效应量小、变异高、测量误差大 <span class="citation" data-cites="ioannidis2005">(<a href="#ref-ioannidis2005" role="doc-biblioref">Ioannidis 2005</a>)</span>。Researcher degrees of freedom 可能在一定程度上受到强理论 <span class="citation" data-cites="oberauer2019">(<a href="#ref-oberauer2019" role="doc-biblioref">Oberauer 和 Lewandowsky 2019</a>)</span>、共同体方法规范或重复研究约束，不过这些约束可能更多是隐性的而非显性的，而且仍然会留下大量灵活决策空间。</p>
+<section id="数据依赖的分析" class="level3 page-columns page-full" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="数据依赖的分析"><span class="header-section-number">11.1.1</span> 数据依赖的分析</h3>
+<p>当研究者在数据分析期间穿行于分叉路径花园时，他们的选择可能受到数据影响（<strong>data-dependent</strong> decision-making），从而引入偏差。如果研究者正在寻找某种特定结果（见下面的 <span class="smallcaps">Depth</span> 框），他们就更可能沿着把自己引向那个方向的分支前进。</p>
+<p>你可以把这想得有点像玩“hot（<span class="fa-solid fa-fire" style="color: var(--orange);"></span>）or cold（<span class="fa-solid fa-snowflake" style="color: var(--blue);"></span>）”游戏，其中 <span class="fa-solid fa-fire" style="color: var(--orange);"></span> 表示这个选择会让研究者更接近想要的总体结果，<span class="fa-solid fa-snowflake" style="color: var(--blue);"></span> 表示这个选择会让他们离它更远。每次研究者到达一个决策点，都会尝试其中一个分支，并获得这个选择如何影响结果的反馈。如果反馈是 <span class="fa-solid fa-fire" style="color: var(--orange);"></span>，他们就走这个分支。如果答案是 <span class="fa-solid fa-snowflake" style="color: var(--blue);"></span>，他们就尝试另一个分支。如果他们走到一条完整路径的尽头，而结果是 <span class="fa-solid fa-snowflake" style="color: var(--blue);"></span>，也许甚至会回头，在更早的路径上尝试不同分支。这种策略会产生偏差风险，因为它系统性地把结果推向研究者偏好的方向 <span class="citation" data-cites="hardwicke2022">(<a href="#ref-hardwicke2022" role="doc-biblioref">Hardwicke 和 Wagenmakers 2023</a>)</span>。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;我们说“偏差风险”，而不是直接说“偏差”，是因为在多数科学语境中，我们没有已知 ground truth 可以拿来比较结果。因此，在任何具体情境中，我们不知道数据依赖决策实际上在多大程度上偏倚了结果。</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>depth
+</div>
+</div>
+<section id="只是人类认知偏差和倾斜的激励" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="只是人类认知偏差和倾斜的激励">只是人类：认知偏差和倾斜的激励</h3>
+<p>故事书里常把科学家描绘成客观、理性且冷静无私的真理仲裁者 <span class="citation" data-cites="veldkamp2017">(<a href="#ref-veldkamp2017" role="doc-biblioref">Veldkamp 等 2017</a>)</span>。但现实中，科学家也只是人：他们有自尊、有职业野心，也要付房租！所以，即使我们确实想达到故事书里的形象，也必须承认，我们的决策和行为同样受一系列认知偏差和外部激励影响，这些东西可能把我们带离那个目标。先看几个可能让科学家误入歧途的相关认知偏差：</p>
+<ul>
+<li><p><strong>确认偏差</strong>：以强化既有信念的方式，优先寻找、回忆或评估信息 <span class="citation" data-cites="nickerson1998">(<a href="#ref-nickerson1998" role="doc-biblioref">Nickerson 1998</a>)</span>。</p></li>
+<li><p><strong>后见之明偏差</strong>：相信过去事件本来就更可能发生，而不是承认在事件发生前我们实际认为它有多可能（“我早就知道！”）<span class="citation" data-cites="slovic1977">(<a href="#ref-slovic1977" role="doc-biblioref">Slovic 和 Fischhoff 1977</a>)</span>。</p></li>
+<li><p><strong>动机性推理</strong>：把先前决策合理化，使它们被框定在有利光线下，即便它们原本并不理性 <span class="citation" data-cites="kunda1990">(<a href="#ref-kunda1990" role="doc-biblioref">Kunda 1990</a>)</span>。</p></li>
+</ul>
+<!-- ![Examples of apophenia: Mars Face, Winnie the Pooh Cloud, and Jesus Toast.](images/prereg/apophenia.png){#fig-apophenia width="70%"} -->
+<ul>
+<li><strong>Apophenia</strong>：在噪声中检测出看似有意义的模式 <span class="citation" data-cites="gilovich1985">(<a href="#ref-gilovich1985" role="doc-biblioref">Gilovich, Vallone, 和 Tversky 1985</a>)</span>。</li>
+</ul>
+<p>更糟的是，科学生态系统的激励结构常常又增加了把事情弄错的额外动机。经费、奖项和发表声望的分配，常常基于研究结果的性质，而不是研究质量 <span class="citation" data-cites="smaldino2016 nosek2012">(<a href="#ref-smaldino2016" role="doc-biblioref">Smaldino 和 McElreath 2016</a>; <a href="#ref-nosek2012" role="doc-biblioref">Nosek, Spies, 和 Motyl 2012</a>)</span>。例如，许多学术期刊，尤其是那些通常被认为最有声望的期刊，似乎偏好新颖、阳性且统计显著的结果，而不是增量式、阴性或零结果 <span class="citation" data-cites="bakker2012">(<a href="#ref-bakker2012" role="doc-biblioref">Bakker, Dijk, 和 Wicherts 2012</a>)</span>。此外，还有压力要求文章写出简洁、连贯且有说服力的叙事 <span class="citation" data-cites="giner-sorolla2012">(<a href="#ref-giner-sorolla2012" role="doc-biblioref">Giner-Sorolla 2012</a>)</span>。这组力量激励科学家追求“令人印象深刻”而不是正确，并鼓励 questionable research practices。 通过反复 <span class="math inline">\(p\)</span>-hacking 和 HARKing 来打造一篇“漂亮”科学论文的过程，被称为 “Chrysalis Effect” <span class="citation" data-cites="oboyle2017">(<a href="#ref-oboyle2017" role="doc-biblioref">O’Boyle, Banks, 和 Gonzalez-Mulé 2017</a>)</span>，见 <a href="#fig-chrysalis" class="quarto-xref">图&nbsp;<span>11.4</span></a>。</p>
+<div id="fig-chrysalis" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个用蝴蝶变态过程类比科学论文写作的图。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-chrysalis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/prereg/chrysalis.png" class="img-fluid figure-img" style="width:70.0%" alt="一个用蝴蝶变态过程类比科学论文写作的图。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-chrysalis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;11.4: Chrysalis Effect 的说明：丑陋真相通过 questionable research practices 的变形，变成美丽虚构。
+</figcaption>
+</figure>
+</div>
+<p>总之，科学家的人类弱点以及科学生态系统有缺陷的激励，凸显了报告研究发现时透明度和智识谦逊的必要性 <span class="citation" data-cites="hoekstra2021">(<a href="#ref-hoekstra2021" role="doc-biblioref">Hoekstra 和 Vazire 2021</a>)</span>。</p>
+</section>
+</div>
+<p>在最严重的情况下，研究者可能尝试多条路径，直到获得想要的结果，然后<strong>选择性报告</strong>这个结果，而不提他们曾尝试过其他几种分析策略（也称为 <span class="math inline">\(p\)</span>-hacking， 这是我们贯穿全书讨论过的一种实践）。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> 你可能还记得 <a href="003-replication.html" class="quarto-xref"><span>章 3</span></a> 中这个做法的一个例子：参与者在听 The Beatles 的 “When I’m 64” 时，似乎变年轻了。另一个显示分叉路径花园会造成多大损害的例子，来自在一条死掉的大西洋鲑鱼中“发现”脑活动 <span class="citation" data-cites="bennett2009">(<a href="#ref-bennett2009" role="doc-biblioref">Bennett, Miller, 和 Wolford 2009</a>)</span>！研究者故意利用 fMRI 分析流程中的灵活性，并避免多重比较校正，从而在只有死鱼的地方找到“脑活动”（<a href="#fig-salmon" class="quarto-xref">图&nbsp;<span>11.5</span></a>）。</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;“If you torture the data long enough, it will confess” <span class="citation" data-cites="good1972">(<a href="#ref-good1972" role="doc-biblioref">Good 1972</a> p.&nbsp;14, quoting Ronald H. Coase)</span>.</p></div><div id="fig-salmon" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一张 fMRI 扫描图，看似显示死鲑鱼中有脑活动。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-salmon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/prereg/salmon.png" class="img-fluid figure-img" alt="一张 fMRI 扫描图，看似显示死鲑鱼中有脑活动。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-salmon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;11.5: 通过故意利用 fMRI 数据处理流程中的分析灵活性，<span class="citation" data-cites="bennett2009">Bennett, Miller, 和 Wolford (<a href="#ref-bennett2009" role="doc-biblioref">2009</a>)</span> 能够在一条死掉的大西洋鲑鱼中识别出“脑活动”。来自 <span class="citation" data-cites="bennett2009">Bennett, Miller, 和 Wolford (<a href="#ref-bennett2009" role="doc-biblioref">2009</a>, CC BY 许可)</span>。
+</figcaption>
+</figure>
+</div></div>
+</section>
+<section id="结果已知之后再提出假设" class="level3 page-columns page-full" data-number="11.1.2">
+<h3 data-number="11.1.2" class="anchored" data-anchor-id="结果已知之后再提出假设"><span class="header-section-number">11.1.2</span> 结果已知之后再提出假设</h3>
+<p>除了实验设计和分析中的自由度，研究者如何<em>解释</em>研究结果也存在额外灵活性。如 <a href="002-theories.html" class="quarto-xref"><span>章 2</span></a> 所讨论，理论可以用许多不同方式容纳甚至相互冲突的结果，例如提出辅助假设来解释为什么某个特定数据点很特殊。</p>
+<p>在观察数据之后选择或发展假设的做法，被称为 “hypothesizing after the results are known”，或 “HARKing” <span class="citation" data-cites="kerr1998">(<a href="#ref-kerr1998" role="doc-biblioref">Kerr 1998</a>)</span>。HARKing 可能有问题，因为它扩展了分叉路径花园，并帮助正当化各种额外设计和分析决策（<a href="#fig-grid" class="quarto-xref">图&nbsp;<span>11.6</span></a>）。例如，你可能想出一个解释：为什么某个干预对男性有效但对女性无效，从而为基于性别的事后 subgroup analysis 提供理由（见 <span class="smallcaps">Case study</span> 框）。</p>
+<div id="fig-grid" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="一个网格图，两个轴分别是用自由度使 “evidence to hypotheses” 和 “hypotheses to evidence” 相互适配。">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/prereg/grid.png" class="img-fluid figure-img" style="width:70.0%" alt="一个网格图，两个轴分别是用自由度使 “evidence to hypotheses” 和 “hypotheses to evidence” 相互适配。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;11.6: 一组单独研究结果构成的网格。横轴简化说明科学家可以用来生成证据的许多可辩护设计和分析选择。纵轴说明，在解释证据时，通常可以构造或选择若干潜在假设。不受约束的科学家可以同时让证据适配假设，也让假设适配证据，以获得自己偏好的总体结果。
+</figcaption>
+</figure>
+</div>
+<p>HARKing 到底在多大程度上有问题，仍有争议 <span class="citation" data-cites="hardwicke2022">(见 <a href="#ref-hardwicke2022" role="doc-biblioref">Hardwicke 和 Wagenmakers 2023</a>)</span>。至少，诚实说明假设是在观察数据之前还是之后发展出来的，非常重要。</p>
+<p>但等一下！如果数据中确实有有趣结果，寻找它们难道不是好事吗？我们不应该“让数据说话”吗？答案是：是的！但关键是要理解<strong>探索性</strong>和<strong>验证性</strong>研究模式之间的区别。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> 验证意味着在你看到数据<em>之前</em>做研究决策，而探索意味着在你看到数据<em>之后</em>做研究决策。</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;在实践中，单个研究可能同时包含探索性和验证性方面，所以我们把它们描述为不同“模式”。</p></div></div><p>关于探索性研究，最需要记住的是：（1）你需要意识到数据依赖决策会增加偏差风险，并据此校准自己对结果的信心；（2）你需要诚实告诉其他研究者你的分析策略，这样他们也能意识到偏差风险，并据此校准<em>他们</em>对结果的信心。下一节中，我们会学习预注册如何帮助我们做出探索性研究和验证性研究之间这个重要区分。</p>
+</section>
+</section>
+<section id="用预注册降低偏差风险提高透明度并校准信心" class="level2 page-columns page-full" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="用预注册降低偏差风险提高透明度并校准信心"><span class="header-section-number">11.2</span> 用预注册降低偏差风险、提高透明度并校准信心</h2>
+<p>你可以通过在看到数据之前做研究决策，来对抗 researcher degrees of freedom 和数据依赖决策的问题，就像在开始旅程之前先规划好穿过分叉路径花园的路线 <span class="citation" data-cites="wagenmakers2012 hardwicke2022">(<a href="#ref-wagenmakers2012" role="doc-biblioref">Wagenmakers 等 2012</a>; <a href="#ref-hardwicke2022" role="doc-biblioref">Hardwicke 和 Wagenmakers 2023</a>)</span>。如果你坚持走计划路线，就消除了决策受数据影响的可能性。</p>
+<p><strong>预注册</strong>是在分析数据之前（也常常是在收集数据之前），在公开注册库中声明研究决策的过程。预注册确保你的研究决策独立于数据，从而降低上述问题带来的偏差风险。预注册也会向他人透明传达你原本计划了什么，帮助他们判断偏差风险，并校准自己对研究结果的信心。换句话说，预注册可以劝阻研究者从事 <span class="math inline">\(p\)</span>-hacking 和 HARKing 这类 questionable research practices，因为他们需要对自己的原始计划负责，同时也为恰当评估和解释研究提供所需语境。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-continuum" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个图：随着 prespecification 增加，risk of bias 和 sensitivity to serendipitous discovery 下降，confidence 上升。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-continuum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/prereg/continuum.png" class="img-fluid figure-img" alt="一个图：随着 prespecification 增加，risk of bias 和 sensitivity to serendipitous discovery 下降，confidence 上升。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-continuum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;11.7: 预注册澄清研究活动落在预先指定连续体的什么位置。当预注册对 researcher degrees of freedom 的约束较弱（更探索性的研究）时，决策更可能依赖数据，因此偏差风险更高。当预注册对 researcher degrees of freedom 的约束较强（更验证性的研究）时，决策较不可能依赖数据，因此偏差风险更低。相对于验证性研究活动，探索性研究活动对意外发现更敏感，但偏差风险也更高。预注册会透明传达特定结果在这个连续体上的位置，帮助读者适当校准自己的信心。
+</figcaption>
+</figure>
+</div></div><p>预注册并不要求你提前指定所有研究决策，只要求你透明说明什么是计划好的、什么不是。这个透明度有助于区分研究中哪些方面是探索性的，哪些是验证性的（<a href="#fig-continuum" class="quarto-xref">图&nbsp;<span>11.7</span></a>）。在其他条件相同的情况下，我们应该对验证性结果更有信心，因为偏差风险较低。探索性结果的偏差风险更高，但它们也对偶然（意外）发现更<strong>敏感</strong>。因此，验证模式最适合检验假设，探索模式最适合生成假设。所以，探索性和验证性研究都是有价值的活动；关键只是要区分它们 <span class="citation" data-cites="tukey1980">(<a href="#ref-tukey1980" role="doc-biblioref">Tukey 1980</a>)</span>！预注册通过清楚分离二者，提供了两全其美的方案。</p>
+<p>除了上述收益，预注册还可能通过鼓励更仔细地关注研究规划来提高研究质量。我们发现，撰写预注册的过程确实有助于促进合作者之间的沟通，并能在时间和资源被浪费到糟糕设计的研究之前，发现可以处理的问题。详细的前期规划也可以创造获得有用共同体反馈的机会，特别是在 registered reports（见下面的 <span class="smallcaps">Depth</span> 框）语境中，专门的同行评审会在研究甚至尚未开始之前评估你的研究。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>depth
+</div>
+</div>
+<section id="预注册和它的朋友们处理-researcher-degrees-of-freedom-的工具箱" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="预注册和它的朋友们处理-researcher-degrees-of-freedom-的工具箱">预注册和它的朋友们：处理 researcher degrees of freedom 的工具箱</h3>
+<p>有几个有用工具可以补充或扩展预注册。一般来说，我们建议这些工具与预注册结合使用，而不是取代预注册，因为预注册提供了关于研究和规划过程的透明度 <span class="citation" data-cites="hardwicke2022">(<a href="#ref-hardwicke2022" role="doc-biblioref">Hardwicke 和 Wagenmakers 2023</a>)</span>。其中前两个工具在 <a href="007-models.html" class="quarto-xref"><span>章 7</span></a> 最后一节中有更详细讨论。</p>
+<p><strong>Robustness checks</strong>。 Robustness checks（也称为 “sensitivity analyses”）评估分叉路径花园中不同决策选择如何影响最终结果模式。当你必须在几个可辩护的分析选择之间做取舍，而它们彼此没有明显优劣，或各有互补优缺点时，这个技术尤其有用。例如，你可能用三种不同缺失数据处理方法运行三次分析。稳健结果不应在这三个不同选择之间有实质变化。</p>
+<p><strong>Multiverse analyses</strong>。 最近，一些研究者开始运行大规模 robustness checks，称为 “multiverse” <span class="citation" data-cites="steegen2016">(<a href="#ref-steegen2016" role="doc-biblioref">Steegen 等 2016</a>)</span> 或 “specification curve” <span class="citation" data-cites="simonsohn2020">(<a href="#ref-simonsohn2020" role="doc-biblioref">Simonsohn, Simmons, 和 Nelson 2020</a>)</span> analyses。我们在 <a href="007-models.html" class="quarto-xref"><span>章 7</span></a> 中稍微讨论过这些方法。 <!-- These techniques evaluate the factorial intersection of multiple choices for multiple decisions---like simultaneously evaluating thousands of pathways in the garden of forking paths. --> 有些人认为，这类大规模 robustness checks让预注册变得多余；毕竟，如果你可以探索所有路径，为什么还要预先指定单一路径 <span class="citation" data-cites="rubin2020 oberauer2019">(<a href="#ref-rubin2020" role="doc-biblioref">Rubin 2020</a>; <a href="#ref-oberauer2019" role="doc-biblioref">Oberauer 和 Lewandowsky 2019</a>)</span>？但解释 multiverse analysis 的结果并不直接；例如，所有决策选择似乎不太可能同样可辩护 <span class="citation" data-cites="giudice2021">(<a href="#ref-giudice2021" role="doc-biblioref">Giudice 和 Gangestad 2021</a>)</span>。此外，如果 multiverse analyses 没有预注册，那么它们会引入 researcher degrees of freedom，并创造选择性报告的机会，从而增加偏差风险。</p>
+<p><strong>Held-out sample</strong>。一种同时受益于探索性和验证性研究模式的选择，是把数据分成<strong>训练</strong>样本和<strong>测试</strong>样本。（测试样本通常称为 “held out”，因为它被从探索过程中“留出”。）你可以在训练样本中以探索模式生成假设，并以此为基础，在 held-out sample 中预注册验证性分析。这个策略的一个明显缺点是，拆分数据会降低 statistical power， 但在数据充足的情况下，包括许多机器学习场景中，这个技术是金标准。</p>
+<p><strong>Masked analysis</strong>（传统上称为 “blind analysis”）。有时，数据收集期间可能出现你在预注册计划中没有预料到的问题，例如缺失数据、流失，或随机化失败。你如何诊断并处理这些问题，同时不通过数据依赖分析增加偏差风险？一个选择是 masked analysis，它会伪装与结果有关的数据关键方面（例如打乱条件标签或加入噪声），同时仍允许一定程度的数据检查 <span class="citation" data-cites="dutilh2019">(<a href="#ref-dutilh2019" role="doc-biblioref">Dutilh, Sarafoglou, 和 Wagenmakers 2019</a>)</span>。在诊断出问题后，你可以调整预注册计划，而不增加偏差风险，因为你的决策没有受到结果影响。</p>
+<p><strong>Standard operating procedures</strong>。共同体规范，也许是在你的研究领域或实验室层面，可以成为 researcher degrees of freedom 的自然约束。例如，你所在共同体可能有一种处理离群值的普遍接受方法。你可以通过把这些约束写在 standard operating procedures（SOP） 文档中，让它们显性化；这有点像一个活的 meta-preregistration <span class="citation" data-cites="lin2016">(<a href="#ref-lin2016" role="doc-biblioref">Lin 和 Green 2016</a>)</span>。</p>
+<p><strong>Open lab notebooks</strong>。维护实验室笔记本可以是记录研究项目进展中各种决策的有用方式。预注册有点像在项目开始时给你的实验室笔记本拍一张快照，那时你写下的还只有研究计划。公开你的实验室笔记本，是透明记录研究以及偏离预注册计划之处的好方法。</p>
+<p><strong>Registered reports</strong>。 Registered reports（<a href="#fig-reg-reports" class="quarto-xref">图&nbsp;<span>11.8</span></a>）是一种文章格式，它把预注册直接嵌入发表流程 <span class="citation" data-cites="chambers2020">(<a href="#ref-chambers2020" role="doc-biblioref">Chambers 和 Tzavella 2020</a>)</span>。其想法是，你把预注册 protocol 提交给期刊，并在研究甚至尚未开始之前接受同行评审。如果研究获批，期刊同意发表它，无论结果如何。这与传统发表模型有根本不同；在传统模型中，同行评审和期刊是在研究<em>完成之后</em>且结果已知时评估你的研究。由于研究是否接受发表独立于结果，registered reports 可以提供预注册的收益，同时额外防止 publication bias。 它们也提供了很好的机会，让你在仍能修改研究设计时获得反馈！</p>
+<div id="fig-reg-reports" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个展示 Registered Report 阶段的图：研究在结果收集前后都接受同行评审。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reg-reports-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/prereg/registered-reports.png" class="img-fluid figure-img" style="width:70.0%" alt="一个展示 Registered Report 阶段的图：研究在结果收集前后都接受同行评审。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reg-reports-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;11.8: Registered reports 包含一篇文章在结果收集前后都接受同行评审（改编自 <a href="https://cos.io/initiatives/registered-reports" class="uri">https://cos.io/initiatives/registered-reports</a>）。
+</figcaption>
+</figure>
+</div>
+</section>
+</div>
+</section>
+<section id="如何预注册" class="level2 page-columns page-full" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="如何预注册"><span class="header-section-number">11.3</span> 如何预注册</h2>
+<p>高风险研究（如医学试验）必须预注册 <span class="citation" data-cites="dickersin2012">(<a href="#ref-dickersin2012" role="doc-biblioref">Dickersin 和 Rennie 2012</a>)</span>。2005 年，一个大型国际医学期刊联盟决定不发表未注册试验。经济学学科也有强烈的研究注册规范（见例如 <a href="https://www.socialscienceregistry.org" class="uri">https://www.socialscienceregistry.org</a>）。但预注册对心理学来说还相当新 <span class="citation" data-cites="nosek2018">(<a href="#ref-nosek2018" role="doc-biblioref">Nosek 等 2018</a>)</span>，而且仍然没有标准做法；如果你正在做预注册，就已经在前沿了！</p>
+<p>我们建议使用 Open Science Framework（OSF） 作为你的注册库。OSF 是心理学中最受欢迎的注册库之一，而且你可以在这个平台上做很多其他有用的事来提高研究透明度，例如分享数据、材料、分析脚本和 preprints。在 OSF 上，可以“注册”你上传的任何文件。当你注册一个文件时，它会创建一个带时间戳、只读的副本，并生成专用链接。你可以把这个链接加入报告研究的文章中。</p>
+<!-- \clearpage -->
+<div id="tbl-prereg-template" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-prereg-template-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;11.1: Preregistration template outline, covering key aspects of your experiment and analysis.
+</figcaption>
+<div aria-describedby="tbl-prereg-template-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 1%">
+<col style="width: 95%">
+<col style="width: 1%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Question</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Data collection. Have any data been collected for this study already?</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Hypothesis. What’s the main question being asked or hypothesis being tested in this study?</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Dependent variable. Describe the key dependent variable(s) specifying how they will be measured.</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Conditions. Which conditions will participants be assigned to?</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Analyses. Specify exactly which analyses you will conduct to examine the main question/hypothesis.</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Outliers and Exclusions. Describe exactly how outliers will be defined and handled, and your precise rule(s) for excluding observations.</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Sample Size. How many observations will be collected, or what will determine sample size? No need to justify decision, but be precise about exactly how the number will be determined.</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Other. Anything else you would like to preregister (e.g., secondary analyses, variables collected for exploratory purposes, unusual analyses planned).</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>预注册的一种方式，是撰写一份 protocol 文档，指定研究理由、目标或假设、方法和分析计划，然后注册该文档。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> 如果你愿意，OSF 也有一组专门的预注册模板可供使用。<a href="#tbl-prereg-template" class="quarto-xref">表&nbsp;<span>11.1</span></a> 展示了这类模板的一个大纲。这些模板常常针对特定研究类型的需要而定制。例如，有用于一般定量心理学研究的模板 <span class="citation" data-cites="bosnjak2021">(“PRP-QUANT”; <a href="#ref-bosnjak2021" role="doc-biblioref">Bosnjak 等 2022</a>)</span>、认知建模模板 <span class="citation" data-cites="cruwell2021">(<a href="#ref-cruwell2021" role="doc-biblioref">Crüwell 和 Evans 2021</a>)</span>，以及二手数据分析模板 <span class="citation" data-cites="akker2019">(<a href="#ref-akker2019" role="doc-biblioref">Akker 等 2019</a>)</span>。<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;你可以把 study protocol 想成有点像一篇没有结果和讨论部分的研究论文（这里是我们自己一项研究的例子：<a href="https://osf.io/2cnkq" class="uri">https://osf.io/2cnkq</a>）。</p></div><div id="fn5"><p><sup>5</sup>&nbsp;OSF 界面可能会变化，但目前这份指南会带你完成创建预注册的一系列步骤：<a href="https://help.osf.io/article/158-create-a-preregistration" class="uri">https://help.osf.io/article/158-create-a-preregistration</a>。</p></div></div><p>一旦预注册了计划，你就去运行研究并报告结果，对吧？嗯，希望如此……但事情可能不会那么简单。忘记在计划中包含某些东西，或因为意外情况不得不偏离计划，是相当常见的。预注册在实践中其实可能很难 <span class="citation" data-cites="nosek2019">(<a href="#ref-nosek2019" role="doc-biblioref">Nosek 等 2019</a>)</span>。</p>
+<p>不过别担心。记住，预注册的关键目标之一是透明度，以便他人能够评估和解释研究结果。如果你决定偏离原计划，并进行数据依赖分析，那么这个决定可能增加偏差风险。但如果你向读者透明传达这个决定，他们就可以适当校准自己对结果的信心。你甚至可以把计划内和计划外分析都作为 robustness check 运行（见 <span class="smallcaps">Depth</span> 框），以评估这个特定选择在多大程度上影响结果。</p>
+<p>报告研究时，区分哪些是计划内、哪些不是计划内很重要。如果你运行了大量数据依赖分析，那么值得设置单独的探索性和验证性结果部分。另一方面，如果你基本遵守了原计划，只做了轻微偏离，那么可以加入一张表（也许放在 appendix 中），概述这些改动 <span class="citation" data-cites="hardwicke2021citation">(例如见 <a href="#ref-hardwicke2021citation" role="doc-biblioref">Hardwicke 等 2021</a> 的 Supplementary Information A)</span>。</p>
+</section>
+<section id="本章小结预注册" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="本章小结预注册"><span class="header-section-number">11.4</span> 本章小结：预注册</h2>
+<p>我们在这里主张预注册你的研究计划。这个做法有助于降低数据依赖分析造成的偏差风险（也就是我们描述的“分叉路径花园”），并向其他科学家透明传达偏差风险。重要的是，预注册是一个 “<a href="https://cos.io/blog/preregistration-plan-not-prison">plan, not a prison</a>”：在多数情况下，预注册的验证性分析会和探索性分析共存。二者都是良好研究的重要部分，关键是披露哪个是哪个！</p>
+<div class="callout callout-style-default callout-note callout-titled" title="discussion questions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>discussion questions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><span class="math inline">\(P\)</span>-hack 你的科学荣耀之路！为了感受数据依赖分析在实践中可能如何运作，可以玩一下这个 app：<a href="https://projects.fivethirtyeight.com/p-hacking" class="uri">https://projects.fivethirtyeight.com/p-hacking</a>。你认为预注册会影响你对基于这个数据集提出的 claims 的信心吗？</p></li>
+<li><p>预注册你的下一个实验！开始预注册的最好方式，就是在下一项研究中试一试。访问 <a href="https://osf.io/registries/osf/new" class="uri">https://osf.io/registries/osf/new</a>，注册你的 study protocol，或完成其中一个模板。你觉得预注册中最困难的方面是什么？它带来了哪些收益？</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="readings">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>readings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Nosek, Brian A., Charles R. Ebersole, Alexander C. DeHaven, and David T. Mellor <span class="citation" data-cites="nosek2018">(<a href="#ref-nosek2018" role="doc-biblioref">2018</a>)</span>. “The Preregistration Revolution.” <em>Proceedings of the National Academy of Sciences</em> 115 (11): 2600–2606. <a href="https://doi.org/10.1073/pnas.1708274114" class="uri">https://doi.org/10.1073/pnas.1708274114</a>.</p></li>
+<li><p>Hardwicke, Tom E., and Eric-Jan Wagenmakers <span class="citation" data-cites="hardwicke2022">(<a href="#ref-hardwicke2022" role="doc-biblioref">2023</a>)</span>. “Reducing Bias, Increasing Transparency, and Calibrating Confidence with Preregistration.” <em>Nature Human Behaviour</em> 7 (1): 15–26. <a href="https://doi.org/10.31222/osf.io/d7bcu" class="uri">https://doi.org/10.31222/osf.io/d7bcu</a>.</p></li>
+</ul>
+</div>
+</div>
+
+
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-akker2019" class="csl-entry" role="listitem">
+Akker, Olmo van den, Sara J. Weston, Lorne Campbell, William J. Chopik, Rodica I. Damian, Pamela Davis-Kean, Andrew Hall, 等. 2019. <span>《Preregistration of secondary data analysis: <span>A</span> template and tutorial》</span>. PsyArXiv. <a href="https://psyarxiv.com/hvfmr/">https://psyarxiv.com/hvfmr/</a>.
+</div>
+<div id="ref-bakker2012" class="csl-entry" role="listitem">
+Bakker, Marjan, Annette van Dijk, 和 Jelte M. Wicherts. 2012. <span>《The rules of the game called psychological science》</span>. <em>Perspectives on Psychological Science</em> 7 (6): 543–54. <a href="https://doi.org/10.1177/1745691612459060">https://doi.org/10.1177/1745691612459060</a>.
+</div>
+<div id="ref-barber1976" class="csl-entry" role="listitem">
+Barber, Theodore Xenophon. 1976 [1927]. <em>Pitfalls in <span>Human</span> <span>Research</span>: <span>Ten</span> <span>Pivotal</span> <span>Points</span></em>. Pergamon general psychology series. Pergamon Press.
+</div>
+<div id="ref-bennett2009" class="csl-entry" role="listitem">
+Bennett, C M, M B Miller, 和 G L Wolford. 2009. <span>《Neural correlates of interspecies perspective taking in the post-mortem <span>Atlantic</span> <span>Salmon</span>: an argument for multiple comparisons correction》</span>. <em>NeuroImage</em>, Organization for <span>Human</span> <span>Brain</span> <span>Mapping</span> 2009 <span>Annual</span> <span>Meeting</span>, 47 (Supplement 1): S125. <a href="https://doi.org/10.1016/S1053-8119(09)71202-9">https://doi.org/10.1016/S1053-8119(09)71202-9</a>.
+</div>
+<div id="ref-berkowitz2015" class="csl-entry" role="listitem">
+Berkowitz, Talia, Marjorie W. Schaeffer, Erin A. Maloney, Lori Peterson, Courtney Gregor, Susan C. Levine, 和 Sian L. Beilock. 2015. <span>《Math at home adds up to achievement in school》</span>. <em>Science</em> 350 (6257): 196–98. <a href="https://doi.org/10.1126/science.aac7427">https://doi.org/10.1126/science.aac7427</a>.
+</div>
+<div id="ref-berkowitz2016" class="csl-entry" role="listitem">
+Berkowitz, Talia, Marjorie W Schaeffer, Christopher S Rozek, Erin A Maloney, Susan C Levine, 和 Sian L Beilock. 2016. <span>《Response to Comment on <span>〈Math at home adds up to achievement in school〉</span>》</span>. <em>Science</em> 351 (6278): 1161.
+</div>
+<div id="ref-bosnjak2021" class="csl-entry" role="listitem">
+Bosnjak, Michael, Christian Fiebach, David Thomas Mellor, Stefanie Mueller, Daryl O’Connor, Fred Oswald, 和 Rose Sokol-Chang. 2022. <span>《A template for preregistration of quantitative research in psychology: report of the joint psychological societies preregistration task force》</span>. <em>American Psychologist</em> 77 (4): 602–15. <a href="https://doi.org/10.1037/amp0000879">https://doi.org/10.1037/amp0000879</a>.
+</div>
+<div id="ref-chambers2020" class="csl-entry" role="listitem">
+Chambers, Chris, 和 Loukia Tzavella. 2020. <span>《Registered <span>Reports</span>: past, present and future》</span>. MetaArXiv. <a href="https://doi.org/10.31222/osf.io/43298">https://doi.org/10.31222/osf.io/43298</a>.
+</div>
+<div id="ref-cruwell2021" class="csl-entry" role="listitem">
+Crüwell, Sophia, 和 Nathan J. Evans. 2021. <span>《Preregistration in diverse contexts: a preregistration template for the application of cognitive models》</span>. <em>Royal Society Open Science</em> 8 (10): 210155. <a href="https://doi.org/10.1098/rsos.210155">https://doi.org/10.1098/rsos.210155</a>.
+</div>
+<div id="ref-degroot2014" class="csl-entry" role="listitem">
+de Groot, A. D. 2014 [1956]. <span>《The meaning of <span>〈significance〉</span> for different types of research》</span>. 翻译 Eric-Jan Wagenmakers, Denny Borsboom, Josine Verhagen, Rogier A. Kievit, Marjan Bakker, Angélique O. J. Cramer, Dora Matzke, Don Mellenbergh, 和 Han L. J. van der Maas. <em>Acta Psychologica</em> 148 (May 2014): 188–94. <a href="https://doi.org/10.1016/j.actpsy.2014.02.001">https://doi.org/10.1016/j.actpsy.2014.02.001</a>.
+</div>
+<div id="ref-dickersin2012" class="csl-entry" role="listitem">
+Dickersin, Kay, 和 Drummond Rennie. 2012. <span>《The evolution of trial registries and their use to assess the clinical trial enterprise》</span>. <em>JAMA</em> 307 (17): 1861–64. <a href="https://doi.org/10.1001/jama.2012.4230">https://doi.org/10.1001/jama.2012.4230</a>.
+</div>
+<div id="ref-dutilh2019" class="csl-entry" role="listitem">
+Dutilh, Gilles, Alexandra Sarafoglou, 和 Eric-Jan Wagenmakers. 2019. <span>《Flexible <span>Y</span>et fair: blinding analyses in experimental psychology》</span>. <em>Synthese</em>, 八月. <a href="https://doi.org/10.1007/s11229-019-02456-7">https://doi.org/10.1007/s11229-019-02456-7</a>.
+</div>
+<div id="ref-feynman1974" class="csl-entry" role="listitem">
+Feynman, Richard P. 1974. <span>《Cargo <span>Cult</span> <span>Science</span>》</span>. <a href="http://calteches.library.caltech.edu/51/2/CargoCult.pdf">http://calteches.library.caltech.edu/51/2/CargoCult.pdf</a>.
+</div>
+<div id="ref-frank2016" class="csl-entry" role="listitem">
+Frank, Michael C. 2016. <span>《Comment on <span>〈Math at home adds up to achievement in school〉</span>》</span>. <em>Science</em> 351 (6278): 1161.
+</div>
+<div id="ref-gelman2014" class="csl-entry" role="listitem">
+Gelman, Andrew, 和 Eric Loken. 2014. <span>《The statistical crisis in science》</span>. <em>American Scientist</em> 102 (6): 460–65. <a href="https://doi.org/10.1511/2014.111.460">https://doi.org/10.1511/2014.111.460</a>.
+</div>
+<div id="ref-gilovich1985" class="csl-entry" role="listitem">
+Gilovich, Thomas, Robert Vallone, 和 Amos Tversky. 1985. <span>《The hot hand in basketball: <span>On</span> the misperception of random sequences》</span>. <em>Cognitive Psychology</em> 17 (3): 295–314. <a href="https://doi.org/10.1016/0010-0285(85)90010-6">https://doi.org/10.1016/0010-0285(85)90010-6</a>.
+</div>
+<div id="ref-giner-sorolla2012" class="csl-entry" role="listitem">
+Giner-Sorolla, Roger. 2012. <span>《Science or art? <span>How</span> aesthetic standards grease the way <span>t</span>hrough the publication bottleneck but undermine science》</span>. <em>Perspectives on Psychological Science</em> 7 (6): 562–71. <a href="https://doi.org/10.1177/1745691612457576">https://doi.org/10.1177/1745691612457576</a>.
+</div>
+<div id="ref-giudice2021" class="csl-entry" role="listitem">
+Giudice, M Del, 和 S W Gangestad. 2021. <span>《A traveler’s guide to the multiverse: promises, pitfalls, and a framework for the evaluation of analytic decisions》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 4 (1): 1–15. <a href="https://doi.org/10.1177/2515245920954925">https://doi.org/10.1177/2515245920954925</a>.
+</div>
+<div id="ref-good1972" class="csl-entry" role="listitem">
+Good, I. J. 1972. <span>《Statistics and <span>Today</span>’s <span>Problems</span>》</span>. <em>The American Statistician</em> 26 (3): 11–19. <a href="https://doi.org/10.1080/00031305.1972.10478922">https://doi.org/10.1080/00031305.1972.10478922</a>.
+</div>
+<div id="ref-hardwicke2021citation" class="csl-entry" role="listitem">
+Hardwicke, Tom E, Dénes Szűcs, Robert T Thibault, Sophia Crüwell, Olmo R van den Akker, Michèle B Nuijten, 和 John PA Ioannidis. 2021. <span>《Citation patterns following a strongly contradictory replication result: Four case studies from psychology》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 4 (3): 1–14. <a href="https://doi.org/10.1177/25152459211040837">https://doi.org/10.1177/25152459211040837</a>.
+</div>
+<div id="ref-hardwicke2022" class="csl-entry" role="listitem">
+Hardwicke, Tom E, 和 Eric-Jan Wagenmakers. 2023. <span>《Reducing bias, increasing transparency, and calibrating confidence with preregistration》</span>. <em>Nature Human Behaviour</em> 7 (1): 15–26. <a href="https://doi.org/10.1038/s41562-022-01497-2">https://doi.org/10.1038/s41562-022-01497-2</a>.
+</div>
+<div id="ref-hoekstra2021" class="csl-entry" role="listitem">
+Hoekstra, Rink, 和 Simine Vazire. 2021. <span>《Aspiring to greater intellectual humility in science》</span>. <em>Nature Human Behaviour</em> 5 (12): 1602–7.
+</div>
+<div id="ref-ioannidis2005" class="csl-entry" role="listitem">
+Ioannidis, John P. A. 2005. <span>《Why most published research findings are false》</span>. <em>PLOS Medicine</em> 2 (8): e124. <a href="https://doi.org/10.1371/journal.pmed.0020124">https://doi.org/10.1371/journal.pmed.0020124</a>.
+</div>
+<div id="ref-kerr1998" class="csl-entry" role="listitem">
+Kerr, Norbert L. 1998. <span>《<span>HARKing</span>: <span>Hypothesizing</span> <span>after</span> the <span>Results</span> are <span>Known</span>》</span>. <em>Personality &amp; Social Psychology Review (Lawrence Erlbaum Associates)</em> 2 (3): 196. <a href="https://doi.org/10.1207/s15327957pspr0203_4">https://doi.org/10.1207/s15327957pspr0203_4</a>.
+</div>
+<div id="ref-kunda1990" class="csl-entry" role="listitem">
+Kunda, Ziva. 1990. <span>《The case for motivated reasoning.》</span> <em>Psychological Bulletin</em> 108 (3): 480–98. <a href="https://doi.org/10.1037/0033-2909.108.3.480">https://doi.org/10.1037/0033-2909.108.3.480</a>.
+</div>
+<div id="ref-lin2016" class="csl-entry" role="listitem">
+Lin, Winston, 和 Donald P. Green. 2016. <span>《Standard operating procedures: a safety net for pre-analysis plans》</span>. <em>PS: Political Science &amp; Politics</em> 49 (3): 495–500. <a href="http://www.journals.cambridge.org/abstract_S1049096516000810">http://www.journals.cambridge.org/abstract_S1049096516000810</a>.
+</div>
+<div id="ref-nickerson1998" class="csl-entry" role="listitem">
+Nickerson, Raymond S. 1998. <span>《Confirmation bias: a ubiquitous phenomenon in many guises》</span>. <em>Review of General Psychology</em> 2 (2): 175–220. <a href="https://doi.org/10.1037/1089-2680.2.2.175">https://doi.org/10.1037/1089-2680.2.2.175</a>.
+</div>
+<div id="ref-nosek2019" class="csl-entry" role="listitem">
+Nosek, Brian A, Emorie D. Beck, Lorne Campbell, Jessica K. Flake, Tom E Hardwicke, David T. Mellor, Anna E. van ’t Veer, 和 Simine Vazire. 2019. <span>《Preregistration is hard, and worthwhile》</span>. <em>Trends in Cognitive Sciences</em> 23 (10): 815–18. <a href="https://doi.org/10.1016/j.tics.2019.07.009">https://doi.org/10.1016/j.tics.2019.07.009</a>.
+</div>
+<div id="ref-nosek2018" class="csl-entry" role="listitem">
+Nosek, Brian A, Charles R. Ebersole, Alexander C. DeHaven, 和 David T. Mellor. 2018. <span>《The preregistration revolution》</span>. <em>Proceedings of the National Academy of Sciences</em> 115 (11): 2600–2606. <a href="https://doi.org/10.1073/pnas.1708274114">https://doi.org/10.1073/pnas.1708274114</a>.
+</div>
+<div id="ref-nosek2012" class="csl-entry" role="listitem">
+Nosek, Brian A, Jeffrey R. Spies, 和 Matt Motyl. 2012. <span>《Scientific <span>Utopia</span>: <span>II</span>. restructuring incentives and practices to promote truth over publishability》</span>. <em>Perspectives on Psychological Science</em> 7 (6): 615–31. <a href="https://doi.org/10.1177/1745691612459058">https://doi.org/10.1177/1745691612459058</a>.
+</div>
+<div id="ref-oboyle2017" class="csl-entry" role="listitem">
+O’Boyle, Ernest Hugh, George Christopher Banks, 和 Erik Gonzalez-Mulé. 2017. <span>《The chrysalis effect: how ugly initial results metamorphosize into beautiful articles》</span>. <em>Journal of Management</em> 43 (2): 376–99. <a href="https://doi.org/10.1177/0149206314527133">https://doi.org/10.1177/0149206314527133</a>.
+</div>
+<div id="ref-oberauer2019" class="csl-entry" role="listitem">
+Oberauer, Klaus, 和 Stephan Lewandowsky. 2019. <span>《Addressing the theory crisis in psychology》</span>. <em>Psychonomic bulletin &amp; review</em> 26 (5): 1596–1618.
+</div>
+<div id="ref-rubin2020" class="csl-entry" role="listitem">
+Rubin, Mark. 2020. <span>《Does preregistration improve the credibility of research findings?》</span> <em>The Quantitative Methods for Psychology</em> 16 (4): 15. <a href="https://doi.org/10.20982/tqmp.16.4.p376">https://doi.org/10.20982/tqmp.16.4.p376</a>.
+</div>
+<div id="ref-simonsohn2020" class="csl-entry" role="listitem">
+Simonsohn, Uri, Joseph P Simmons, 和 Leif D Nelson. 2020. <span>《Specification curve analysis》</span>. <em>Nature Human Behaviour</em>, 七月, 1–7. <a href="https://doi.org/10.1038/s41562-020-0912-z">https://doi.org/10.1038/s41562-020-0912-z</a>.
+</div>
+<div id="ref-slovic1977" class="csl-entry" role="listitem">
+Slovic, Paul, 和 Baruch Fischhoff. 1977. <span>《On the psychology of experimental surprises》</span>. <em>Journal of Experimental Psychology: Human Perception and Performance</em> 3 (4): 544–51. <a href="https://doi.org/10.1037/0096-1523.3.4.544">https://doi.org/10.1037/0096-1523.3.4.544</a>.
+</div>
+<div id="ref-smaldino2016" class="csl-entry" role="listitem">
+Smaldino, Paul E, 和 Richard McElreath. 2016. <span>《The natural selection of bad science》</span>. <em>Royal Society Open Science</em> 3 (9): 160384. <a href="https://doi.org/10.1098/rsos.160384">https://doi.org/10.1098/rsos.160384</a>.
+</div>
+<div id="ref-steegen2016" class="csl-entry" role="listitem">
+Steegen, Sara, Francis Tuerlinckx, Andrew Gelman, 和 Wolf Vanpaemel. 2016. <span>《Increasing transparency <span>t</span>hrough a multiverse analysis》</span>. <em>Perspectives on Psychological Science</em> 11 (5): 702–12. <a href="https://doi.org/10.1177/1745691616658637">https://doi.org/10.1177/1745691616658637</a>.
+</div>
+<div id="ref-tukey1980" class="csl-entry" role="listitem">
+Tukey, John W. 1980. <span>《We need both exploratory and confirmatory》</span>. <em>The American Statistician</em> 34 (1): 23–25. <a href="https://doi.org/10.2307/2682991">https://doi.org/10.2307/2682991</a>.
+</div>
+<div id="ref-veldkamp2017" class="csl-entry" role="listitem">
+Veldkamp, Coosje L. S., Chris H. J. Hartgerink, Marcel A. L. M. van van Assen, 和 Jelte M. Wicherts. 2017. <span>《Who believes in the storybook image of the scientist?》</span> <em>Accountability in Research</em> 24 (3): 127–51. <a href="https://doi.org/10.1080/08989621.2016.1268922">https://doi.org/10.1080/08989621.2016.1268922</a>.
+</div>
+<div id="ref-wagenmakers2012" class="csl-entry" role="listitem">
+Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, 和 Rogier A. Kievit. 2012. <span>《An agenda for purely confirmatory research》</span>. <em>Perspectives on Psychological Science</em> 7 (6): 632–38. <a href="https://doi.org/10.1177/1745691612463078">https://doi.org/10.1177/1745691612463078</a>.
+</div>
+</div>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./010-sampling.html" class="pagination-link" aria-label="抽样">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./012-collection.html" class="pagination-link" aria-label="数据收集">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

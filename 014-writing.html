@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>14&nbsp; 写作 – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./015-viz.html" rel="next">
+<link href="./013-management.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./014-writing.html">报告</a></li><li class="breadcrumb-item"><a href="./014-writing.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#写得清楚" id="toc-写得清楚" class="nav-link active" data-scroll-target="#写得清楚"><span class="header-section-number">14.1</span> 写得清楚</a>
+  <ul class="collapse">
+  <li><a href="#科学论文的结构" id="toc-科学论文的结构" class="nav-link" data-scroll-target="#科学论文的结构"><span class="header-section-number">14.1.1</span> 科学论文的结构</a></li>
+  <li><a href="#段落句子和词" id="toc-段落句子和词" class="nav-link" data-scroll-target="#段落句子和词"><span class="header-section-number">14.1.2</span> 段落、句子和词</a></li>
+  </ul></li>
+  <li><a href="#建议" id="toc-建议" class="nav-link" data-scroll-target="#建议"><span class="header-section-number">14.2</span> 建议</a>
+  <ul class="collapse">
+  <li><a href="#起草和修改" id="toc-起草和修改" class="nav-link" data-scroll-target="#起草和修改"><span class="header-section-number">14.2.1</span> 起草和修改</a></li>
+  </ul></li>
+  <li><a href="#写得可复现" id="toc-写得可复现" class="nav-link" data-scroll-target="#写得可复现"><span class="header-section-number">14.3</span> 写得可复现</a>
+  <ul class="collapse">
+  <li><a href="#为什么要写可复现报告" id="toc-为什么要写可复现报告" class="nav-link" data-scroll-target="#为什么要写可复现报告"><span class="header-section-number">14.3.1</span> 为什么要写可复现报告？</a></li>
+  <li><a href="#可复现写作的原则" id="toc-可复现写作的原则" class="nav-link" data-scroll-target="#可复现写作的原则"><span class="header-section-number">14.3.2</span> 可复现写作的原则</a></li>
+  <li><a href="#可复现性与协作的-trade-off" id="toc-可复现性与协作的-trade-off" class="nav-link" data-scroll-target="#可复现性与协作的-trade-off"><span class="header-section-number">14.3.3</span> 可复现性与协作的 trade-off</a></li>
+  </ul></li>
+  <li><a href="#写得负责任" id="toc-写得负责任" class="nav-link" data-scroll-target="#写得负责任"><span class="header-section-number">14.4</span> 写得负责任</a>
+  <ul class="collapse">
+  <li><a href="#负责任的披露和解释" id="toc-负责任的披露和解释" class="nav-link" data-scroll-target="#负责任的披露和解释"><span class="header-section-number">14.4.1</span> 负责任的披露和解释</a></li>
+  <li><a href="#负责任地处理错误" id="toc-负责任地处理错误" class="nav-link" data-scroll-target="#负责任地处理错误"><span class="header-section-number">14.4.2</span> 负责任地处理错误</a></li>
+  <li><a href="#负责任的引用" id="toc-负责任的引用" class="nav-link" data-scroll-target="#负责任的引用"><span class="header-section-number">14.4.3</span> 负责任的引用</a></li>
+  <li><a href="#负责任的作者署名实践" id="toc-负责任的作者署名实践" class="nav-link" data-scroll-target="#负责任的作者署名实践"><span class="header-section-number">14.4.4</span> 负责任的作者署名实践</a></li>
+  </ul></li>
+  <li><a href="#本章小结写作" id="toc-本章小结写作" class="nav-link" data-scroll-target="#本章小结写作"><span class="header-section-number">14.5</span> 本章小结：写作</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography"></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./014-writing.html">报告</a></li><li class="breadcrumb-item"><a href="./014-writing.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-writing" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="学习目标">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>学习目标
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>通过简洁表达、使用结构、并根据读者调整写法，写得清楚</li>
+<li>通过把写作和分析代码交织在一起，写得可复现</li>
+<li>通过承认局限、纠正错误、校准结论，写得负责任</li>
+</ul>
+</div>
+</div>
+<p>你已经设计并运行了实验，甚至已经分析了数据。<em>Experimentology</em> 的最后一部分讨论如何报告你的结果。我们先思考如何写得清楚、可复现、负责任（本章）；然后讨论如何设计既信息充分又好看的数据可视化（<a href="015-viz.html" class="quarto-xref"><span>章 15</span></a>）。本部分的最后一章介绍元分析（meta-analysis），作为研究综合的工具，帮助我们把研究结果放到更大的背景中理解。这几章关注 <span class="smallcaps">透明性</span>，也关注（尤其是在元分析中）<span class="smallcaps">bias reduction（减少偏差）</span> 和 <span class="smallcaps">测量精度</span>。</p>
+<p>如果你不能清楚地传达自己做了什么，那么你投入到设计和运行有效实验中的所有努力都可能被浪费。写作是一种强大的工具：你只参与一次对话，却有机会对潜在无限多的读者说话。所以把它写对很重要！这里我们会提供一些建议，说明如何把科学论文，也就是报告实验的主要方式，写得清楚、可复现、负责任。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;沟通清晰是现代科学的基础原则之一。早期做炼金术实验的原始科学家常常故意让自己的工作晦涩难懂，甚至用神秘代码写作，以免别人发现“自然的强大秘密”。Francis Bacon 和 Robert Boyle 等科学方法论先驱则转而推动透明和清晰。众所周知，Issac Newton（起初是炼金术士，后来是科学家）仍然故意用晦涩方式写作，以“保护”自己的工作 <span class="citation" data-cites="heard2016">(<a href="#ref-heard2016" role="doc-biblioref">Heard 2016</a>)</span>。</p></div></div><section id="写得清楚" class="level2 page-columns page-full" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="写得清楚"><span class="header-section-number">14.1</span> 写得清楚</h2>
+<p>写作的目的是什么？Stephen King 说：“当然是心灵感应” <span class="citation" data-cites="king2000">(<a href="#ref-king2000" role="doc-biblioref">King 2000</a>)</span>。写作的目标，是尽可能有效地把你脑中的信息传到读者脑中。遗憾的是，对我们大多数人来说，清楚写作并不是天生会的；它是一门需要练习的技艺。</p>
+<p>学习清楚写作最有效的方法之一，是阅读并模仿你欣赏的写作。很多科学文章写得并不清楚，所以你需要有选择地挑选模仿对象。幸运的是，作为读者，你看到好写作时会认出来：你会感觉作者正在把想法直接从他们脑中传到你脑中。当你遇到这样的文章时，试着找同一作者的更多作品。你接触到的好科学写作越多，就越能形成判断什么有效、什么无效的感觉。你可能既学到坏习惯，也学到好习惯（我们当然也这样！），但只要有意识地剔除坏的、保留好的，时间久了你的写作会进步。</p>
+<p>清楚写作没有严格规则，但有一些被广泛接受的惯例，我们会在这里分享给你。这些惯例来自一般风格指南，也来自专门针对科学写作的指南 <span class="citation" data-cites="zinsser2006 heard2016 gernsbacher2018 savage2019">(<a href="#ref-zinsser2006" role="doc-biblioref">Zinsser 2006</a>; <a href="#ref-heard2016" role="doc-biblioref">Heard 2016</a>; <a href="#ref-gernsbacher2018" role="doc-biblioref">Gernsbacher 2018</a>; <a href="#ref-savage2019" role="doc-biblioref">Savage 和 Yeh 2019</a>)</span>。</p>
+<section id="科学论文的结构" class="level3 page-columns page-full" data-number="14.1.1">
+<h3 data-number="14.1.1" class="anchored" data-anchor-id="科学论文的结构"><span class="header-section-number">14.1.1</span> 科学论文的结构</h3>
+<p>科学论文不是小说。读者通常不会从头读到尾，而是在各个部分之间跳转，以便高效提取信息 <span class="citation" data-cites="doumont2009">(<a href="#ref-doumont2009" role="doc-biblioref">Doumont 2009</a>)</span>。这种“随机访问”之所以可行，是因为研究文章通常遵循同一种惯例结构（见 <a href="#fig-writing-imrad" class="quarto-xref">图&nbsp;<span>14.1</span></a>）。文章主体包括四个主要部分：引言、方法、结果和讨论（IMRaD）。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> 这个结构有叙事逻辑：知识缺口是什么？（引言）；你如何处理它？（方法）；你发现了什么？（结果）；这些结果意味着什么？（讨论）。</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;在很久很久以前，科学沟通几乎没有什么惯例：科学家会通过互相写信来分享最新发现。但随着科学家和研究数量增加，这种方式变得不可持续。IMRaD 文章结构在 19 世纪开始流行，并在 20 世纪中期战后科学生产力快速扩张时占据主导。我们认为 IMRaD 风格文章是一个很大进步，哪怕偶尔收到一封信也确实不错。</p></div></div><p>结构既帮助读者，也帮助作者。可以试着从章节标题开始写，把它们当作结构，然后一节一节把文本填充进去。在每一节里，先列出你想传达的关键点，每个关键点都可以作为一个新段落的第一句。然后再添加每个段落的具体内容，这样你就已经很接近一篇文章的完整初稿了。</p>
+<p>可以想象，你文章主体中的焦点宽窄呈现一个“沙漏”结构（<a href="#fig-writing-imrad" class="quarto-xref">图&nbsp;<span>14.1</span></a>）。引言开头应该焦点较宽，为读者提供研究的一般背景。随后，引言的焦点应越来越窄，直到你描述将要处理的具体知识缺口或问题，以及（简要说明）你准备如何处理它。方法和结果位于沙漏中央，因为它们紧密聚焦于你的研究本身。在讨论部分，焦点向相反方向移动，从窄到宽。先总结研究结果，讨论局限，再把发现与既有文献整合起来，并描述实践和理论含义。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-writing-imrad" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个漏斗图，写作宽度在引言处最宽，在方法/结果处更窄，在讨论处再次变宽。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-writing-imrad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/writing/imrad.png" class="img-fluid figure-img" style="width:70.0%" alt="一个漏斗图，写作宽度在引言处最宽，在方法/结果处更窄，在讨论处再次变宽。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-writing-imrad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;14.1: 研究文章的惯例结构。文章主体由引言、方法、结果和讨论（IMRaD）几个部分组成。
+</figcaption>
+</figure>
+</div></div><p>研究文章往往塞满了复杂信息；读者很容易迷路。交叉引用是一种有用的路标，可以告诉读者在哪里找到相关的额外信息，同时不打断写作的流动。例如，你可以通过交叉引用图或表，把读者引向数据可视化（例如“见 Figure 1”），也可以把他们引向补充材料中的额外方法细节（例如“见 Supplementary Information A”）。</p>
+<p>组织复杂论证的一个有用技巧，是把你的研究目标或假设与结果交叉引用起来。例如，你可以在文章引言中引入编号假设，然后在报告相关分析和结果时直接引用这些假设。这些交叉引用可以提醒读者，不同结果或分析如何对应回你的研究目标。</p>
+</section>
+<section id="段落句子和词" class="level3" data-number="14.1.2">
+<h3 data-number="14.1.2" class="anchored" data-anchor-id="段落句子和词"><span class="header-section-number">14.1.2</span> 段落、句子和词</h3>
+<p>写文章有点像画人体。如果你一开始就画衣服，就可能把漂亮的纹理加到一个根本不可能成立的形体上。相反，你必须先理解底层骨架，然后逐渐添加层次，直到能看见布料如何挂在身体上。文章结构是“骨架”，段落和句子是“血肉”。只有在扎实大纲已经就位之后，才开始考虑段落和句子。</p>
+<p>理想情况下，每个段落都应该对应文章大纲中的一个单一要点，并包含说服读者所需的具体内容。“P-E-E-L”（point-explain-evidence-link，即要点、解释、证据、连接）是一种有用的段落结构，尤其适用于引言和讨论。首先，在第一句简洁说出该段的信息（P）。段落主体用于进一步解释这个要点并提供证据（E-E；你还可以加入第三个 “E”，即 example）。段落结尾用几句话提醒读者你的要点，并设置与下一段的连接。</p>
+<p>既然段落里的每个句子都有目的，你就可以通过追问句子的形式如何服务于这个目的来写句子、改句子。例如，短句很适合提出强有力的起始要点。另一方面，如果只用短句，你的写作可能显得单调而机械。试着变化句子长度，让写作有更自然的节奏。只是要避免把太多信息塞进同一句话；很长的句子可能让人困惑，也难以处理。</p>
+<p>你也可以用句子结构作为脚手架，支撑读者的思考。用读者已经知道的内容开头。例如，与其写“我们进行了一个被试间 <span class="math inline">\(t\)</span> 检验，比较实验组和控制组的表现，以处理认知失调假设”，不如写“为了处理认知失调假设，我们使用被试间 <span class="math inline">\(t\)</span> 检验比较了实验组和控制组的表现。”</p>
+<p>人类读者很擅长处理关于人的叙事。然而，科学家常常通过把自己从过程中拿掉，削弱研究叙事，有时甚至为此使用别扭的语法结构。例如，科学家有时写 “The data were analysed”，或者更糟，“An analysis of the data was carried out”。我们很多人都被教过写这样的句子，但说 “We analyzed the data” 要清楚得多。</p>
+<p>类似地，我们很多人也倾向于用框架和限定语隐藏自己的观点：“[It is believed that/Research indicates that/Studies show that] 金钱会增加幸福（Frog &amp; Toad, 1963）。” 如果你确实相信金钱导致幸福，那就直接说出来，必要时加引用。把限定语留给这样的情况：<em>有人</em>相信金钱导致幸福，但那个人<em>不是</em>你。当你确实觉得不确定性有必要时，再强调不确定性；这样读者会更认真对待你的疑虑。</p>
+</section>
+</section>
+<section id="建议" class="level2 page-columns page-full" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="建议"><span class="header-section-number">14.2</span> 建议</h2>
+<p>科学写作以干涩、乏味、没有灵魂著称。确实，写研究文章比写小说受到更多约束，但你仍然可以用隐喻、头韵和幽默给读者一点惊喜和乐趣。只要写作清楚准确，我们看不出为什么它不能同时令人愉快。好读的文章更容易读，也更有趣。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> 下面是一些关于如何清楚表达自己的建议：</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;我们最喜欢的好读文章例子之一是 <span class="citation" data-cites="cutler1994">Cutler (<a href="#ref-cutler1994" role="doc-biblioref">1994</a>)</span>，那是一篇令人愉快的文章，用文章形式本身来说明关于人类语言加工的观点。读一下，你就会明白！</p></div></div><p><strong>明确一点</strong>。避免含糊和歧义。你把写作含义留给读者想象的空间越大，不同读者想出不同东西的风险就越大！所以要直接、具体。</p>
+<p><strong>简洁一点</strong>。通过省掉不必要的词、去除杂乱内容，最大化写作中的 signal-to-noise ratio <span class="citation" data-cites="zinsser2006">(<a href="#ref-zinsser2006" role="doc-biblioref">Zinsser 2006</a>)</span>。例如，说 <em>we investigated</em>，不要说 <em>we performed an investigation of</em>；说 <em>if</em>，不要说 <em>in the event that</em>。不要试图传达你关于某个主题知道的一切，研究报告不是随笔。只纳入达成文章目的所需要的内容，其余都删掉。</p>
+<p><strong>具体一点</strong>。具体例子让抽象想法更容易抓住。但有些想法就是很难用文字表达，这时图示会非常有帮助。例如，用流程图而不是文字来说明一系列复杂的排除标准，可能更清楚。你甚至可以用照片、视频和截图来说明实验任务 <span class="citation" data-cites="heycke2019">(<a href="#ref-heycke2019" role="doc-biblioref">Heycke 和 Spitzer 2019</a>)</span>。</p>
+<p><strong>一致一点</strong>。用不同词指同一个概念可能让人困惑，因为读者不一定清楚你是在指另一个概念，还是只是换了一个同义词。例如，在日常对话中，“replication” 和 “reproducibility” 可能听起来像是指同一件事的两种说法，但在科学写作中，这两个概念有不同的技术定义，所以不应混用。每个技术术语定义一次，然后在整篇稿件中使用同一个词。</p>
+<p><strong>根据读者调整</strong>。我们大多数人都会根据谈话对象调整聊天风格；好写作也遵循同样原则。写作时了解读者更难，因为我们看不到读者反应，也不能据此调整。尽管如此，我们可以对读者是谁做一些有根据的猜测。例如，如果你在写一篇入门综述文章，那么相比给专业期刊写研究文章，你可能需要更注意解释技术术语。</p>
+<p><strong>检查你的理解</strong>。不清楚的写作可能是不清楚思考的症状。如果一个想法在你脑中说不通，它又怎么会在纸面上说得通？事实上，试图用写作传达某件事，是检验自己理解、暴露论证逻辑缺口的极好方式。所以，如果你发现自己很难写清楚，停下来问问自己：<em>我知道自己想说什么吗</em>？如果问题是不清楚思考，那么在试着写下来之前，先和同事或导师把想法说清楚，可能是值得的。</p>
+<!-- Importantly, you must resist the temptation to mask unclear thinking in unclear writing. Sometimes, your thinking will be unclear simply because *nobody* understands the topic you are addressing. Indeed, we should expect that to happen; the whole point of research is to expand the frontiers of human knowledge, so naturally, you will find yourself working on the fault line of what is and what is not well understood. If you have unresolvable uncertainty about something, say so explicitly, don't hide it in bad writing. -->
+<p><strong>少用 acronyms</strong>。用简短 acronym 替代冗长术语很诱人：既然可以说 “CDT”，为什么还要说 “cognitive dissonance theory”？遗憾的是，acronym 会增加读者的认知负担，也可能造成误解。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> 例如，如果你把 “odds ratio” 缩写成 “OR”，读者每次遇到它时，都要额外走一步，把 “OR” 翻译回 “odds ratio”。随着你在文章中引入更多 acronyms，问题会成倍增加。更糟的是，对某些读者来说，“OR” 往往表示 “operating room”，而不是 “odds ratio”。Acronyms 可能有用，但通常只有在它们被广泛使用且被理解时才有用。</p>
+<!-- For example, "magnetic resonance imaging" ("MRI") and "deoxyribonucleic acid" (DNA). At a minimum, be sure to define all acronyms, even when they are likely to be familiar to most readers. -->
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;<span class="citation" data-cites="barnett2020">Barnett 和 Doubleday (<a href="#ref-barnett2020" role="doc-biblioref">2020</a>)</span> 发现 acronyms 在研究文章中被广泛使用，并认为它们削弱清楚沟通。这里有一个 Barnett 和 Doubleday 从 2019 年一篇 publication 中提取的文本例子，用来说明这一点：“Applying PROBAST showed that ADO, B-AE-D, B-AE-D-C, extended ADO, updated ADO, updated BODE, and a model developed by Bertens et al.&nbsp;were derived in studies assessed as being at low risk of bias.”</p></div></div><section id="起草和修改" class="level3 page-columns page-full" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="起草和修改"><span class="header-section-number">14.2.1</span> 起草和修改</h3>
+<p>最清楚、看起来最不费力的科学写作，很可能经历了大量修改，才显得如此自然。很多学生知道许多“轻松流畅”的文章经历过多少轮修改时，都会感到惊讶。例如，Tversky 和 Kahneman 反复起草、重写他们关于 judgment and decision-making 的著名（且高度可读）文章中的每一个词，两个人一起趴在打字机前 <span class="citation" data-cites="lewis2016undoing">(<a href="#ref-lewis2016undoing" role="doc-biblioref">Lewis 2016</a>)</span>。</p>
+<p>把你正在写的文章想象成一座花园。你的初稿可能是一团相互缠绕的枝条。需要几轮修剪和塑形，你的写作才能达到最有效的形态。你会惊讶地发现，自己经常能找到可以删掉的词，或者可以简化的复杂句子。</p>
+<p>判断自己的写作是否实现了“心灵感应”的目标可能很难，尤其是在几轮修改之后。试着从目标读者中的某个人那里获得反馈。他们的评论，即使不全是正面的，也会让你很好地了解他们理解（并同意）了你论证中的多少内容。<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;去找那些愿意告诉你写得不好的人！他们可能不会让你感觉很好，但会帮助你进步。</p></div></div></section>
+</section>
+<section id="写得可复现" class="level2 page-columns page-full" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="写得可复现"><span class="header-section-number">14.3</span> 写得可复现</h2>
+<p>许多研究结果并不可复现，也就是说，它们报告的数字和图，即使在原始数据上重复原始分析，也无法重新生成。正如我们在 <a href="003-replication.html" class="quarto-xref"><span>章 3</span></a> 中讨论的，缺乏可复现性（reproducibility）是科学文献的大问题；如果你不能相信所读文章中的数字，就更难在文献基础上继续推进。</p>
+<p>幸运的是，有许多工具和技术可以帮助你写出完全可复现的研究报告。基本想法是创建一条不断裂的链条，把数据分析 pipeline 的每一部分连接起来，从原始数据一路连接到研究文章中报告的最终数字。这种连接使你，也希望使其他人，能够追踪每个数字的 provenance（来源链），并从零开始重新创建（reproduce）它。</p>
+<section id="为什么要写可复现报告" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="为什么要写可复现报告"><span class="header-section-number">14.3.1</span> 为什么要写可复现报告？</h3>
+<p>写可复现报告至少有三个理由。第一，数据分析是一项容易出错的活动。如果没有保护措施，你很容易意外覆盖数据、误标实验条件，或者复制粘贴了错误的统计量。正如我们在 <a href="003-replication.html" class="quarto-xref"><span>章 3</span></a> 中讨论的，一项研究发现，一组心理学论文样本中将近一半包含明显的统计报告错误 <span class="citation" data-cites="nuijten2016">(<a href="#ref-nuijten2016" role="doc-biblioref">Nuijten 等 2016</a>)</span>。采用可复现分析工作流，可以减少出错机会，避免复制粘贴这类容易出错的手动操作。</p>
+<p>第二，关于数据分析的技术信息很难用文字沟通。文字往往有歧义，作者也可能无意遗漏重要细节 <span class="citation" data-cites="hardwicke2018b">(<a href="#ref-hardwicke2018b" role="doc-biblioref">Hardwicke 等 2018</a>)</span>。相比之下，可复现工作流会精确记录从原始数据到研究报告的整个分析 pipeline，就像它实际实现的那样，说明任何报告值的来源，并允许读者评估、验证和重复分析过程。</p>
+<p>最后，可复现工作流通常也是更高效的工作流。例如，你可能发现自己忘了执行数据排除，需要重新运行分析。你可能生成了一张图，然后决定更喜欢另一套配色。或者你想把同一张结果表输出成 PDF，也输出到 PowerPoint slide 中。在可复现工作流中，所有分析步骤都写成脚本，只要点击一个按钮就能轻松重新运行。你（以及其他人）也可以在其他项目中复用部分代码，而不必从零开始写。</p>
+</section>
+<section id="可复现写作的原则" class="level3 page-columns page-full" data-number="14.3.2">
+<h3 data-number="14.3.2" class="anchored" data-anchor-id="可复现写作的原则"><span class="header-section-number">14.3.2</span> 可复现写作的原则</h3>
+<p>下面我们列出一些可复现写作的一般原则。这些原则可以在许多不同软件生态中实践。我们推荐 R Markdown 及其后继者 Quarto，它们让你可以在 R 中写数据分析代码，并编译成漂亮的文档，甚至网站。（本书就是用 Quarto 写的。）<a href="102-rmarkdown.html" class="quarto-xref"><span>附录 C</span></a> 会介绍使用这些工具创建科学论文的基本细节。原则如下：</p>
+<ul>
+<li><p><strong>永远不要打断链条</strong>。分析 pipeline 的每一部分，从原始数据<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> 到最终产品，都应该出现在项目 repository 中。通过查看 repository 文档，读者应该能够跟随步骤，从原始数据走到最终稿件，包括表和图。</p></li>
+<li><p><strong>所有东西都脚本化</strong>。尽量确保分析 pipeline 的每一步都由计算机代码执行，而不是通过复制粘贴或直接编辑电子表格等手动操作完成。这个做法确保每一步都通过可执行代码而不是含糊描述来记录，从而保证它可以被复现。比如，想象你决定在数据集中重新编码一个变量。你可以使用 Excel 的“find and replace”功能，但这个操作不会被记录下来，你甚至可能忘记自己做过！更好的选择是写一个脚本。虽然 scripted pipeline 第一次搭起来可能很麻烦，但到第三次重跑时，它就会帮你省时间。</p></li>
+<li><p><strong>使用 literate programming</strong>。一段计算机代码的含义，对另一个用户来说并不总是显而易见，尤其是对方不是专家时。事实上，我们也经常看着自己的代码挠头，想知道它到底在做什么。为了避免这个问题，试着围绕普通语言注释来组织代码，用注释解释代码应该在做什么。这种技术称为 “literate programming” <span class="citation" data-cites="knuth1992">(<a href="#ref-knuth1992" role="doc-biblioref">Knuth 1992</a>)</span>。</p></li>
+<li><p><strong>使用 defensive programming</strong>。脚本化分析中仍然可能出错。Defensive programming 是一系列策略，帮助提前预判、检测并避免错误。典型的 defensive programming 工具是在代码中加入 tests，也就是检查代码或数据是否满足某些假设的小片段。例如，你可以测试存储反应时的变量是否出现了低于零的值（这应该是不可能的）。如果 test 通过，分析 pipeline 继续；如果 test 失败，pipeline 停止，并出现错误信息提醒你有问题。</p></li>
+<li><p><strong>使用免费/open-source software 和编程语言</strong>。如果可能，避免使用 SPSS 或 Matlab 这类商业软件，转而使用 R、Python、Jamovi 或 JASP 这类免费、open-source software 和编程语言。这个做法会让其他人更容易访问、复用和验证你的工作，也包括你自己！<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p></li>
+<li><p><strong>使用 version control</strong>。在 <a href="013-management.html" class="quarto-xref"><span>章 13</span></a> 中，我们介绍了 version control 的好处：它是一种很好的方式，可以在构建分析 pipeline 的过程中逐步保存，让你在不小心引入错误时回滚到之前的版本。</p></li>
+<li><p><strong>保存计算环境</strong>。即使你的分析 pipeline 在自己电脑上完全可复现，你仍然需要考虑它能否在别人的电脑上运行，甚至能否在你自己的电脑更新软件后继续运行。你可以通过记录并保存分析 pipeline 成功运行时的计算环境来处理这个问题。有多种工具可以帮助做到这一点，包括 Docker、Code Ocean、renv（用于 R）和 venv（用于 Python）。<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p></li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;当然，要考虑 <a href="013-management.html" class="quarto-xref"><span>章 13</span></a> 中讨论过的隐私问题。</p></div><div id="fn7"><p><sup>7</sup>&nbsp;我们中有几个人都有一堆旧 Matlab 代码库。虽然学生可以获得折扣 license，但全价软件 license 对资源有限的研究者来说可能是重大障碍。如果你已经离开 Matlab，还要问自己是否值得为了重跑一个旧分析而再付一年 license，这也很糟糕。</p></div><div id="fn8"><p><sup>8</sup>&nbsp;如果你对这个方向感兴趣，我们推荐 <span class="citation" data-cites="peikert2021">Peikert 和 Brandmaier (<a href="#ref-peikert2021" role="doc-biblioref">2021</a>)</span>，它提供了一篇高级教程，介绍如何使用 Docker 和 <code>make</code> 作为补充 Git 与 R Markdown 的工具，实现完整的 computational reproducibility。</p></div></div></section>
+<section id="可复现性与协作的-trade-off" class="level3 page-columns page-full" data-number="14.3.3">
+<h3 data-number="14.3.3" class="anchored" data-anchor-id="可复现性与协作的-trade-off"><span class="header-section-number">14.3.3</span> 可复现性与协作的 trade-off</h3>
+<p>我们很想就此结束，看着你步伐轻快地走向夕阳，胳膊下夹着一份可复现报告。不幸的是，我们必须承认，在协作方面，可复现写作会带来一些实际困难。</p>
+<p>协作的一个重要方面，是和合作者交换评论和行内文字修改。你可以用 R Markdown 或 Quarto 文件以及 Git 来完成这种交换，但这些工具不像 Word 或 Google Docs 那样 user-friendly，而且有些合作者会完全不熟悉它们。许多期刊也期望文章以 Word 文档或 LaTeX 文件提交。把 R Markdown 或 Quarto 文件输出为 Word 时，往往会引入格式问题，尤其是对中等复杂度的表格。因此，在出现更 user-friendly 的工具之前，可复现性和协作之间可能需要某种折中。下面有两种工作流风格供你考虑。</p>
+<p>第一种是 <em>maximal reproducibility</em> approach。如果你的合作者熟悉 R Markdown 或 Quarto，并且你不介意通过 Git 交换评论和编辑，或者他们不介意给你一份评论和修改清单，由你在源文档中实现，那么你就可以为项目维持完全可复现的工作流。期刊提交和出版过程仍可能引入一些问题，例如合并 copy editor 做出的修改，但至少你提交的稿件（以及你希望已经发布的 preprint）会是完全可复现的。</p>
+<p>第二种是 <em>two worlds</em> approach。这个工作流有点笨重，但有利于协作，同时保持可复现性。首先，在 R Markdown 或 Quarto 中写结果部分（见 <a href="102-rmarkdown.html" class="quarto-xref"><span>附录 C</span></a>），并生成 Word 文档。然后，在 Word（或其他文字处理软件）中写稿件的其余部分，包括整合合作者的评论和修改。当你有了最终版本，再把摘要、引言、方法和讨论复制粘贴回 R Markdown 或 Quarto 源文档。<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> 把结果部分中的任何改动整合回 R Markdown 或 Quarto 文档需要更多努力，可能要手动检查，也可能用 Word 的 “compare documents” 功能。这个 approach 的优点是，你拥有一份可复现文档，而你的合作者不必偏离他们偏好的工作流。遗憾的是，它需要你投入更多努力，也比 maximal reproducibility approach 稍微更容易出错。</p>
+<div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;你也可以把 Google Docs 纳入这个工作流。我们发现，像 Docs 这样的云平台在收集多位合作者对同一文档的评论时尤其有用。<code>trackdown</code> package <span class="citation" data-cites="kothe2021">(<a href="#ref-kothe2021" role="doc-biblioref">Kothe 等 2021</a>)</span> 可以帮助管理这个工作流（<a href="https://claudiozandonella.github.io/trackdown" class="uri">https://claudiozandonella.github.io/trackdown</a>）。</p></div></div></section>
+</section>
+<section id="写得负责任" class="level2 page-columns page-full" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="写得负责任"><span class="header-section-number">14.4</span> 写得负责任</h2>
+<p>作为科学作者，你既有职业责任，也有伦理责任。你必须传达关于研究的所有相关信息，使其他科学家能够恰当地评价和验证它。同样重要的是，不要夸大你的发现，要把结论校准到现有证据 <span class="citation" data-cites="hoekstra2021">(<a href="#ref-hoekstra2021" role="doc-biblioref">Hoekstra 和 Vazire 2021</a>)</span>。如果你的工作中发现了错误，你必须回应，并在可能时纠正 <span class="citation" data-cites="bishop2018">(<a href="#ref-bishop2018" role="doc-biblioref">Bishop 2018</a>)</span>。最后，你必须履行关于作者署名和引用实践的学术义务。</p>
+<section id="负责任的披露和解释" class="level3 page-columns page-full" data-number="14.4.1">
+<h3 data-number="14.4.1" class="anchored" data-anchor-id="负责任的披露和解释"><span class="header-section-number">14.4.1</span> 负责任的披露和解释</h3>
+<p>回到学校里，我们都学过：得到正确答案还不够，你还需要展示自己是如何得到这个答案的，才能拿满分。研究报告也有同样期待。不要只告诉读者你发现了什么，也要告诉他们你是如何发现的。<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> 这意味着完整详细地描述方法，并共享数据、材料和分析脚本。</p>
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;重要细节很容易被忽略，尤其是在项目结尾。回头看你的研究预注册会是一个有用提醒。不同研究设计的报告指南也可以提供有用的 checklist <span class="citation" data-cites="appelbaum2018">(<a href="#ref-appelbaum2018" role="doc-biblioref">Appelbaum 等 2018</a>)</span>。</p></div></div><p>在期刊文章中，你通常可以灵活决定，在文章主体中提供多少细节，又把多少内容放到补充材料。读者有不同需求；有些人可能只想知道重点，有些人则需要详细方法信息来重复你的研究。作为经验法则，尽量确保没有任何放进补充材料的内容会让读者感到意外。你当然不应该用补充材料故意隐藏重要细节，也不应该把它当成杂乱无章的垃圾场：清楚写作的原则仍然适用！</p>
+<p>下面还有几条负责任写作的 guidelines：</p>
+<ul>
+<li><strong>不要过度声称</strong>。科学家常常觉得自己是（而且很遗憾，常常确实是）根据研究<em>结果</em>而不是研究<em>质量</em>来被评价的。因此，很容易诱使人做出比证据真正支持的范围更大、更大胆的声称。仔细思考你研究的局限，把结论校准到证据，而不是校准到你希望自己能够声称什么。确保你的结论在整篇稿件中都表述得恰当，尤其是在标题和摘要中。</li>
+</ul>
+<ul>
+<li><p><strong>承认解释和 generalizability 上的局限</strong>。即使你已经在全文中恰当地校准了声称，仍然可能有一些具体局限值得讨论：要么在引言中介绍研究设计时讨论，要么在讨论部分解释研究时讨论。例如，如果你的实验使用某一种特定 manipulation 来实例化一个你关心的 construct，你可以讨论这个局限，以及未来研究如何处理它。仔细思考研究局限，清楚陈述它们，并考虑它们如何影响你的结论 <span class="citation" data-cites="clarke2023">(<a href="#ref-clarke2023" role="doc-biblioref">Clarke 等 2023</a>)</span>。<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> 对局限的讨论，是明确陈述你的发现的 <em>generalizability</em> 的好地方 <span class="citation" data-cites="simons2017">(关于这类陈述的指导，见 <a href="#ref-simons2017" role="doc-biblioref">Simons, Shoda, 和 Lindsay 2017</a>)</span>。</p></li>
+<li><p><strong>讨论，不要辩论</strong>。讨论部分的目的是帮助读者解释你的研究。重要的是，期刊文章不是一场辩论：不要觉得自己必须教条地为某个特定立场或解释争辩。你应该讨论证据的优点和弱点，以及不同解释的相对价值。例如，也许存在一个你无法通过研究设计消除的潜在 confounding variable。读者也许自己能发现这一点，但无论如何，突出它是你的责任。也许总体来看你认为这个 confound 不太可能解释结果，这没问题，但你需要向读者解释你的推理。</p></li>
+<li><p><strong>披露利益冲突和 funding</strong>。研究者通常会在个人层面对研究结果有投入，而这种投入可能导致 bias（例如过度声称或 selective reporting）。但有时，你从一项研究中可能获得的个人收益会超过某个阈值，被视为 <strong>利益冲突</strong>。这个阈值在哪里并不总是完全清楚。最明显的利益冲突发生在你会从研究结果中获得经济收益时（例如，药物开发者评估自己的药物）。如果你不确定自己是否有潜在利益冲突，就应该披露。你也应该披露为研究获得的任何 funding，一方面因为这通常是资助方要求，另一方面因为它可能代表利益冲突，例如资助方对研究结果有特定利害关系。为避免歧义，你也应该在自己<em>没有</em>需要声明的利益冲突或 funding 时明确说明。</p></li>
+<li><p><strong>透明报告</strong>。在 <a href="011-prereg.html" class="quarto-xref"><span>章 11</span></a> 中，你了解了 selective reporting 的问题，以及这种做法如何使研究文献产生偏差。你自己的工作中有几种方式可以避免这个问题。首先，假设你<em>确实</em>报告了所有内容，就在方法部分加入一条明确说明这一点的 statement。<span class="citation" data-cites="simmons2012">Simmons, Nelson, 和 Simonsohn (<a href="#ref-simmons2012" role="doc-biblioref">2012</a>)</span> 建议的 statement 是：“We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study.” 如果你已经预注册研究，要清楚链接到 preregistration，并说明你是否偏离了原计划。你可以在补充材料中加入详细的 preregistration disclosure table，并在方法部分突出任何重大偏离。在结果部分，要清楚标出（例如用小标题）哪些分析是预先计划并纳入 preregistration 的（confirmatory），哪些不是预先计划的（exploratory）。</p></li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn11"><p><sup>11</sup>&nbsp;你是否应该只是把声称写得更谦虚，从而避免写研究局限？声称和局限之间的平衡很微妙。处理这个问题的一种方式是问自己：“如果我在文章摘要中说 X，后来又陈述一个与该声称相关的局限，这样可以吗？还是读者会觉得被欺骗？”</p></div></div></section>
+<section id="负责任地处理错误" class="level3 page-columns page-full" data-number="14.4.2">
+<h3 data-number="14.4.2" class="anchored" data-anchor-id="负责任地处理错误"><span class="header-section-number">14.4.2</span> 负责任地处理错误</h3>
+<p>你没有责任从不犯错。但你<em>有</em>责任以及时、透明、专业的方式回应错误 <span class="citation" data-cites="bishop2018">(<a href="#ref-bishop2018" role="doc-biblioref">Bishop 2018</a>)</span>。<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> 无论错误是如何被发现的（例如由你自己发现，还是由读者发现），我们建议联系期刊，并请求他们发布 correction statement（有时称为 <em>erratum</em>）。我们中有几个人过去都纠正过论文。如果错误很严重而且无法修复，你应该考虑撤回文章。</p>
+<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>&nbsp;正如 jazz musician Miles Davis 曾说：“If you hit a wrong note, it’s the next note that you play that determines if it’s good or bad.”</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="事故报告">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>事故报告
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>2018 年，在职业生涯的关键阶段，Julia Strand 在著名期刊 <em>Psychonomic Bulletin &amp; Review</em> 上发表了一项重要研究。她在会议上展示了这项工作，并获得了额外 funding 来做 follow-up studies。但几个月后，她的团队发现他们无法重复出这个结果。</p>
+<p>她感到困惑，开始寻找结果不一致的原因。最终，她找到了罪魁祸首：一个 programming error。当她惊恐地坐在电脑前盯着屏幕时，她意识到其他人可能永远也不会发现这个 bug。隐藏这个错误当时一定看起来像是最容易做的事。</p>
+<p>但她做了正确的事。第二天，她通知了自己的学生、coauthors、funding officer、负责她 tenure review 的 department chair，以及期刊，以启动文章的 retraction。然后……这并没有毁掉她的职业生涯。每个人都表示理解，并欣赏她做了正确的事。期刊更正了文章。她没有失去 grant。她获得了 tenure。许多科学家，包括我们，都因为她的做法而钦佩她。</p>
+<p>诚实的错误会发生，重要的是你如何回应它们 <span class="citation" data-cites="strand2021">(<a href="#ref-strand2021" role="doc-biblioref">Strand 2021</a>)</span>。事实上，对科学家和普通公众的 survey research 表明，科学家的 reputation 建立在人们认为他们努力“get it right”，而不只是“be right” <span class="citation" data-cites="ebersole2016b">(<a href="#ref-ebersole2016b" role="doc-biblioref">Ebersole, Axt, 和 Nosek 2016</a>)</span>。</p>
+</div>
+</div>
+<p>Correction/retraction statement 应该包括以下内容：</p>
+<ol type="1">
+<li><strong>承认错误</strong>。清楚说明发生了错误。</li>
+<li><strong>描述错误</strong>。读者需要知道错误的确切性质。</li>
+<li><strong>描述错误的影响</strong>。读者需要知道错误可能如何影响他们对结果的解释。</li>
+<li><strong>描述错误如何发生</strong>。知道错误如何发生，可能帮助其他人避免同样错误。</li>
+<li><strong>描述你已经做了什么来处理错误</strong>。其他人可能会从你实施的解决方案中学习。</li>
+<li><strong>感谢识别错误的人</strong>。识别错误可能需要大量工作；如果这个人愿意被识别，就应该给予应有 credit。</li>
+</ol>
+</section>
+<section id="负责任的引用" class="level3" data-number="14.4.3">
+<h3 data-number="14.4.3" class="anchored" data-anchor-id="负责任的引用"><span class="header-section-number">14.4.3</span> 负责任的引用</h3>
+<p>引用你的研究所基于的先前工作，可以确保研究者因贡献而获得 credit，也帮助读者验证你的声称基础。你当然应该避免复制他人工作并说成自己的（关于 plagiarism 的更多内容见 <a href="004-ethics.html" class="quarto-xref"><span>章 4</span></a>）。 试着明确说明你为什么引用某个来源。它是否提供证据支持你的观点？它是否是一篇综述论文，为读者提供有用背景？或者它是否描述了你正在测试的理论？</p>
+<p>引用文章前要确保你读过它们。<span class="citation" data-cites="stang2018">Stang, Jonas, 和 Poole (<a href="#ref-stang2018" role="doc-biblioref">2018</a>)</span> 报告了一个警示故事：一篇批评某个方法工具的 commentary，竟然经常被引用为<em>支持</em>使用该工具！看起来很多作者并没有读他们引用的论文，这既误导人，也令人尴尬。</p>
+<p>尽量避免 selective 或 uncritical citation。只引用支持你论点的研究、忽略不支持的研究，是误导性的。你应该对先前工作提供平衡说明，包括相互矛盾的证据。要确保评价和整合先前研究的证据，而不只是描述它们。记住：每项研究都有局限。</p>
+</section>
+<section id="负责任的作者署名实践" class="level3 page-columns page-full" data-number="14.4.4">
+<h3 data-number="14.4.4" class="anchored" data-anchor-id="负责任的作者署名实践"><span class="header-section-number">14.4.4</span> 负责任的作者署名实践</h3>
+<p>给予参与研究项目的个人 credit 是一种伦理责任：这样如果工作有影响，他们能获得收益；如果有错误，他们也能承担责任。<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn13"><p><sup>13</sup>&nbsp;1975 年，物理学家兼数学家 Jack H. Hetherington 写了一篇准备投给 <em>Physical Review Letters</em> 的论文。我们不确定为什么，但 Hetherington 用第一人称复数写了那篇论文（也就是用 “we” 指自己，而不是 “I”）。后来他发现该期刊不接受单作者文章使用 “we”。Hetherington 已经费力地用打字机敲完了文章，并不想再重来一遍。于是，他选择了一个不那么费劲的办法，把自己的猫，一只名叫 F. D. C. Willard 的 feline，列为 coauthor。这篇论文被接受并发表了 <span class="citation" data-cites="hetherington1975">(<a href="#ref-hetherington1975" role="doc-biblioref">Hetherington 和 Willard 1975</a>)</span>。</p></div></div><p>目前在学术界，<em>authorship model</em> 占主导。在这个模型下，作者署名和 authorship order 是研究者对项目贡献的重要信号。一般预期是，要获得 authorship，一个人应该对研究有 substantial contribution（例如设计、数据收集、分析），并协助撰写研究报告，同时和其他 coauthors 一起对研究承担共同责任。参与了项目但未达到这个门槛的人，会在单独的致谢部分提及，而不被视为作者。</p>
+<p><strong>Authorship order</strong> 往往被理解为作者贡献性质和程度的信号。在心理学（及相邻学科）中，第一作者和最后作者通常是项目负责人。通常，尽管当然并不总是如此，第一作者是执行项目的 junior colleague，最后作者是 supervision 该项目的 senior colleague。</p>
+<p>有人主张，authorship model 应该被更包容的 <em>contributorship</em> model 取代，在这种模型中，所有参与项目的人都被承认为 “contributors”。不同于 authorship model，contributorship 没有任意阈值。每个人的实际贡献会被明确描述，而不是依赖 authorship order 的隐性惯例。Contributorship model 可能促进协作，并确保 student assistants 获得恰当 credit。</p>
+<p>你可能会发现，大多数期刊仍然期待你使用 authorship model。尽管如此，通常可以，而且有时必须，在文章中加入 contributorship statement，描述每个人做了什么。例如，CREDIT taxonomy 提供了一套研究任务的结构化 taxonomy，使 contributorship reporting 更统一。<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn14"><p><sup>14</sup>&nbsp;对于较大项目，Tenzing 工具可以根据标准化表单自动生成 CREDIT statements <span class="citation" data-cites="holcombe2020">(<a href="#ref-holcombe2020" role="doc-biblioref">Holcombe 等 2020</a>)</span>。</p></div><div id="fn15"><p><sup>15</sup>&nbsp;如果你发现所有作者贡献相同，也许不得不从历史例子中获取灵感，根据 25 局 croquet series <span class="citation" data-cites="hassell1974">(<a href="#ref-hassell1974" role="doc-biblioref">Hassell 和 May 1974</a>)</span>、rock, paper, scissors <span class="citation" data-cites="kupfer2004">(<a href="#ref-kupfer2004" role="doc-biblioref">Kupfer, Webbeking, 和 Franklin 2004</a>)</span>，或 brownie bake-off <span class="citation" data-cites="young1992">(<a href="#ref-young1992" role="doc-biblioref">Young 和 Young 1992</a>)</span> 来决定 authorship order。或者，你也可以采用 <span class="citation" data-cites="lakens2018">Lakens, Scheel, 和 Isager (<a href="#ref-lakens2018" role="doc-biblioref">2018</a>)</span> 的方法，在 R 中随机化 authorship order！</p></div></div><p>因为 authorship 在学术界是如此重要的信号，所以尽早和合作者就 authorship plan 达成一致非常重要，尤其是谁是一作、谁是末作。<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
+</section>
+</section>
+<section id="本章小结写作" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="本章小结写作"><span class="header-section-number">14.5</span> 本章小结：写作</h2>
+<p>写科学文章可以是实验研究过程的一个有回报的终点。但写作是一门技艺，而清楚写作，尤其是清楚写复杂和技术性主题，可能需要大量练习和许多草稿。此外，写研究还带有伦理和职业责任，和其他写作负担不同。科学作者必须努力确保自己发现的可复现性，并负责任地报告这些发现，指出局限和弱点，也指出优点。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="讨论问题">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>讨论问题
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>找一个 writing buddy，互相给一小段写作提供反馈（正在写的论文摘要、会议摘要，甚至课程项目 proposal 都是不错例子）。思考如何使用本章提供的建议改进彼此的写作。</p></li>
+<li><p>找一篇数据开放可得的已发表研究文章，看看你能否通过恢复他们报告的确切数值来 reproduce 论文中的一个分析。你可以在 Social Science Reproduction Platform（<a href="https://www.socialsciencereproduction.org" class="uri">https://www.socialsciencereproduction.org</a>）或 ReproHack（<a href="https://www.reprohack.org" class="uri">https://www.reprohack.org</a>）上找到这个练习的支持。和朋友讨论你在这个练习中遇到了哪些挑战，以及如何在自己的工作中避免这些挑战。</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="延伸阅读">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>延伸阅读
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Zinsser, William <span class="citation" data-cites="zinsser2006">(<a href="#ref-zinsser2006" role="doc-biblioref">2006</a>)</span>. <em>On Writing Well: The Classic Guide to Writing Nonfiction</em>. 7th ed.&nbsp;Harper Collins.</p></li>
+<li><p>Gernsbacher, Morton Ann <span class="citation" data-cites="gernsbacher2018">(<a href="#ref-gernsbacher2018" role="doc-biblioref">2018</a>)</span>. “Writing Empirical Articles: Transparency, Reproducibility, Clarity, and Memorability.” <em>Advances in Methods and Practices in Psychological Science</em> 1 (3): 403–414. <a href="https://doi.org/10.1177/2515245918754485" class="uri">https://doi.org/10.1177/2515245918754485</a>.</p></li>
+</ul>
+</div>
+</div>
+
+
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-appelbaum2018" class="csl-entry" role="listitem">
+Appelbaum, Mark, Harris Cooper, Rex B. Kline, Evan Mayo-Wilson, Arthur M. Nezu, 和 Stephen M. Rao. 2018. <span>《Journal article reporting standards for quantitative research in psychology: <span>The</span> <span>APA</span> <span>Publications</span> and <span>Communications</span> <span>Board</span> task force report.》</span> <em>American Psychologist</em> 73 (1): 3. <a href="https://doi.org/10.1037/amp0000191">https://doi.org/10.1037/amp0000191</a>.
+</div>
+<div id="ref-barnett2020" class="csl-entry" role="listitem">
+Barnett, Adrian, 和 Zoe Doubleday. 2020. <span>《The growth of acronyms in the scientific literature》</span>. <em>eLife</em> 9 (七月): e60080. <a href="https://doi.org/10.7554/eLife.60080">https://doi.org/10.7554/eLife.60080</a>.
+</div>
+<div id="ref-bishop2018" class="csl-entry" role="listitem">
+Bishop, D. V. M. 2018. <span>《Fallibility in science: responding to errors in the work of oneself and others》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 1 (3): 432–38. <a href="https://doi.org/10.1177/2515245918776632">https://doi.org/10.1177/2515245918776632</a>.
+</div>
+<div id="ref-clarke2023" class="csl-entry" role="listitem">
+Clarke, Beth, Lindsay Alley, Sakshi Ghai, Jessica Kay Flake, Julia M. Rohrer, Joseph P. Simmons, Sarah R. Schiavone, 和 Simine Vazire. 2023. <span>《Looking Our Limitations in the Eye: A Tutorial for Writing About Research Limitations in Psychology》</span>. <span>PsyArXiv</span>. <a href="https://doi.org/10.31234/osf.io/386bh">https://doi.org/10.31234/osf.io/386bh</a>.
+</div>
+<div id="ref-cutler1994" class="csl-entry" role="listitem">
+Cutler, Anne. 1994. <span>《The perception of rhythm in language》</span>. <em>Cognition</em> 50: 79–81.
+</div>
+<div id="ref-doumont2009" class="csl-entry" role="listitem">
+Doumont, Jean-Luc. 2009. <em>Trees, maps, and theorems</em>. Principiae.
+</div>
+<div id="ref-ebersole2016b" class="csl-entry" role="listitem">
+Ebersole, Charles R, Jordan R Axt, 和 Brian A Nosek. 2016. <span>《Scientists’ reputations are based on getting it right, not being right》</span>. <em>PLoS biology</em> 14 (5): e1002460.
+</div>
+<div id="ref-gernsbacher2018" class="csl-entry" role="listitem">
+Gernsbacher, Morton Ann. 2018. <span>《Writing empirical articles: transparency, reproducibility, clarity, and memorability》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 1 (3): 403–14. <a href="https://doi.org/10.1177/2515245918754485">https://doi.org/10.1177/2515245918754485</a>.
+</div>
+<div id="ref-hardwicke2018b" class="csl-entry" role="listitem">
+Hardwicke, Tom E, Maya B Mathur, Kyle Earl MacDonald, Gustav Nilsonne, George Christopher Banks, Mallory Kidwell, Alicia Hofelich Mohr, 等. 2018. <span>《Data availability, reusability, and analytic reproducibility: Evaluating the impact of a mandatory open data policy at the journal Cognition》</span>. <em>Royal Society Open Science</em> 5. <a href="https://doi.org/10.1098/rsos.180448">https://doi.org/10.1098/rsos.180448</a>.
+</div>
+<div id="ref-hassell1974" class="csl-entry" role="listitem">
+Hassell, M. P., 和 R. M. May. 1974. <span>《Aggregation of predators and insect parasites and its effect on stability》</span>. <em>Journal of Animal Ecology</em> 43 (2): 567–94. <a href="https://doi.org/10.2307/3384">https://doi.org/10.2307/3384</a>.
+</div>
+<div id="ref-heard2016" class="csl-entry" role="listitem">
+Heard, Stephen B. 2016. <em>The scientist’s guide to writing: how to write more easily and effectively <span>throughout</span> your scientific career</em>. Princeton University Press.
+</div>
+<div id="ref-hetherington1975" class="csl-entry" role="listitem">
+Hetherington, J. H., 和 F. D. C. Willard. 1975. <span>《Two-, Three-, and Four-Atom Exchange Effects in <span>bcc</span> <span class="math inline">\(^{3}\mathrm{He}\)</span>》</span>. <em>Physical Review Letters</em> 35 (21): 1442–44. <a href="https://doi.org/10.1103/PhysRevLett.35.1442">https://doi.org/10.1103/PhysRevLett.35.1442</a>.
+</div>
+<div id="ref-heycke2019" class="csl-entry" role="listitem">
+Heycke, Tobias, 和 Lisa Spitzer. 2019. <span>《Screen recordings as a tool to document computer assisted data collection procedures》</span>. <em>Psychologica Belgica</em> 59 (1): 269–80. <a href="https://doi.org/10.5334/pb.490">https://doi.org/10.5334/pb.490</a>.
+</div>
+<div id="ref-hoekstra2021" class="csl-entry" role="listitem">
+Hoekstra, Rink, 和 Simine Vazire. 2021. <span>《Aspiring to greater intellectual humility in science》</span>. <em>Nature Human Behaviour</em> 5 (12): 1602–7.
+</div>
+<div id="ref-holcombe2020" class="csl-entry" role="listitem">
+Holcombe, Alex O., Marton Kovacs, Frederik Aust, 和 Balazs Aczel. 2020. <span>《Documenting contributions to scholarly articles using <span>CRediT</span> and tenzing》</span>. 编辑 Cassidy R. Sugimoto. <em>PLOS ONE</em> 15 (12): e0244611. <a href="https://doi.org/10.1371/journal.pone.0244611">https://doi.org/10.1371/journal.pone.0244611</a>.
+</div>
+<div id="ref-king2000" class="csl-entry" role="listitem">
+King, Stephen. 2000. <em>On Writing: A Memoir of the Craft</em>. Scribner.
+</div>
+<div id="ref-knuth1992" class="csl-entry" role="listitem">
+Knuth, Donald Ervin. 1992. <em>Literate Programming</em>. no. 27. <span>Center for the Study of Language and Information</span>.
+</div>
+<div id="ref-kothe2021" class="csl-entry" role="listitem">
+Kothe, Emily, Claudio Zandonella Callegher, Filippo Gambarota, Janosch Linkersdörfer, 和 Mathew Ling. 2021. <em><span>trackdown</span>: Collaborative Writing and Editing of R Markdown (or Quarto / Sweave) Documents in Google Drive</em>. <a href="https://doi.org/10.5281/zenodo.5772942">https://doi.org/10.5281/zenodo.5772942</a>.
+</div>
+<div id="ref-kupfer2004" class="csl-entry" role="listitem">
+Kupfer, John A, Amy L Webbeking, 和 Scott B Franklin. 2004. <span>《Forest fragmentation affects early successional patterns on shifting cultivation fields near <span>Indian</span> <span>Church</span>, <span>Belize</span>》</span>. <em>Agriculture, Ecosystems &amp; Environment</em> 103 (3): 509–18. <a href="https://doi.org/10.1016/j.agee.2003.11.011">https://doi.org/10.1016/j.agee.2003.11.011</a>.
+</div>
+<div id="ref-lakens2018" class="csl-entry" role="listitem">
+Lakens, Daniël, Anne M. Scheel, 和 Peder M. Isager. 2018. <span>《Equivalence testing for psychological research: a tutorial》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 1 (2): 259–69. <a href="https://doi.org/10.1177/2515245918770963">https://doi.org/10.1177/2515245918770963</a>.
+</div>
+<div id="ref-lewis2016undoing" class="csl-entry" role="listitem">
+Lewis, Michael. 2016. <em>The undoing project: A friendship that changed the world</em>. Penguin UK.
+</div>
+<div id="ref-nuijten2016" class="csl-entry" role="listitem">
+Nuijten, Michèle B., Chris H J Hartgerink, Marcel A L M van Assen, Sacha Epskamp, 和 Jelte M Wicherts. 2016. <span>《The prevalence of statistical reporting errors in psychology (1985–2013)》</span>. <em>Behavior Research Methods</em> 48 (4): 1205–26.
+</div>
+<div id="ref-peikert2021" class="csl-entry" role="listitem">
+Peikert, Aaron, 和 Andreas M Brandmaier. 2021. <span>《A reproducible data analysis workflow with R Markdown, Git, Make, and Docker》</span>. <em>Quantitative and Computational Methods in Behavioral Sciences</em>, 1–27.
+</div>
+<div id="ref-savage2019" class="csl-entry" role="listitem">
+Savage, Van, 和 Pamela Yeh. 2019. <span>《Novelist Cormac McCarthy’s tips on how to write a great science paper》</span>. <em>Nature</em> 574 (7777): 441–43.
+</div>
+<div id="ref-simmons2012" class="csl-entry" role="listitem">
+Simmons, Joseph P, Leif D Nelson, 和 Uri Simonsohn. 2012. <span>《A 21 word solution》</span>. <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.2160588">https://doi.org/10.2139/ssrn.2160588</a>.
+</div>
+<div id="ref-simons2017" class="csl-entry" role="listitem">
+Simons, Daniel J., Yuichi Shoda, 和 D. Stephen Lindsay. 2017. <span>《Constraints on generality (COG): A proposed addition to all empirical papers》</span>. <em>Perspectives on Psychological Science</em> 12 (6): 1123–28.
+</div>
+<div id="ref-stang2018" class="csl-entry" role="listitem">
+Stang, Andreas, Stephan Jonas, 和 Charles Poole. 2018. <span>《Case study in major quotation errors: a critical commentary on the <span>Newcastle</span>–<span>Ottawa</span> scale》</span>. <em>European Journal of Epidemiology</em> 33 (11): 1025–31. <a href="https://doi.org/10.1007/s10654-018-0443-3">https://doi.org/10.1007/s10654-018-0443-3</a>.
+</div>
+<div id="ref-strand2021" class="csl-entry" role="listitem">
+Strand, Julia. 2021. <span>《Error tight: exercises for lab groups to prevent research mistakes》</span>. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/rsn5y">https://doi.org/10.31234/osf.io/rsn5y</a>.
+</div>
+<div id="ref-young1992" class="csl-entry" role="listitem">
+Young, Helen J., 和 Truman P. Young. 1992. <span>《Alternative <span>Outcomes</span> of <span>Natural</span> and <span>Experimental</span> <span>High</span> <span>Pollen</span> <span>Loads</span>》</span>. <em>Ecology</em> 73 (2): 639–47. <a href="https://doi.org/10.2307/1940770">https://doi.org/10.2307/1940770</a>.
+</div>
+<div id="ref-zinsser2006" class="csl-entry" role="listitem">
+Zinsser, William. 2006. <em>On writing well: the classic guide to writing nonfiction</em>. 7th ed. HarperCollins.
+</div>
+</div>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./013-management.html" class="pagination-link" aria-label="项目管理">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./015-viz.html" class="pagination-link" aria-label="可视化">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

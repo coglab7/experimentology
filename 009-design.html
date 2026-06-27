@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; 设计 – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./010-sampling.html" rel="next">
+<link href="./008-measurement.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./008-measurement.html">规划</a></li><li class="breadcrumb-item"><a href="./009-design.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#实验设计" id="toc-实验设计" class="nav-link active" data-scroll-target="#实验设计"><span class="header-section-number">9.1</span> 实验设计</a>
+  <ul class="collapse">
+  <li><a href="#一个双因素实验" id="toc-一个双因素实验" class="nav-link" data-scroll-target="#一个双因素实验"><span class="header-section-number">9.1.1</span> 一个双因素实验</a></li>
+  <li><a href="#广义-factorial-designs因子设计" id="toc-广义-factorial-designs因子设计" class="nav-link" data-scroll-target="#广义-factorial-designs因子设计"><span class="header-section-number">9.1.2</span> 广义 factorial designs（因子设计）</a></li>
+  <li><a href="#between--vs-within-participant-designs被试间与被试内设计" id="toc-between--vs-within-participant-designs被试间与被试内设计" class="nav-link" data-scroll-target="#between--vs-within-participant-designs被试间与被试内设计"><span class="header-section-number">9.1.3</span> Between- vs within-participant designs（被试间与被试内设计）</a></li>
+  <li><a href="#重复测量和实验-items" id="toc-重复测量和实验-items" class="nav-link" data-scroll-target="#重复测量和实验-items"><span class="header-section-number">9.1.4</span> 重复测量和实验 items</a></li>
+  <li><a href="#离散和连续的实验-manipulations" id="toc-离散和连续的实验-manipulations" class="nav-link" data-scroll-target="#离散和连续的实验-manipulations"><span class="header-section-number">9.1.5</span> 离散和连续的实验 manipulations</a></li>
+  </ul></li>
+  <li><a href="#选择你的-manipulation" id="toc-选择你的-manipulation" class="nav-link" data-scroll-target="#选择你的-manipulation"><span class="header-section-number">9.2</span> 选择你的 manipulation</a>
+  <ul class="collapse">
+  <li><a href="#内部效度威胁混淆" id="toc-内部效度威胁混淆" class="nav-link" data-scroll-target="#内部效度威胁混淆"><span class="header-section-number">9.2.1</span> 内部效度威胁：混淆</a></li>
+  <li><a href="#内部效度威胁placebodemand-和-expectancy" id="toc-内部效度威胁placebodemand-和-expectancy" class="nav-link" data-scroll-target="#内部效度威胁placebodemand-和-expectancy"><span class="header-section-number">9.2.2</span> 内部效度威胁：Placebo、demand 和 expectancy</a></li>
+  <li><a href="#manipulations-的外部效度" id="toc-manipulations-的外部效度" class="nav-link" data-scroll-target="#manipulations-的外部效度"><span class="header-section-number">9.2.3</span> Manipulations 的外部效度</a></li>
+  </ul></li>
+  <li><a href="#本章小结实验设计" id="toc-本章小结实验设计" class="nav-link" data-scroll-target="#本章小结实验设计"><span class="header-section-number">9.3</span> 本章小结：实验设计</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography"></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./008-measurement.html">规划</a></li><li class="breadcrumb-item"><a href="./009-design.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-design" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="learning goals">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>learning goals
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>描述实验设计的关键要素</li>
+<li>定义用于移除 confound 的随机化和 counterbalancing 策略</li>
+<li>讨论如何设计适合目标总体的实验</li>
+</ul>
+</div>
+</div>
+<p>本书的核心论点是：实验应该被设计成能够对因果效应产生精确且无偏的测量。但是什么东西的因果效应？答案是 manipulation！在实验中，我们会操纵（干预）世界的某个方面，并测量这个 manipulation 的效应。然后，我们把这个测量与没有发生干预的情境进行比较。</p>
+<p>我们把不同的干预状态称为实验的<strong>条件</strong>。最常见的实验设计，是比较<strong>控制</strong>条件和<strong>实验</strong>（有时也称为<strong>处理</strong>）条件：在控制条件中不实施干预，在实验条件中实施干预。</p>
+<p>但还可以有许多其他实验设计。在更复杂的实验中，不同维度上的 manipulation（在这个语境中有时称为<strong>因素</strong>）可以组合起来。本章第一部分会介绍一些常见实验设计，以及描述它们所需的词汇。这里我们的重点是识别那些能最大化<span class="smallcaps">测量精度</span>的设计。</p>
+<p>一个好的实验测量必须是目标构念的有效测量。manipulation 也是如此：它必须有效关联到目标因果效应。在本章第二部分，我们会讨论<strong>manipulation validity</strong>的问题，包括生态效度和<strong>混淆</strong>问题。我们会讨论<strong>随机化</strong>和 <strong>counterbalancing</strong> 这类做法，如何帮助移除 nuisance confound，这是实验设计中<span class="smallcaps">减少偏差</span>的重要组成部分。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;这一节会借用 <a href="001-experiments.html" class="quarto-xref"><span>章 1</span></a> 中对因果推断的介绍，所以如果你还没有读过那里，现在正是时候。</p></div></div><p>先预告本章的总体 take-home points：我们认为，你默认的实验应该操纵一个或两个因素，通常不要更多，并且应该在参与者内连续地操纵这些因素。虽然这样的设计并不总是可行，但它们通常最有可能产生某个特定效应的精确估计，而这些估计可以用来约束未来的理论化。我们先从一个 <span class="smallcaps">case study</span> 开始，其中一个细微 confound 让一个实验结果变得难以解释。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="case study">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>case study
+</div>
+</div>
+<section id="自动的-theory-of-mind心理理论" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="自动的-theory-of-mind心理理论">自动的 theory of mind（心理理论）？</h3>
+<p>在我们课程的早期版本中，学生 Desmond Ong 想要重复一个发人深省的发现：婴儿和成人似乎都会追踪其他 agent 的信念状态，即便这与手头任务无关 <span class="citation" data-cites="kovacs2010">(<a href="#ref-kovacs2010" role="doc-biblioref">Kovács, Téglás, 和 Endress 2010</a>)</span>。在这个范式中，一个动画 Smurf 角色会看着一个自驱动的小球进出屏幕后方。在视频结尾，屏幕会倒下，参与者必须回答小球是存在还是不存在。做出这个判断的反应时是关键因变量。</p>
+<p>这个实验设计考察两个因素：参与者是否相信小球存在或不存在（P+/P−），以及动画 agent 根据它看到的内容<em>会相信</em>小球存在还是不存在（A+/A−）。结果是四个条件：P+/A+、P+/A−、P−/A+ 和 P−/A−。（我们可以把这叫作一个<strong>完全交叉</strong>设计，因为一个因素的每个水平都和另一个因素的每个水平一起呈现。）</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-design-kovacs-original" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一张带均值和置信区间的反应时图，横轴是参与者的信念；agent 信念为 absent 时的斜率比 present 时更陡。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-design-kovacs-original-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="009-design_files/figure-html/fig-design-kovacs-original-1.png" class="img-fluid figure-img" style="width:45.0%" alt="一张带均值和置信区间的反应时图，横轴是参与者的信念；agent 信念为 absent 时的斜率比 present 时更陡。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-design-kovacs-original-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.1: 来自 <span class="citation" data-cites="kovacs2010">Kovács, Téglás, 和 Endress (<a href="#ref-kovacs2010" role="doc-biblioref">2010</a>)</span> 的原始数据。误差条显示 95% 置信区间。基于 <span class="citation" data-cites="phillips2015">Phillips 等 (<a href="#ref-phillips2015" role="doc-biblioref">2015</a>)</span>。
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>原始实验和 Desmond 做的重复实验都显示，agent 的信念会显著影响参与者的反应时。这说明那个完全无关的 agent 对小球的想法，似乎会让参与者对小球存在与否反应得更快或更慢。<a href="#fig-design-kovacs-original" class="quarto-xref">Figure&nbsp;<span>9.1</span></a> 展示了原始数据（<span class="math inline">\(N = 24\)</span>）。但是，尽管两项研究都显示了 agent belief 的效应，重复研究以及几个变体还显示了参与者信念和 agent 信念之间的交叉<strong>交互</strong>。当 agent 和参与者<em>都</em>相信小球在屏幕后面时，参与者反而更慢（<a href="#fig-design-kovacs-replication" class="quarto-xref">图&nbsp;<span>9.2</span></a>）。这个发现不符合“追踪不一致信念会减慢反应时”的理论。如果参与者在追踪自己关于小球的信念<em>以及</em> agent 的信念，他们应该在 P+/A+ 条件下最快，而不是更慢。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-design-kovacs-replication" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一张有 9 个面板的图，每个面板和 9.1 结构相同；每个面板中的线都交叉。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-design-kovacs-replication-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="009-design_files/figure-html/fig-design-kovacs-replication-1.png" class="img-fluid figure-img" style="width:85.0%" alt="一张有 9 个面板的图，每个面板和 9.1 结构相同；每个面板中的线都交叉。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-design-kovacs-replication-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.2: 来自 <span class="citation" data-cites="kovacs2010">Kovács, Téglás, 和 Endress (<a href="#ref-kovacs2010" role="doc-biblioref">2010</a>)</span> 一系列重复研究的数据，包括网页版（实验 1a 和 1b）、实验室版（实验 1c）、若干改变作答格式的版本（实验 2 和 3；2AFC = two alternative forced choice），以及一个用大墙完全阻挡 agent 看到小球的实验（实验 4）。“Hits”和“CRs”面板指不同 trial 子集：小球存在时参与者回答“present”，小球不存在时回答“absent”。误差条为 95% 置信区间。基于 <span class="citation" data-cites="phillips2015">Phillips 等 (<a href="#ref-phillips2015" role="doc-biblioref">2015</a>)</span>。
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>一个围绕这个范式工作的合作团队识别出了一个关键问题 <span class="citation" data-cites="phillips2015">(<a href="#ref-phillips2015" role="doc-biblioref">Phillips 等 2015</a>)</span>。实验设计中存在一个<strong>confound</strong>，也就是除了目标因素以外，还有另一个因素在不同条件之间变化。换句话说，除了 agent 和参与者的信念状态，条件之间还有别的东西在变化。这个 confound 是一个注意力检查（<a href="012-collection.html" class="quarto-xref"><span>章 12</span></a> 会进一步讨论）：当 agent 离开场景时，参与者必须按键，以表明自己在注意。对于 P+/A+ 和 P−/A− trial，也就是反应时较慢的那些 trial，这个注意力检查在视频中出现得比另外两个条件晚几秒。当移除注意力检查，或让它在不同条件中的时间保持一致时，反应时效应就消失了。这说明原始发现模式可能是由这个 confound 造成的。</p>
+<p>如果重复的标准是某个特定统计检验在 <span class="math inline">\(p &lt; 0.05\)</span> 下显著，那么这个实验成功重复了。但效应估计与被提出的理论解释并不一致。一个发现可以是可重复的，却不支持底层理论！</p>
+<p>这个故事有一个重要 caveat。后续工作<em>只是</em>揭示了某个特定实验操作化中存在 confound，并没有提供反对一般意义上 automatic theory of mind 的证据。事实上，也有人提出，一旦消除这个 confound，这个范式的其他版本<em>确实</em>揭示了 theory of mind processing 的证据 <span class="citation" data-cites="el-kaddouri2020">(<a href="#ref-el-kaddouri2020" role="doc-biblioref">El Kaddouri 等 2020</a>)</span>。</p>
+</section>
+</div>
+<section id="实验设计" class="level2 page-columns page-full" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="实验设计"><span class="header-section-number">9.1</span> 实验设计</h2>
+<p>实验设计是许多领域的基础；遗憾的是，用来描述它们的术语可能因领域而异，这会变得相当混乱！这里我们大多把实验描述为某种 manipulation 与某个测量之间的关系，其中参与者被随机分配到实验条件中，以估计 manipulation 对测量的效应。因素是 manipulation 发生变化的维度。例如，在上面的 <span class="smallcaps">case study</span> 中，两个因素是参与者信念和 agent 信念。另一个值得熟悉的术语体系，是 <a href="005-estimation.html" class="quarto-xref"><span>5</span></a>–<a href="007-models.html" class="quarto-xref"><span>7</span></a> 章中使用的术语，它们常见于计量经济学和统计学：<strong>treatment</strong>（manipulation）和 <strong>outcome</strong>（measure）。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;这里的术语很难。在心理学中，人们有时会说有一个<strong>自变量</strong>（manipulation，因果上在先，因此相对其他因果影响是“独立的”）和一个<strong>因变量</strong>（measure，我们假设它在因果上依赖于 manipulation）。我们觉得这个术语很难记，因为这些词和它们实际描述的概念差异很大。</p></div></div><p>本节会讨论实验变化的几个关键维度：（1）纳入多少因素，以及这些因素如何交叉；（2）每个参与者接受多少条件和测量；（3）manipulation 是离散水平，还是落在连续尺度上。</p>
+<section id="一个双因素实验" class="level3 page-columns page-full" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="一个双因素实验"><span class="header-section-number">9.1.1</span> 一个双因素实验</h3>
+<p>经典的“实验设计”框架，其目标是把因变量测量中的观察变异分解为：（1）由 manipulation 造成的变异，以及（2）其他变异，包括测量误差和参与者层面的变异。这个框架可以很好地映射到 <a href="005-estimation.html" class="quarto-xref"><span>5</span></a>–<a href="007-models.html" class="quarto-xref"><span>7</span></a> 章所描述的统计框架上。本质上，这个框架用我们实验中的条件结构作为预测变量，来建模测量的分布。</p>
+<p>不同实验设计会让我们更有效或更不有效地估计特定效应。回想 <a href="005-estimation.html" class="quarto-xref"><span>章 5</span></a> 中，我们用一个简单相减来估计茶/奶顺序 manipulation 的效应：<span class="math inline">\(\beta = \theta_{T} - \theta_{C}\)</span>（其中 <span class="math inline">\(\beta\)</span> 是效应估计，每个 <span class="math inline">\(\theta\)</span> 表示一个条件的估计，即处理 <span class="math inline">\(T\)</span> 和控制 <span class="math inline">\(C\)</span>；在那章中，为了表示先茶和先奶条件，我们称它们为 <span class="math inline">\(\theta_T\)</span> 和 <span class="math inline">\(\theta_M\)</span>）。如果三条件实验中有两个不同 treatment，这个逻辑也完全可行：每个 treatment 都可以分别与 control 比较。对于 treatment 1，<span class="math inline">\(\beta_{T_1} = \theta_{T_1} - \theta_{C}\)</span>，对于 treatment 2，<span class="math inline">\(\beta_{T_2} = \theta_{T_2} - \theta_{C}\)</span>。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-design-young-design" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个 2x2 表格，结果（negative/neutral）与信念（negative/neutral）交叉，每格有示例句子。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-design-young-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/design/young2007-design.png" class="img-fluid figure-img" alt="一个 2x2 表格，结果（negative/neutral）与信念（negative/neutral）交叉，每格有示例句子。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-design-young-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.3: <span class="citation" data-cites="young2007">Young 等 (<a href="#ref-young2007" role="doc-biblioref">2007</a>)</span> 中使用的 2 x 2 交叉设计
+</figcaption>
+</figure>
+</div></div><p>不过，如果我们有不止一个不同的目标因素，这个逻辑就会变得更复杂。来看一个例子。</p>
+<p><span class="citation" data-cites="young2007">Young 等 (<a href="#ref-young2007" role="doc-biblioref">2007</a>)</span> 感兴趣的是，道德判断如何同时依赖行动者的信念和他们行动的结果。他们向参与者呈现一些 vignette，例如 Grace 和朋友参观一家化工厂，然后去休息室喝咖啡；在那里，她看到一种白色粉末，并把它放进朋友的咖啡里。接着，他们按照 <a href="#fig-design-young-design" class="quarto-xref">图&nbsp;<span>9.3</span></a> 中的方案，同时操纵 Grace 的<em>信念</em>和她行动的<em>结果</em>。参与者（<span class="math inline">\(N = 10\)</span>）使用四点 Likert scale 评分，判断这些行动在道德上是被禁止的（1）还是可允许的（4）。<a href="#fig-design-young-data" class="quarto-xref">Figure&nbsp;<span>9.4</span></a> 展示了数据。</p>
+<div id="fig-design-young-data" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="一张条形图，展示 neutral/negative outcome 与 neutral/negative belief 下的评分，并标注 simple effects 和 interactions。">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-design-young-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/design/young2007-data.png" class="img-fluid figure-img" style="width:80.0%" alt="一张条形图，展示 neutral/negative outcome 与 neutral/negative belief 下的评分，并标注 simple effects 和 interactions。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-design-young-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.4: 道德可允许性如何随信念和结果变化。结果来自 <span class="citation" data-cites="young2007">Young 等 (<a href="#ref-young2007" role="doc-biblioref">2007</a>)</span>，并标注了估计效应。简单效应测量各单独条件与 neutral belief、neutral outcome 条件之间的差异。交互测量两个简单效应的预测总和，与 negative belief、negative outcome 条件下实际观察数据之间的差异。
+</figcaption>
+</figure>
+</div>
+<p>Young 等人的设计有两个因素：belief 和 outcome。每个因素有两个水平（neutral 和 negative，分别把 belief 记为 <span class="math inline">\(B\)</span> 和 <span class="math inline">\(-B\)</span>，outcome 记为 <span class="math inline">\(O\)</span> 和 <span class="math inline">\(-O\)</span>）。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> 这些因素是<strong>完全交叉</strong>的：每个因素的每个水平都与其他每个因素的每个水平组合。</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;这两者都不一定是“控制”条件：目标只是比较该因素的两个水平，即 negative 和 neutral，从而估计该因素带来的效应。</p></div></div><p>这个完全交叉设计让我们很容易估计感兴趣的量。假设我们的<strong>参考</strong>组（目前等同于控制组）是 neutral belief、neutral outcome。现在我们很容易使用之前同样的相减方式来估计自己关心的特定效应。例如，我们可以看 neutral outcome 情况下 negative belief 的效应：<span class="math inline">\(\beta_{-B,O} = \theta_{-B,O} - \theta_{B,O}\)</span>。这个效应显示在 <a href="#fig-design-young-data" class="quarto-xref">图&nbsp;<span>9.4</span></a> 的左侧。 <!-- The effect of a negative outcome is computed similarly as $\beta_{B,-O} = \theta_{B,-O} - \theta_{B,O}$. --></p>
+<p>但现在出现了一个复杂性：这两个<strong>简单效应</strong>（一个变量在另一个变量特定水平上的效应）合起来会暗示，negative belief、negative outcome 条件下的组合效应 <span class="math inline">\(\beta_{-B,-O}\)</span> 应该等于 <span class="math inline">\(\beta_{-B,O}\)</span> 和 <span class="math inline">\(\beta_{B,-O}\)</span> 之和。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> 从 <a href="#fig-design-young-data" class="quarto-xref">图&nbsp;<span>9.4</span></a> 可以看到，这并不对。如果真是这样，negative belief、negative outcome 条件会低于最低可能评分！</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;如果你感兴趣，也可以用同样的相减逻辑计算某个因素的<strong>平均</strong>或<strong>主</strong>效应。例如，negative belief（<span class="math inline">\(-B\)</span>）相对于 neutral belief（<span class="math inline">\(B\)</span>）的平均效应可以计算为<span class="math inline">\(\beta_{-B} = \frac{(\theta_{-O, -B}\ +\ \theta_{O, -B})\ -\ (\theta_{-O, B}\ +\ \theta_{O, B})}{2}\)</span>。</p></div><div id="fn5"><p><sup>5</sup>&nbsp;如果你读得很仔细，可能会觉得这听起来像是在谈方差分析（ANOVA），而不是实验设计本身。其实这两个主题实际上是同一个主题！问题在于如何设计实验，使这些统计模型能够用来估计我们关心的特定效应，以及效应组合。万一你错过了，我们在 <a href="007-models.html" class="quarto-xref"><span>章 7</span></a> 中讨论了如何在回归框架中建模交互。</p></div></div><p>相反，我们观察到一个<strong>交互</strong>效应（当有两个因素时，有时称为<strong>二阶交互</strong>）：当两个因素同时存在时的效应，不等于两个简单效应之和。 为了捕捉这个效应，我们需要一个交互项：<span class="math inline">\(\beta_{-B,-O}\)</span>。<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> 换句话说，negative belief（意图）对主观道德可允许性的效应，取决于行动是否造成伤害。关键是，如果没有完全交叉设计， 我们无法估计这个交互，而且会对其中一个条件做出错误预测。</p>
+</section>
+<section id="广义-factorial-designs因子设计" class="level3 page-columns page-full" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="广义-factorial-designs因子设计"><span class="header-section-number">9.1.2</span> 广义 factorial designs（因子设计）</h3>
+<p>Young 等人的设计包含两个因素，每个因素两个水平，称为 <strong>2 x 2 design</strong>（读作“two by two”）。这类 2 x 2 设计极其常见且有用，但它们只是可以构造的无限多这类设计中的一种。</p>
+<p>假设我们向 Young 等人的设计加入第三个因素：Grace 当天对朋友的感觉是中性的，还是生气的。如果我们把第三个因素 <span class="math inline">\(A\)</span> 与另外两个因素（<span class="math inline">\(B\)</span> 和 <span class="math inline">\(O\)</span>）完全交叉，就会得到一个 2 x 2 x 2 设计。这个设计有八个条件： <span class="math inline">\((A, B, O)\)</span>、<span class="math inline">\((A, B, -O)\)</span>、<span class="math inline">\((A, -B, O)\)</span>、<span class="math inline">\((A, -B, -O)\)</span>、<span class="math inline">\((-A, B, O)\)</span>、<span class="math inline">\((-A, B, -O)\)</span>、<span class="math inline">\((-A, -B, O)\)</span>、<span class="math inline">\((-A, -B, -O)\)</span>。 这些条件允许我们估计二阶和三阶交互（见 <a href="#tbl-three-way" class="quarto-xref">表&nbsp;<span>9.1</span></a>）。</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<!-- \scriptsize -->
+<div class="cell">
+<div id="tbl-three-way" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-three-way-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;9.1: Effects in a 2 x 2 x 2 design with affect, belief, and outcome as factors.
+</figcaption>
+<div aria-describedby="tbl-three-way-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+<!-- \normalsize -->
+</div></div><p>三阶交互很难思考！affect x belief x outcome 交互告诉你，由三个因素同时存在所导致的道德可允许性差异，与根据二阶交互估计所预测出来的差异之间有多大差别。除了难以思考，高阶交互通常也很难估计，因为要准确估计它们，你必须稳定估计所有低阶交互 <span class="citation" data-cites="mcclelland1993">(<a href="#ref-mcclelland1993" role="doc-biblioref">McClelland 和 Judd 1993</a>)</span>。因此，除非你处在一种情境中：既对这些交互有强预测，又确信自己有能力恰当地估计它们，否则我们不建议采用依赖高阶交互的实验设计。</p>
+<p>事情还可以更复杂。如果你有三个因素，每个因素两个水平，如上面的例子（<a href="#tbl-three-way" class="quarto-xref">表&nbsp;<span>9.1</span></a>），你总共可以估计七个感兴趣的效应。但如果你有<em>四个</em>因素，每个因素两个水平，就会有 15 个效应。四个因素、每个因素<em>三个</em>水平，会得到可怕的 80 个不同效应！<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> 至少从在合理样本量中估计和解释单个效应的角度看，这条路通向疯狂。再次强调，我们建议从单因素和双因素设计开始。遵循良好测量和抽样实践的简单设计，能教会我们很多东西。</p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;一般公式是 <span class="math inline">\(N\)</span> 个因素、每个因素 <span class="math inline">\(M\)</span> 个水平时，有 <span class="math inline">\(M^N-1\)</span> 个效应。</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>depth
+</div>
+</div>
+<section id="广义-factorial-designs-的估计策略" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="广义-factorial-designs-的估计策略">广义 factorial designs 的估计策略</h3>
+<p>那么，如果你真的关心四个或更多因素，也就是说你想估计它们的效应，并把它们纳入理论，应该怎么做？最简单的策略，是在研究起步时，用一系列单因素实验独立测量它们。当每个目标因素都有一个单一参考水平时，这种设置很自然，而且这些实验可以为判断哪些因素对 outcome 最重要提供基础，从而决定哪些因素应该优先进入估计交互的实验。</p>
+<p>另一方面，有时一个因素没有参考水平。例如，在 <span class="citation" data-cites="kovacs2010">Kovács, Téglás, 和 Endress (<a href="#ref-kovacs2010" role="doc-biblioref">2010</a>)</span> 范式中，不清楚 positive belief 还是 negative belief 是参考水平。在像他们那样的完全交叉设计中，这不是问题；但如果你有两个以上这类因素，这种情况就可能造成问题。理想情况下，你会想运行独立实验，但你必须为所有其他变量选择某个水平，不能直接假设某个水平是“中性”的。</p>
+<p>一种允许你计算主效应但不能计算交互的解决方案，叫作<strong>拉丁方</strong>。拉丁方是三因素设计的一个好方案；三因素通常也是完全交叉设计开始变得难以承受的水平。 <!-- ^[There's a variant called the "Greco-Latin square" for four factors, in case you need that.] --> 拉丁方是一个 <span class="math inline">\(n\ \text{x}\ n\)</span> 矩阵，其中每个数字在每一行和每一列中都恰好出现一次，例如： <span class="math display">\[\begin{bmatrix}
+    1 &amp; 2 &amp; 3 \\
+    2 &amp; 3 &amp; 1\\
+    3 &amp; 1 &amp; 2 \\
+    \end{bmatrix}\]</span> 这个 <span class="math inline">\(n = 3\)</span> 的拉丁方给出了如何在 3 x 3 x 3 实验中平衡因素的方案。行号是一个因素，列号是第二个因素，单元格中的数字是第三个因素。因此，一个条件是 <span class="math inline">\((1,1,1)\)</span>，即所有因素的第一个水平，显示在左上角单元格。另一个条件是 <span class="math inline">\((3,3,2)\)</span>，即右下角单元格。虽然完全交叉设计需要运行 27 个单元格，拉丁方只有九个。关键是，这九个单元格中的因素组合是平衡的，因此可以估计三个因素中每个水平的平均效应。 <!-- ^[You can check and see that no interactions can be estimated, because no factor co-occurs with two different levels of another factor.]   --></p>
+<p>还有更高级的方法可用。例如，<strong>optimal experiment design</strong> 文献中包含一些方法，用于选择最有信息量的一系列实验，以估计模型中的参数；这个模型可以包含许多因素及其交互 <span class="citation" data-cites="myung2009">(<a href="#ref-myung2009" role="doc-biblioref">Myung 和 Pitt 2009</a>)</span>。走这条路通常意味着你已经实现了一个关于研究领域的计算理论，但它可以是探索多因素复杂实验空间的一种非常有成效的策略。</p>
+</section>
+</div>
+<!-- \clearpage -->
+</section>
+<section id="between--vs-within-participant-designs被试间与被试内设计" class="level3 page-columns page-full" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="between--vs-within-participant-designs被试间与被试内设计"><span class="header-section-number">9.1.3</span> Between- vs within-participant designs（被试间与被试内设计）</h3>
+
+<div class="no-row-height column-margin column-container"><div id="fig-design-between" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个图：2 名参与者进入 control 后被测量，2 名参与者进入 treatment 后被测量。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-design-between-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/design/between.png" class="img-fluid figure-img" alt="一个图：2 名参与者进入 control 后被测量，2 名参与者进入 treatment 后被测量。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-design-between-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.5: 一个 between-participants design。
+</figcaption>
+</figure>
+</div></div><p>一旦你知道想在实验中操纵哪些因素，下一步就是考虑这些因素将如何呈现给参与者，以及这种呈现如何与你的测量相互作用。最大的决策是：每个参与者是只经历某个因素的一个水平，即 <strong>between-participants</strong> design，还是经历多个水平，即 <strong>within-participants</strong> design。 <a href="#fig-design-between" class="quarto-xref">Figure&nbsp;<span>9.5</span></a> 展示了一个简单的 between-participants design，有四名参与者（每个条件分配两名），而 <a href="#fig-design-within" class="quarto-xref">图&nbsp;<span>9.6</span></a> 展示了同一设计的 within-participants 版本。</p>
+<div id="fig-design-within" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="一个图，从 9.5 的结构开始，然后参与者交换 treatment/control 分配，进入测量。">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-design-within-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/design/within.png" class="img-fluid figure-img" style="width:90.0%" alt="一个图，从 9.5 的结构开始，然后参与者交换 treatment/control 分配，进入测量。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-design-within-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.6: 一个 within-participants design， 对顺序做了 counterbalancing（下面会讨论 counterbalancing）。
+</figcaption>
+</figure>
+</div>
+<p>由于人们的差异很大，决定在参与者之间还是参与者内测量某个因素，会产生重要后果。想象我们像之前一样估计 treatment effect，只是计算 <span class="math inline">\(\widehat{\beta} = \widehat{\theta}_{T} - \widehat{\theta}_{C}\)</span>，其中两个估计来自不同参与者总体。在这种情境中，我们的估计 <span class="math inline">\(\widehat{\beta}\)</span> 包含三个成分：（1）<span class="math inline">\(\theta_{T}\)</span> 和 <span class="math inline">\(\theta_{C}\)</span> 之间的真实差异；（2）与抽样有关的变异，即来自总体的哪些参与者最终进入两个条件样本；（3）测量误差。 成分 2 之所以存在，是因为来自同一总体的任意两个参与者样本，在某个测量上的平均值都会不同。这正是我们在 <a href="006-inference.html" class="quarto-xref"><span>章 6</span></a> 的零分布中看到的那种抽样变异。</p>
+<p>当实验设计是参与者内设计时，成分 2 不存在，因为两个条件中的参与者都是从<em>同一个</em>总体中抽到的。如果我们运气不好，所有参与者在测量上都低于总体平均数，那么这种不走运会同等影响我们的条件。选择适当样本量的后果相当极端：between-participants designs 通常需要的参与者数量，是 within-participants designs 的两到八倍！<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;如果你想估计 within-participants 数据收集带来多大优势，需要知道你的观察值之间有多相关（可靠）。关于这个问题的一项分析 <span class="citation" data-cites="lakens2016">(<a href="#ref-lakens2016" role="doc-biblioref">Lakens 2016</a>)</span> 提出，关键关系是 <span class="math inline">\(N_{\text{within}} = N_{\text{between}} (1-\rho) /2\)</span>，其中 <span class="math inline">\(\rho\)</span> 是个体内两个条件测量之间的相关。它们越相关，within-participants 所需的 <span class="math inline">\(N\)</span> 就越小。</p></div></div><p>既然有这些优势，为什么还会考虑使用 between-participants design？ within-participants design 并不适用于所有实验。例如，考虑一种医学干预，比如把一个新的手术程序和一个既有手术程序比较。患者不可能接受两种不同手术，因此不可能进行参与者内比较。</p>
+<p>行为科学中的大多数 manipulation 没有这么极端，但给同一参与者提供多个条件仍然可能不现实或不合适。<span class="citation" data-cites="greenwald1976">Greenwald (<a href="#ref-greenwald1976" role="doc-biblioref">1976</a>)</span> 区分了三类不良效应：<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;我们倾向于把所有这些都看作 carryover effect 的形式，并且有时用这个标签作为总括性描述。一些人还使用一个形象说法 “poisoning the well” <span class="citation" data-cites="gelman2017">(<a href="#ref-gelman2017" role="doc-biblioref">Gelman 2017</a>)</span>，即早期条件“毁掉”了后续条件的数据。</p></div></div><ul>
+<li><strong>练习效应</strong>发生在实施测量或 treatment 会导致变化的时候。想象一个用于教授数学概念的课程干预：很难说服一所学校把同一个主题教给学生两次，而且第二轮教学的效应很可能与第一轮很不一样！</li>
+<li><strong>敏化效应</strong>发生在看到两个版本的干预后，你可能因为比较了它们并注意到差异，而对第二个版本作出不同于第一个版本的反应。考虑一项关于房间照明的研究：如果实验者不断改变照明，参与者可能会意识到照明是研究重点！</li>
+<li><strong>延续效应</strong>指的是一个 treatment 的效应可能比测量期持续更久。例如，想象一项研究中，一个 treatment 是让参与者因为一个不可能解开的谜题而感到沮丧；如果第二个条件安排在这个条件之后，参与者可能仍然沮丧，导致条件之间发生效应 spillover。</li>
+</ul>
+<p>所有这些问题都可能让 within-participant designs 真正令人担心。但想要获得完全不受这些问题偏倚的效应估计，可能会导致 between-participant designs 被过度使用 <span class="citation" data-cites="gelman2017">(<a href="#ref-gelman2017" role="doc-biblioref">Gelman 2017</a>)</span>。 如上所述，between-participant designs 在 power 和精度方面代价很大。</p>
+<p>另一种做法是承认 carryover 类效应的可能性，并努力缓解它们。第一，你可以确保条件顺序被随机化或平衡（见下文）；第二，你可以在统计模型中分析这些 carryover effects（例如估计条件和顺序的交互）。<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;即便一个因素必须在参与者之间变化，通常仍然可以让其他因素在参与者内变化，从而形成 mixed design，其中一些因素是 between，另一些是 within。</p></div><div id="fn10"><p><sup>10</sup>&nbsp;Caveat：研究设计是观察性的，所以不能做因果推断。</p></div></div><p>我们在 <a href="#fig-design-between-within" class="quarto-xref">图&nbsp;<span>9.7</span></a> 中总结了从我们的角度看这个问题的状态。我们认为，只要可能，就应该优先选择 within-participant designs。 这个结论也和我们对课程中重复研究所做的 meta-research 一致：在 176 项学生重复研究中，使用 within-subjects design 是成功重复的最强相关因素 <span class="citation" data-cites="boyce2023">(<a href="#ref-boyce2023" role="doc-biblioref">Boyce, Mathur, 和 Frank 2023</a>)</span>。<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<div id="fig-design-between-within" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="一组列表：between design 的缺点（需要很多参与者、变异性）；within design 的缺点（carryover effects）。">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-design-between-within-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/design/between-within.png" class="img-fluid figure-img" style="width:70.0%" alt="一组列表：between design 的缺点（需要很多参与者、变异性）；within design 的缺点（carryover effects）。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-design-between-within-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.7: Between-participant 与 within-participant designs 的优缺点。我们建议尽可能使用 within-participant designs。
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="重复测量和实验-items" class="level3 page-columns page-full" data-number="9.1.4">
+<h3 data-number="9.1.4" class="anchored" data-anchor-id="重复测量和实验-items"><span class="header-section-number">9.1.4</span> 重复测量和实验 items</h3>
+<p>我们刚刚讨论的是是否向同一个参与者实施多个 <em>manipulations</em>。对 <em>measures</em> 来说，也会出现完全类似的决策！我们的 take-home point 也类似：除非出现特定困难，否则通常非常值得为每名参与者在每个条件中做多次测量（通过多个实验 <strong>trials</strong>）。</p>
+<p>你可以创建一个 between-participants design，在其中先实施 manipulation，然后测量多次。<a href="#fig-design-rm-between" class="quarto-xref">图&nbsp;<span>9.8</span></a> 展示了这种情境。有时这种设计效果很好。例如，想象一个经颅磁刺激（TMS）实验：参与者接受一段时间针对某个特定脑区的神经刺激。然后，他们反复执行某个测量任务，直到刺激效应消退。他们执行测量任务的次数越多，对任何效应的估计就越好（例如，与针对另一个脑区的 TMS 控制条件相比）。</p>
+<div id="fig-design-rm-between" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="一个图，从 9.5 的结构开始，然后每个参与者又流向两次测量。">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-design-rm-between-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/design/rm-between.png" class="img-fluid figure-img" style="width:90.0%" alt="一个图，从 9.5 的结构开始，然后每个参与者又流向两次测量。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-design-rm-between-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.8: 一个 between-participants、 repeated-measures design。
+</figcaption>
+</figure>
+</div>
+<p>这种设计有时被称为<strong>重复测量</strong>设计，但这里的术语又有些棘手。“重复测量”指的是每个参与者被测量不止一次的任何实验，包括 between-participants 和 within-participants designs。<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> 我们的建议是：既使用 within-participants designs，<em>也</em>从每名参与者那里获得多次测量。</p>
+<div class="no-row-height column-margin column-container"><div id="fn11"><p><sup>11</sup>&nbsp;我们这里说的是用同一个测量做多个 trial，而不是多个不同测量。如 <a href="008-measurement.html" class="quarto-xref"><span>章 8</span></a> 所讨论，我们倾向于反对在单个实验中测量很多不同东西，部分原因正是本章所阐明的这些担忧：如果你有时间，最好把你最关心的东西测得更精确。把一件事测好已经够难了。把一件事测好，远比把很多事测差要好。</p></div></div><p>为什么？在上一小节，我们描述了 between-participants design 中估计的变异如何依赖三个成分：（1）真实条件差异；（2）条件之间的抽样变异；（3）测量误差。</p>
+<p>Within-participants designs 很好，因为它们不包含（2）。重复测量会减少（3）：测量次数越多，测量误差越低，进而测量信度越高！</p>
+<p>不过，重复同一个测量很多次也有问题。有些测量无法在不改变反应的情况下重复。举一个明显例子，我们不能把完全相同的数学题给同一个人做两次，并得到两个有用的数学能力测量！这个问题的典型解决方案是创建多个 items。以数学评估为例，你会创建多个你认为测量同一个概念、但数字或其他表面特征不同的问题。</p>
+<p>使用多个 items 做测量有两个好处。第一，它允许跨 item 合并反应，从而降低测量误差。第二，它提高了测量的可推广性。一个在许多不同 items 上都一致的效应，更可能是可以推广到一整类刺激的效应；这和使用多个参与者能够支持跨人群总体的推广，逻辑完全相同 <span class="citation" data-cites="clark1973">(<a href="#ref-clark1973" role="doc-biblioref">Clark 1973</a>)</span>。</p>
+<div id="fig-design-pre-post" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="一个图：2 名参与者流向 measure、control、measure；2 名参与者流向 measure、treatment、measure。">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-design-pre-post-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/design/pre-post.png" class="img-fluid figure-img" style="width:70.0%" alt="一个图：2 名参与者流向 measure、control、measure；2 名参与者流向 measure、treatment、measure。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-design-pre-post-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.9: 一个 between-participants、 pre-post design。
+</figcaption>
+</figure>
+</div>
+<p>重复测量的 between-participants design 有一个变体：在干预前（pre-）和干预后（post-）都实施测量，如 <a href="#fig-design-pre-post" class="quarto-xref">图&nbsp;<span>9.9</span></a> 所示。这种设计有时称为 <strong>pre-post</strong> design。当干预规模较大、也更难做成 within-participants 时，这种设计极其常见，例如在现场实验中，一个政策或课程被提供给一个样本而不提供给另一个样本。前测可以用来减去参与者层面的变异，从而恢复对 treatment effect 的更精确估计。回想一下，在纯 between-participants design 中，我们的 treatment effect 是 <span class="math inline">\(\beta = \theta_{T} - \theta_{C}\)</span>。在 pre-post design 中，我们可以做得更好，计算 <span class="math inline">\(\beta = (\theta_{T_{\text{post}}} - \theta_{T_{\text{pre}}}) - (\theta_{C_{\text{post}}} - \theta_{C_{\text{pre}}})\)</span>。这个方程说的是：“treatment 组比 control 组多上升了多少？<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>&nbsp;这个估计有时称为 “difference in differences”。这个基本思想在计量经济学中被广泛使用，既用于实验情形，也用于准实验情形 <span class="citation" data-cites="cunningham2021">(<a href="#ref-cunningham2021" role="doc-biblioref">Cunningham 2021</a>)</span>。不过在实践中，我们建议在基于模型的分析中把 treatment 前测量作为协变量，而不是只做简单相减。</p></div></div><p>总之，within-participants、repeated-measurement designs 是大多数知觉、心理物理学和认知心理学研究的基本工具。当 manipulation 和 measure 都可以重复时，即便样本量很小，这些设计也能提供很高的测量精度；只要可能，我们都推荐使用。</p>
+<!-- \clearpage -->
+<div class="callout callout-style-default callout-note callout-titled" title="accident report">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>accident report
+</div>
+</div>
+<section id="刺激特异性效应" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="刺激特异性效应">刺激特异性效应</h3>
+<p>想象你是一名心理语言学家，假设名词比动词加工得更快。你做了一个实验，选出十个动词和十个名词，然后测量一大批参与者阅读每个词的时间。你发现了支持预测效应的强证据，并发表了一篇论文。唯一的问题是，与此同时，另一个人做了完全相同的研究，只是用了不同的名词和动词，并发表了一篇得出相反结论的论文。当这种情况发生时，可能每个效应都是由所选择的特定实验 items 驱动的，而不是一个对一般名词和动词都成立的推广 <span class="citation" data-cites="clark1973">(<a href="#ref-clark1973" role="doc-biblioref">Clark 1973</a>)</span>。</p>
+<p>从样本推广到总体的问题并不新鲜。正如我们在 <a href="006-inference.html" class="quarto-xref"><span>章 6</span></a> 中讨论过的，我们一直在对参与实验的人样本做这类推断。我们的经典统计技术旨在量化从参与者样本推广到总体的能力，因此我们知道，非常小的样本量会导致很弱的推广。<em>items</em> 上会出现完全相同的问题：非常小的实验 items 样本，会导致到 item 总体的推广很弱。</p>
+<p>Item effects 有点像偶然找到一组十个人，他们的左脚趾都比右脚趾长。如果你继续测量同一组人的脚趾，可以继续重复这个长度差异。但这并不意味着它对整个总体成立。</p>
+<p>这种<strong>刺激可推广性</strong>问题出现在心理学的许多不同领域。一个例子是，数百篇论文曾围绕一个叫 “risky shift” 的现象展开，也就是小组在就某个决策进行审议时，会比个人做出风险更高的决策。不幸的是，这个现象似乎完全由小组审议的特定 vignette 选择所驱动：有些故事产生 risky shift，另一些故事则产生更保守的 shift <span class="citation" data-cites="westfall2015">(<a href="#ref-westfall2015" role="doc-biblioref">Westfall, Judd, 和 Kenny 2015</a>)</span>。</p>
+<p>另一个例子来自记忆文献。在一篇经典论文中，<span class="citation" data-cites="baddeley1975">Baddeley, Thomson, 和 Buchanan (<a href="#ref-baddeley1975" role="doc-biblioref">1975</a>)</span> 提出，发音耗时更长的词（“tycoon” 或 “morphine”）会比耗时更短的词（“ember” 或 “wicket”）记得更差，即使它们有相同音节数。这个效应似乎也由原始论文所选择的特定词组驱动。它在那一特定刺激集上高度可重复，但不能推广到其他刺激集 <span class="citation" data-cites="lovatt2000">(<a href="#ref-lovatt2000" role="doc-biblioref">Lovatt, Avons, 和 Masterson 2000</a>)</span>。</p>
+<p>这些例子的含义很清楚：实验者需要在实验设计和分析中小心，避免从自己的刺激过度推广到更宽泛的构念。三个主要步骤可以帮助实验者避免这个陷阱：</p>
+<ol type="1">
+<li>为了最大化一般性，使用与参与者样本规模相当的实验 items 样本，例如词、图片或 vignette。</li>
+<li>重复一个实验时，除了重新抽取参与者样本，也考虑重新抽取 item 样本。起草新 item 更费力，但会带来更稳健的结论。</li>
+<li>当实验 items 是从更广泛总体中随机抽取时，使用包含这个抽样过程的统计模型（例如 <a href="007-models.html" class="quarto-xref"><span>章 7</span></a> 中带 item 随机截距的 mixed effects models）。</li>
+</ol>
+</section>
+</div>
+<!-- \clearpage -->
+</section>
+<section id="离散和连续的实验-manipulations" class="level3 page-columns page-full" data-number="9.1.5">
+<h3 data-number="9.1.5" class="anchored" data-anchor-id="离散和连续的实验-manipulations"><span class="header-section-number">9.1.5</span> 离散和连续的实验 manipulations</h3>
+<p>心理学中的大多数实验设计使用离散条件 manipulation：treatment vs control。在我们看来，相对于更连续地操纵 treatment 强度，这个决策常常错失机会。实验的目标是估计因果效应；理想情况下，这个估计可以推广到其他情境，并作为理论的基础。不只是测量一个效应，而是测量一个<strong>剂量-反应</strong>关系，也就是当 manipulation 强度变化时，测量如何变化。这有许多好处，可以帮助实现上述目标。</p>
+<!-- \clearpage -->
+<p>许多 manipulation 都可以被<strong>滴定</strong>，也就是说，只要实验者有一点创造力，它们的强度就可以连续变化。课程干预可以以不同强度实施，例如改变授课 session 数。对于 priming manipulation，可以改变 prime 刺激的频率或持续时间。两个刺激可以连续 morph，从而考察分类边界。<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn13"><p><sup>13</sup>&nbsp;这些方法在知觉和心理物理学研究中极其常见，部分原因是被研究的维度本身往往天然连续。如果<em>不</em>连续操纵刺激对比度，基本不可能估计参与者的视觉对比敏感度！</p></div></div><p>Dose-response designs 很有用，因为它们可以让你洞察从 manipulation 映射到 measure 的函数形状。知道这个形状可以帮助你的理论理解！看看 <a href="#fig-design-dose-schema" class="quarto-xref">图&nbsp;<span>9.10</span></a> 给出的例子。</p>
+<div id="fig-design-dose-schema" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="一张有 3 个面板的图：control/treatment 两个点；control、T1、T2 多个点；连续 dosage 上连接起来的点。">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-design-dose-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/design/dose-response.png" class="img-fluid figure-img" style="width:95.0%" alt="一张有 3 个面板的图：control/treatment 两个点；control、T1、T2 多个点；连续 dosage 上连接起来的点。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-design-dose-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.10: 三个示意设计。（左）Control 和 treatment 是一个名义变量的两个水平。（中）Control 与 treatment 的有序水平比较。（右）Treatment level 是区间或比率变量，因此可以连接各点并外推出参数曲线。
+</figcaption>
+</figure>
+</div>
+<p>如果你的实验只有两个条件，那么关于 manipulation 和 measure 之间的关系，你最多只能说它产生了某个特定大小的效应；实质上，你是假设 condition 是一个名义变量。 如果你有多个有序 treatment 水平，就可以开始推测 treatment 和效应大小之间关系的性质。但如果你能测量 treatment 的强度，那么就可以开始通过参数函数（例如线性回归、 sigmoid 或其他函数）描述 treatment 强度和效应强度之间关系的性质。<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> 这些参数函数反过来可以让你从实验中推广，预测在你没有直接测量的干预条件下会发生什么！</p>
+<div class="no-row-height column-margin column-container"><div id="fn14"><p><sup>14</sup>&nbsp;当然，这些假设都带有理论负载：选择线性函数或 sigmoid 并不是必要的，没有什么能保证简单、平滑或单调函数就是正确的。关键是，选择一个函数会明确你关于 treatment-effect 关系性质的假设。</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>depth
+</div>
+</div>
+<section id="titrated-designs滴定式设计相关的取舍" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="titrated-designs滴定式设计相关的取舍">titrated designs（滴定式设计）相关的取舍</h3>
+<p>和成人一样，婴儿喜欢看更有趣、更复杂的刺激。但他们总是偏好复杂刺激吗？还是说他们会寻找与自己加工能力相匹配的复杂度水平？为了检验这个假设，<span class="citation" data-cites="brennan1966">Brennan, Ames, 和 Moore (<a href="#ref-brennan1966" role="doc-biblioref">1966</a>)</span> 让三个不同年龄组的婴儿（3、8 和 14 周，<span class="math inline">\(N = 30\)</span>）观看三种不同复杂度的黑白棋盘格刺激（2 x 2、8 x 8 和 24 x 24）。</p>
+<p>他们的发现绘制在 <a href="#fig-design-dose-ex" class="quarto-xref">图&nbsp;<span>9.11</span></a>: 最年幼的婴儿偏好最简单的刺激，中间年龄的婴儿偏好中等复杂度刺激，最年长的婴儿偏好最复杂刺激。这些发现有助于推动这样一种理论：婴儿会优先注意那些为其加工能力提供适当学习输入的刺激 <span class="citation" data-cites="kidd2012">(<a href="#ref-kidd2012" role="doc-biblioref">Kidd, Piantadosi, 和 Aslin 2012</a>)</span>。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-design-dose-ex" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一张按刺激复杂度在 3 个年龄点上绘制注视时间的图：2x2 下降，8x8 先上升再下降，24x24 上升。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-design-dose-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="009-design_files/figure-html/fig-design-dose-ex-1.png" class="img-fluid figure-img" style="width:55.0%" alt="一张按刺激复杂度在 3 个年龄点上绘制注视时间的图：2x2 下降，8x8 先上升再下降，24x24 上升。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-design-dose-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.11: 婴儿注视时间，按刺激复杂度和婴儿年龄绘制。数据来自 <span class="citation" data-cites="brennan1966">Brennan, Ames, 和 Moore (<a href="#ref-brennan1966" role="doc-biblioref">1966</a>)</span>。
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>如果你的目标只是检测效应是否为零，那么 dose-response designs 并不能实现最大的 statistical power。 例如，如果 <span class="citation" data-cites="brennan1966">Brennan, Ames, 和 Moore (<a href="#ref-brennan1966" role="doc-biblioref">1966</a>)</span> 只是想获得最大 statistical power，他们也许只应该测试两个年龄组和两个复杂度水平（比如 3 周和 14 周婴儿，以及 2 x 2 和 24 x 24 棋盘格）。这已经足以显示复杂度和年龄之间的交互，而且把更多资源投入这四个条件（而不是九个条件）会让每个条件的估计更精确。但他们的发现就没那么清楚地支持“婴儿偏好适合其加工能力的刺激”这一观点了，因为没有哪个组会偏好中等复杂度（就像 8 周婴儿显然表现出的那样）。通过努力测量中间条件，他们为自己的理论提供了更强检验。</p>
+</section>
+</div>
+</section>
+</section>
+<section id="选择你的-manipulation" class="level2 page-columns page-full" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="选择你的-manipulation"><span class="header-section-number">9.2</span> 选择你的 manipulation</h2>
+<p>上一节中，我们回顾了许多常见实验设计。这些设计为组合 manipulations 和 measures 提供了一组常见选项。但你的选择必须以你感兴趣的具体 manipulation 为基础！本节会讨论实验者在设计 manipulations 时需要考虑的问题。</p>
+<p>在 <a href="008-measurement.html" class="quarto-xref"><span>章 8</span></a> 中，我们讨论了<em>测量</em>效度，但效度这个概念也可以应用于 manipulations，而不只是 measures。具体来说，如果一个 manipulation 对应于实验者意图干预的构念，那么它就是有效的。在这个语境中，针对 manipulations 的<em>内部</em>效度威胁，通常指实验设计中的某些因素让预期 manipulation 没有真正干预目标构念。相反，针对 manipulations 的<em>外部</em>效度威胁，通常指 manipulation 本身与目标构念并不很好匹配。</p>
+<section id="内部效度威胁混淆" class="level3 page-columns page-full" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="内部效度威胁混淆"><span class="header-section-number">9.2.1</span> 内部效度威胁：混淆</h3>
+<p>最重要的是，manipulations 必须真的操纵正在估计其因果效应的构念。如果它们<em>实际</em>操纵的是别的东西，那么它们就是<strong>混淆的</strong>。这个术语在心理学中被广泛使用，但值得重新看一下它的含义。<strong>实验混淆</strong>是一个在实验设计过程中产生的变量，它既与预测变量有因果关系，又可能与 outcome 有关系。因此，它是对<strong>内部效度</strong>的威胁。</p>
+<p>回到 <a href="001-experiments.html" class="quarto-xref"><span>章 1</span></a> 中关于因果推断的讨论。我们的目标是用随机实验估计金钱对幸福的因果效应。但直接给人钱是一个很大的干预，它涉及与研究者接触；即使你的 manipulation 失败了，单独的接触也可能导致实验效应。因此，许多给参与者钱的研究会给少量钱或大量钱。这个设计让两个条件中的研究者接触保持一致，意味着两个条件之间的 outcome 差异应该由收到的钱数造成（除非还有其他 confounds！）。</p>
+<p>假设你正在设计这样一个实验，并且想遵循我们的建议，使用 within-participants design。 你可以测量幸福，给参与者 $100，等待一个月后再次测量幸福，再给参与者 $1,000，等待一个月，然后第三次测量幸福。麻烦在于，这个设计有一个明显的实验 confound（<a href="#fig-design-money1" class="quarto-xref">图&nbsp;<span>9.12</span></a>）：金钱礼物的顺序。也许幸福只是随着时间推移上升得更多，而与收到第二份礼物无关。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-design-money1" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个 DAG：condition assignment 指向 more money 和 later time，两者都指向 happiness。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-design-money1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/design/money1.png" class="img-fluid figure-img" alt="一个 DAG：condition assignment 指向 more money 和 later time，两者都指向 happiness。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-design-money1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.12: 混淆顺序和条件分配意味着你无法推断金钱与幸福之间的联系。
+</figcaption>
+</figure>
+</div></div><p>如果你认为实验设计中可能存在 confound，就应该思考如何移除它。第一个选项是<strong>消除</strong>，也就是我们上面描述过的：基本上是在不同条件之间匹配某个特定变量。对多数 confounds 来说，这应该是我们的首选。不幸的是，在我们的 within-participants 金钱-幸福研究中，顺序与条件混淆了，所以如果我们匹配顺序，就完全消除了条件 manipulation。</p>
+<p>第二个选项是 <strong>counterbalancing</strong>，也就是在参与者之间系统地改变一个混淆因素，使它在整个实验中的平均效应为零。在我们的例子中，在参与者之间 counterbalance 顺序是一个非常安全的选择。有些参与者先拿 $100，另一些参与者先拿 $1,000。这样，你就能保证条件顺序这个 confound 不会影响平均效应。这种 counterbalancing 的效果，是“剪断”条件分配和较晚时间之间的因果依赖。我们在因果图中用剪刀图标表示这一点（<a href="#fig-design-money2" class="quarto-xref">图&nbsp;<span>9.13</span></a>）。<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> 时间仍然可以影响幸福，但这个效应独立于条件效应，因此你的实验仍然可以给出条件效应的无偏估计。</p>
+<div class="no-row-height column-margin column-container"><div id="fn15"><p><sup>15</sup>&nbsp;在实践中，counterbalancing 就像给你的 factorial design 增加一个额外因素！但因为这个因素是<strong>nuisance factor</strong>，也就是基本上我们并不关心的因素，所以我们不把它作为真正的条件 manipulation 讨论。尽管如此，在初步分析中检查这类 nuisance factor 的效应是好做法。即便你的平均效应不会被它偏倚，它也会引入变异，而为了理解其他效应和规划新研究，你可能想理解这些变异。</p></div><div id="fig-design-money2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个 DAG，结构与 9.12 相同，但从 condition assignment 到 later time 的箭头被剪断。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-design-money2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/design/money2.png" class="img-fluid figure-img" alt="一个 DAG，结构与 9.12 相同，但从 condition assignment 到 later time 的箭头被剪断。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-design-money2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.13: 特定条件与其实施时间之间的混淆，可以通过 counterbalancing 或顺序随机化移除。
+</figcaption>
+</figure>
+</div></div>
+<p>当一个变量有太多水平，或存在多个混淆变量时，counterbalancing会变得更棘手。在这种情况下，可能无法做完整 counterbalance，使这些因素的所有组合都被相同数量的参与者看到。你可能必须依赖部分 counterbalancing 方案或拉丁方设计（见上面的 <span class="smallcaps">Depth</span> 框；在这种情况下，拉丁方被用来创建刺激顺序，使每个 treatment 在顺序中的位置相对于另外两个混淆变量被控制）。</p>
+<p>最后一个选项，尤其适用于这种棘手情况，是<strong>随机化</strong>：也就是通过随机选择决定向参与者实施 nuisance variable 的哪个水平。现在许多实验干预由软件呈现，因此随机化越来越常见。如果你<em>能够</em>随机化实验 confounds，大概就应该这么做。随机化真正会带来麻烦的时候，是你有大量选项、很少参与者，或者两者兼有。那时，随机化因素的各水平可能会不平衡。跨许多实验平均时，不平衡会被抵消；但在单个实验中，它可能导致数值上不幸的偏差。</p>
+<p>思考实验设计的一个好方法，是一步一步走完整个实验，并思考潜在 confounds。对于每一个 confound，考虑它能否通过 counterbalancing 或随机化移除。正如我们的 <span class="smallcaps">case study</span> 所显示，confounds 并不总是显而易见，尤其是在复杂范式中。没有万无一失的方法能保证你发现每一个 confound；有时避免它们的最好方法，单纯就是把你的候选设计拿给一个持怀疑态度的朋友看。</p>
+</section>
+<section id="内部效度威胁placebodemand-和-expectancy" class="level3 page-columns page-full" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="内部效度威胁placebodemand-和-expectancy"><span class="header-section-number">9.2.2</span> 内部效度威胁：Placebo、demand 和 expectancy</h3>
+<p>第二类重要的内部效度威胁，来自研究设计被 manipulation 如何实施、甚至 manipulation <em>被实施这件事</em>相关的因素混淆的情况。在某些情况下，这些因素会产生可以控制的 confounds；在另一些情况下，它们只能被理解并防范。<span class="citation" data-cites="rosnow1997">Rosnow 和 Rosenthal (<a href="#ref-rosnow1997" role="doc-biblioref">1997</a>)</span> 把这些称为“artifacts”：由人<em>对</em>人开展研究时产生的系统性错误。</p>
+<p><strong>Placebo</strong> effect 是指参与者在研究情境中对 treatment 的期待所带来的测量正向效应。placebo 的经典例子来自医学：把无活性的糖丸作为“treatment”给患者，会让一些患者报告他们正在接受治疗的症状有所减轻。Placebo effects 是医学研究中的主要担忧，也是医学实验设计中的固定组成部分 <span class="citation" data-cites="benedetti2020">(<a href="#ref-benedetti2020" role="doc-biblioref">Benedetti 2020</a>)</span>。关键洞见是，treatment 不能只与没有 treatment 的 baseline 比较，而应该与这样一种 baseline 比较：treatment 的心理方面存在，但“active ingredient”不存在。用我们一直使用的术语来说，当你只是比较 treatment 和 no-treatment 条件时，接受 treatment 的体验（独立于 treatment 内容）就是一个混淆因素。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="accident report">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>accident report
+</div>
+</div>
+<section id="脑训练" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="脑训练">脑训练？</h3>
+<p>做有挑战性的认知任务能让你更聪明吗？在 2000 年代末和 2010 年代初，一个庞大的“脑训练”产业兴起。Lumos Labs、CogMed、BrainHQ 和 CogniFit 等公司提供一些游戏，这些游戏常常以认知心理学任务为模型，并声称可以提高记忆、注意和问题解决能力。</p>
+<p>这些公司的主张，部分基于一批科学文献：这些文献报告说，对困难认知任务进行集中训练，能够带来<strong>迁移</strong>到其他认知领域的收益。其中最有影响力的是 <span class="citation" data-cites="jaeggi2008">Jaeggi 等 (<a href="#ref-jaeggi2008" role="doc-biblioref">2008</a>)</span> 的一项研究。他们进行了四个实验，参与者（所有研究合计 <span class="math inline">\(N = 70\)</span>）被分配到两种条件之一：通过一个困难的工作记忆任务（“dual N-back”）进行工作记忆训练，或无训练控制；训练天数从八天到 19 天不等。</p>
+<p>这项研究的发现激起了巨大兴趣，因为他们报告说，参与者不仅在具体训练任务上表现提升，在一个他们并没有训练过的一般智力任务上也有所提升。虽然控制组在这些任务上的分数也提高了，大概只是因为被测试了两次，但存在一个 condition by time（pre-test vs post-test）交互，使训练组（把四个训练实验合并后）的分数在训练期内显著增长更多（<a href="#fig-design-jaeggi" class="quarto-xref">图&nbsp;<span>9.14</span></a>）。这些结果被解释为支持 transfer，也就是在一个任务上的训练带来更广泛收益，而这正是“脑训练”的关键目标。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-design-jaeggi" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一张带均值和置信区间的表现图，从训练前到训练后上升，dual n-back 比 control 上升更陡。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-design-jaeggi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="009-design_files/figure-html/fig-design-jaeggi-1.png" class="img-fluid figure-img" style="width:50.0%" alt="一张带均值和置信区间的表现图，从训练前到训练后上升，dual n-back 比 control 上升更陡。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-design-jaeggi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.14: 来自 <span class="citation" data-cites="jaeggi2008">Jaeggi 等 (<a href="#ref-jaeggi2008" role="doc-biblioref">2008</a>)</span>: 训练条件和无训练控制条件的 pre-test 与 post-test 分数。
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<!-- \vspace{-1em} -->
+<p>不过，原论文的细心读者注意到了 analytic flexibility 的迹象（如 <a href="003-replication.html" class="quarto-xref"><span>3</span></a> 和 <a href="006-inference.html" class="quarto-xref"><span>6</span></a> 章所讨论）。例如，关键统计模型拟合的是一个由事后合并实验产生的数据集，在关键交互上得到 <span class="math inline">\(p = 0.025\)</span> <span class="citation" data-cites="redick2013">(<a href="#ref-redick2013" role="doc-biblioref">Redick 等 2013</a>)</span>。当数据被拆开时，可以清楚看到各个子实验中的测量和效应都不同（<a href="#fig-design-jaeggi-disagg" class="quarto-xref">图&nbsp;<span>9.15</span></a>）。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-design-jaeggi-disagg" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一张和 9.14 相同的图，但有 4 个面板，分别按 session 数和测量标识；斜率差异不同。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-design-jaeggi-disagg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="009-design_files/figure-html/fig-design-jaeggi-disagg-1.png" class="img-fluid figure-img" style="width:80.0%" alt="一张和 9.14 相同的图，但有 4 个面板，分别按 session 数和测量标识；斜率差异不同。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-design-jaeggi-disagg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9.15: <span class="citation" data-cites="jaeggi2008">Jaeggi 等 (<a href="#ref-jaeggi2008" role="doc-biblioref">2008</a>)</span> 的四个子实验，现在拆开显示。面板展示 8、12、17 和 19-session 研究。注意不同测量：RAPM = Raven’s Advanced Progressive Matrices； BOMAT = Bochumer Matrizentest。 基于 <span class="citation" data-cites="redick2013">Redick 等 (<a href="#ref-redick2013" role="doc-biblioref">2013</a>)</span>。
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>同一研究团队的几项重复研究处理了其中一些问题，但它们仍然没有显示出令人信服的 transfer 证据。特别是，这些研究没有与<strong>主动控制组</strong>比较；主动控制组中的参与者会用同样多时间做某种替代活动 <span class="citation" data-cites="simons2016">(<a href="#ref-simons2016" role="doc-biblioref">Simons 等 2016</a>)</span>。这种比较很关键，因为与<strong>被动控制组</strong>（不接受任何干预的组）比较，会把参与者在研究中的一般努力和参与程度，与所使用的特定训练混淆起来。相对于被动控制的成功 transfer，可能来自参与者的参与、期待或动机，而不是训练本身。</p>
+<p>一项带有主动控制组和广泛 outcome measures 的细致训练重复研究（<span class="math inline">\(N = 74\)</span>），没有发现工作记忆训练带来的任何 transfer effects <span class="citation" data-cites="redick2013">(<a href="#ref-redick2013" role="doc-biblioref">Redick 等 2013</a>)</span>。一项包含 23 项研究的 meta-analysis&nbsp;得出结论：这些发现让人怀疑工作记忆训练能否提高认知功能 <span class="citation" data-cites="melby-lervag2013">(<a href="#ref-melby-lervag2013" role="doc-biblioref">Melby-Lervåg 和 Hulme 2013</a>)</span>。在对 cognitive transfer theory 的一次有说服力检验中，一个 BBC 节目（“Bang Goes the Theory”）鼓励听众参加一项为期六周的在线脑训练研究。超过 11,000 名听众完成了前测和后测，并至少完成了两次训练 session。无论是针对规划和推理的聚焦训练，还是关于记忆、注意和数学的更广泛训练，都没有迁移到未经训练的任务上。</p>
+<p>Placebo effects 是脑训练文献中某些阳性发现的一个合理解释。<span class="citation" data-cites="foroughi2016">Foroughi 等 (<a href="#ref-foroughi2016" role="doc-biblioref">2016</a>)</span> 通过两种不同广告招募参与者。第一种广告宣称 “numerous studies have shown working memory training can increase fluid intelligence”（“placebo treatment” 组），第二种只是提供实验学分（控制组）。一次训练 session 后，placebo treatment 组在矩阵推理能力上显示出显著提升。placebo treatment 组参与者从训练中获得的收益，超过了他们通过训练本身可能获得的任何收益。此外，回应 placebo treatment 广告的参与者倾向于认同智力可塑性的陈述，这说明他们可能尤其容易自选择进入这个干预。</p>
+<p>在总结大量脑训练文献时，<span class="citation" data-cites="simons2016">Simons 等 (<a href="#ref-simons2016" role="doc-biblioref">2016</a>)</span> 写道：“Despite marketing claims from brain-training companies of ‘proven benefits’ … we find the evidence of benefits from cognitive brain training to be ‘inadequate.’”</p>
+</section>
+</div>
+<p>如果 placebo effects 反映的是参与者对 treatment 的期待，那么 <strong>demand characteristics</strong> 反映的则是参与者认为<em>实验者</em>想要什么，以及他们想帮助实验者达成目标的愿望 <span class="citation" data-cites="orne1962">(<a href="#ref-orne1962" role="doc-biblioref">Orne 1962</a>)</span>。Demand characteristics 常被作为避免 within-participants designs 的理由：如果参与者意识到干预存在，他们随后可能会以自己认为对实验者有帮助的方式作答。控制或识别 demand characteristics 的典型工具包括：使用 cover story 掩盖实验目的；使用 debriefing 程序探查参与者是否通常猜到了实验目的；以及（也许最有效地）创建一个 demand characteristics 类似、但缺少实验干预关键成分的控制条件。注意，如果你用 cover story 掩盖实验目的，就值得想想自己是否使用了 deception， 因为这可能引发伦理问题（见 <a href="004-ethics.html" class="quarto-xref"><span>章 4</span></a>）。当然，你应该确保向参与者 debrief 实验的真实功能！</p>
+<p>内部效度威胁清单中的最后一项是<strong>实验者期待效应</strong>，即实验者的行为以某种方式偏倚参与者，从而在没有真实差异的地方制造出条件差异的表象。这类效应的经典例子来自动物学习文献和 Clever Hans 的故事。Clever Hans 是一匹看起来能够通过用蹄子敲击答案来做算术的马。经过更深入调查后，人们发现它是在被训练者的姿势提示（显然训练者本人并不知道）下，在达到想要的答案时停止敲击。这匹马完全不懂数学，但实验者的期待改变了它在不同条件下的行为。</p>
+<p>在任何由人类实验者实施、且实验者知道自己正在实施哪个条件的实验中，条件差异都可能来自实验者传递自己的期待。<a href="#tbl-rosenthal" class="quarto-xref">Table&nbsp;<span>9.2</span></a> 展示了一项 meta-analysis&nbsp;的结果，它估计了多个领域中 expectancy effects 的大小，幅度令人震惊。毫无疑问，实验者期待足以人为地“创造”出许多有趣现象。期待机制本身也是一个有意思的研究主题；在许多情况下，期待似乎以非言语方式传递，很像 Clever Hans 学会的方式 <span class="citation" data-cites="rosnow1997">(<a href="#ref-rosnow1997" role="doc-biblioref">Rosnow 和 Rosenthal 1997</a>)</span>。</p>
+<!-- ::: {.margin-caption} -->
+<!-- \vspace{-1.5em} -->
+<div id="tbl-rosenthal" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rosenthal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;9.2: Magnitudes of expectancy effects in various domains. Based on <span class="citation" data-cites="rosenthal1994">Rosenthal (<a href="#ref-rosenthal1994" role="doc-biblioref">1994</a>)</span>.
+</figcaption>
+<div aria-describedby="tbl-rosenthal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Domain</th>
+<th style="text-align: right;"><em>d</em></th>
+<th style="text-align: right;"><em>r</em></th>
+<th style="text-align: left;">Example of type of study</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Laboratory interviews</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: left;">Effects of sensory restriction on reports of hallucinatory experiences</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Reaction time</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: left;">Latency of word associations to certain stimulus words</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Learning and ability</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: right;">0.26</td>
+<td style="text-align: left;">IQ test scores, verbal conditioning (learning)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Person perception</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: left;">Perception of other people’s success</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Inkblot tests</td>
+<td style="text-align: right;">0.84</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: left;">Ratio of animal to human Rorschach responses</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Everyday situations</td>
+<td style="text-align: right;">0.88</td>
+<td style="text-align: right;">0.40</td>
+<td style="text-align: left;">Symbol learning, athletic performance</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Psychophysical judgments</td>
+<td style="text-align: right;">1.05</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: left;">Ability to discriminate tones</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Animal learning</td>
+<td style="text-align: right;">1.73</td>
+<td style="text-align: right;">0.65</td>
+<td style="text-align: left;">Learning in mazes and Skinner boxes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Weighted mean</em></td>
+<td style="text-align: right;">0.70</td>
+<td style="text-align: right;">0.33</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Unweighted mean</em></td>
+<td style="text-align: right;">0.74</td>
+<td style="text-align: right;">0.35</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Median</em></td>
+<td style="text-align: right;">0.70</td>
+<td style="text-align: right;">0.33</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<!-- ::: -->
+<p>在医学研究中，金标准是这样一种实验设计：患者和实验者都不知道患者处在哪个条件中。<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> 其他设计的结果会被怀疑，因为它们容易受到 demand 和 expectancy effects 影响。在心理学中，现代最常见的防范实验者期待的方法，是由计算机平台实施干预，因为它可以在不同条件中以连贯且统一的方式给出指令。</p>
+<div class="no-row-height column-margin column-container"><div id="fn16"><p><sup>16</sup>&nbsp;这些通常称为<strong>双盲</strong>设计（不过现在常常更偏好 <strong>masked</strong> 这个术语）。</p></div></div><p>对于必须由实验者实施的干预，理想情况下实验者不应知道自己正在实施哪个条件。另一方面，在心理学中维持实验者无知的后勤操作可能相当复杂。因此，许多研究者选择较低程度的控制，例如通过脚本标准化干预实施。出于实践原因，这些设计有时是必要的，但应该受到仔细审视。“你如何排除实验者期待效应？” 是一个令人不舒服的问题，但它应该在研讨会和论文评审中被更频繁地提出。</p>
+</section>
+<section id="manipulations-的外部效度" class="level3 page-columns page-full" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="manipulations-的外部效度"><span class="header-section-number">9.2.3</span> Manipulations 的外部效度</h3>
+<p>某个具体实验 manipulation 的目标，是操作化一个特定的目标因果关系。正如测量与构念之间的关系可能更有效或更无效，manipulation 与构念之间的关系也一样。你怎么判断？和测量的情形一样，通往效度没有唯一大道。你需要提出一个效度论证 <span class="citation" data-cites="kane1992">(<a href="#ref-kane1992" role="doc-biblioref">Kane 1992</a>)</span>。<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a></p>
+<!-- Let's see how these arguments might look for some of the examples we've discussed in this chapter.  -->
+<div class="no-row-height column-margin column-container"><div id="fn17"><p><sup>17</sup>&nbsp;一个 caveat 是：manipulation 的效度包含 manipulation 和 measure 的效度。如果测量无效，你不可能得到一个好的因果效应估计。</p></div></div><p>为了检验金钱对幸福的效应，我们的 manipulation 是给参与者 $1,000。这个 manipulation 显然有表面效度。但人们多久会平白无故收到一笔现金横财，而不是在工作中加薪或从亲戚那里继承钱？效应是由<em>拥有</em>这笔钱造成的，还是由无附加条件地<em>收到</em>这笔钱造成的？我们必须做更多实验，才能看出金钱 manipulation 的哪个方面最重要。即便在这种直接的情形中，我们也需要谨慎对待自己所提出 claim 的宽度。</p>
+<p>有时，效度论证是基于 manipulation 成功在测量上产生了某种变化。我们开头的 implicit theory of mind <span class="smallcaps">case study</span> 中，刺激包含一个动画 Smurf 角色，论证是参与者在做判断时考虑了 Smurf 的信念。这个刺激选择似乎很意外：参与者不仅要追踪其他<em>人</em>的隐性信念，还要追踪非人类动画角色图像的信念。另一方面，基于 manipulation 的成功，作者提出了一个 <em>a fortiori</em> 论证：如果人们连动画 Smurf 的信念都会追踪，那么他们<em>必定</em>会追踪真实人类的信念。</p>
+<p>来看最后一个例子，以便进一步思考 manipulation validity。 <span class="citation" data-cites="walton2011">Walton 和 Cohen (<a href="#ref-walton2011" role="doc-biblioref">2011</a>)</span> 进行了一项短期干预：大学生（<span class="math inline">\(N = 92\)</span>）阅读关于社会归属和大学过渡挑战的材料，然后用这些想法重新框定自己的经历。这个干预对成绩和 well-being 产生了长期改变。虽然该干预无疑有理论基础，但我们对这个干预效度的一部分理解来自其 efficacy：如果干预归属感会在 outcome measures 上造成这么大变化，那么 sense of belonging <em>必定</em>是一个强有力的因素。<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> 唯一的危险是论证变成循环的：理论是正确的，因为干预取得了成功；干预被假定为有效的，因为理论如此说明。走出这个循环的方式，是重复和推广这个干预。如果干预能够反复产生 outcome，就像归属感干预的重复研究所显示的那样 <span class="citation" data-cites="walton2020">(<a href="#ref-walton2020" role="doc-biblioref">Walton, Brady, 和 Crum 2020</a>)</span>，那么这个 manipulation 就会成为未来理论的一个有趣目标。这类研究项目的下一步，是理解这类干预的限制（有时称为<strong>boundary conditions</strong>）。</p>
+<div class="no-row-height column-margin column-container"><div id="fn18"><p><sup>18</sup>&nbsp;另一方面，如果 manipulation <em>没有</em>在你的测量上产生变化，也许 manipulation 是无效的，但构念仍然存在。归属感可能仍然重要，即便我的特定干预没有改变它！</p></div></div></section>
+</section>
+<section id="本章小结实验设计" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="本章小结实验设计"><span class="header-section-number">9.3</span> 本章小结：实验设计</h2>
+<p>本章开始时，我们考察了一些常见实验设计，它们让我们能够测量与一个或多个 manipulations 相关的效应。简短地说，我们的建议是：“保持简单！”许多实验的 failure mode 是包含太多 manipulations，而这些 manipulations 又被测得不够精确。</p>
+<p>从单个 manipulation 开始，并仔细测量它。理想情况下，除非 manipulation 与这种设计完全不兼容，否则这个测量应该通过 within-participants design 完成。如果这个设计还能纳入 dose-response manipulation，它就更可能为定量理论化提供基础。</p>
+<p>如何确保你的 manipulation 有效？仔细的实验者需要考虑可能的 confounds，并确保它们被控制或随机化。他们还必须考虑其他 artifacts，包括 placebo、 demand 和 expectancy effects。 最后，他们必须开始思考自己的 manipulation 与更宽泛理论构念之间的关系，也就是他们希望检验其因果作用的那个构念。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="discussion questions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>discussion questions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>选择你所在心理学领域中的一项经典研究。分析它的设计选择：操纵了多少因素？做了多少测量？它使用的是 within- 还是 between-participants design？ 测量是否重复？你能否根据取舍（例如 carryover effects、 疲劳或其他因素）为这些选择辩护？</p></li>
+<li><p>考虑同一项研究。设计一个替代版本，改变其中一个设计参数（例如删掉一个 manipulation 或 measure，或把 within-participants 改为 between-participants）。这个改变有什么优缺点？你认为你的设计改进了原始设计吗？</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="readings">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>readings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>许多材料在这本经典研究方法教材中有更深入介绍：Rosenthal, Robert, and Ralph L. Rosnow <span class="citation" data-cites="rosenthal2008">(<a href="#ref-rosenthal2008" role="doc-biblioref">2008</a>)</span>. <em>Essentials of Behavioral Research: Methods and Data Analysis</em>. Third Edition. McGraw-Hill. <a href="http://dx.doi.org/10.34944/dspace/66" class="uri">http://dx.doi.org/10.34944/dspace/66</a>.</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-baddeley1975" class="csl-entry" role="listitem">
+Baddeley, Alan D, Neil Thomson, 和 Mary Buchanan. 1975. <span>《Word length and the structure of short-term memory》</span>. <em>Journal of verbal learning and verbal behavior</em> 14 (6): 575–89.
+</div>
+<div id="ref-benedetti2020" class="csl-entry" role="listitem">
+Benedetti, Fabrizio. 2020. <em>Placebo effects</em>. Oxford University Press.
+</div>
+<div id="ref-boyce2023" class="csl-entry" role="listitem">
+Boyce, Veronica, Maya B Mathur, 和 Michael C Frank. 2023. <span>《Eleven years of student replication projects provide evidence on the correlates of replicability in psychology》</span>. <em>Royal Society Open Science</em> 10 (11): 231240.
+</div>
+<div id="ref-brennan1966" class="csl-entry" role="listitem">
+Brennan, Wendy M, Elinor W Ames, 和 Ronald W Moore. 1966. <span>《Age differences in infants’ attention to patterns of different complexities》</span>. <em>Science</em> 151 (3708): 354–56.
+</div>
+<div id="ref-clark1973" class="csl-entry" role="listitem">
+Clark, Herbert H. 1973. <span>《The language-as-fixed-effect fallacy: A critique of language statistics in psychological research》</span>. <em>Journal of Verbal Learning and Verbal Behavior</em> 12 (4): 335–59.
+</div>
+<div id="ref-cunningham2021" class="csl-entry" role="listitem">
+Cunningham, Scott. 2021. <em>Causal Inference: The Mixtape</em>. Yale University Press.
+</div>
+<div id="ref-el-kaddouri2020" class="csl-entry" role="listitem">
+El Kaddouri, Rachida, Lara Bardi, Diana De Bremaeker, Marcel Brass, 和 Roeljan Wiersema. 2020. <span>《Measuring spontaneous mentalizing with a ball detection task: putting the attention-check hypothesis by Phillips and colleagues (2015) to the test》</span>. <em>Psychological Research</em> 84 (6): 1749–57.
+</div>
+<div id="ref-foroughi2016" class="csl-entry" role="listitem">
+Foroughi, Cyrus K, Samuel S Monfort, Martin Paczynski, Patrick E McKnight, 和 P M Greenwood. 2016. <span>《Placebo effects in cognitive training》</span>. <em>Proceedings of the national Academy of Sciences</em> 113 (27): 7470–74.
+</div>
+<div id="ref-gelman2017" class="csl-entry" role="listitem">
+Gelman, Andrew. 2017. <span>《Poisoning the well with a within-person design? What’s the risk?》</span> 收入 <em>Statistical Modeling, Causal Inference, and Social Science</em>. <a href="https://statmodeling.stat.columbia.edu/2017/11/25/poisoning-well-within-person-design-whats-risk/">https://statmodeling.stat.columbia.edu/2017/11/25/poisoning-well-within-person-design-whats-risk/</a>.
+</div>
+<div id="ref-greenwald1976" class="csl-entry" role="listitem">
+Greenwald, Anthony G. 1976. <span>《Within-subjects designs: To use or not to use?》</span> <em>Psychological Bulletin</em> 83 (2): 314–20.
+</div>
+<div id="ref-jaeggi2008" class="csl-entry" role="listitem">
+Jaeggi, Susanne M, Martin Buschkuehl, John Jonides, 和 Walter J Perrig. 2008. <span>《Improving fluid intelligence with training on working memory》</span>. <em>Proceedings of the National Academy of Sciences</em> 105 (19): 6829–33.
+</div>
+<div id="ref-kane1992" class="csl-entry" role="listitem">
+Kane, Michael T. 1992. <span>《An argument-based approach to validity》</span>. <em>Psychological Bulletin</em> 112 (3): 527–35.
+</div>
+<div id="ref-kidd2012" class="csl-entry" role="listitem">
+Kidd, Celeste, Steven T Piantadosi, 和 Richard N Aslin. 2012. <span>《The Goldilocks effect: Human infants allocate attention to visual sequences that are neither too simple <span>N</span>or too complex》</span>. <em>PloS one</em> 7 (5): e36399.
+</div>
+<div id="ref-kovacs2010" class="csl-entry" role="listitem">
+Kovács, Ágnes Melinda, Ernő Téglás, 和 Ansgar Denis Endress. 2010. <span>《The social sense: Susceptibility to others’ beliefs in human infants and adults》</span>. <em>Science</em> 330 (6012): 1830–34.
+</div>
+<div id="ref-lakens2016" class="csl-entry" role="listitem">
+Lakens, Daniel. 2016. <span>《Why Within-Subject Designs Require Fewer Participants <span>t</span>han Between-Subject Designs》</span>. 2016年. <a href="https://daniellakens.blogspot.com/2016/11/why-within-subject-designs-require-less.html">https://daniellakens.blogspot.com/2016/11/why-within-subject-designs-require-less.html</a>.
+</div>
+<div id="ref-lovatt2000" class="csl-entry" role="listitem">
+Lovatt, Peter, Steve E Avons, 和 Jackie Masterson. 2000. <span>《The word-length effect and disyllabic words》</span>. <em>The Quarterly Journal of Experimental Psychology: Section A</em> 53 (1): 1–22.
+</div>
+<div id="ref-mcclelland1993" class="csl-entry" role="listitem">
+McClelland, Gary H, 和 Charles M Judd. 1993. <span>《Statistical difficulties of detecting interactions and moderator effects》</span>. <em>Psychological bulletin</em> 114 (2): 376–90.
+</div>
+<div id="ref-melby-lervag2013" class="csl-entry" role="listitem">
+Melby-Lervåg, Monica, 和 Charles Hulme. 2013. <span>《Is working memory training effective? A meta-analytic review.》</span> <em>Developmental psychology</em> 49 (2): 270–91.
+</div>
+<div id="ref-myung2009" class="csl-entry" role="listitem">
+Myung, Jay I, 和 Mark A Pitt. 2009. <span>《Optimal experimental design for model discrimination.》</span> <em>Psychological review</em> 116 (3): 499–518.
+</div>
+<div id="ref-orne1962" class="csl-entry" role="listitem">
+Orne, Martin T. 1962. <span>《On the social psychology of the psychological experiment: With particular reference to demand characteristics and their implications.》</span> <em>American psychologist</em> 17 (11): 776–83.
+</div>
+<div id="ref-phillips2015" class="csl-entry" role="listitem">
+Phillips, Jonathan, Desmond C Ong, Andrew D R Surtees, Yijing Xin, Samantha Williams, Rebecca Saxe, 和 Michael C Frank. 2015. <span>《A second look at automatic theory of mind: Reconsidering Kov<span>á</span>cs, <span>T</span><span>é</span>gl<span>á</span>s, and Endress (2010)》</span>. <em>Psychological Science</em> 26 (9): 1353–67.
+</div>
+<div id="ref-redick2013" class="csl-entry" role="listitem">
+Redick, Thomas S, Zach Shipstead, Tyler L Harrison, Kenny L Hicks, David E Fried, David Z Hambrick, Michael J Kane, 和 Randall W Engle. 2013. <span>《No evidence of intelligence improvement <span>a</span>fter working memory training: a randomized, placebo-controlled study.》</span> <em>Journal of Experimental Psychology: General</em> 142 (2): 359–79.
+</div>
+<div id="ref-rosenthal1994" class="csl-entry" role="listitem">
+Rosenthal, Robert. 1994. <span>《Interpersonal expectancy effects: A 30-year perspective》</span>. <em>Current directions in psychological science</em> 3 (6): 176–79.
+</div>
+<div id="ref-rosenthal2008" class="csl-entry" role="listitem">
+Rosenthal, Robert, 和 Ralph L. Rosnow. 2008. <em>Essentials of behavioral research: Methods and data analysis</em>. 3rd 本. McGraw-Hill. <a href="https://doi.org/10.34944/dspace/66">https://doi.org/10.34944/dspace/66</a>.
+</div>
+<div id="ref-rosnow1997" class="csl-entry" role="listitem">
+Rosnow, Ralph, 和 Robert Rosenthal. 1997. <em>People studying people: Artifacts and ethics in behavioral research</em>. W. H. Freeman.
+</div>
+<div id="ref-simons2016" class="csl-entry" role="listitem">
+Simons, Daniel J, Walter R Boot, Neil Charness, Susan E Gathercole, Christopher F Chabris, David Z Hambrick, 和 Elizabeth A L Stine-Morrow. 2016. <span>《Do <span>〈brain-training〉</span> programs work?》</span> <em>Psychological Science in the Public Interest</em> 17 (3): 103–86.
+</div>
+<div id="ref-walton2020" class="csl-entry" role="listitem">
+Walton, Gregory M, Shannon T Brady, 和 A J Crum. 2020. <span>《The social-belonging intervention》</span>. <em>Handbook of wise interventions: How social psychology can help people change</em>, 36–62.
+</div>
+<div id="ref-walton2011" class="csl-entry" role="listitem">
+Walton, Gregory M, 和 Geoffrey L Cohen. 2011. <span>《A brief social-belonging intervention improves academic and health outcomes of minority students》</span>. <em>Science</em> 331 (6023): 1447–51.
+</div>
+<div id="ref-westfall2015" class="csl-entry" role="listitem">
+Westfall, Jacob, Charles M Judd, 和 David A Kenny. 2015. <span>《Replicating studies in which samples of participants respond to samples of stimuli》</span>. <em>Perspectives on Psychological Science</em> 10 (3): 390–99.
+</div>
+<div id="ref-young2007" class="csl-entry" role="listitem">
+Young, Liane, Fiery Cushman, Marc Hauser, 和 Rebecca Saxe. 2007. <span>《The neural basis of the interaction <span>b</span>etween theory of mind and moral judgment》</span>. <em>Proceedings of the National Academy of Sciences</em> 104 (20): 8235–40.
+</div>
+</div>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./008-measurement.html" class="pagination-link" aria-label="测量">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./010-sampling.html" class="pagination-link" aria-label="抽样">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

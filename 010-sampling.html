@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; 抽样 – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./011-prereg.html" rel="next">
+<link href="./009-design.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./008-measurement.html">规划</a></li><li class="breadcrumb-item"><a href="./010-sampling.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#抽样理论" id="toc-抽样理论" class="nav-link active" data-scroll-target="#抽样理论"><span class="header-section-number">10.1</span> 抽样理论</a>
+  <ul class="collapse">
+  <li><a href="#经典概率抽样" id="toc-经典概率抽样" class="nav-link" data-scroll-target="#经典概率抽样"><span class="header-section-number">10.1.1</span> 经典概率抽样</a></li>
+  </ul></li>
+  <li><a href="#方便样本可推广性和-weird-问题" id="toc-方便样本可推广性和-weird-问题" class="nav-link" data-scroll-target="#方便样本可推广性和-weird-问题"><span class="header-section-number">10.2</span> 方便样本、可推广性和 WEIRD 问题</a>
+  <ul class="collapse">
+  <li><a href="#问题最糟糕的版本" id="toc-问题最糟糕的版本" class="nav-link" data-scroll-target="#问题最糟糕的版本"><span class="header-section-number">10.2.1</span> 问题最糟糕的版本</a></li>
+  <li><a href="#希望的理由和前进方向" id="toc-希望的理由和前进方向" class="nav-link" data-scroll-target="#希望的理由和前进方向"><span class="header-section-number">10.2.2</span> 希望的理由和前进方向</a></li>
+  </ul></li>
+  <li><a href="#抽样过程中的偏差" id="toc-抽样过程中的偏差" class="nav-link" data-scroll-target="#抽样过程中的偏差"><span class="header-section-number">10.3</span> 抽样过程中的偏差</a>
+  <ul class="collapse">
+  <li><a href="#collider-bias碰撞偏差" id="toc-collider-bias碰撞偏差" class="nav-link" data-scroll-target="#collider-bias碰撞偏差"><span class="header-section-number">10.3.1</span> Collider bias（碰撞偏差）</a></li>
+  <li><a href="#流失偏差" id="toc-流失偏差" class="nav-link" data-scroll-target="#流失偏差"><span class="header-section-number">10.3.2</span> 流失偏差</a></li>
+  </ul></li>
+  <li><a href="#样本量规划" id="toc-样本量规划" class="nav-link" data-scroll-target="#样本量规划"><span class="header-section-number">10.4</span> 样本量规划</a>
+  <ul class="collapse">
+  <li><a href="#power-analysis功效分析" id="toc-power-analysis功效分析" class="nav-link" data-scroll-target="#power-analysis功效分析"><span class="header-section-number">10.4.1</span> Power analysis（功效分析）</a></li>
+  <li><a href="#实践中的-power-analysis" id="toc-实践中的-power-analysis" class="nav-link" data-scroll-target="#实践中的-power-analysis"><span class="header-section-number">10.4.2</span> 实践中的 power analysis</a></li>
+  <li><a href="#样本量规划的替代方法" id="toc-样本量规划的替代方法" class="nav-link" data-scroll-target="#样本量规划的替代方法"><span class="header-section-number">10.4.3</span> 样本量规划的替代方法</a></li>
+  </ul></li>
+  <li><a href="#本章小结抽样" id="toc-本章小结抽样" class="nav-link" data-scroll-target="#本章小结抽样"><span class="header-section-number">10.5</span> 本章小结：抽样</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography"></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./008-measurement.html">规划</a></li><li class="breadcrumb-item"><a href="./010-sampling.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-sampling" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="learning goals">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>learning goals
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>讨论抽样理论和分层抽样</li>
+<li>推理不同样本的局限，尤其是方便样本的局限</li>
+<li>考虑抽样偏差以及它们如何影响你的推断</li>
+<li>学习如何为实验选择并说明合适的样本量</li>
+</ul>
+</div>
+</div>
+<p>正如我们一直提醒你的，实验被设计出来，是为了产生对某个因果效应的测量。但是什么东西的因果效应？又是对谁而言的因果效应？这些问题在我们的论文中常常获得出人意料地少的讨论空间。顶刊标题读起来像是：“Daxy thinking promotes fribbles”，“Doing fonzy improves smoodling”，或者 “Blicket practice produces more foozles than smonkers”。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 每个标题都用<em>泛称语言</em>提出一个暗示普遍成立的 claim <span class="citation" data-cites="dejesus2019">(<a href="#ref-dejesus2019" role="doc-biblioref">DeJesus 等 2019</a>)</span>，<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> 但对每一个 claim，我们都可以合理地问：“对谁而言？”是所有人？还是某一类特定的人？这些问题关乎我们的关键主题：<span class="smallcaps">可推广性</span>。</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;标题已修改，以保护原作者。这些研究者很可能在论文正文中说了更具体的话。</p></div><div id="fn2"><p><sup>2</sup>&nbsp;泛称语言是一种很有意思的语言现象。当我们说“蚊子传播疟疾”这类话时，我们并不是说<em>所有</em>蚊子都会传播疟疾，而大概是说：“相对于其他相关昆虫或其他生物，把蚊子概括为疟疾传播者，是一个有效且有诊断性的概括” <span class="citation" data-cites="tessler2019">(见 <a href="#ref-tessler2019" role="doc-biblioref">Tessler 和 Goodman 2019</a>)</span>。</p></div></div><p>让我们聚焦于 smoodling。我们不会允许作者提出一个完全普遍版本的 claim：“做[<em>任何</em>] fonzy 都会改善 smoodling [<em>对所有人</em>]。”这个非泛称版本所陈述的概括，远远超出了我们实际拥有的证据。但我们似乎常常可以接受作者（通过泛称语言）<em>暗示</em>他们的发现可以广泛推广。想象一下，这些标题中某一个完全具体的版本可能是什么样：“在实验室阅读一段特定 fonzy 材料 15 分钟，提高了 36 名大学生在一份问卷上的 smoodling 分数。”这篇论文的适用范围听起来就很窄！</p>
+<p>在统计估计和推断的讨论中，我们已经遇到过可推广性。当我们估计某个特定量（比如 fonzy 的效应）时，我们是在自己的样本中估计它。但接着，我们使用推断工具推理这个<strong>样本</strong>中的估计如何关联到整个<strong>总体</strong>中的参数。我们如何把这些用于推广的<em>统计</em>工具，与我们关于发现可推广性的<em>科学</em>问题连接起来？这就是本章的问题。</p>
+<p>实验规划中的一组关键决策，是从什么总体中抽样，以及如何抽样。我们会先讨论<strong>抽样理论</strong>的基础：不同抽样方式，以及它们允许或不允许哪些推广。第二节会处理可能损害效应估计的<strong>抽样偏差</strong>。最后一组关键决策关于<strong>样本量</strong>规划。本章第三部分会处理这个问题，先从经典的<strong>power analysis</strong>开始，然后介绍实验者规划和说明样本量的其他几种方式。</p>
+<section id="抽样理论" class="level2 page-columns page-full" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="抽样理论"><span class="header-section-number">10.1</span> 抽样理论</h2>
+<p>抽样的基本想法很简单：你想通过测量某个总体中的一个样本，来估计这个大型或无限总体中的某个测量。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> 抽样策略分为两类。<strong>概率抽样</strong>策略，是指总体中每个成员都有某个已知、预先指定的概率被选入样本，例如“要推广到日本人，就从日本每个人的名单中随机抽取”。<strong>非概率抽样</strong>则涵盖这样一些策略：选择概率未知或会变化，或者总体中某些成员永远不可能被纳入样本，例如“要推广到德国人，就把调查发给一个德国邮件列表，并让人们把邮件转发给家人”。</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;对于较小总体中的估计，还有一些工具可以处理你的样本占总体很大比例的情况（例如，对你所在系做调查，并获得一半学生的回答）。这里我们不讨论这些工具；我们的重点是推广到大规模人类总体。</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="case study">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>case study
+</div>
+</div>
+<section id="每个人都不擅长描述气味吗" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="每个人都不擅长描述气味吗">每个人都不擅长描述气味吗？</h3>
+<p>自 Darwin 以来，科学家一直假设嗅觉在人类中是一种退化的感觉，是一种我们甚至懒得用语言编码的感觉。在英语中，我们甚至没有一套稳定的气味词。我们可以说某个东西 “stinky”、“fragrant”，或者也许是 “musty”，但除此之外，我们关于气味的大多数词都是关于气味的<em>来源</em>，而不是它的性质。香蕉、玫瑰和臭鼬都有独特气味，但我们没有词汇来命名它们之间共同或不同的气味特征。并且，当我们临时编造 ad hoc 词汇时，这些词通常相当不一致 <span class="citation" data-cites="majid2014">(<a href="#ref-majid2014" role="doc-biblioref">Majid 和 Burenhult 2014</a>)</span>。许多语言中也存在同样情况。</p>
+<p>那么，把“相对于视觉等感觉，嗅觉在人类中被低估”作为关于人类，也就是所有人的概括，是否合适？这个推断具有经典的从样本到总体的结构。在几个使用广泛语言的参与者样本中，我们观察到关于气味的词汇有限且不一致，并且辨别能力也较差。我们用这些样本来支持对总体的推断；在这个例子中，总体是整个人类。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-sampling-majid2014" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一张带均值和误差条的 codability 图，按语言分面；英语中颜色高于气味，但 Jahai 中二者接近。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sampling-majid2014-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="010-sampling_files/figure-html/fig-sampling-majid2014-1.png" class="img-fluid figure-img" style="width:55.0%" alt="一张带均值和误差条的 codability 图，按语言分面；英语中颜色高于气味，但 Jahai 中二者接近。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sampling-majid2014-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;10.1: 来自 <span class="citation" data-cites="majid2014">Majid 和 Burenhult (<a href="#ref-majid2014" role="doc-biblioref">2014</a>)</span> 的数据，展示英语说话者和 Jahai 说话者在颜色和气味命名上的一致性。数值越高表示描述越一致。误差条显示标准差。
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>但是，这些关于人类普遍缺少嗅觉词汇的推断，很可能是基于非代表性样本的选择！多个狩猎采集群体似乎都有很大的词汇量，可以一致地描述气味。例如，Jahai 是马来半岛上的一个狩猎采集群体，他们的词汇中至少包含十二个表示不同气味的词，例如 /cŋ<span class="math inline">\(\symup{\varepsilon}\)</span>s/，它命名的是汽油、烟或蝙蝠粪便这类带有“刺鼻气味”的气味。当 Jahai 说话者被要求命名气味时，他们产生的描述比英语说话者更短，也更一致；事实上，他们的气味描述和颜色描述一样一致（<a href="#fig-sampling-majid2014" class="quarto-xref">图&nbsp;<span>10.1</span></a>）。进一步研究表明，狩猎采集生活方式是一个相关因素：几个狩猎采集群体都表现出良好的气味命名能力，而附近的园艺农业群体则没有 <span class="citation" data-cites="majid2018">(<a href="#ref-majid2018" role="doc-biblioref">Majid 和 Kruspe 2018</a>)</span>。</p>
+<p>关于人类的概括很棘手。如果你想估计平均气味命名能力，可以随机抽取人类样本并评估他们的气味命名。样本中的多数个体很可能说英语、普通话、印地语或西班牙语。几乎可以肯定，没有人会说 Jahai，因为这种语言只有略多于一千人使用，并且在 Ethnologue 中被列为“濒危”（<a href="https://www.ethnologue.com/language/jhi" class="uri">https://www.ethnologue.com/language/jhi</a>）。你对低气味命名稳定性的估计，可能是对世界人口<em>多数</em>的不错猜测，但它几乎不会告诉你 Jahai 的情况。</p>
+<p>另一方面，从关于平均能力的统计概括，跳到“人类嗅觉命名能力低”这样更丰富的 claim，会更复杂。关于人类经验普遍方面的这类 claim，需要更多谨慎和更强证据 <span class="citation" data-cites="piantadosi2014">(<a href="#ref-piantadosi2014" role="doc-biblioref">Piantadosi 和 Gibson 2014</a>)</span>。从抽样角度看，人类行为和认知显示出巨大且复杂的<strong>异质性</strong>，也就是个体的变异以及不同 cluster 之间的变异。简单说，如果我们想知道一般而言人是什么样，就必须仔细思考我们把哪些人纳入研究。</p>
+</section>
+</div>
+<section id="经典概率抽样" class="level3 page-columns page-full" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="经典概率抽样"><span class="header-section-number">10.1.1</span> 经典概率抽样</h3>
+<p>在经典抽样理论中，存在某个<strong>抽样框</strong>，其中包含总体的每一个成员；想象一张列有每个成年人人名的巨大名单。然后，我们使用某种<strong>抽样策略</strong>，最简单的可能就是完全随机选择，从这个抽样框中选择 <span class="math inline">\(N\)</span> 个人，并把他们纳入实验。这个情境正是我们关于样本均值如何收敛到总体均值的所有统计结果背后的情境（如 <a href="006-inference.html" class="quarto-xref"><span>章 6</span></a> 中所示）。</p>
+<p>不幸的是，心理学研究中我们很少这样抽样。从我们想推广到的大型总体中收集真正的概率样本，实在太困难也太昂贵了。想想用<em>所有成年人类</em>样本，甚至用<em>位于美国的成年英语使用者</em>样本来做某个实验，会涉及哪些问题。一旦你开始思考收集这类总体的概率样本需要什么，复杂性就会迅速增加。你如何找到他们的名字？如果他们不在你能访问的登记册中怎么办？你如何联系他们？如果他们没有电子邮箱怎么办？他们如何完成你的实验？如果他们没有最新的网页浏览器怎么办？如果他们根本不想参加怎么办？</p>
+<p>相反，绝大多数心理学研究使用<strong>方便样本</strong>：这类非概率样本由容易招募的个体组成，例如大学本科生，或 Amazon Mechanical Turk、Prolific Academic 等 crowdsourcing 平台上的工作者（见 <a href="012-collection.html" class="quarto-xref"><span>章 12</span></a>）。下面我们会再回到这些样本。</p>
+<p>另一方面，在调查研究中，比如选举民调，有许多复杂技术可以处理抽样；虽然这个领域仍不完美，但它在预测复杂且动态的行为方面已经取得了很大进展。其中一个基本思想是构建<strong>代表性样本</strong>：样本在一个或多个社会人口学特征上与总体匹配，比如性别、收入、种族和族裔、年龄或政治取向。</p>
+<p>代表性样本可以通过概率抽样构建，也可以通过非概率方法构建，例如用各种方便方法，从不同群体中按配额招募个体。这些方法对许多社会科学研究至关重要，但在实验心理学研究中使用得没那么频繁，也不一定是初学实验者工具箱中的关键部分。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;读者可以想到一些近期研究的反例，它们确实关注代表性抽样，但我们猜它们总体上会证明这个规则。例如，最近一项研究使用全国样本检验了成长型思维干预对美国高中生的普遍性 <span class="citation" data-cites="yeager2019">(<a href="#ref-yeager2019" role="doc-biblioref">Yeager 等 2019</a>)</span>。这项大型研究从美国所有注册高中组成的抽样框中抽取了 100 多所高中，然后在同意参与的学校内随机分配学生。研究者随后检查同意参与的学校是否代表了更广泛的学校总体。这项研究非常好，但我们希望你同意，如果你发现自己处在这种情境中，也就是规划一项多研究者、五年期、全国样本的联盟研究，你可能应该咨询统计学家，而不是使用这本入门书。</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>depth
+</div>
+</div>
+<section id="代表性样本和分层抽样" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="代表性样本和分层抽样">代表性样本和分层抽样</h3>
+<p><strong>分层抽样</strong>是一种很有用的方法。如果你认为实验效应会随样本中的某种分组而变化，它可以帮助你获得更精确的估计。想象你对某个总体中的某个测量感兴趣，比如美国成年人对喝茶的态度，但你认为这个测量会随一个或多个特征变化，例如成年人是经常喝咖啡、偶尔喝咖啡，还是不喝咖啡。更糟的是，你的测量可能在某个群体内部更有变异：也许大多数经常和偶尔喝咖啡的人都觉得茶还可以，但不喝咖啡者作为一个群体往往讨厌茶（多数不喝任何含咖啡因饮料）。</p>
+<p>从这个异质总体中做一个简单随机样本，<em>会</em>产生渐近收敛到正确总体平均茶饮态度的统计估计。但它收敛得可能比你希望的更慢，因为任何给定样本都可能仅仅由于偶然而过度抽到或抽不到不喝咖啡者。在小样本中，如果你碰巧抽到太多不喝咖啡者，对态度的估计会向下偏；如果碰巧抽得太少，就会向上偏。最终这一切都会被抵消，但任何单个样本（尤其是小样本）都会比理想情况噪声更大。</p>
+<div id="fig-sampling-stratified" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个图：包含 50 个三种颜色点的方框，进入分层抽样框和样本（上方）或随机样本（下方）。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sampling-stratified-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/sampling/stratified-sample.png" class="img-fluid figure-img" style="width:75.0%" alt="一个图：包含 50 个三种颜色点的方框，进入分层抽样框和样本（上方）或随机样本（下方）。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sampling-stratified-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;10.2: 分层抽样的说明。 左侧面板显示抽样框。上方框显示按参与者特征分层后的抽样框和分层样本。下方框显示一个简单随机样本，它碰巧完全漏掉了一个群体。
+</figcaption>
+</figure>
+</div>
+<p>但是，如果你知道总体中经常、偶尔或不喝咖啡者的比例，就可以在这些子总体内部执行分层抽样，确保你的样本在这个维度上具有代表性 <span class="citation" data-cites="neyman1992">(<a href="#ref-neyman1992" role="doc-biblioref">Neyman 1992</a>)</span>。<a href="#fig-sampling-stratified" class="quarto-xref">图&nbsp;<span>10.2</span></a> 展示了这种情境，说明一个特定抽样框如何被拆分为若干群体来做分层抽样。结果是样本在某个特定特征上匹配总体比例。相比之下，简单随机样本可能因偶然而过度或不足抽取某些子群体。</p>
+<p>分层抽样可以显著提高估计精度。当不同群体的均值差很多，或方差差很多时，这种收益最明显。如果你认为这些方法对你的问题很重要，还有几种重要的分层抽样改进方法。特别是，<strong>optimal sampling</strong> 可以帮助你弄清楚如何对方差更高的群体过度抽样。另一方面，如果你用来给参与者分层的特征和 outcome 完全无关，那么分层抽样的估计收敛速度会和随机抽样一样快（只是实现起来更麻烦一些）。</p>
+<p><a href="#fig-sampling-stratified-sim" class="quarto-xref">图&nbsp;<span>10.3</span></a> 展示了 <a href="#fig-sampling-stratified" class="quarto-xref">图&nbsp;<span>10.2</span></a> 场景的一个模拟，其中每个咖啡偏好群体都有不同的茶态度均值，而且最小群体具有最大方差。虽然这里的数字是虚构的，但很明显，分层组中的估计误差小得多，并且随着样本变大，估计误差下降得快得多。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-sampling-stratified-sim" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一张展示估计均值随样本量变化的图，比较 random 和 stratified samples；stratified 的标准差更小。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sampling-stratified-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="010-sampling_files/figure-html/fig-sampling-stratified-sim-1.png" class="img-fluid figure-img" style="width:70.0%" alt="一张展示估计均值随样本量变化的图，比较 random 和 stratified samples；stratified 的标准差更小。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sampling-stratified-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;10.3: 一个展示 stratification 潜在收益的模拟。 每个点都是特定样本量下的估计均值，样本通过随机或分层方式抽取。红点显示样本估计的均值和标准差。
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Stratification 无处不在，而且即便在方便样本中也有用。例如，对发展感兴趣的研究者通常会按年龄给样本分层（例如，在一项学龄前儿童研究中招募相同数量的 2 岁和 3 岁儿童）。你可以在纯随机样本中估计发展变化，但分层可以保证你对目标范围有良好覆盖。</p>
+<p>如果你认为某个 outcome 会随特定特征变化，考虑 stratification 并不是坏主意。但不要过头；为了凑齐样本中最后一个左撇子非二元咖啡饮用者，你可能会把自己逼疯。只有在你知道测量会随目标特征变化时，才重点考虑分层。</p>
+</section>
+</div>
+</section>
+</section>
+<section id="方便样本可推广性和-weird-问题" class="level2 page-columns page-full" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="方便样本可推广性和-weird-问题"><span class="header-section-number">10.2</span> 方便样本、可推广性和 WEIRD 问题</h2>
+<p>现在回到可推广性问题。我们只用方便样本开展实验时，获得的实验效应估计到底有多可推广？我们会先陈述实验心理学中可推广性问题最糟糕的版本。然后，我们会试着从悬崖边后退一步，讨论为什么即使心理学文献被一些可推广性问题困扰，我们也未必需要绝望。</p>
+<section id="问题最糟糕的版本" class="level3 page-columns page-full" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="问题最糟糕的版本"><span class="header-section-number">10.2.1</span> 问题最糟糕的版本</h3>
+<p>心理学是对人类心智的研究。但从抽样理论角度看，已发表文献中没有任何一个估计，是基于从人类总体中抽出的简单随机样本。情况还不止如此。以下是关于心理学研究可推广性已经提出的三个最严重问题。</p>
+<ol type="1">
+<li><p><strong>方便样本</strong>。几乎所有实验心理学研究都使用方便样本。这个问题导致有人评论说，“现有人类行为科学在很大程度上是大学二年级学生行为的科学” <span class="citation" data-cites="mcnemar1946 rosenthal1984">(<a href="#ref-mcnemar1946" role="doc-biblioref">McNemar 1946</a>, p.&nbsp;333; quoted in <a href="#ref-rosenthal1984" role="doc-biblioref">Rosenthal 和 Rosnow 1984</a>, p.&nbsp;261)</span>。我们容易接触到的样本，并不代表我们想描述的总体！曾经有一个社交媒体账号专门找那些声称能治愈疾病的生物学论文，并在它们后面加上限定语“in mice”。我们也许可以考虑是否需要对心理学论文做同样的事。“Doing fonzy improves smoodling <em>in sophomore college undergraduates in the Western US</em>” 能登上顶刊吗？</p></li>
+<li><p><strong>WEIRD 问题</strong>。 我们研究的方便样本不仅不能代表它们被招募的本地或国家语境，而且这些本地和国家语境本身也不能代表广泛的人类经验。<span class="citation" data-cites="henrich2010">Henrich, Heine, 和 Norenzayan (<a href="#ref-henrich2010" role="doc-biblioref">2010</a>)</span> 创造了 WEIRD（Western, educated, industrialized, rich, and democratic）这个术语，用来概括心理学实验典型参与者不同于其他人类的一些方式。文献中 WEIRD 参与者的极度过度代表，促使一些研究者提出，已发表结果只是反映了“WEIRD psychology”，也就是更广阔人类心理宇宙中一个很小且特殊的部分。<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p></li>
+<li><p><strong>item sampling 问题</strong>。如 <a href="007-models.html" class="quarto-xref"><span>章 7</span></a> 和 <a href="009-design.html" class="quarto-xref"><span>9</span></a> 所讨论，我们通常不只是想推广到新的人，也想推广到新的刺激 <span class="citation" data-cites="westfall2015">(<a href="#ref-westfall2015" role="doc-biblioref">Westfall, Judd, 和 Kenny 2015</a>)</span>。问题是，我们的实验常常使用一小组 items，这些 items 是实验者以 ad hoc 方式构造的，而不是作为我们希望用效应量估计推广到的更广泛刺激总体的代表样本抽取出来的。更重要的是，我们的统计分析有时没有考虑刺激变异。除非我们知道自己的 items 与更广泛刺激总体之间的关系，否则我们的估计可能又以另一种方式基于非代表性样本。</p></li>
+</ol>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;WEIRD 这个术语非常有用，因为它让人们注意到实验心理学中人类经验广度缺乏代表性。但这个想法的一个负面后果，是有人回应说，我们这个领域需要做的是抽取更多“non-WEIRD”人群。暗示 WEIRD 标签之外的每一种文化都一样，并没有帮助 <span class="citation" data-cites="syed2020">(<a href="#ref-syed2020" role="doc-biblioref">Syed 和 Kathawalla 2020</a>)</span>。更好的起点，是考虑文化变异可能如何指导我们的抽样选择。</p></div></div><p>总之，心理学文献中的实验主要是在 WEIRD 方便样本和非系统抽取的实验刺激样本中测量效应。我们是否应该举手投降，接受一种不可推广的、由样本特异性轶事组成的“科学” <span class="citation" data-cites="yarkoni2020">(<a href="#ref-yarkoni2020" role="doc-biblioref">Yarkoni 2020</a>)</span>？</p>
+</section>
+<section id="希望的理由和前进方向" class="level3 page-columns page-full" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="希望的理由和前进方向"><span class="header-section-number">10.2.2</span> 希望的理由和前进方向</h3>
+<p>我们认为情况没有上面的论证暗示得那么暗淡。上述每个论证背后都有一个<strong>异质性</strong>概念，也就是特定效应在总体中会变化的想法。</p>
+<p>让我们思考这个论证的一个非常简单版本。假设我们有一个测量 smoodling 效应的实验，而事实证明 smoodling 在整个人类总体中完全普遍且不变。现在，如果我们想精确估计 smoodling，可以抽取<em>任何</em>样本，因为每个人都会显示同样模式。由于 smoodling 是同质的，一个非代表性样本不会造成问题。确实有一些现象像这样！例如，Stroop 任务几乎对每个人都会产生一致且相似的干扰效应 <span class="citation" data-cites="hedge2018">(<a href="#ref-hedge2018" role="doc-biblioref">Hedge, Powell, 和 Sumner 2018</a>)</span>。</p>
+<div id="fig-sampling-heterogeneity" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="一个图：代表性样本有接近的总体/样本均值；如果效应异质，方便样本会有偏差。">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-sampling-heterogeneity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/sampling/heterogeneity.png" class="img-fluid figure-img" alt="一个图：代表性样本有接近的总体/样本均值；如果效应异质，方便样本会有偏差。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-sampling-heterogeneity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;10.4: 异质性和方便样本相互作用的说明。颜色表示任意总体子群。左侧面板显示样本构成。每个单独图显示各子群中效应量的分布。
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-sampling-heterogeneity" class="quarto-xref">图&nbsp;<span>10.4</span></a> 更广泛地说明了这个论证。如果你有一个代表性样本（上方），那么无论效应是同质的（右侧）还是异质的（右侧），样本均值和总体均值都会收敛到同一个值。这就是抽样理论的美妙之处。如果你有一个方便样本， 总体中的某一部分会在样本中过度代表。如果总体中效应大小是同质的，方便样本并不会造成问题，就像 smoodling 或 Stroop 的情形。麻烦出现在效应异质时。由于某个群体被过度代表，相对于总体均值，样本均值会产生系统性偏差。</p>
+<p>所以，上面列出的问题，包括方便样本、 WEIRD 样本和狭窄刺激样本，只有在效应异质时才会造成问题。它们异质吗？简短答案是：<em>我们不知道</em>。在效应同质时，方便样本没有问题；但如果我们只使用方便样本，就可能不知道哪些效应是同质的！这就像把头埋进沙子里。</p>
+<p>如果没有关于什么应该在个体之间变化、什么应该在个体之间保持一致的理论，我们就无法摆脱这种循环性。<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> 作为人类行为的朴素观察者，人与人之间的差异常常显得很突出。我们是年龄、性别、种族、阶级和教育等社会特征的敏锐观察者。出于这个原因，我们关于心理学的直觉理论常常把这些特征放在前台，把它们看作人与人之间变异的主要位置。当然，这些特征很重要，但它们也无法解释人类心理学中的许多<em>不</em>变性。另一条理论化路线始于这样一个想法：心理学中“较低层级”的部分，比如知觉，应该比社会认知这类“较高层级”能力更少变化。这类理论听起来是一个有用起点，但文献中也有反例，包括知觉中的文化变异 <span class="citation" data-cites="henrich2010">(<a href="#ref-henrich2010" role="doc-biblioref">Henrich, Heine, 和 Norenzayan 2010</a>)</span>。</p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;许多人已经对文化和语言一般如何调节心理过程做过理论化 <span class="citation" data-cites="markus1991">(例如 <a href="#ref-markus1991" role="doc-biblioref">Markus 和 Kitayama 1991</a>)</span>。我们这里谈的是相关但略有不同的问题：不是关于什么不同的理论，而是关于什么时候应该有差异、什么时候不应该有差异的理论。例如，Tsai <span class="citation" data-cites="tsai2007">(<a href="#ref-tsai2007" role="doc-biblioref">2007</a>)</span> 的 “ideal affect” 理论预测，不同文化中实际 affect 的分布应该更相似，但文化差异应该出现在 <em>ideal affect</em>（人们想要有什么感觉）上。这是一个关于什么时候应看到同质性、什么时候应看到异质性的理论。</p></div></div><p>多实验室、多国家研究可以帮助处理关于异质性的问题，打破我们上面描述的循环性。例如，ManyLabs 2 系统考察了一组现象在不同文化中的可重复性 <span class="citation" data-cites="klein2018">(<a href="#ref-klein2018" role="doc-biblioref">Klein 等 2018</a>)</span>，发现 WEIRD 地点和其他地点之间的效应变异有限。并且，在一项比较方便样本和概率样本的研究中，<span class="citation" data-cites="coppock2018">Coppock, Leeper, 和 Mullinix (<a href="#ref-coppock2018" role="doc-biblioref">2018</a>)</span> 在来自社会科学的一组实验效应中发现人口统计异质性有限。</p>
+<p>所以，至少在一些情况下，我们不必那么担心异质性。更一般地，这类大型研究提供了测量和刻画人口统计与文化变异的可能性，也可以刻画变异本身如何在不同现象之间变化。</p>
+</section>
+</section>
+<section id="抽样过程中的偏差" class="level2 page-columns page-full" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="抽样过程中的偏差"><span class="header-section-number">10.3</span> 抽样过程中的偏差</h2>
+<p>在计量经济学或流行病学这类使用观察性方法估计因果效应的领域中，推理<strong>抽样偏差</strong>是估计可推广效应的关键部分。如果你的样本不能代表目标总体， 那么你的效应估计会有偏。<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> 在我们讨论的这种实验工作中，很多这类问题会通过随机分配来处理，包括我们处理的第一个问题：<strong>collider bias</strong>。第二个问题则不是这样，也就是<strong>流失偏差</strong>，它即便在随机实验中也是问题。</p>
+<div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;有大量文献使用因果推断框架来校正这些偏差。这些技术远超出本书范围；但如果你感兴趣，可以看看我们之前推荐过的一些教材，例如 <span class="citation" data-cites="cunningham2021">Cunningham (<a href="#ref-cunningham2021" role="doc-biblioref">2021</a>)</span>。</p></div></div><section id="collider-bias碰撞偏差" class="level3 page-columns page-full" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="collider-bias碰撞偏差"><span class="header-section-number">10.3.1</span> Collider bias（碰撞偏差）</h3>
+<p>想象你想通过一项（非实验）调查测量金钱和幸福之间的关联。如 <a href="001-experiments.html" class="quarto-xref"><span>章 1</span></a> 所讨论，有许多因果过程可能导致这种关联。<a href="#fig-sampling-money" class="quarto-xref">Figure&nbsp;<span>10.5</span></a> 展示了其中几个场景。金钱可能真的导致幸福（1）；幸福可能导致你赚更多钱（2）；或者某个第三因素，比如有很多朋友，可能让人更幸福<em>也</em>更富有（3）。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-sampling-money" class="quarto-float quarto-figure quarto-figure-center anchored" alt="四个 DAG：箭头 money M 到 happiness H；箭头 H 到 M；friends 指向 M 和 H；M 和 H 指向 social services sample。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sampling-money-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/sampling/money.png" class="img-fluid figure-img" alt="四个 DAG：箭头 money M 到 happiness H；箭头 H 到 M；friends 指向 M 和 H；M 和 H 指向 social services sample。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sampling-money-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;10.5: 金钱和幸福在某个特定样本中相关的四个原因：（1）因果关系，（2）反向因果，（3）与朋友关系混淆，以及（4）collider bias。最后一个场景中，我们必须假设我们的测量以进入这个样本为<em>条件</em>，也就是说，我们只在社会服务样本内部查看金钱和幸福的关联。
+</figcaption>
+</figure>
+</div></div><p>但如果抽样不谨慎，我们也会创造虚假关联。我们可能诱发的一个突出问题叫 <strong>collider bias</strong>。假设我们从一家社会服务机构的客户中招募样本。不幸的是，我们的两个变量都可能影响一个人是否出现在社会服务机构中（<a href="#fig-sampling-money" class="quarto-xref">图&nbsp;<span>10.5</span></a>, 4）：人们可能因为财务或福利援助而与该机构互动，也可能因为心理服务而互动（也许由于抑郁）。</p>
+<p>处于社会服务样本中这个变量被称为 <strong>collider</strong>，因为两条因果箭头<em>碰撞</em>到它（它们都指向它）。如果我们只看社会服务样本内部，可能会看到财富和幸福之间的<em>负</em>关联：平均而言，前来寻求财务援助的人财富更少、幸福更多，而前来寻求心理服务的人则相反。这里的 take-home point 是，在观察性研究中，你需要仔细思考抽样过程的因果结构 <span class="citation" data-cites="rohrer2018">(<a href="#ref-rohrer2018" role="doc-biblioref">Rohrer 2018</a>)</span>。</p>
+<p>如果你在做实验研究，基本上可以免受这类偏差影响：即便在被子选择的样本中，随机分配仍然“有效”。如果你在社会服务人群中使用随机分配运行金钱干预，仍然可以无偏估计金钱对幸福的效应。但这个估计只对<em>这个被子选择总体的成员</em>有效。</p>
+</section>
+<section id="流失偏差" class="level3 page-columns page-full" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="流失偏差"><span class="header-section-number">10.3.2</span> 流失偏差</h3>
+<p><strong>流失</strong>指的是人们退出你的研究。你应该尽一切努力改善参与者体验（见 <a href="012-collection.html" class="quarto-xref"><span>章 12</span></a>），但有时，尤其当 manipulation 对参与者很费力，或者你的实验是纵向的、需要追踪参与者一段时间时，仍然会有参与者退出研究。</p>
+<p>流失本身可能威胁实验估计的可推广性。想象你做一个实验，在一年时间里，以一组小学生为样本，比较一种新的、非常强化的课后数学课程和控制课程。到年底，假设许多参与者退出了。留在研究中的家庭，很可能是那些最关心数学的家庭。即便你看到课程干预的效应，这个效应也可能只能推广到热爱数学的家庭中的孩子。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-sampling-attrition" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个 DAG，其中 curriculum intervention 指向 math scores，虚线箭头从 high math interest 指向 math scores。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sampling-attrition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/sampling/attrition.png" class="img-fluid figure-img" alt="一个 DAG，其中 curriculum intervention 指向 math scores，虚线箭头从 high math interest 指向 math scores。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sampling-attrition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;10.6: Selective attrition 即使在存在随机分配时也可能导致偏差。虚线表示研究者没有观察到的因果关系。
+</figcaption>
+</figure>
+</div><div id="fn8"><p><sup>8</sup>&nbsp;如果你进一步深入画 DAGs，就会想把 attrition 画成图中的一个独立节点，但这超出了本书范围。</p></div></div><p>但流失还有一个更进一步的问题，称为<strong>选择性流失</strong>。如果流失与 outcome 有关，而且特别发生在 treatment 组内（或者同样地，特别发生在 control 组内），即便存在随机分配，你最终也可能得到有偏估计 <span class="citation" data-cites="nunan2018">(<a href="#ref-nunan2018" role="doc-biblioref">Nunan, Aronson, 和 Bankhead 2018</a>)</span>。想象在你的数学干预实验中，控制条件的学生留在样本中，但数学干预本身太难，以至于除非家庭对数学非常感兴趣，否则大多数都退出了。现在，当你在实验结束时比较数学分数时，你的估计会有偏（<a href="#fig-sampling-attrition" class="quarto-xref">图&nbsp;<span>10.6</span></a>）：数学条件中的分数可能更高，仅仅是因为谁坚持到了最后存在差异。<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>不幸的是，事实证明，即便在短研究中，流失偏差也可能很常见，尤其是在线研究中，参与者只要关闭浏览器窗口就能退出。这种偏差可能严重到导致错误结论。例如，<span class="citation" data-cites="zhou2016">Zhou 和 Fishbach (<a href="#ref-zhou2016" role="doc-biblioref">2016</a>)</span> 做了一个实验，要求在线参与者写下过去一年中四件快乐事件（低难度）或十二件快乐事件（高难度），然后让参与者评价任务难度。令人惊讶的是，高难度任务被评为比低难度任务更容易！</p>
+<p>选择性流失是这个反直觉结论的罪魁祸首：低难度条件中只有 26% 的参与者退出，而高难度任务中整整 69% 退出了。剩下的 31% 参与者发现，生成 12 件快乐事件对他们来说相当容易，因此他们把客观上更难的任务评为更不困难。</p>
+<p>始终努力追踪和报告流失信息。这样你和其他人就能理解，流失是否正在导致你的估计有偏，或威胁你的发现可推广性。<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;如果你对此感兴趣，有一整个统计学领域聚焦于<strong>缺失数据</strong>，并提供模型来推理和处理数据可能不是<strong>完全随机缺失</strong>的情况 <span class="citation" data-cites="little2019">(<a href="#ref-little2019" role="doc-biblioref">Little 和 Rubin 2019</a> 是这些工具的经典参考)</span>。上面提到的因果推断框架也提供了非常有用的方式来思考这类偏差。</p></div></div></section>
+</section>
+<section id="样本量规划" class="level2 page-columns page-full" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="样本量规划"><span class="header-section-number">10.4</span> 样本量规划</h2>
+<p>现在，你已经花了一些时间考虑自己的样本以及它代表什么总体。接下来，你的样本应该包含多少人？一直收集数据，直到推断检验中出现 <span class="math inline">\(p &lt; 0.05\)</span>，是得到 false positive 的好方法。这种做法被称为 “optional stopping”，它是使 <span class="math inline">\(p\)</span> 值失效的一类实践的好例子，很像 <a href="003-replication.html" class="quarto-xref"><span>章 3</span></a> 和 <a href="006-inference.html" class="quarto-xref"><span>章 6</span></a> 中讨论的 analytic flexibility 情形 <span class="citation" data-cites="simmons2011">(<a href="#ref-simmons2011" role="doc-biblioref">Simmons, Nelson, 和 Simonsohn 2011</a>)</span>。</p>
+<p>何时停止收集数据的决策不应依赖数据。相反，你应该在研究 preregistration（见 <a href="011-prereg.html" class="quarto-xref"><span>章 11</span></a>）中透明声明你的数据收集<strong>停止规则</strong>。这一步会让读者放心，说明不存在 optional stopping 带来的偏差风险。最简单的停止规则是：“我会一直收集数据，直到达到目标 <span class="math inline">\(N\)</span>”；这种情况下所需要的只是一个 <span class="math inline">\(N\)</span> 值。</p>
+<p>但你如何决定 <span class="math inline">\(N\)</span>？这取决于你想测量的效应，以及它在总体中如何变化。更小的效应需要更大的样本量。经典上，<span class="math inline">\(N\)</span> 通过<strong>power analysis</strong>来计算；给定某个特定预期效应量，它可以提供一个样本量，使你有不错机会拒绝零假设。下面会介绍这个计算。</p>
+<p>经典 power analysis并不是规划样本量的唯一方式。还有许多其他有用策略，其中一些依赖和 power analysis 相同类型的计算（<a href="#tbl-stopping-rules" class="quarto-xref">表&nbsp;<span>10.1</span></a>）。每一种策略都可以为特定样本量提供有效理由，但它们适用于不同情境。</p>
+<div id="tbl-stopping-rules" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-stopping-rules-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;10.1: Types of data collection stopping rules, along with examples of appropriate contexts for them.
+</figcaption>
+<div aria-describedby="tbl-stopping-rules-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 47%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Stopping rule</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Power analysis</td>
+<td>Stop at <span class="math inline">\(N\)</span> for known probability of rejecting the null given known effect size</td>
+<td>Randomized trial with strong expectations about effect size</td>
+</tr>
+<tr class="even">
+<td>Resource constraint</td>
+<td>Stop collecting data after a certain amount of time or after a certain amount of resources are used</td>
+<td>Time-limited field work</td>
+</tr>
+<tr class="odd">
+<td>Smallest effect size of interest</td>
+<td>Stop at <span class="math inline">\(N\)</span> for known probability of rejecting the null for effects greater than some minimum</td>
+<td>Measurement of a theoretically important effect with unknown magnitude</td>
+</tr>
+<tr class="even">
+<td>Precision analysis</td>
+<td>Stop at <span class="math inline">\(N\)</span> that provides some known degree of precision in measure</td>
+<td>Experimental measurement to compare with predictions of cognitive models</td>
+</tr>
+<tr class="odd">
+<td>Sequential analysis</td>
+<td>Stop when a known inferential criterion is reached</td>
+<td>Intervention trial designed to accept or reject null with maximal efficiency</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="power-analysis功效分析" class="level3 page-columns page-full" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="power-analysis功效分析"><span class="header-section-number">10.4.1</span> Power analysis（功效分析）</h3>
+
+<div class="no-row-height column-margin column-container"><div id="fig-sampling-neyman-pearson" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个 inference（reject/fail）与 reality（true/false）的表：false positive、correct rejection、true positive、false negative。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sampling-neyman-pearson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/sampling/power-alpha.png" class="img-fluid figure-img" alt="一个 inference（reject/fail）与 reality（true/false）的表：false positive、correct rejection、true positive、false negative。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sampling-neyman-pearson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;10.7: 零假设显著性检验的标准决策矩阵。
+</figcaption>
+</figure>
+</div></div><p>先回顾一下我们在 <a href="006-inference.html" class="quarto-xref"><span>章 6</span></a> 中介绍的零假设显著性检验范式。记得我们在 <a href="006-inference.html" class="quarto-xref"><span>章 6</span></a> 中介绍过 Neyman-Pearson 的决策理论检验视角，<a href="#fig-sampling-neyman-pearson" class="quarto-xref">图&nbsp;<span>10.7</span></a> 再次展示了它。其想法是，我们有某个零假设 <span class="math inline">\(H_0\)</span> 和某个备择假设 <span class="math inline">\(H_1\)</span>，大概像“没有效应”和“是的，有某个已知大小的效应”，然后我们想用数据来决定自己处在哪个状态。<span class="math inline">\(\alpha\)</span> 是拒绝零假设的标准，惯例上设为 <span class="math inline">\(\alpha=0.05\)</span>。</p>
+<p>但如果 <span class="math inline">\(H_0\)</span> 实际上是假的，而备择假设 <span class="math inline">\(H_1\)</span> 是真的呢？并不是所有实验都同样适合在这些情况下拒绝零假设。想象做一个 <span class="math inline">\(N = 3\)</span> 的实验。在这种情况下，即便零假设是假的，我们几乎也总是无法拒绝它。我们的样本几乎肯定太小，无法排除抽样变异作为观察数据来源的可能。</p>
+<p>让我们尝试量化自己有多愿意<em>错过</em>这个效应，也就是 false negative rate。 我们用 <span class="math inline">\(\beta\)</span> 表示这个概率。如果 <span class="math inline">\(\beta\)</span> 是错过效应的概率（当零假设其实为假时未能拒绝它），那么 <span class="math inline">\(1-\beta\)</span> 就是我们<em>在零假设为假时正确拒绝零假设</em>的概率。这就是我们所说的实验的<strong>statistical power</strong>。</p>
+<div id="fig-sampling-power" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="一张 H_0/H_1 下分布的图；较大样本有更低显著性阈值，显著事件比例更高。">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-sampling-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/sampling/power.png" class="img-fluid figure-img" alt="一张 H_0/H_1 下分布的图；较大样本有更低显著性阈值，显著事件比例更高。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-sampling-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;10.8: 样本量越大 power 越高的说明。
+</figcaption>
+</figure>
+</div>
+<p>只有在知道备择假设的效应量时，我们才能计算 power。如果备择假设是小效应，那么拒绝零假设的概率通常会很低（除非样本量非常大）。相反，如果备择假设是大效应，那么拒绝零假设的概率会更高。</p>
+<p>样本量也有同样动态：同一个效应量，在大样本中比在小样本中更容易检测。<a href="#fig-sampling-power" class="quarto-xref">Figure&nbsp;<span>10.8</span></a> 展示了这种关系如何运作。大样本量通过减少抽样误差，创造了更紧的零分布（右侧）。更紧的零分布意味着，在存在真实效应的变异下，你有更多时候可以拒绝零假设。如果你的样本量太小，以至于大多数时候无法检测到效应，我们称这种情况为 <strong>underpowered</strong>。<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;你也可以把一个设计称为 <strong>overpowered</strong>，不过我们对这种说法稍有异议，因为大数据集的价值通常不只是拒绝零假设，还包括以高精度测量效应，并考察效应如何被样本其他特征调节。</p></div><div id="fn11"><p><sup>11</sup>&nbsp;这里我们的重点是给出 power analysis 的概念性介绍；更详细的入门见 <span class="citation" data-cites="cohen1992">Cohen (<a href="#ref-cohen1992" role="doc-biblioref">1992</a>)</span>。</p></div></div><p>经典 power analysis 包括计算在给定 <span class="math inline">\(\alpha\)</span> 和已知效应量时，为达到某个 power 水平所需的样本量 <span class="math inline">\(N\)</span>。<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> <span class="math inline">\(\alpha\)</span>、<span class="math inline">\(\beta\)</span>、<span class="math inline">\(N\)</span> 和效应量之间关系的数学，已经针对许多不同统计检验被推导出来 <span class="citation" data-cites="cohen2013">(<a href="#ref-cohen2013" role="doc-biblioref">Cohen 2013</a>)</span>，并被编码进 G*Power <span class="citation" data-cites="faul2007">(<a href="#ref-faul2007" role="doc-biblioref">Faul 等 2007</a>)</span> 和 R 的 <code>pwr</code> package <span class="citation" data-cites="champely2020">(<a href="#ref-champely2020" role="doc-biblioref">Champely 2020</a>)</span> 这类软件。对于其他情况（包括 mixed effects models），你可能必须进行模拟：在已知假设下生成许多模拟实验运行，并计算其中有多少会导致显著效应。幸运的是，也有 R packages 可用于这个目的，包括 <code>simr</code> package <span class="citation" data-cites="green2016">(<a href="#ref-green2016" role="doc-biblioref">Green 和 MacLeod 2016</a>)</span>。</p>
+</section>
+<section id="实践中的-power-analysis" class="level3 page-columns page-full" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="实践中的-power-analysis"><span class="header-section-number">10.4.2</span> 实践中的 power analysis</h3>
+<p>让我们为假想的金钱与幸福实验做一个 power analysis。想象这个实验是一个简单双组设计，其中来自方便总体的参与者被随机分配到两种条件之一：收到 $1,000 和一些关于储蓄的建议（实验条件），或只收到建议而没有钱（控制条件）。一个月后，我们跟进并收集自我报告幸福评分。为了能够拒绝零假设，我们的研究应该有多少人？这个问题的答案取决于我们想要的 <span class="math inline">\(\alpha\)</span> 和 <span class="math inline">\(\beta\)</span>，以及我们对干预预期效应量的判断。</p>
+<p>对于 <span class="math inline">\(\alpha\)</span>，我们就设定一个惯例显著性阈值 <span class="math inline">\(\alpha = 0.05\)</span>。但我们想要的 power 水平应该是多少？社会科学中的通常标准，是追求 80% 以上的 power（例如 <span class="math inline">\(\beta &lt; 0.20\)</span>）；这让你有五分之四的机会观察到显著效应。但就像 <span class="math inline">\(\alpha = 0.05\)</span> 一样，这是一个惯例值，对现代标准来说也许有点太宽松；对某个特定效应的强检验，可能应该有 90% 或 95% power。<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>&nbsp;真的，想在工作中使用 power analysis 的研究者，应该仔细想想自己愿意接受多大 false negative 概率。在探索性研究中，错过效应的较高概率也许是合理的；相反，在验证性研究中，追求更高 power 水平可能更有意义。</p></div></div><p>与根本问题相比，这些选择相对容易：我们的 power analysis需要对效应量有某种预期。这是 <em>power analysis 的第一个根本问题</em>：如果你知道效应量，也许就不需要做实验了！</p>
+<p>那么，你应该如何获得效应量估计？这里有几种可能：</p>
+<ul>
+<li><p><strong>Meta-analysis</strong>。&nbsp;如果有一项好的 meta-analysis 研究了你想测量的效应（或某个密切相关的效应），那你很幸运。强 meta-analysis 不仅会有精确的效应量估计，也会有一些诊断，用来检测并校正文献中潜在的 publication bias（见 <a href="016-meta.html" class="quarto-xref"><span>章 16</span></a>）。虽然这些诊断并不完美，但它们仍然可以让你判断是否能用 meta-analytic effect size estimate 作为 power analysis的基础。</p></li>
+<li><p><strong>特定先前研究</strong>。更复杂的情况是，你只有一项或少数几项先前研究，想把它们作为参考。麻烦在于，文献中的任何单个效应都可能由于发表偏倚和其他选择性报告偏差而被夸大（见 <a href="003-replication.html" class="quarto-xref"><span>章 3</span></a>）。因此，使用这个估计很可能意味着你的研究会 underpowered；你可能不会像先前研究那么幸运！</p></li>
+<li><p><strong>Pilot testing</strong>。很多人（包括我们）曾在某个阶段学到，做 power analysis的一种方式是开展 pilot study，从 pilot 中估计效应量，然后用这个效应估计为主研究做 power analysis。我们不推荐这种做法。麻烦在于，pilot study 的样本量会很小，导致效应量估计非常不精确 <span class="citation" data-cites="browne1995">(<a href="#ref-browne1995" role="doc-biblioref">Browne 1995</a>)</span>。如果你高估了效应量，主研究就会严重 underpowered。如果你低估了，情况则相反。用 pilot 做 power analysis 是制造问题的配方。</p></li>
+<li><p><strong>关于目标效应的一般预期</strong>。在我们看来，在没有非常强 meta-analysis&nbsp;的情况下，使用 power analysis的最好方式，也许是先对你预期并希望能够检测到的效应大小形成一个一般想法。说“我不知道效应会有多大，但如果它是<em>中等大小</em>（比如 <span class="math inline">\(d=0.5\)</span>），我们看看自己的 power 会是多少；因为这是我们对金钱干预所希望看到的那类效应”，是完全合理的。这类 power analysis 可以帮助你设定预期：在给定样本量下，你大概能检测到什么范围的效应。</p></li>
+</ul>
+<p>对于我们的金钱研究，使用中等效应的一般预期，可以计算 <span class="math inline">\(d=0.5\)</span> 时的 power。在这个例子中，我们直接使用 <a href="006-inference.html" class="quarto-xref"><span>章 6</span></a> 中介绍的双样本 <span class="math inline">\(t\)</span> 检验；当 <span class="math inline">\(\alpha = 0.05\)</span> 且 <span class="math inline">\(d=0.5\)</span> 时，达到 80% power 需要每组有 <span class="math inline">\(N = 64\)</span> 人。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>使用 <code>pwr</code> package 在 R 中做经典 power analysis 相当简单。这个 package 提供一组针对特定检验的函数，例如 <code>pwr.t.test()</code>。对每个函数，你提供四个参数中的三个：效应量（<code>d</code>）、观察数量（<code>n</code>）、显著性水平（<code>sig.level</code>）和 power（<code>power</code>）；函数会计算第四个。对于经典 power analysis，我们留空 <code>n</code>：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> .<span class="dv">5</span>, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">power =</span> .<span class="dv">8</span>, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">sig.level =</span> .<span class="dv">05</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">type =</span> <span class="st">"two.sample"</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>但也可以使用同一个函数来计算某个 <code>n</code> 和 <code>d</code> 组合下所达到的 power。</p>
+</div>
+</div>
+<p>然而，还有第二个问题。<em>power analysis 的第二个根本问题</em>是，实验的真实效应量可能为零。在这种情况下，<em>没有任何</em>样本量能让你正确拒绝零假设。回到 <a href="006-inference.html" class="quarto-xref"><span>章 6</span></a> 中的讨论，零假设显著性检验框架本来就不是为了让你<em>接受</em>零假设而设置的。如果你感兴趣的是一种双向假设检验方法，既可以接受也可以拒绝零假设，那么你可能需要考虑 Bayes Factor 或<strong>等效性检验</strong>方法 <span class="citation" data-cites="lakens2018">(<a href="#ref-lakens2018" role="doc-biblioref">Lakens, Scheel, 和 Isager 2018</a>)</span>；这些方法不符合经典 power analysis 的假设。</p>
+</section>
+<section id="样本量规划的替代方法" class="level3 page-columns page-full" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="样本量规划的替代方法"><span class="header-section-number">10.4.3</span> 样本量规划的替代方法</h3>
+<p>现在考虑一些经典 power analysis 的替代方法，它们仍然可以产生合理的样本量说明。</p>
+<ol type="1">
+<li><p><strong>资源约束</strong>。在某些情况下，存在限制数据收集的根本资源约束。例如，如果你在做田野工作，有时正确的数据收集停止标准就是“田野访问结束时”，因为每一个额外数据点都很有价值。当预先指定时，这类样本量说明可以相当合理，尽管它们不能排除对某个特定假设而言 underpowered 的可能。</p></li>
+<li><p><strong>Smallest effect size of interest（SESOI）</strong>。SESOI 分析是 power analysis 的一个变体，其中包含一些资源约束规划。你不是试图直觉判断目标效应有多大，而是选择一个水平：低于这个水平，你可能就不感兴趣去检测这个效应了。这个选择可以由理论（预测什么）、应用关切（在某个具体情境中什么效应可能有用）或资源约束（运行实验有多昂贵或多耗时）来指导。在实践中，SESOI 分析就是以某个特定小效应为目标的经典 power analysis。</p></li>
+<li><p><strong>基于精度的样本规划</strong>。如 <a href="006-inference.html" class="quarto-xref"><span>章 6</span></a> 所讨论，研究目标并不总是拒绝零假设！有时，我们会主张在多数时候，目标应该是以高精度估计某个目标因果效应，因为这些估计是建立理论的前提。如果你想要的是一个具有已知精度的估计（比如某个特定宽度的置信区间），就可以计算达到该精度所需的样本量 <span class="citation" data-cites="bland2009 rothman2018">(<a href="#ref-bland2009" role="doc-biblioref">Bland 2009</a>; <a href="#ref-rothman2018" role="doc-biblioref">Rothman 和 Greenland 2018</a>)</span>。<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p></li>
+<li><p><strong>Sequential analysis</strong>。你的停止规则不必是在某个特定 <span class="math inline">\(N\)</span> 上硬性截止。相反，你可以使用 frequentist 或 Bayesian 方法规划一种<strong>序贯分析</strong>，也就是计划在达到某个特定推断阈值时停止收集数据。对于 frequentist 版本，防止 sequential analysis 变成 <span class="math inline">\(p\)</span>-hacking 的关键，是你预先指定会在哪些 <span class="math inline">\(N\)</span> 值上进行检验，然后校正因为多次检验产生的 <span class="math inline">\(p\)</span> 值 <span class="citation" data-cites="lakens2014">(<a href="#ref-lakens2014" role="doc-biblioref">Lakens 2014</a>)</span>。对于 Bayesian sequential analysis，你实际上可以在收集数据时计算一个持续更新的 Bayes Factor，并在达到预先指定的证据水平时停止 <span class="citation" data-cites="schonbrodt2017">(<a href="#ref-schonbrodt2017" role="doc-biblioref">Schönbrodt 等 2017</a>)</span>。后一种替代方案的优势在于，它允许你收集支持零假设的证据，也允许你收集反对零假设的证据。<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p></li>
+</ol>
+<div class="no-row-height column-margin column-container"><div id="fn13"><p><sup>13</sup>&nbsp;根据我们的经验，当你试图收集足够精确的测量，以便在计算模型之间比较时，这类规划最有用。由于模型可以做出相差某个已知数量的定量预测，那么你的置信区间需要多窄就很清楚。</p></div><div id="fn14"><p><sup>14</sup>&nbsp;另一个有趣变体是 sequential parameter estimation，即收集数据直到达到目标精度水平 <span class="citation" data-cites="kelley2018">(<a href="#ref-kelley2018" role="doc-biblioref">Kelley, Darku, 和 Chattopadhyay 2018</a>)</span>；这种方法结合了基于精度分析和序贯分析的一些优点。</p></div></div><p>总之，有许多不同方式可以说明你的样本量或停止规则。 最重要的是：（1）预先指定你的策略；（2）清楚说明你的选择理由。<a href="#tbl-sampling-justification" class="quarto-xref">Table&nbsp;<span>10.2</span></a> 给出了一个样本量说明示例，它调用了这里讨论的几个不同概念，并把经典 power 计算作为说明的一部分。审稿人可以很容易地跟随这段讨论的逻辑，并形成自己的结论：这个研究是否有足够样本量，以及在研究者约束下是否应该开展。</p>
+<div id="tbl-sampling-justification" class="quarto-float quarto-figure quarto-figure-center anchored" data-tbl-colwidths="[20,80]">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sampling-justification-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;10.2: Example sample size justification, referencing elements of SESOI, resource limitation, and power-based reasoning.
+</figcaption>
+<div aria-describedby="tbl-sampling-justification-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Justification text</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Background</td>
+<td>We did not have strong prior information about the likely effect size, so we could not compute a classical power analysis.</td>
+</tr>
+<tr class="even">
+<td>Smallest effect of interest</td>
+<td>Because of our interest in meaningful factors affecting word learning, we were interested in effect sizes as small as <span class="math inline">\(d=0.5\)</span>.</td>
+</tr>
+<tr class="odd">
+<td>Resource limitation</td>
+<td>We were also limited by our ability to collect data only at our on-campus preschool.</td>
+</tr>
+<tr class="even">
+<td>Power computation</td>
+<td>We calculated that based on our maximal possible sample size of <span class="math inline">\(N = 120\)</span> (60 per group), we would achieve at least 80% power to reject the null for effects as small as <span class="math inline">\(d = 0.52\)</span>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<!-- \clearpage -->
+<div class="callout callout-style-default callout-note callout-titled" title="depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>depth
+</div>
+</div>
+<section id="重复研究的样本量" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="重复研究的样本量">重复研究的样本量</h3>
+<p>如何设定重复研究的样本量，一直是 metascience 文献中的持续问题。朴素地说，你似乎应该能够计算原始研究的效应量，然后直接把它作为经典 power analysis 的基础。</p>
+<p>不过，这种朴素做法有几个缺陷。第一，由于 publication bias <span class="citation" data-cites="nosek2021">(<a href="#ref-nosek2021" role="doc-biblioref">Nosek 等 2022</a>)</span>， 原始发表论文中的效应量很可能高估了真实效应量。 <!-- ^[Imagine the counterfactual world in which the same study had yielded a smaller and perhaps nonsignificant effect size. Would it still have been published in the same form, and would you still want to replicate? If not, then consider the fact that the authors "got lucky"---even if the effect is truly present, perhaps this particular experiment happened to observe a larger effect than the true value just by chance.] --> 第二，power analysis 只会给出一个样本量，使重复研究在某个标准下有特定概率拒绝零假设。但完全可能出现这样的情况：原始实验 <span class="math inline">\(p&lt;0.05\)</span>，重复实验 <span class="math inline">\(p&gt;0.05\)</span>，而且原始实验和重复实验的结果彼此并没有显著差异。因此，对原始效应量做出统计显著的重复，并不一定是你想追求的目标。</p>
+<p>面对这些问题，重复研究的样本量可以用几种其他方式规划。第一，重复者可以使用上面提到的标准策略，例如 SESOI 或基于资源的规划，以高概率或在已知时间/金钱范围内排除大效应。不过，如果 SESOI 很高或资源有限，这些策略可能产生不确定结果。一个确定答案可能需要投入非常可观的资源。</p>
+<p>第二，<span class="citation" data-cites="simonsohn2015">Simonsohn (<a href="#ref-simonsohn2015" role="doc-biblioref">2015</a>)</span> 推荐 “small telescopes” 方法。其想法不是检验是否<em>存在</em>效应，而是检验是否存在一个<em>大到原始研究本可以检测到</em>的效应。这个类比来自天文学。如果一个观鸟者把双筒望远镜指向天空，并声称发现了一颗新行星，我们不仅要问那个位置是否有一颗行星，还要问他们是否有任何可能用双筒望远镜看到它；如果没有，也许他们是对的，但理由是错的！Simonsohn 表明，如果重复者收集原始研究 2.5 倍大的样本，他们就有 80% power 检测任何原始研究本来可以合理检测到的效应。这个简单经验法则为保守重复研究提供了一个不错起点。</p>
+<p>最后，重复者可以使用 sequential Bayesian analysis， 试图收集相对于 <span class="math inline">\(H_1\)</span> 或 <span class="math inline">\(H_0\)</span> 支持度的 substantial evidence。Sequential bayes 是一个有吸引力的选项，因为它允许高效收集数据，以反映某个效应是否可能存在于某个特定样本中，尤其是在 SESOI 或 “small telescopes” 分析有时需要大到难以承受的样本时。</p>
+</section>
+</div>
+</section>
+</section>
+<section id="本章小结抽样" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="本章小结抽样"><span class="header-section-number">10.5</span> 本章小结：抽样</h2>
+<p>作为实验者，你的目标是估计一个因果效应。 但这个效应是对谁而言的？ 本章试图帮助你思考，如何从实验样本推广到某个目标总体。基于概率样本开展实验是非常少见的，在这类样本中，总体每个成员都有相同机会被选中。如果你使用方便样本， 就需要考虑该样本引入的偏差如何关联到你观察到的效应估计。你认为这个效应在总体中很可能高度异质吗？有没有理论提示，这个效应对你招募的方便样本来说可能更大或更小？</p>
+<p>关于可推广性和抽样的问题，取决于你正在研究的精确构念，而且没有机械程序可以回答这些问题。相反，你只能问自己：我的抽样程序如何限定我想基于数据做出的推断？清楚说明你的推理会非常有帮助，无论是对你自己，还是对想把你的发现一般性放入语境中理解的读者。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="discussion questions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>discussion questions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>我们想一般性地理解人类认知，但你是否认为，更高效的研究策略是先在 WEIRD 方便总体中研究认知的某些特征（例如知觉），然后再到 non-WEIRD 群体中检验我们的概括？反对这种基于效率的策略，有哪些论点？</p></li>
+<li><p>关于抽样的另一种立场是，最有影响力的实验并不是把某个数推广到总体；它们是 demonstration experiments，显示某个特定效应在某些条件下是可能的（想想 Milgram 的从众研究；见 <a href="004-ethics.html" class="quarto-xref"><span>章 4</span></a>）。按照这个论点，总体抽样的具体细节常常是次要的。你认为这个立场有道理吗？</p></li>
+</ol>
+<!-- 3. Form an argument about this controversial position: Nothing you learn from US college undergraduates is likely to generalize to the US population as a whole, so we should dramatically decrease the use of this convenience population.  -->
+<ol start="3" type="1">
+<li>一种论点认为，我们永远无法对人类心智做概括，因为历史上的很多人类总体根本无法被我们接触到（我们不能对古希腊心理学做实验）。换句话说，从某个特定总体中抽样，<em>也</em>是在对某个特定时间点抽样。为了处理这个问题，我们应该如何限定自己的研究解释？</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="readings">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>readings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>关于 WEIRD 问题的原始檄文：Henrich, Joseph, Steven J. Heine, and Ara Norenzayan <span class="citation" data-cites="henrich2010">(<a href="#ref-henrich2010" role="doc-biblioref">2010</a>)</span>. “The WEIRDest People in the World?” <em>Behavioral and Brain Sciences</em> 33 (2–3): 61–83.</p></li>
+<li><p>由 power analysis 创始人撰写的一篇非常易读的介绍：Cohen, Jacob <span class="citation" data-cites="cohen1992">(<a href="#ref-cohen1992" role="doc-biblioref">1992</a>)</span>. “A Power Primer.” <em>Psychological Bulletin</em> 112 (1): 155.</p></li>
+<li><p>一篇对可推广性问题的深入且周到讨论：Yarkoni, Tal <span class="citation" data-cites="yarkoni2020">(<a href="#ref-yarkoni2020" role="doc-biblioref">2020</a>)</span>. “The Generalizability Crisis.” <em>Behavioral and Brain Sciences</em> 45:1–37.</p></li>
+</ul>
+</div>
+</div>
+
+
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bland2009" class="csl-entry" role="listitem">
+Bland, John Martin. 2009. <span>《The tyranny of power: is there a better way to calculate sample size?》</span> <em>British Medical Journal</em> 339 (7730): 1133–35.
+</div>
+<div id="ref-browne1995" class="csl-entry" role="listitem">
+Browne, Richard H. 1995. <span>《On the use of a pilot sample for sample size determination》</span>. <em>Statistics in medicine</em> 14 (17): 1933–40.
+</div>
+<div id="ref-champely2020" class="csl-entry" role="listitem">
+Champely, Stephane. 2020. <em><span>pwr</span>: Basic Functions for Power Analysis</em>. <a href="https://CRAN.R-project.org/package=pwr">https://CRAN.R-project.org/package=pwr</a>.
+</div>
+<div id="ref-cohen1992" class="csl-entry" role="listitem">
+Cohen, Jacob. 1992. <span>《A power primer》</span>. <em>Psychological bulletin</em> 112 (1): 155–59.
+</div>
+<div id="ref-cohen2013" class="csl-entry" role="listitem">
+———. 2013. <em>Statistical power analysis for the behavioral sciences</em>. Routledge.
+</div>
+<div id="ref-coppock2018" class="csl-entry" role="listitem">
+Coppock, Alexander, Thomas J Leeper, 和 Kevin J Mullinix. 2018. <span>《Generalizability of heterogeneous treatment effect estimates <span>a</span>cross samples》</span>. <em>Proceedings of the National Academy of Sciences</em> 115 (49): 12441–46.
+</div>
+<div id="ref-cunningham2021" class="csl-entry" role="listitem">
+Cunningham, Scott. 2021. <em>Causal Inference: The Mixtape</em>. Yale University Press.
+</div>
+<div id="ref-dejesus2019" class="csl-entry" role="listitem">
+DeJesus, Jasmine M, Maureen A Callanan, Graciela Solis, 和 Susan A Gelman. 2019. <span>《Generic language in scientific communication》</span>. <em>Proceedings of the National Academy of Sciences</em> 116 (37): 18370–77.
+</div>
+<div id="ref-faul2007" class="csl-entry" role="listitem">
+Faul, Franz, Edgar Erdfelder, Albert-Georg Lang, 和 Axel Buchner. 2007. <span>《G* Power 3: A flexible statistical power analysis program for the social, behavioral, and biomedical sciences》</span>. <em>Behavior Research Methods</em> 39 (2): 175–91.
+</div>
+<div id="ref-green2016" class="csl-entry" role="listitem">
+Green, Peter, 和 Catriona J. MacLeod. 2016. <span>《<span>simr</span>: An <span>R</span> package for power analysis of generalised linear mixed models by simulation》</span>. <em>Methods in Ecology and Evolution</em> 7 (4): 493–98. <a href="https://doi.org/10.1111/2041-210X.12504">https://doi.org/10.1111/2041-210X.12504</a>.
+</div>
+<div id="ref-hedge2018" class="csl-entry" role="listitem">
+Hedge, Craig, Georgina Powell, 和 Petroc Sumner. 2018. <span>《The reliability paradox: Why robust cognitive tasks do not produce reliable individual differences》</span>. <em>Behavior Research Methods</em> 50 (3): 1166–86.
+</div>
+<div id="ref-henrich2010" class="csl-entry" role="listitem">
+Henrich, Joseph, Steven J. Heine, 和 Ara Norenzayan. 2010. <span>《The weirdest people in the world?》</span> <em>Behavioral and Brain Sciences</em> 33 (2-3): 61–83.
+</div>
+<div id="ref-kelley2018" class="csl-entry" role="listitem">
+Kelley, Ken, Francis Bilson Darku, 和 Bhargab Chattopadhyay. 2018. <span>《Accuracy in parameter estimation for a general class of effect sizes: A sequential approach.》</span> <em>Psychological Methods</em> 23 (2): 226–43.
+</div>
+<div id="ref-klein2018" class="csl-entry" role="listitem">
+Klein, Olivier, Tom E Hardwicke, Frederik Aust, Johannes Breuer, Henrik Danielsson, Alicia Hofelich Mohr, Hans IJzerman, Gustav Nilsonne, Wolf Vanpaemel, 和 Michael C Frank. 2018. <span>《A practical guide for transparency in psychological science》</span>. <em>Collabra: Psychology</em> 4 (1): 20. <a href="https://doi.org/10.1525/collabra.158">https://doi.org/10.1525/collabra.158</a>.
+</div>
+<div id="ref-lakens2014" class="csl-entry" role="listitem">
+Lakens, Daniël. 2014. <span>《Performing high-powered studies efficiently with sequential analyses》</span>. <em>European Journal of Social Psychology</em> 44 (7): 701–10.
+</div>
+<div id="ref-lakens2018" class="csl-entry" role="listitem">
+Lakens, Daniël, Anne M. Scheel, 和 Peder M. Isager. 2018. <span>《Equivalence testing for psychological research: a tutorial》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 1 (2): 259–69. <a href="https://doi.org/10.1177/2515245918770963">https://doi.org/10.1177/2515245918770963</a>.
+</div>
+<div id="ref-little2019" class="csl-entry" role="listitem">
+Little, Roderick J A, 和 Donald B Rubin. 2019. <em>Statistical analysis with missing data</em>. 卷 793. John Wiley &amp; Sons.
+</div>
+<div id="ref-majid2014" class="csl-entry" role="listitem">
+Majid, Asifa, 和 Niclas Burenhult. 2014. <span>《Odors are expressible in language, as long as you speak the right language》</span>. <em>Cognition</em> 130 (2): 266–70.
+</div>
+<div id="ref-majid2018" class="csl-entry" role="listitem">
+Majid, Asifa, 和 Nicole Kruspe. 2018. <span>《Hunter-gatherer olfaction is special》</span>. <em>Current Biology</em> 28 (3): 409–13.
+</div>
+<div id="ref-markus1991" class="csl-entry" role="listitem">
+Markus, Hazel R, 和 Shinobu Kitayama. 1991. <span>《Culture and the self: Implications for cognition, emotion, and motivation.》</span> <em>Psychological review</em> 98 (2): 224–53.
+</div>
+<div id="ref-mcnemar1946" class="csl-entry" role="listitem">
+McNemar, Quinn. 1946. <span>《Opinion-attitude methodology》</span>. <em>Psychological bulletin</em> 43 (4): 289.
+</div>
+<div id="ref-neyman1992" class="csl-entry" role="listitem">
+Neyman, Jerzy. 1992. <span>《On the two different aspects of the representative method: the method of stratified sampling and the method of purposive selection》</span>. 收入 <em>Breakthroughs in statistics</em>, 123–50. Springer.
+</div>
+<div id="ref-nosek2021" class="csl-entry" role="listitem">
+Nosek, Brian A, Tom E Hardwicke, Hannah Moshontz, Aurélien Allard, Katherine S Corker, Anna Dreber Almenberg, Fiona Fidler, Joseph Hilgard, Melissa Kline, 和 Michèle B. Nuijten. 2022. <span>《Replicability, robustness, and reproducibility in psychological science》</span>. <em>Annual Review of Psychology</em> 73 (1): 719–48. <a href="https://doi.org/10.1146/annurev-psych-020821-114157">https://doi.org/10.1146/annurev-psych-020821-114157</a>.
+</div>
+<div id="ref-nunan2018" class="csl-entry" role="listitem">
+Nunan, David, Jeffrey Aronson, 和 Clare Bankhead. 2018. <span>《Catalogue of bias: attrition bias》</span>. <em>Evidence Based Medicine</em> 23 (1): 21–22.
+</div>
+<div id="ref-piantadosi2014" class="csl-entry" role="listitem">
+Piantadosi, Steven T, 和 Edward Gibson. 2014. <span>《Quantitative standards for absolute linguistic universals》</span>. <em>Cognitive Science</em> 38 (4): 736–56.
+</div>
+<div id="ref-rohrer2018" class="csl-entry" role="listitem">
+Rohrer, Julia M. 2018. <span>《Thinking clearly about correlations and causation: Graphical causal models for observational data》</span>. <em>Advances in methods and practices in psychological science</em> 1 (1): 27–42.
+</div>
+<div id="ref-rosenthal1984" class="csl-entry" role="listitem">
+Rosenthal, Robert, 和 Ralph L Rosnow. 1984. <em>Essentials of behavioral research: Methods and data analysis</em>. New York: McGraw-Hill.
+</div>
+<div id="ref-rothman2018" class="csl-entry" role="listitem">
+Rothman, Kenneth J, 和 Sander Greenland. 2018. <span>《Planning study size based on precision rather <span>t</span>han power》</span>. <em>Epidemiology</em> 29 (5): 599–603.
+</div>
+<div id="ref-schonbrodt2017" class="csl-entry" role="listitem">
+Schönbrodt, Felix D, Eric-Jan Wagenmakers, Michael Zehetleitner, 和 Marco Perugini. 2017. <span>《Sequential hypothesis testing with Bayes factors: Efficiently testing mean differences》</span>. <em>Psychol. Methods</em> 22 (2): 322–39.
+</div>
+<div id="ref-simmons2011" class="csl-entry" role="listitem">
+Simmons, Joseph P, Leif D Nelson, 和 Uri Simonsohn. 2011. <span>《False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant》</span>. <em>Psychological science</em> 22 (11): 1359–66. <a href="https://doi.org/10.1177/0956797611417632">https://doi.org/10.1177/0956797611417632</a>.
+</div>
+<div id="ref-simonsohn2015" class="csl-entry" role="listitem">
+Simonsohn, Uri. 2015. <span>《Small telescopes: detectability and the evaluation of replication results》</span>. <em>Psychological Science</em> 26 (5): 559–69.
+</div>
+<div id="ref-syed2020" class="csl-entry" role="listitem">
+Syed, Moin, 和 U Kathawalla. 2020. <span>《Cultural psychology, diversity, and representation in open science》</span>. 收入 <em>Cultural Methods in Psychology: Describing and Transforming Cultures</em>, 编辑 Kate C McLean, 427–54. Oxford University Press.
+</div>
+<div id="ref-tessler2019" class="csl-entry" role="listitem">
+Tessler, Michael Henry, 和 Noah D Goodman. 2019. <span>《The language of generalization》</span>. <em>Psychological review</em> 126 (3): 395–436.
+</div>
+<div id="ref-tsai2007" class="csl-entry" role="listitem">
+Tsai, Jeanne L. 2007. <span>《Ideal affect: Cultural causes and behavioral consequences》</span>. <em>Perspectives on Psychological Science</em> 2 (3): 242–59.
+</div>
+<div id="ref-westfall2015" class="csl-entry" role="listitem">
+Westfall, Jacob, Charles M Judd, 和 David A Kenny. 2015. <span>《Replicating studies in which samples of participants respond to samples of stimuli》</span>. <em>Perspectives on Psychological Science</em> 10 (3): 390–99.
+</div>
+<div id="ref-yarkoni2020" class="csl-entry" role="listitem">
+Yarkoni, Tal. 2020. <span>《The generalizability crisis》</span>. <em>Behavioral and Brain Sciences</em> 45: 1–37.
+</div>
+<div id="ref-yeager2019" class="csl-entry" role="listitem">
+Yeager, David S, Paul Hanselman, Gregory M Walton, Jared S Murray, Robert Crosnoe, Chandra Muller, Elizabeth Tipton, 等. 2019. <span>《A national experiment reveals where a growth mindset improves achievement》</span>. <em>Nature</em> 573 (7774): 364–69.
+</div>
+<div id="ref-zhou2016" class="csl-entry" role="listitem">
+Zhou, Haotian, 和 Ayelet Fishbach. 2016. <span>《The pitfall of experimenting on the web: How unattended selective attrition leads to surprising (<span>Y</span>et false) research conclusions.》</span> <em>Journal of personality and social psychology</em> 111 (4): 493–504.
+</div>
+</div>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./009-design.html" class="pagination-link" aria-label="设计">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./011-prereg.html" class="pagination-link" aria-label="预注册">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

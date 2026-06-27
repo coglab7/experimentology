@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; 实验 – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./002-theories.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./001-experiments.html">基础</a></li><li class="breadcrumb-item"><a href="./001-experiments.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#观察性研究无法揭示因果性" id="toc-观察性研究无法揭示因果性" class="nav-link active" data-scroll-target="#观察性研究无法揭示因果性"><span class="header-section-number">1.1</span> 观察性研究无法揭示因果性</a>
+  <ul class="collapse">
+  <li><a href="#描述因果关系" id="toc-描述因果关系" class="nav-link" data-scroll-target="#描述因果关系"><span class="header-section-number">1.1.1</span> 描述因果关系</a></li>
+  <li><a href="#方向性与-confounding-的问题" id="toc-方向性与-confounding-的问题" class="nav-link" data-scroll-target="#方向性与-confounding-的问题"><span class="header-section-number">1.1.2</span> 方向性与 confounding 的问题</a></li>
+  </ul></li>
+  <li><a href="#实验帮助我们回答因果问题" id="toc-实验帮助我们回答因果问题" class="nav-link" data-scroll-target="#实验帮助我们回答因果问题"><span class="header-section-number">1.2</span> 实验帮助我们回答因果问题</a>
+  <ul class="collapse">
+  <li><a href="#我们无法让人保持不变" id="toc-我们无法让人保持不变" class="nav-link" data-scroll-target="#我们无法让人保持不变"><span class="header-section-number">1.2.1</span> 我们无法让人保持不变</a></li>
+  <li><a href="#随机化来解决问题" id="toc-随机化来解决问题" class="nav-link" data-scroll-target="#随机化来解决问题"><span class="header-section-number">1.2.2</span> 随机化来解决问题</a></li>
+  </ul></li>
+  <li><a href="#generalizability可推广性" id="toc-generalizability可推广性" class="nav-link" data-scroll-target="#generalizability可推广性"><span class="header-section-number">1.3</span> Generalizability（可推广性）</a></li>
+  <li><a href="#随机化实验的结构" id="toc-随机化实验的结构" class="nav-link" data-scroll-target="#随机化实验的结构"><span class="header-section-number">1.4</span> 随机化实验的结构</a></li>
+  <li><a href="#本章小结实验" id="toc-本章小结实验" class="nav-link" data-scroll-target="#本章小结实验"><span class="header-section-number">1.5</span> 本章小结：实验</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography"></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./001-experiments.html">基础</a></li><li class="breadcrumb-item"><a href="./001-experiments.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-experiments" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="学习目标">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>学习目标
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>定义什么是实验</li>
+<li>用因果图对比观察性研究和实验研究</li>
+<li>理解随机化在实验中的作用</li>
+<li>思考实验的 generalizability（可推广性）会受到哪些限制</li>
+</ul>
+</div>
+</div>
+<p>欢迎来到 <em>Experimentology</em>！这本书讨论的是如何开展心理学实验。贯穿全书，我们会围绕一个简单想法展开：</p>
+<div class="page-columns page-full"><blockquote class="blockquote">
+<p>实验的目的，是估计因果效应的大小。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</blockquote><div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;你可能已经在想：“这不是我理解的实验！我以为实验是用来检验假设的。”先别急。我们希望后面能说服你：我们的定义更一般；而检验假设只是你可以用一次测量来做的一件事。</p></div></div></div>
+<p>从这个核心想法出发，我们会讨论如何处理实验设计、测量、抽样等问题。你在这些环节中的选择，会决定估计有多精确，也会决定它是否容易受到偏差影响。不过在进入这些主题之前，我们先从一个更基础的问题开始：为什么要做实验？这个问题会和本书的两个核心主题 <span class="smallcaps">bias reduction（减少偏差）</span> 与 <span class="smallcaps">generalizability（可推广性）</span> 交织在一起。</p>
+<section id="观察性研究无法揭示因果性" class="level2 page-columns page-full" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="观察性研究无法揭示因果性"><span class="header-section-number">1.1</span> 观察性研究无法揭示因果性</h2>
+<p>如果你在读这本书，你大概有某些关于心理学的问题想弄明白。语言是如何习得的？我们为什么会体验到幸福和悲伤这样的情绪？为什么人类有时会合作，有时又会互相伤害？当心理学家研究这些古老问题时，他们常常会把它们转化成关于 <strong>因果性</strong> 的问题。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;定义因果性是哲学中最困难、也最古老的问题之一，我们不会试图在这里解决它。不过从心理学视角来看，我们很喜欢 Lewis 的 <span class="citation" data-cites="lewis1973">(<a href="#ref-lewis1973" role="doc-biblioref">1973</a>)</span> “counterfactual” 因果性分析。按照这个观点，我们可以通过设想一个场景来理解“金钱导致幸福”：如果人们没有得到更多金钱，他们就不会体验到幸福感的提升。</p></div></div><section id="描述因果关系" class="level3 page-columns page-full" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="描述因果关系"><span class="header-section-number">1.1.1</span> 描述因果关系</h3>
+<p>考虑一个老问题：金钱会让人更幸福吗？这个问题的核心，其实是在问我们能对世界做出什么干预。我能不能通过获得更多金钱让自己更幸福？我能不能用金钱导致幸福？</p>
+<p>我们要怎么检验“金钱影响幸福”这个假设效应？直觉上，很多人会想到做一个 <strong>观察性研究</strong>。我们可以调查人们赚多少钱，以及他们有多幸福。这个研究的结果会给每个参与者一组成对的测量值：<code>[money, happiness]</code>。</p>
+<p>现在想象一下，你的观察性研究发现收入和幸福感有关，也就是说二者在统计上 <strong>相关</strong>：钱更多的人往往更幸福。那我们能得出结论说金钱导致幸福吗？不一定。存在相关，并不意味着存在因果关系！</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-experiments-money1" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A directed acyclic graph (DAG) with an arrow from money to happiness.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-experiments-money1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/experiments/money1-drawing.png" class="img-fluid figure-img" alt="A directed acyclic graph (DAG) with an arrow from money to happiness.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-experiments-money1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1.1: 金钱对幸福的假设因果效应。
+</figcaption>
+</figure>
+</div></div><p>我们可以把因果假设说得更精确一点。为了表示因果关系，我们会用一种工具，叫 <strong>有向无环图</strong>（directed acyclic graphs，DAGs）<span class="citation" data-cites="pearl1998">(<a href="#ref-pearl1998" role="doc-biblioref">Pearl 1998</a>)</span>。<a href="#fig-experiments-money1" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> 展示了金钱和幸福之间的一个 DAG。箭头表示我们关于两个变量之间潜在因果联系的想法：金钱和幸福。箭头的方向告诉我们，我们假设的因果关系是朝哪个方向发生的。</p>
+<p>我们在观察性研究中看到的金钱与幸福之间的相关，与 <a href="#fig-experiments-money1" class="quarto-xref">图&nbsp;<span>1.1</span></a> 中的因果模型是一致的；但是，它也同样与好几种替代性的因果模型一致。下面我们会用 DAGs 来说明这些模型。</p>
+</section>
+<section id="方向性与-confounding-的问题" class="level3 page-columns page-full" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="方向性与-confounding-的问题"><span class="header-section-number">1.1.2</span> 方向性与 confounding 的问题</h3>
+
+<div class="no-row-height column-margin column-container"><div id="fig-experiments-money2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="3 DAGs: 1. same as 1.1; 2. arrow from happiness to money; 3. arrows from friends to money and to happiness.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-experiments-money2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/experiments/money2-drawing.png" class="img-fluid figure-img" alt="3 DAGs: 1. same as 1.1; 2. arrow from happiness to money; 3. arrows from friends to money and to happiness.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-experiments-money2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1.2: 金钱和幸福可能相关的三种原因。
+</figcaption>
+</figure>
+</div></div><p><a href="#fig-experiments-money2" class="quarto-xref">图&nbsp;<span>1.2</span></a> 用 DAGs 展示了几种都能解释金钱和幸福之间观察到的相关的因果模型。DAG 1 表示我们的假设关系：金钱使人幸福。但 DAG 2 展示的是完全相反方向的效应！在这个 DAG 中，幸福使人赚到更多钱。</p>
+<p>更让人困惑的是，金钱和幸福之间可能存在相关，但两个方向上都没有因果关系。相反，第三个变量，也就是通常所说的 <strong>confound</strong>，可能同时导致金钱和幸福增加。比如，也许拥有更多朋友会让人更幸福，也会让人赚更多钱（DAG 3）。在这种情况下，幸福和金钱会相关，尽管二者并不是彼此的原因。</p>
+<p>一个 confound（或几个 confounds）可能完全解释两个变量之间的关系（如 DAG 3），但它也可能只是<em>部分</em>解释这种关系。比如，金钱确实可能增加幸福，但这个因果效应相当小，只解释了二者观察到的相关中的一小部分；剩下的部分则由“朋友”这个 confound（也许还有其他 confounds）解释。</p>
+<p>在这种情况下，由于 confounds 的存在，我们说金钱与幸福之间观察到的相关，是金钱对幸福的因果效应的一个 <strong>有偏</strong> 估计。confounds 引入的偏差大小会因情境而异：它可能很小，也可能强到让我们在两个变量根本不存在因果关系时误以为存在因果关系。<a href="#fig-experiments-money2" class="quarto-xref">图&nbsp;<span>1.2</span></a> 总结的这种局面，正是我们说“相关不蕴含因果”的原因。两个变量之间的相关<em>可以与</em>二者之间存在因果关系相容，但它也同样可以与其他关系相容。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;有时人们会问，<em>因果是否蕴含相关</em>（相反方向）。简短回答是：也不一定。两个变量之间存在因果关系，通常意味着它们在数据中会相关，但并非总是如此。比如，想象你测量一辆车的速度和油门踏板/加速器上的压力。一般来说，压力和速度会相关，这与二者之间的因果关系一致。但现在想象你只在有人开车上坡时测量这两个变量——这时速度可能保持不变，而压力可能在增加，反映的是驾驶者试图保持车速。因此，在这个数据集中两个变量不会相关，尽管二者之间的因果关系仍然存在。</p></div><div id="fn4"><p><sup>4</sup>&nbsp;事实上，DAGs 是社会科学家用来推理因果关系的关键工具之一。DAGs 会指导统计模型的建立，用来从观察性数据中估计特定的因果效应。我们不会在这里讨论这些方法，但如果你感兴趣，可以看看本章末尾的推荐阅读。</p></div></div><p>你仍然可以从观察性研究中了解因果关系，但需要采用更复杂的方法。你不能只是测量相关，然后跳到因果结论。社会科学中的“因果革命”得益于一系列统计方法的发展，这些方法使我们能够从观察性数据集中推理因果关系。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> 这些方法很有意思，但它们只适用于某些特定情形。相比之下，实验方法<em>总是</em>能够减少由 confounding 造成的偏差（当然，有些实验出于伦理或实践原因是不能做的）。</p>
+</section>
+</section>
+<section id="实验帮助我们回答因果问题" class="level2 page-columns page-full" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="实验帮助我们回答因果问题"><span class="header-section-number">1.2</span> 实验帮助我们回答因果问题</h2>
+<p>想象一下，你（a）创造了一个我们世界的精确复制品，（b）给复制世界里的每个人 1,000 美元，然后（c）几年后发现，复制世界里的每个人都比原始世界中与之匹配的自己更幸福。这个实验会为“金钱让人更幸福”提供强有力的证据。我们来想想为什么。</p>
+<p>考虑某一个具体的人：如果他们在复制世界中比在原始世界中更幸福，什么能解释这种差异？既然我们精确复制了整个世界，却只做了一个改变，也就是金钱，那么这个改变就是唯一能够解释幸福差异的因素。我们可以说，除了金钱以外，我们<em>保持了所有变量不变</em>；而金钱是我们在实验中 <strong>操纵</strong> 的变量，我们观察它对某个 <strong>测量</strong> 的影响，也就是幸福。这一想法——除了特定的实验操纵之外保持所有变量不变——就是实验方法背后的基本逻辑 <span class="citation" data-cites="mill1869">(as articulated by <a href="#ref-mill1869" role="doc-biblioref">Mill 1843</a>)</span>。<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;另一种理解为什么我们可以在这里推断因果性 的方式，是回到前面脚注中提到的 counterfactual 逻辑。如果因果性的定义是 counterfactual 的（“如果原因不同，会发生什么？”），那么这个实验就满足了这个定义。在这个不可能的实验中，我们可以直接<em>看到</em> counterfactual：如果这个人多了 1,000 美元，他们会多幸福！</p></div></div><p>回到我们关于金钱和幸福的观察性研究。其中一个重大的因果推断问题，是存在“第三变量”confounds，例如拥有更多朋友。更多朋友可能让你更有钱，也可能让你更幸福。实验的想法是保持其他所有东西不变，包括人们拥有多少朋友，这样我们就能测量金钱对幸福的影响。通过保持朋友数量不变，我们就切断了朋友与金钱、朋友与幸福之间的因果联系。<a href="#fig-experiments-money3" class="quarto-xref">图&nbsp;<span>1.3</span></a> 以图形方式表达了这一点：我们把“朋友”这个 confound “剪掉”了。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-experiments-money3" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A DAG with scissored arrows from friends to money and to happiness, experimental intervention arrow from money to happiness.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-experiments-money3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/experiments/money3-drawing.png" class="img-fluid figure-img" alt="A DAG with scissored arrows from friends to money and to happiness, experimental intervention arrow from money to happiness.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-experiments-money3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1.3: 原则上，实验允许我们通过保持朋友数量不变来“剪掉”朋友这个 confound（不过在实践中，如果研究单位是人，要弄清楚如何保持某个东西不变可能很困难）。
+</figcaption>
+</figure>
+</div></div><section id="我们无法让人保持不变" class="level3 page-columns page-full" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="我们无法让人保持不变"><span class="header-section-number">1.2.1</span> 我们无法让人保持不变</h3>
+<p>你可能会想，理论上听起来很好，但我们不可能真的创造出一个所有东西都保持不变的复制世界，那么现实世界里的实验要怎么做？如果我们讨论的是烤蛋糕的实验，那很容易看出怎样才能保持所有材料不变，只改变一个东西，比如烘焙温度。这样我们就能对烘焙温度的影响做一个实验检验。但当我们讨论的是人时，怎么才能“保持某个东西不变”？人不是蛋糕。没有两个人是一样的；正如每个有多个孩子的父母都知道的，即使你试图“保持材料不变”，结果也不会一样！</p>
+<p>如果我们拿两个人来比较，给其中一个人钱，我们比较的是两个<em>不同</em>的人，而不是在所有东西保持不变时同一个人的两个实例。我们也不能为了让第一个人与第二个人匹配，就<em>让</em>第一个人拥有更多或更少朋友——这不是保持任何东西不变；相反，这是另一个（巨大、困难，而且可能不合伦理的）干预，它本身也可能对幸福产生很多影响。</p>
+<p>你可能会想：为什么不直接问人们有多少朋友，然后利用这些信息把他们分成相等的组？你当然可以这么做，但这种策略只能让你控制那些你知道的 confounds。比如，你也许能根据朋友数量把人均分到两组，但没有根据受教育程度来均分。如果受教育程度也同时影响金钱和幸福，你仍然有一个 confound。你接下来也许会尝试同时按朋友数量和受教育程度来分组。但也许还有另一个你没注意到的 confound：睡眠质量！类似地，只选择拥有相同朋友数量的人也行不通——这只保持了朋友这个变量不变，而没有保持两个人之间其他所有<em>差异</em>不变。那么我们该怎么办？<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;许多见过社会科学中使用回归模型的研究者会以为，“控制很多东西”是改进因果推断的好办法。并不是！事实上，如果没有明确的因果理由，不恰当地控制某个变量，反而可能让你的效应估计<em>更有偏</em> <span class="citation" data-cites="wysocki2022">(<a href="#ref-wysocki2022" role="doc-biblioref">Wysocki, Lawson, 和 Rhemtulla 2022</a>)</span>。</p></div></div></section>
+<section id="随机化来解决问题" class="level3 page-columns page-full" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="随机化来解决问题"><span class="header-section-number">1.2.2</span> 随机化来解决问题</h3>
+
+<div class="no-row-height column-margin column-container"><div id="fig-experiments-money4" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The same DAG as 1.3 with additional scissored arrows from education to money and education to happiness.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-experiments-money4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/experiments/money4-drawing.png" class="img-fluid figure-img" alt="The same DAG as 1.3 with additional scissored arrows from education to money and education to happiness.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-experiments-money4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1.4: 如果你把一大群人随机分成若干组，那么平均而言，这些组在各个方面都会相等。
+</figcaption>
+</figure>
+</div></div><p>答案是 <strong>随机化</strong>。如果你把一大屋子人随机分成两组，平均而言，这两组会有相似的朋友数量。同样，如果你随机决定实验中谁能收到钱，你会发现有钱组和无钱组平均而言会有相似的朋友数量。换句话说，通过随机化，朋友的 confounding 作用被控制住了。但最重要的是，被控制住的并<em>不只是</em>朋友的作用；受教育程度、睡眠质量，以及所有其他 confounds 也都被控制住了。如果你把一大群人随机分成若干组，那么平均而言，这些组会在所有方面都相等（<a href="#fig-experiments-money4" class="quarto-xref">图&nbsp;<span>1.4</span></a>）。</p>
+<p>所以，我们的简单实验设计是这样的：把一些人随机分派到有钱组，把另一些人随机分派到无钱 control group（我们有时把这些组称为 <strong>conditions</strong>）。然后我们测量两组人的幸福感。随机化的基本逻辑是：如果金钱导致幸福，那么我们应该在有钱组中看到更高的幸福感——平均而言。<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;你可能已经想抗议了：这个实验可以做得更好。也许我们可以在随机化前后都测量幸福，以提高精确度。也许我们需要给 control condition 的参与者少量金钱，以确保两个 conditions 的参与者都和实验者互动过，从而让两个 conditions 尽可能相似。我们同意！这些都是实验设计的重要部分，我们会在后续章节中谈到。</p></div></div><p>随机化是一个强大的工具，但它有一个 caveat：它并不是每次都奏效。<em>平均而言</em>，随机化会确保你的有钱组和无钱组在朋友数量、受教育程度、睡眠质量等 confounds 上是相等的。但就像你抛硬币时有时十次里会出现九次正面一样，有时你使用了随机化，仍然会碰巧让某个 condition 中受教育程度较高的人比另一个 condition 更多。随机化保证的是，平均而言，所有 confounds 都被控制。因此，来自这些 confounds 的系统性偏差不会进入你的估计。但随机变异仍然会带来一些噪声。</p>
+<p>总之，随机化是一种极其简单而有效的方法，用来在操纵变量之外保持一切不变。通过这样做，随机化让实验心理学家能够对因果关系做出无偏估计。重要的是，无论你是否能控制实验的每一个方面，随机化都能发挥作用：在烤蛋糕时如此，在用人作为研究对象时也是如此。<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;这里有一个重要 caveat：你并不总是必须随机化<em>人</em>。你可以使用一种叫做 <strong>within-participants</strong> design 的实验设计，让同一批人处于多个 conditions 中。这种设计有另一组未知 confounds，这次集中在<em>时间</em>上。为了绕开这些 confounds，你必须随机化操纵呈现的顺序。对于某些类型的操纵，这种随机化非常有效；但对另一些操纵则不太有效。我们会在 <a href="009-design.html" class="quarto-xref"><span>章 9</span></a> 中更多讨论这些设计。</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="深入">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>深入
+</div>
+</div>
+<section id="不幸的随机化" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="不幸的随机化">不幸的随机化？</h3>
+<p>正如我们一直在讨论的，random assignment 通过确保各组在所有特征上——平均而言——相等，来去除 confounding。不过，对于任何一次<em>具体</em>的 random assignment 来说，样本越大，这种等价越可能成立。任何单个实验都可能受到 <strong>unhappy randomization</strong> 的影响，也就是某个 confound 纯粹由于偶然，在组间没有平衡。</p>
+<p>unhappy randomization 在小实验中比在大实验中常见得多。为了理解原因，我们使用一种叫 <strong>simulation</strong> 的技术。在 simulations 中，我们根据一组假设随机生成数据：我们虚构一组参与者，并生成他们的特征和 condition assignments。通过改变所使用的假设，我们可以考察特定选择会如何改变数据结构。</p>
+<p>为了考察 unhappy randomization，我们创建了许多模拟版的金钱-幸福实验。在这些实验中，experimental group 收到钱，control group 不收到钱，然后我们测量两组的幸福感。我们假设每个参与者都有一定数量的朋友，而且朋友越多，他们越幸福。因此，当我们把他们随机分派到 experimental 和 control groups 时，就会面临 unhappy randomization 的风险：有时一组会比另一组拥有多得多的朋友。</p>
+<div id="fig-experiments-randomization" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-experiments-randomization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="001-experiments_files/figure-html/experiments-randomization-1.png" class="img-fluid figure-img" style="width:60.0%" alt="A plot with vertical cluster of points around a horizontal dashed line, which get narrow in height over the horizontal axis."></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-experiments-randomization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1.5: 来自金钱-幸福实验的模拟数据。每个点表示一个实验中测得的幸福效应（纵向位置），这个实验在每组中有固定数量的参与者（横向位置）。点的颜色表示两组之间朋友数量的不均衡程度。虚线表示真实效应。
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-experiments-randomization" class="quarto-xref">图&nbsp;<span>1.5</span></a> 展示了这个 simulation 的结果。每个点都是一个实验，表示对幸福效应的一次估计（给 experimental group 的金钱带来了多少幸福）。对于非常小的实验（例如每组只有一个或三个参与者），点会离表示真实效应的虚线非常远——这意味着这些估计极其 noisy！原因就是 unhappy randomization。 上方和下方的点对应的是某一组拥有的朋友远多于另一组的情况。</p>
+<p>关于这个 simulation，有三点值得注意。第一，随着 sample size 变大，总体噪声会下降：更大的实验会产生更接近真实效应的估计。第二，随着样本变大，unhappy randomization 也会显著减少。虽然在大型实验中，个体之间的差异仍然同样大，但在最大的组里，每个 condition 中的<em>组</em>平均朋友数量几乎完全相同。</p>
+<p>最后，尽管小实验各自都非常 noisy，但所有小实验的<em>平均效应</em>仍然非常接近真实效应。最后这一点说明了，当我们说随机化实验去除了 confounds 时，我们是什么意思。即使在我们的 simulation 中，朋友数量仍然是决定幸福的重要因素，跨实验的平均效应仍然是正确的，而且每一个单独估计都是无偏的。</p>
+</section>
+</div>
+</section>
+</section>
+<section id="generalizability可推广性" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="generalizability可推广性"><span class="header-section-number">1.3</span> Generalizability（可推广性）</h2>
+<p>当我们提出关于心理学的问题时，重要的是要思考我们到底想研究谁。我们想知道金钱是否会增加<em>所有人</em>的幸福吗？是生活在物质主义社会中的人吗？还是基本需求没有得到满足的人？我们把试图研究的那群人称为 <strong>目标总体</strong>，把实际参加实验的人称为 <strong>样本</strong>。而 <strong>抽样</strong> 这个过程，就是我们招募人们进入实验所做的事情。</p>
+<p>有时，研究者从一个总体中抽样，却对另一个（通常更宽泛的）总体提出主张。比如，他们可能用一个特定的美国大学生样本来运行实验，却把结论 generalize 到所有人（他们意图中的目标总体）。 样本与总体的不匹配并不总是问题，但因果关系常常会因总体不同而不同。</p>
+<p>遗憾的是，心理学家普遍假设，基于美国和欧洲样本的研究可以 generalize 到世界其他地区，但事实往往并非如此。为了凸显这个问题，<span class="citation" data-cites="henrich2010">Henrich, Heine, 和 Norenzayan (<a href="#ref-henrich2010" role="doc-biblioref">2010</a>)</span> 创造了 WEIRD 这个缩写。 这个醒目的名称描述了从一个相当不寻常的样本推广到全人类时的奇怪之处：这个样本是 Western、Educated、Industrialized、Rich、Democratic 的。Henrich 及其同事认为，诸如视觉知觉、空间认知和社会推理这些看似“基本”的心理功能，在不同总体中都广泛存在差异。因此，任何基于 WEIRD subpopulation 估计出的效应所做的推广，都可能是不成立的。</p>
+<p>在 21 世纪初，研究者发现，感恩干预——例如写一篇简短文章，描述别人为你做过的一件好事——会在西方国家进行的研究中增加幸福。基于这些发现，一些心理学家认为，感恩干预可以增加所有人的幸福。但他们似乎错了。几年后，<span class="citation" data-cites="layous2013culture">Layous 等 (<a href="#ref-layous2013culture" role="doc-biblioref">2013</a>)</span> 在两个地点运行了一个感恩实验：美国和韩国。令人惊讶的是，感恩干预降低了韩国样本中的幸福感。研究者把这种负面效应归因于韩国人在反思感恩时更明显体验到的亏欠感。在这个例子中，我们会说，用美国样本得到的发现，可能无法 <strong>generalize</strong> 到韩国人。</p>
+<p>generalizability 的问题延伸到实验的所有方面，而不只是样本。例如，即使我们假想的现金干预实验确实提高了幸福感，我们也未必有理由把结论 generalize 到提供金钱的不同方式。也许是我们给出的金额或提供金钱的方式中某些特殊因素导致了观察到的效应。如果没有测试多种不同的干预类型，我们就不能提出宽泛的主张。正如我们会在 <a href="007-models.html" class="quarto-xref"><span>章 7</span></a> 和 <a href="009-design.html" class="quarto-xref"><span>章 9</span></a> 中看到的，这个问题会影响我们的统计分析和实验设计 <span class="citation" data-cites="yarkoni2020">(<a href="#ref-yarkoni2020" role="doc-biblioref">Yarkoni 2020</a>)</span>。</p>
+<p>generalizability 的问题无处不在，但第一步只是承认它，并对它进行推理。也许所有论文都应该有一个 Constraints on Generality statement，让研究者讨论他们是否预期自己的发现能够跨不同样本、实验刺激、程序，以及历史和时间特征进行推广 <span class="citation" data-cites="simons2017">(<a href="#ref-simons2017" role="doc-biblioref">Simons, Shoda, 和 Lindsay 2017</a>)</span>。这种声明至少会提醒研究者保持谦逊：实验是理解世界如何运作的强大工具，但任何单个实验能教给我们的东西都有边界。</p>
+</section>
+<section id="随机化实验的结构" class="level2 page-columns page-full" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="随机化实验的结构"><span class="header-section-number">1.4</span> 随机化实验的结构</h2>
+<div id="fig-experiments-anatomy" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="A DAG with sample within population pointing to manipulation (experimental/control) then to measure (outcome).">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-experiments-anatomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/experiments/anatomy.png" class="img-fluid figure-img" style="width:70.0%" alt="A DAG with sample within population pointing to manipulation (experimental/control) then to measure (outcome).">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-experiments-anatomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1.6: 随机化实验的结构：样本参与者被随机分派到 experimental condition 或 control condition。
+</figcaption>
+</figure>
+</div>
+<p>现在是回过头来整理实验结构的好时机，因为这一结构会贯穿全书。<a href="#fig-experiments-anatomy" class="quarto-xref">图&nbsp;<span>1.6</span></a> 展示了一个简单的两组实验，类似我们设想的金钱-幸福干预。一个样本取自更大的总体，样本中的参与者被随机分派到两个 conditions（操纵）之一：要么是提供金钱的 experimental condition， 要么是不提供金钱的 control condition。 然后，我们为每个参与者记录一个 outcome measure，也就是幸福。</p>
+<p>在后续章节中，我们会更详细地讨论所有这些组成部分。我们会在 <a href="008-measurement.html" class="quarto-xref"><span>章 8</span></a> 中讨论测量，因为好的测量是好实验的基础。然后在 <a href="009-design.html" class="quarto-xref"><span>章 9</span></a> 中，我们会讨论可能的不同实验设计类型，以及它们各自的优缺点。最后，我们会在 <a href="010-sampling.html" class="quarto-xref"><span>章 10</span></a> 中讨论抽样过程。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="事故报告">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>事故报告
+</div>
+</div>
+<section id="一个因果推断非常不清楚的实验" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="一个因果推断非常不清楚的实验">一个因果推断非常不清楚的实验</h3>
+<p>Stanford Prison Experiment 是心理学史上最著名的研究之一。参与者被随机分派，在 Stanford 心理学系大楼内部的监狱生活模拟中扮演“guards”和“prisoners”的角色 <span class="citation" data-cites="zimbardo1972">(<a href="#ref-zimbardo1972" role="doc-biblioref">Zimbardo 1972</a>)</span>。这项模拟原本设计为运行两周，但由于扮演 guards 的参与者表现出残忍行为，显然对模拟囚犯做出了各种去人性化行为，实验不得不在六天后终止。这个结果被广泛写入心理学导论教材，通常被解释为情境因素力量的证据：在合适的情境下，即使是 Stanford 的本科生，也能很快被说服去表现出世界上最糟糕监狱中那些不人道行为 <span class="citation" data-cites="griggs2014">(<a href="#ref-griggs2014" role="doc-biblioref">Griggs 2014</a>)</span>。</p>
+<p>自这项研究最初发表以来，陆续出现的各种信息使其情境操纵的因果解释变得远不那么清楚 <span class="citation" data-cites="le-texier2019">(<a href="#ref-le-texier2019" role="doc-biblioref">Le Texier 2019</a>)</span>。guards 被告知了实验目标，并收到如何实现这些目标的指示。实验者本人还提出了一些严厉惩罚，后来这些惩罚的使用又被当作去人性化行为出现的证据。此外，在整个研究过程中，guards 和 prisoners 都受到了实验者的大量指导。一些参与者报告说，他们在研究中的反应被夸大或编造了 <span class="citation" data-cites="blum2018">(<a href="#ref-blum2018" role="doc-biblioref">Blum 2018</a>)</span>。所有这些问题都大大削弱了这样一种想法：参与者角色的分配（表面上的实验操纵）是观察到的行为的唯一原因。</p>
+<p>这项研究的执行也不符合伦理。除了这样一项研究——连同它给参与者带来的所有风险——是否根本可能合乎伦理这一问题之外，研究中的许多特征也明显违反了我们将在 <a href="004-ethics.html" class="quarto-xref"><span>章 4</span></a> 中学习的准则。参与者被阻止自愿退出研究。guards 被欺骗，以为自己是研究助理，而不是研究参与者。更糟的是，这项研究的报道也不准确：报道强调行为是自然出现的，强调模拟的沉浸性，以及实验记录的详尽程度。事实上，参与者受到了大量指示，模拟过程反复被研究环境中的日常细节打断，而实验中相对很少的一部分被视频记录并分析。</p>
+<p>Prison Experiment 是心理学史上一段迷人但问题重重的插曲，但它几乎没有提供关于人类心智的因果证据。</p>
+</section>
+</div>
+</section>
+<section id="本章小结实验" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="本章小结实验"><span class="header-section-number">1.5</span> 本章小结：实验</h2>
+<p>在本章中，我们把实验定义为操纵和测量的组合。与随机化结合时，即使我们研究的是人（他们很难被保持不变），实验也能让我们做出强有力的因果推断。尽管如此，实验的力量也有边界：样本、实验刺激和程序总是存在限制，这些限制会影响我们能够在多大范围内 generalize。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="讨论问题">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>讨论问题
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>想象你做了一项调查，发现花更多时间玩暴力电子游戏的人往往更有攻击性（也就是说，暴力电子游戏和攻击性之间存在正相关）。仿照 <a href="#fig-experiments-money2" class="quarto-xref">图&nbsp;<span>1.2</span></a>，列出这两个变量可能相关的三种原因。</p></li>
+<li><p>假设你想运行一个实验，检验玩暴力电子游戏是否会导致攻击性增加。你的操纵是什么？你的测量是什么？你会如何处理年龄等变量可能造成的 confounding？</p></li>
+<li><p>考虑一个检验人们食物偏好的实验。实验者随机分派 30 名美国学龄前儿童，让他们吃芦笋或炸鸡柳，然后询问他们有多喜欢这顿饭。总体上，儿童更喜欢肉；实验者写了一篇论文，声称人类更偏好肉而不是蔬菜。列出这项研究在 generalizability 上的一些限制。考虑到这些限制，这项研究（或某种修改版）到底还值得做吗？</p></li>
+<li><p>考虑 Milgram study，另一项经典心理学研究（也是我们在 <a href="004-ethics.html" class="quarto-xref"><span>章 4</span></a> 中的 <span class="smallcaps">case study</span>）。这项研究符合我们对实验的定义吗？</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="阅读材料">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>阅读材料
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>从社会科学视角出发的因果推断基础介绍：Huntington-Klein, Nick. <span class="citation" data-cites="huntington2021">(<a href="#ref-huntington2021" role="doc-biblioref">2021</a>)</span>. <em>The Effect: An Introduction to Research Design and Causality.</em> Chapman &amp; Hall/CRC. Available free online at <a href="https://theeffectbook.net" class="uri">https://theeffectbook.net</a>.</p></li>
+<li><p>稍微进阶一些的处理，主要聚焦于 econometrics：Cunningham, Scott. <span class="citation" data-cites="cunningham2021">(<a href="#ref-cunningham2021" role="doc-biblioref">2021</a>)</span>. <em>Causal Inference: The Mixtape.</em> Yale University Press. Available free online at <a href="https://mixtape.scunning.com" class="uri">https://mixtape.scunning.com</a>.</p></li>
+</ul>
+</div>
+</div>
+
+
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-blum2018" class="csl-entry" role="listitem">
+Blum, Ben. 2018. <span>《The lifespan of a lie》</span>. Medium. <a href="https://medium.com/s/trustissues/the-lifespan-of-a-lie-d869212b1f62">https://medium.com/s/trustissues/the-lifespan-of-a-lie-d869212b1f62</a>.
+</div>
+<div id="ref-cunningham2021" class="csl-entry" role="listitem">
+Cunningham, Scott. 2021. <em>Causal Inference: The Mixtape</em>. Yale University Press.
+</div>
+<div id="ref-griggs2014" class="csl-entry" role="listitem">
+Griggs, Richard A. 2014. <span>《Coverage of the Stanford Prison Experiment in introductory psychology textbooks》</span>. <em>Teaching of Psychology</em> 41 (3): 195–203.
+</div>
+<div id="ref-henrich2010" class="csl-entry" role="listitem">
+Henrich, Joseph, Steven J. Heine, 和 Ara Norenzayan. 2010. <span>《The weirdest people in the world?》</span> <em>Behavioral and Brain Sciences</em> 33 (2-3): 61–83.
+</div>
+<div id="ref-huntington2021" class="csl-entry" role="listitem">
+Huntington-Klein, Nick. 2021. <em>The effect: An introduction to research design and causality</em>. <span>Chapman &amp; Hall/CRC</span>.
+</div>
+<div id="ref-layous2013culture" class="csl-entry" role="listitem">
+Layous, Kristin, Hyunjung Lee, Incheol Choi, 和 Sonja Lyubomirsky. 2013. <span>《Culture matters when designing a successful happiness-increasing activity: A comparison of the United States and South Korea》</span>. <em>Journal of Cross-Cultural Psychology</em> 44 (8): 1294–1303.
+</div>
+<div id="ref-le-texier2019" class="csl-entry" role="listitem">
+Le Texier, Thibault. 2019. <span>《Debunking the stanford prison experiment.》</span> <em>American Psychologist</em> 74 (7): 823.
+</div>
+<div id="ref-lewis1973" class="csl-entry" role="listitem">
+Lewis, David. 1973. <em>Counterfactuals</em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-mill1869" class="csl-entry" role="listitem">
+Mill, John Stuart. 1843. <em>A System of Logic, Ratiocinative and Inductive: Being a Connected View of the Principles of Evidence and the Methods of Scientific Investigation</em>. John W. Parker.
+</div>
+<div id="ref-pearl1998" class="csl-entry" role="listitem">
+Pearl, Judea. 1998. <span>《Graphical models for probabilistic and causal reasoning》</span>. <em>Quantified representation of uncertainty and imprecision</em>, 367–89.
+</div>
+<div id="ref-simons2017" class="csl-entry" role="listitem">
+Simons, Daniel J., Yuichi Shoda, 和 D. Stephen Lindsay. 2017. <span>《Constraints on generality (COG): A proposed addition to all empirical papers》</span>. <em>Perspectives on Psychological Science</em> 12 (6): 1123–28.
+</div>
+<div id="ref-wysocki2022" class="csl-entry" role="listitem">
+Wysocki, Anna C., Katherine M. Lawson, 和 Mijke Rhemtulla. 2022. <span>《Statistical control requires causal justification》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 5 (2): 25152459221095823.
+</div>
+<div id="ref-yarkoni2020" class="csl-entry" role="listitem">
+Yarkoni, Tal. 2020. <span>《The generalizability crisis》</span>. <em>Behavioral and Brain Sciences</em> 45: 1–37.
+</div>
+<div id="ref-zimbardo1972" class="csl-entry" role="listitem">
+Zimbardo, Philip G. 1972. <span>《Pathology of imprisonment》</span>. <em>Society</em> 9 (6): 4–8.
+</div>
+</div>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="前言">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">前言</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./002-theories.html" class="pagination-link" aria-label="理论">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; 伦理 – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./005-estimation.html" rel="next">
+<link href="./003-replication.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./001-experiments.html">基础</a></li><li class="breadcrumb-item"><a href="./004-ethics.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#伦理框架" id="toc-伦理框架" class="nav-link active" data-scroll-target="#伦理框架"><span class="header-section-number">4.1</span> 伦理框架</a>
+  <ul class="collapse">
+  <li><a href="#consequentialist-theories后果主义理论" id="toc-consequentialist-theories后果主义理论" class="nav-link" data-scroll-target="#consequentialist-theories后果主义理论"><span class="header-section-number">4.1.1</span> Consequentialist theories（后果主义理论）</a></li>
+  <li><a href="#deontological-approaches义务论取向" id="toc-deontological-approaches义务论取向" class="nav-link" data-scroll-target="#deontological-approaches义务论取向"><span class="header-section-number">4.1.2</span> Deontological approaches（义务论取向）</a></li>
+  <li><a href="#virtue-based-approaches德性取向" id="toc-virtue-based-approaches德性取向" class="nav-link" data-scroll-target="#virtue-based-approaches德性取向"><span class="header-section-number">4.1.3</span> Virtue-based approaches（德性取向）</a></li>
+  </ul></li>
+  <li><a href="#对研究参与者的伦理责任" id="toc-对研究参与者的伦理责任" class="nav-link" data-scroll-target="#对研究参与者的伦理责任"><span class="header-section-number">4.2</span> 对研究参与者的伦理责任</a>
+  <ul class="collapse">
+  <li><a href="#institutional-review-boards机构审查委员会" id="toc-institutional-review-boards机构审查委员会" class="nav-link" data-scroll-target="#institutional-review-boards机构审查委员会"><span class="header-section-number">4.2.1</span> Institutional review boards（机构审查委员会）</a></li>
+  <li><a href="#风险与收益" id="toc-风险与收益" class="nav-link" data-scroll-target="#风险与收益"><span class="header-section-number">4.2.2</span> 风险与收益</a></li>
+  </ul></li>
+  <li><a href="#分析和报告中的伦理责任" id="toc-分析和报告中的伦理责任" class="nav-link" data-scroll-target="#分析和报告中的伦理责任"><span class="header-section-number">4.3</span> 分析和报告中的伦理责任</a></li>
+  <li><a href="#对科学共同体的伦理责任" id="toc-对科学共同体的伦理责任" class="nav-link" data-scroll-target="#对科学共同体的伦理责任"><span class="header-section-number">4.4</span> 对科学共同体的伦理责任</a></li>
+  <li><a href="#本章小结伦理" id="toc-本章小结伦理" class="nav-link" data-scroll-target="#本章小结伦理"><span class="header-section-number">4.5</span> 本章小结：伦理</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography"></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./001-experiments.html">基础</a></li><li class="breadcrumb-item"><a href="./004-ethics.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-ethics" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="学习目标">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>学习目标
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>区分 consequentialist、deontological 和 virtue ethics 三种框架</li>
+<li>识别开展实验研究时的关键伦理问题</li>
+<li>讨论研究分析和报告中的伦理责任</li>
+<li>描述支持 open science practices 的伦理论证</li>
+</ul>
+</div>
+</div>
+<p>本书的基本论点是：实验是估计因果效应的方式，而因果效应是理论的基础。正如我们在 <a href="001-experiments.html" class="quarto-xref"><span>章 1</span></a> 中讨论的，实验之所以能支持强因果推断，是因为它有两个要素：操纵——也就是实验者以某种方式改变世界——以及随机化。换句话说，实验者通过随机决定对参与者做些什么来了解世界！这样做真的可以吗？<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;我们把本章放在全书的“Foundations”部分，是因为我们认为，即使在你开始计划一项研究之前，也必须先开启关于你作为实验者和研究者的伦理责任的讨论。我们会在 <a href="012-collection.html" class="quarto-xref"><span>章 12</span></a> 中回到这里描述的伦理框架；那一章专门处理参与者招募和 informed consent 过程。</p></div></div><p>实验研究会提出许多值得认真考虑的伦理问题。在实验中，我们可以对参与者做什么、不可以做什么？由于他们决定参与研究，我们又对他们负有哪些考虑义务？为了方便讨论这些问题，我们先简要介绍伦理分析中常见的标准哲学框架。随后，我们会利用这些框架讨论实验伦理问题：先从参与者的视角讨论，再从更广泛的科学生态系统视角讨论。最后，我们会给出一个支持 <span class="smallcaps">transparency</span> 的伦理论证。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="案例研究">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>案例研究
+</div>
+</div>
+<section id="电击治疗" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="电击治疗">电击治疗</h3>
+<p>最后一个集中营的幸存囚犯被解放十年后，Holocaust 的主要策划者之一 Adolf Eichmann 因其在大规模种族灭绝中的角色受审 <span class="citation" data-cites="baade1961">(<a href="#ref-baade1961" role="doc-biblioref">Baade 1961</a>)</span>。在反思自己强行带走、折磨并最终杀害数百万犹太人的理由时，毫无悔意的 Eichmann 声称自己“merely a cog in the machinery that carried out the directives of the German Reich”，因此并不直接负责 <span class="citation" data-cites="kilham1974">(<a href="#ref-kilham1974" role="doc-biblioref">Kilham 和 Mann 1974</a>)</span>。这个令人震惊的说法给了一位年轻研究者一个有趣想法：“Could it be that Eichmann and his million accomplices in the Holocaust were just following orders? Could we call them all accomplices?” <span class="citation" data-cites="milgram1974">(<a href="#ref-milgram1974" role="doc-biblioref">Milgram 1974</a>, p.&nbsp;123)</span>.</p>
+<p>Stanley Milgram 想直接检验：在权威人物的指示下，人们是否会服从，即使结果令人不适或有害。他邀请参与者进入实验室，在一项活动中担任教师 <span class="citation" data-cites="milgram1963">(<a href="#ref-milgram1963" role="doc-biblioref">Milgram 1963</a>)</span>。参与者被告知，每当附近房间里的另一名参与者，也就是学生，给出错误回答时，他们就要给学生施加电压逐步升高的电击。实际上，没有任何电击；学生是一名了解实验安排的演员，只是在“电击”施加时假装痛苦。尽管学生清楚可闻地恳求停止，参与者仍被鼓励继续施加电击。在 Milgram 的一项研究中，近 65% 的参与者对学生施加了最高电压。</p>
+<p>这个极其令人不安的结果，正如 <span class="citation" data-cites="ross2011">Ross 和 Nisbett (<a href="#ref-ross2011" role="doc-biblioref">1991</a>, p.&nbsp;55)</span> 所说，已经成为 “part of our society’s shared intellectual legacy”，并以许多不同方式影响了科学讨论和大众讨论。与此同时，对该研究档案材料的现代重新分析质疑了研究中的 deception 是否有效，从而动摇了其核心发现 <span class="citation" data-cites="perry2020">(<a href="#ref-perry2020" role="doc-biblioref">Perry 等 2020</a>)</span>。</p>
+<p>无论其科学价值如何，Milgram 的研究都明显违反了现代关于研究行为的伦理规范。在其他违规之外，程序中包含 <strong>coercion</strong>，削弱了参与者退出实验的权利。这种 coercion 似乎产生了负面后果：Milgram 注意到，一些参与者表现出焦虑症状和紧张。这一观察令人不安，并引发了要求将此类研究宣布为不合伦理的呼声 <span class="citation" data-cites="baumrind1964">(e.g., <a href="#ref-baumrind1964" role="doc-biblioref">Baumrind 1964</a>)</span>。围绕 Milgram 研究的伦理问题很复杂，其中一些与其研究和时代背景的具体细节相当相关 <span class="citation" data-cites="miller2009">(<a href="#ref-miller2009" role="doc-biblioref">Miller 2009</a>)</span>。但围绕这项研究的争议，是促使科学共同体采纳更严格政策、保护研究参与者免受不必要伤害的重要因素。</p>
+</section>
+</div>
+<section id="伦理框架" class="level2 page-columns page-full" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="伦理框架"><span class="header-section-number">4.1</span> 伦理框架</h2>
+<p>Milgram 的实验（见 <span class="smallcaps">案例研究</span>）真的在伦理上是错的吗——也就是说，它本来就不应该被开展吗？你可能直觉上认为它不合伦理，因为参与者经历了伤害，或者因为实验者（有时）欺骗了他们。另一些人可能会提出为实验辩护的论证，例如我们从中学到的东西足够有价值，足以证明开展它是合理的。除了来回争论之外，我们如何更系统地处理这个问题？</p>
+<p>伦理框架为分析这类情境提供了工具。在本节中，我们会介绍三种最常用的框架，并讨论每一种如何应用到 Milgram 的 paradigm 上。</p>
+<section id="consequentialist-theories后果主义理论" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="consequentialist-theories后果主义理论"><span class="header-section-number">4.1.1</span> Consequentialist theories（后果主义理论）</h3>
+<p>伦理理论为“什么构成好的行动”提供原则。关于好行动的最简单理论是 <strong>consequentialist</strong> 理论：好的行动会带来好的结果。最著名的 consequentialist 立场是 <strong>utilitarian position</strong>，最初由哲学家 John Stuart Mill 定义 <span class="citation" data-cites="flinders1992">(<a href="#ref-flinders1992" role="doc-biblioref">Flinders 1992</a>)</span>。这种观点强调基于 “greatest happiness principle” 来做决策，也就是一个行动在道德上是否为好，应基于人们因它体验到的 happiness 或 pleasure 程度来判断；同样，一个行动在道德上是否为坏，也应基于人们因同一行动体验到的 unhappiness 或 pain 程度来判断 <span class="citation" data-cites="mill1859">(<a href="#ref-mill1859" role="doc-biblioref">Mill 1859</a>)</span>。</p>
+<p>对 Milgram 研究的 consequentialist analysis 会考虑研究的负面和正面影响，并把二者相互权衡。这项研究是否伤害了参与者？另一方面，这项研究是否带来了能够防止伤害或产生积极收益的知识？</p>
+<p>Consequentialist analysis 可以是一种直接方式，用来论证某个行动的风险和收益是否合理；但在研究情境中，它并不令人满意。许多可怕的实验都可能被 consequentialist analysis 许可，但我们仍会觉得它们站不住脚。想象一位研究者强迫你接受一项有风险且你不想要的医学干预，只因为由此产生的知识可能使成千上万人受益。这个实验看起来正是我们的伦理框架应该排除的那类事情！</p>
+</section>
+<section id="deontological-approaches义务论取向" class="level3 page-columns page-full" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="deontological-approaches义务论取向"><span class="header-section-number">4.1.2</span> Deontological approaches（义务论取向）</h3>
+<p>违背参与者意愿或在其不知情的情况下开展有害研究是令人厌恶的；我们认为 Tuskegee Syphilis Experiment 是这类研究的可怕例子（见下面的 <span class="smallcaps">案例研究</span>）。考虑这类案例时，一些规则似乎很明显，例如：“研究者在对参与者开展研究之前，必须征得参与者许可。” 这样的原则现在已经被正式写入所有研究伦理规范。它们体现了一种称为 <strong>deontological</strong>（或 duty-based）ethics 的方法。</p>
+<p>Deontology 强调采取伦理上可允许行动的重要性，而不管这些行动的结果如何 <span class="citation" data-cites="biagetti2020">(<a href="#ref-biagetti2020" role="doc-biblioref">Biagetti, Gedutis, 和 Ma 2020</a>)</span>。一般来说，大学伦理委员会采用的是 deontological 的伦理方法 <span class="citation" data-cites="boser2007">(<a href="#ref-boser2007" role="doc-biblioref">Boser 2007</a>)</span>。在研究情境中，主要应用四个原则：</p>
+<ol type="1">
+<li><p><strong>尊重自主性</strong>。这一原则要求，参与研究的人能够自主决定是否参与；而自主性受限者（例如儿童）应获得同等保护 <span class="citation" data-cites="beauchamp2001">(<a href="#ref-beauchamp2001" role="doc-biblioref">Beauchamp 和 Childress 2001</a>)</span>。尊重某人的自主性，也意味着向他们提供做出 informed decision 所需的全部信息，让他们决定是否参与研究（给予 <strong>consent</strong>），并在研究结束后向他们提供关于所参与研究的进一步背景（<strong>debriefing</strong>）。</p></li>
+<li><p><strong>Beneficence</strong>。这一原则意味着，研究者有义务在整个研究期间保护参与者的 well-being。Beneficence 包含两个部分。第一是不造成伤害。研究者必须采取步骤，尽量降低参与者风险，并在开始时披露任何已知风险。如果在参与过程中发现风险，研究者必须通知参与者，并做出合理努力来缓解这些风险，即便这意味着完全停止研究。第二是最大化参与者的潜在收益。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p></li>
+<li><p><strong>Nonmaleficence</strong>。这一原则与 beneficence 类似（事实上，当它们最初在 Belmont Report 中被提出时，beneficence 和 nonmaleficence 是同一个原则；我们稍后会讨论 Belmont Report），但它强调不做出/导致伤害。一般来说，伤害是坏的——但 deontology 关注意图，而不是影响，因此当意图在道德上是好的时，伤害有时可以被正当化。例如，接种疫苗可能造成一些不适和疼痛，但其意图是保护患者未来不感染致命病毒。在这个框架下，这种伤害是可以被正当化的。</p></li>
+<li><p><strong>Justice</strong>。这一原则意味着，研究的收益和风险都应在所有参与者之间平等分配。例如，不应基于社会经济地位、种族和族裔、性别等身份特征，把参与者系统性地分派到某个 condition 而不是另一个 condition。</p></li>
+</ol>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;实践中，这并不意味着用过高金额的钱或礼物补偿参与者；这可能造成其他问题，例如对低收入参与者施加不当影响，诱导他们参与。相反，“maximizing benefits” 被解释为识别参与研究的所有可能收益，并在可能时让这些收益可得。</p></div></div><p>从这些原则的视角分析，Milgram 的研究提出了几个红旗。首先，Milgram 的研究降低了参与者的自主性，让他们很难自愿结束参与（即使参与者明确表示反对，也会被最多四次要求继续施加电击）。第二，这个 paradigm 的设计方式很可能会伤害参与者，因为它把他们置于一个高度 stressful 的情境中。此外，Milgram 的研究在 session 开始前没有筛查参与者已有的心理健康问题，因而可能对某些参与者造成了<em>不必要</em>的伤害。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="深入">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>深入
+</div>
+</div>
+<section id="milgram-的做法合理吗" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="milgram-的做法合理吗">Milgram 的做法合理吗？</h3>
+<p>Milgram 实验造成的伤害，是否因为它增进了我们对 obedience 和 conformity 的理解而可以被正当化？我们不能确定。我们能说的是，在 Milgram 研究发表后的 10 年中，关于 obedience 的论文数量增加了，而且这些论文的性质也从聚焦宗教 conformity 扩展到对社会 conformity 的更广泛兴趣，这提示 Milgram 改变了这个研究领域的方向。此外，在 Milgram 进行的一项 follow-up 中，他报告说，原始研究中 84% 的参与者表示自己很高兴参与了研究 <span class="citation" data-cites="milgram1974">(<a href="#ref-milgram1974" role="doc-biblioref">Milgram 1974</a>)</span>。另一方面，考虑到原始研究中的 validity 问题，也许它对领域产生的影响并不合理 <span class="citation" data-cites="perry2020">(<a href="#ref-perry2020" role="doc-biblioref">Perry 等 2020</a>)</span>。</p>
+<p>许多研究者认为，在保护研究目标完整性的同时，没有一种合乎伦理的方式可以开展 Milgram 的实验，但一些人尝试过。一项研究在几个关键修改下重建了原始实验的一部分 <span class="citation" data-cites="burger2009">(<a href="#ref-burger2009" role="doc-biblioref">Burger 2009</a>)</span>。在进入研究之前，参与者先完成电话筛查，检查心理健康问题、成瘾或极端创伤；随后还要接受有执照的 clinical psychologist 的正式访谈，由其识别抑郁或焦虑迹象。通过这些评估的人会被邀请进入实验室，参加一项 Milgram-type learning study。实验者明确解释说，参与是自愿的，参与决定可以在任何时点撤回，撤回可以由参与者本人提出，也可以由整个 session 期间在场的受训 clinical psychologist 提出。此外，施加电击从未超过 150 伏（原始研究中为 450 伏），并且实验者在 session 结束后对参与者进行了充分 debrief。这项修改后的 replication study 发现了与 Milgram 类似的服从模式；一年后，没有参与者表达任何与参与研究相关的压力或创伤迹象。</p>
+</section>
+</div>
+</section>
+<section id="virtue-based-approaches德性取向" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="virtue-based-approaches德性取向"><span class="header-section-number">4.1.3</span> Virtue-based approaches（德性取向）</h3>
+<p>我们处理伦理困境的最后一种方式，是通过 virtue framework。<em>Virtue</em> 是一种被认为构成道德基础的特质、倾向或品质 <span class="citation" data-cites="annas2006">(<a href="#ref-annas2006" role="doc-biblioref">Annas 2006</a>)</span>。<strong>Virtue ethics</strong> 认为，人们可以通过观察他们所钦佩的人身上的行动来学习变得 virtuous <span class="citation" data-cites="morris2016">(<a href="#ref-morris2016" role="doc-biblioref">Morris 和 Morris 2016</a>)</span>。Virtue ethics 的支持者说，这之所以可行有两个原因：（1）人们通常善于识别他人身上道德上好的特质；（2）人们会从 virtuous 地生活中获得某种满足。Virtue ethics 不同于 deontology 和 utilitarianism，因为它关注的是一个人的 character，而不是规则的性质或行动的后果。</p>
+<p>从研究视角看，virtue ethics 告诉我们，为了以 virtuous 的方式行动，我们必须做出考虑实验周围 context 的决定 <span class="citation" data-cites="dillern2021">(<a href="#ref-dillern2021" role="doc-biblioref">Dillern 2021</a>)</span>。换句话说，研究者应评估他们的研究可能如何影响参与者的行为，尤其是当这些行为偏离通常预期时。这个过程也应当是 adaptive 的，意味着研究者必须警觉地关注参与者在实验 session 中不断变化的心理状态，以及计划程序是否已经不再可接受。</p>
+<p>我们如何把这个伦理框架应用到 Milgram 的实验？许多 virtue ethicists 大概会得出结论：Milgram 的方法既不恰当（对参与者而言），也不 adaptive。注意到参与者 distress 水平不断升高时，遵循 virtue ethics 框架的实验者本应选择提前结束 session；或者更好的是，从一开始就尽量减少参与者 distress。</p>
+</section>
+</section>
+<section id="对研究参与者的伦理责任" class="level2 page-columns page-full" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="对研究参与者的伦理责任"><span class="header-section-number">4.2</span> 对研究参与者的伦理责任</h2>
+<p>Milgram 的电击实验只是几十项不合伦理的人类受试者研究之一，这些研究在美国引起了公众关注和愤怒。1978 年，US National Commission for the Protection of Human Services of Biomedical and Behavioral Research 发布了 <strong>Belmont Report</strong>，其中描述了对参与研究的人类受试者权利的保护 <span class="citation" data-cites="adashi2018">(<a href="#ref-adashi2018" role="doc-biblioref">Adashi, Walters, 和 Menikoff 2018</a>)</span>。报告中也许最重要的信息是这样一个观念：“investigators should not have sole responsibility for determining whether research involving human subjects fulfills ethical standards. Others, who are independent of the research, must share the responsibility.” 换句话说，伦理研究同时需要 transparency 和外部监督。</p>
+<section id="institutional-review-boards机构审查委员会" class="level3 page-columns page-full" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="institutional-review-boards机构审查委员会"><span class="header-section-number">4.2.1</span> Institutional review boards（机构审查委员会）</h3>
+<p>美国 <strong>institutional review boards</strong>（IRBs） 的创建，是 Belmont Report 的一个重要结果。尽管监管框架和标准因国家而异，但对研究进行伦理审查在各国都很普遍。下面我们聚焦美国监管框架，因为它已经成为其他伦理审查系统的一个模型；不过，为了更清楚，我们会把 IRBs 称为 “ethics review boards”。</p>
+<p>Ethics board 是由一群人组成的委员会，负责审查、评估和监督 human subjects research，以确保参与者在参与研究时权利受到保护 <span class="citation" data-cites="oakes2002">(<a href="#ref-oakes2002" role="doc-biblioref">Oakes 2002</a>)</span>。Ethics boards 是地方性的；每一个开展人类受试者或动物研究的组织，都必须拥有自己的 ethics board，或者与外部 ethics board 签约。如果你在大学工作，你所在机构很可能有自己的 ethics board，其成员大概由科学家、医生、教授和社区居民混合组成。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Ethics boards 的本地控制可能导致不同机构的伦理审查实践差异很大，这显然与伦理标准应当统一的想法不一致！此外，批评者也担心一个结构性问题：机构伦理委员会有降低机构责任风险的激励，而私人委员会则有为付费研究者提供批准的激励 <span class="citation" data-cites="lemmens2000">(<a href="#ref-lemmens2000" role="doc-biblioref">Lemmens 和 Freedman 2000</a>)</span>。</p></div></div><p>当一组研究者有一个想在人类受试者中推进的研究问题时，他们必须在开始任何数据收集之前，获得本地 ethics board 的批准。Ethics board 会审查每项研究，以确保：</p>
+<ol type="1">
+<li><p>一项研究对参与者造成的风险不超过 <strong>minimal risk</strong>。这意味着参与者预期会经历的伤害或不适，不大于日常生活中会经历的水平。开展 <strong>greater than minimal risk</strong> 的研究是可能的，但需要额外监测，以发现可能出现的任何 adverse events。</p></li>
+<li><p>研究者在收集任何数据之前，从参与者那里获得 <strong>informed consent</strong>。这一要求意味着实验者必须披露所有潜在风险和收益，使参与者能够就是否参与研究做出 informed decision。重要的是，informed consent 并不会在参与者签署 consent form 后停止。如果研究者在过程中发现任何新的潜在风险或收益，就必须向所有参与者披露这些发现（见 <a href="012-collection.html" class="quarto-xref"><span>章 12</span></a>）。</p></li>
+<li><p>敏感信息保持 <strong>confidential</strong>。尽管监管框架各不相同，研究者通常有义务保护研究期间记录的所有 identifying information（见 <a href="013-management.html" class="quarto-xref"><span>章 13</span></a>）。</p></li>
+<li><p>参与者的招募应当 <strong>equitable</strong>，并且没有 <strong>coercion</strong>。在 ethics boards 成为标准之前，研究者常常 coercively recruit marginalized and vulnerable populations 来检验自己的研究问题，而不是让参与研究成为自愿选择，并提供平等的参与机会。</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="案例研究">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>案例研究
+</div>
+</div>
+<section id="the-tuskegee-syphilis-study塔斯基吉梅毒研究" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="the-tuskegee-syphilis-study塔斯基吉梅毒研究">The Tuskegee Syphilis Study（塔斯基吉梅毒研究）</h3>
+<p>1929 年，The United States Public Health Service（USPHS） 对 Alabama 州 Macon County 的梅毒影响感到困惑；该地区人口绝大多数为黑人 <span class="citation" data-cites="brandt1978">(<a href="#ref-brandt1978" role="doc-biblioref">Brandt 1978</a>)</span>。梅毒是一种性传播细菌感染，可以处于可见且活跃的阶段，也可以处于潜伏阶段。在研究启动时，Tuskegee 成年人口中大约 36% 已经发展出某种形式的梅毒，是美国感染率最高的地区之一 <span class="citation" data-cites="white2006">(<a href="#ref-white2006" role="doc-biblioref">White 2006</a>)</span>。</p>
+<p>USPHS 招募了 400 名 25–60 岁、患有潜伏梅毒的黑人男性，以及 200 名没有感染的黑人男性作为 control group 参与研究 <span class="citation" data-cites="brandt1978">(<a href="#ref-brandt1978" role="doc-biblioref">Brandt 1978</a>)</span>。USPHS 寻求 Macon County Board of Health 的帮助来招募参与者，并承诺会为患有梅毒的社区成员提供治疗。研究者寻找贫穷、文盲的黑人；他们没有告诉这些人自己正在被招募参加一项研究，只是告诉他们会接受 “bad blood” 的治疗。</p>
+<p>因为这项研究关心的是在没有任何医学干预的情况下追踪潜伏梅毒的自然病程，USPHS 从一开始就没有打算为参与者提供任何照护。为了安抚参与者，USPHS 发放了一种未被证明能有效治疗梅毒的药膏，以及很小剂量的实际用于治疗感染的药物。此外，参与者接受了 spinal tap；这个操作被呈现为另一种治疗形式，以及他们“last chance for free treatment”。</p>
+<p>到 1955 年，原始参与者中略多于 30% 已经死于梅毒并发症。直到 1970 年代，最终报告才发布，（缺乏）治疗才结束。总计有 128 名参与者死于梅毒或感染并发症，40 名妻子被感染，19 名儿童出生时携带感染 <span class="citation" data-cites="katz2011">(<a href="#ref-katz2011" role="doc-biblioref">Katz 和 Warren 2011</a>)</span>。伤害波及两代人，而许多人从未真正知道别人对他们做了什么。</p>
+<p>Tuskegee experiment 几乎违反了上面描述的每一条研究准则——事实上，它对研究参与者 agency 的许多可怕侵犯，为未来监管提供了一张蓝图，防止其中任何方面再次发生：研究者没有获得 informed consent。参与者没有被告知与参与相关的所有已知风险和收益。相反，研究者欺骗他们，让他们相信诊断性和侵入性检查与自己的治疗直接相关。</p>
+<p>也许最令人震惊的是，在发现青霉素能有效治疗梅毒后，参与者仍被拒绝获得适当治疗 <span class="citation" data-cites="mahoney1943">(<a href="#ref-mahoney1943" role="doc-biblioref">Mahoney, Arnold, 和 Harris 1943</a>)</span>。USPHS 请求在研究之外监督这些人照护的医疗专业人员不要为参与者提供治疗，以保留研究的方法完整性。这一干预侵犯了参与者平等获得照护的权利，而这一权利本应优先于研究结果。</p>
+<p>最后，招募既不平衡，也带有 coercion。参与者不仅来自最贫困的社区，以期找到 agency 很少的 vulnerable populations，而且还被空洞的治疗承诺和金钱激励（支付丧葬费用；这对当时许多 sharecroppers 和 tenant farmers 是一项经济障碍）所引诱。</p>
+</section>
+</div>
+</section>
+<section id="风险与收益" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="风险与收益"><span class="header-section-number">4.2.2</span> 风险与收益</h3>
+<p>想象一下，你被邀请参加本地大学的一项研究。对方只告诉你，完成一小时的计算机认知任务可以获得 25 美元。现在想象，在 session 进行到一半时，实验者透露他们还需要采集一份血样，“which should only take a couple of minutes and which will really help the research study.” 你会同意采样吗？你会在任何方面感到不舒服吗？</p>
+<p>参与者需要在给出 consent 之前理解参加实验的风险和收益。否则就会损害他们的自主性（一个关键的 deontological 原则）。在这个假想实验中，一个新的、意外的侵入性实验组成部分具有 coercive 性质：参与者如果想退出，就必须选择放弃他们预期获得的补偿。他们也可能觉得自己被实验者 deceived 了。</p>
+<p>在人类受试者研究中，<strong>deception</strong> 是一个特定技术术语，指的是以下情况：（1）实验者隐瞒关于研究目标或意图的任何信息；（2）实验者隐藏自己的真实身份（例如使用演员时）；（3）为了隐藏信息，研究的某些方面被低估或夸大；或者（4）参与者收到任何虚假或误导性信息。从 human subjects 的视角看，使用 deception 需要特殊考虑 <span class="citation" data-cites="kelman2017 baumrind1985">(<a href="#ref-kelman2017" role="doc-biblioref">Kelman 2017</a>; <a href="#ref-baumrind1985" role="doc-biblioref">Baumrind 1985</a>)</span>。</p>
+<p>即使假定风险和收益已经在没有 coercion 或 deception 的情况下被适当披露，它们也必须从<em>参与者</em>的视角评估，而不是从实验者的视角评估。这样做，才能让参与者做出 informed choice。在血样案例中，对参与者的风险没有被披露，而收益是以研究项目（以及实验者）的角度陈述的。</p>
+<p>参与研究的收益可以是直接的，也可以是间接的，重要的是要说明参与者可能获得哪一种收益。虽然一些 clinical studies 和 interventions 可能因为参与本身而提供某种直接收益，但许多 basic science research 的收益是间接的。二者在科学中都有位置，但最终必须由参与者决定，每一种收益在多大程度上激励他们参与研究 <span class="citation" data-cites="shatz1986">(<a href="#ref-shatz1986" role="doc-biblioref">Shatz 1986</a>)</span>。</p>
+</section>
+</section>
+<section id="分析和报告中的伦理责任" class="level2 page-columns page-full" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="分析和报告中的伦理责任"><span class="header-section-number">4.3</span> 分析和报告中的伦理责任</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="事故报告">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>事故报告
+</div>
+</div>
+<section id="什么数据" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="什么数据">什么数据？</h3>
+<p>荷兰社会心理学家 Diederick Stapel 参与了 200 多篇关于 social comparison、stereotype threat 和 discrimination 的文章，其中许多发表在最负盛名的期刊上。Stapel 报告说，肯定积极个人品质可以缓冲危险的社会比较，与个人吸引力相关的产品广告会改变他们的自我感受，接触聪明的内群体成员会提升一个人在未来任务中的表现 <span class="citation" data-cites="stapel2012 trampe2011 gordijn2006">(<a href="#ref-stapel2012" role="doc-biblioref">Stapel 和 Linde 2012</a>; <a href="#ref-trampe2011" role="doc-biblioref">Trampe, Stapel, 和 Siero 2011</a>; <a href="#ref-gordijn2006" role="doc-biblioref">Gordijn 和 Stapel 2006</a>)</span>。这些发现发表时新颖且值得注意，Stapel 的论文被引用了数千次。唯一的问题是什么？Stapel 的数据是编造的。</p>
+<p>Stapel 承认，当他最初开始伪造数据时，他会对少数数据点做小改动 <span class="citation" data-cites="stapel2012b">(<a href="#ref-stapel2012b" role="doc-biblioref">Stapel 2012</a>)</span>。这里那里改一个数字，就能把一项平淡研究变成一项令人印象深刻的研究。在获得舒适的成功之后（而且很少引起期刊编辑和科学共同体其他人的怀疑），Stapel 最终开始创造整套数据集，并把它们冒充为自己的数据。然而，几位同事开始对他压倒性的成功感到怀疑，并把担忧带给 Tilburg University 的 Psychology Department。等到对其工作的调查结束时，Stapel 有 58 篇论文被 <strong>retracted</strong>，也就是说，发表期刊在发现论文内容无效后撤回了论文。</p>
+<p>所有人都同意 Stapel 的行为非常不合伦理。但我们是否应该把 falsification 和 fraud 案例看作与研究中的其他伦理违规在类型上不同？或者，fraud 只是一个 continuum 的端点，而这个 continuum 可能包括 <span class="math inline">\(p\)</span>-hacking 等其他实践？律师和哲学家会努力厘清 sloppy 与 neglect 之间的精确边界；当一个 typo 或 coding mistake 改变了科学论文的结论时，很难知道到底是哪一种在起作用。类似地，如果一位研究者从事所谓 questionable research practices，到什么程度时，我们应认为他们犯了伦理违规，而不是只是把研究做得很差？</p>
+<p>上面的伦理框架为思考这个话题提供了框架。对 consequentialist 来说，sloppy science 可能给科学家带来好结果（更快发表），却给科学共同体其他人带来坏结果，因为他们必须在可能不正确的论文上浪费时间和精力。对 deontologist 来说，科学家的意图起关键作用：明知实践不达标准却仍使用，这不是一个一般可接受的原则。对 virtue ethicist 来说，sloppiness 不是一种道德上好的特质。在所有分析下，研究者都有责任谨慎开展工作。</p>
+</section>
+</div>
+<p>作为科学家，我们不仅对参与者负有责任；我们也要对自己如何处理数据、得出什么结论负责。像 Stapel 这样的案例（见上面的 <span class="smallcaps">事故报告</span>）似乎令人震惊，但它们是一个 continuum 的一部分。像 American Psychological Association 这样的组织，其 professional ethics codes 鼓励研究者在管理和分析数据时保持谨慎，以避免错误和误述 <span class="citation" data-cites="apaethics">(<a href="#ref-apaethics" role="doc-biblioref">American Psychological Association 2017</a>)</span>。</p>
+<p>研究者也有义务不因为自己关于正确答案的信念而压制发现。正如你在 <a href="003-replication.html" class="quarto-xref"><span>章 3</span></a> 中学到的，这种压制可能以一种不幸方式发生：研究者选择性报告自己的研究，从而导致 publication bias。研究者自己的偏见也可能成为不发表的另一种（无效）理由：压制与自己的 theoretical commitments 相矛盾的发现，同样是一种伦理违规。</p>
+<p>重要的是，研究者没有义务发表自己做过的<em>所有</em>东西。在同行评审文献中发表既困难又耗时。有很多理由可以不发表一个实验发现！例如，如果你认为某个结果因为实验设计中的 confound 而确实没有信息量，就没有理由发表它。类似地，如果你决定离开研究工作，因此没有发表 dissertation 中的一项研究，通常也不构成伦理违规。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> 主要伦理问题发生在：你利用一项研究的<em>结果</em>——以及它如何与你自己的信念相关，或如何与 <span class="math inline">\(p &lt; 0.05\)</span> 这样的阈值相关——来决定是否发表它。</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;另一方面，如果你的 dissertation 包含某种可怕疾病的治疗方法，你确实有义务发表它！</p></div></div><p>正如本书会反复讨论的，准备研究报告也必须谨慎，并注意细节（见 <a href="014-writing.html" class="quarto-xref"><span>章 14</span></a>）。写作结果时的 sloppy 可能导致不精确或过宽的主张；如果这种 sloppy 延伸到数据和分析的报告，也可能导致 irreproducibility。</p>
+<p>此外，professional ethics 要求已发表的文献贡献必须是原创的。一般来说，论文文本不得从其他报告的文本中 <strong>plagiarized</strong>（复制）而不署名，无论那些文本是你自己写的，还是另一位作者写的。在直接且署名引用之外复制他人文本，显然是伦理违规，因为这会让文本的 credit 归于你，而不是归于真实作者。但 self-plagiarism 也不可接受——为同一产品多次获得 credit 是一种违规。<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;不同领域在这个问题上的标准并不一样。我们的感觉是，关于 self-plagiarism 的规则主要适用于期刊论文之间的内容重复。因此，例如，在没有资助方或期刊具体政策禁止的情况下，把自己某个 grant proposal 中的文字用于期刊论文是可以接受的。准备期刊论文时，通常也可以重复使用 conference abstract 或 preregistration（当然是你自己写的）中的文本。</p></div></div></section>
+<section id="对科学共同体的伦理责任" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="对科学共同体的伦理责任"><span class="header-section-number">4.4</span> 对科学共同体的伦理责任</h2>
+<p>我们将在全书中描述的 open science 原则，不仅是纠正 reproducibility 和 replicability 问题的重要手段；它们也是伦理义务。</p>
+<p>社会学家 Robert Merton 描述了一组科学被假定遵循的规范：communism——科学知识属于共同体；universalism——科学结果的 validity 独立于科学家的身份；disinterestedness——科学家和科学机构为整个事业的利益行动；以及 organized skepticism——科学发现必须接受批判性评估 <span class="citation" data-cites="merton1979">(<a href="#ref-merton1979" role="doc-biblioref">Merton 1979</a>)</span>。</p>
+<p>如果科学产品不是开放的，那么按 Merton 的定义就很难成为科学家。为了贡献于共同善，论文需要开放可得。为了接受 skeptical inquiry，实验材料、研究数据、分析代码和软件都必须可得，这样分析计算才能被验证，实验才能被 reproduced。否则，你就必须基于权威而不是基于材料和数据来接受论证。</p>
+<p>Openness 不仅在定义上是科学事业的一部分；它也对科学和个体科学家有好处 <span class="citation" data-cites="gorgolewski2016">(<a href="#ref-gorgolewski2016" role="doc-biblioref">Gorgolewski 和 Poldrack 2016</a>)</span>。Open access 的出版物被引用更多 <span class="citation" data-cites="eysenbach2006 gargouri2010">(<a href="#ref-eysenbach2006" role="doc-biblioref">Eysenbach 2006</a>; <a href="#ref-gargouri2010" role="doc-biblioref">Gargouri 等 2010</a>)</span>。Open data 也会增加被引用和复用的潜力，并最大化错误被发现和纠正的机会。</p>
+<p>但这些收益意味着，研究者对资助者负有责任，应追求 open practices，以寻求资助者投资的最大回报。按照同样逻辑，如果研究参与者把自己的时间贡献给科学项目，研究者也有义务最大化这些贡献的影响 <span class="citation" data-cites="brakewood2013">(<a href="#ref-brakewood2013" role="doc-biblioref">Brakewood 和 Poldrack 2013</a>)</span>。基于所有这些原因，个体科学家有义务保持开放——科学机构也有义务促进它们所支持和发表的科学中的 transparency。</p>
+<p>这些义务应如何与研究者的其他责任平衡？例如，我们应如何在 data sharing 的收益与保护参与者隐私的承诺之间取得平衡？此外，既然 transparency policies 也有时间和精力成本，研究者应如何把这些成本与其他义务相权衡？</p>
+<p>首先，在风险和成本有限的情况下，open practices 应当是默认做法。例如，绝大多数期刊允许作者把已接受 manuscript 的未排版版本发布到开放仓库。通往 “green” open access 的这条路径很容易、免费，而且——因为它只发生在文章被接受发表之后——基本没有被抢先发表的风险。第二个例子是，绝大多数分析代码都可以被发布，作为分析究竟如何开展的明确记录，即使由于隐私限制，发布数据有时更复杂。这类朝向 openness 的 “incentive-compatible” 行动，可以让研究者在通往完全 transparent workflow 的路上走很远，没有理由不采取它们。</p>
+<p>第二，研究者应当为共享做计划，并建立一种降低 openness 成本的 workflow。正如我们在 <a href="013-management.html" class="quarto-xref"><span>章 13</span></a> 中讨论的，如果数据事先没有明确为共享而准备，那么事后共享数据可能昂贵且困难；但良好的 project management practices 可以让这个过程简单得多（在许多情况下完全 trivial）。</p>
+<p>最后，鉴于朝向 openness 的伦理要求，资助者、期刊和学会等机构需要利用自己的角色来促进 open practices，并缓解潜在负面影响 <span class="citation" data-cites="nosek2015">(<a href="#ref-nosek2015" role="doc-biblioref">Nosek 等 2015</a>)</span>。Scholarly societies 在教育科学家认识 openness 的收益、并提供资源引导成员采用分享 publication 和其他研究产品的最佳实践方面，扮演重要角色。类似地，期刊可以设定好的默认值，例如要求共享数据和代码，除非给出强有力的理由。研究资助者也可以——而且越来越多地正在——通过 data sharing mandates 表明它们对 openness 的重视。</p>
+</section>
+<section id="本章小结伦理" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="本章小结伦理"><span class="header-section-number">4.5</span> 本章小结：伦理</h2>
+<p>在本章中，我们讨论了三种伦理框架，并通过 Milgram 著名 obedience experiment 的视角评估它们如何应用于我们自己的研究。像 Milgram 这样的研究引发了严肃讨论：如何最好地协调实验者目标与参与者 well-being。Belmont Report 的发表，以及后来美国 ethics boards 的创建，使科学家处理 human subjects research 的方式标准化，并建立了急需的 accountability。我们也讨论了自己对科学共同体的伦理责任，包括如何报告数据，以及如何分发数据。我们希望已经说服你：谨慎、开放的科学是研究者的伦理要求！</p>
+<div class="callout callout-style-default callout-note callout-titled" title="讨论问题">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>讨论问题
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>COVID-19 pandemic 引发了心理学中大量 “rapid-response” 研究，目标是发现——并影响——人们如何推理传染、疫苗、戴口罩以及公共卫生的其他方面。研究者在这类研究中应注意哪些具体伦理问题？相比更 “run-of-the-mill” 的研究，这类研究是否有理由更加谨慎？</li>
+<li>想一个反对 open science practices 的论证——例如，遵循 open science practices 对资源更有限的研究者尤其 burdensome（你也可以自己编另一个！）。鉴于我们认为研究者对 openness 负有伦理义务，你会如何用我们讨论过的三种不同伦理框架分析这个论证？</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="阅读材料">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>阅读材料
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Belmont Report 从发表至今一直塑造着美国研究伦理政策。它也很短，而且相当易读：<a href="https://www.hhs.gov/ohrp/regulations-and-policy/belmont-report/index.html" class="uri">https://www.hhs.gov/ohrp/regulations-and-policy/belmont-report/index.html</a>。</li>
+<li>一本包含 science misconduct 案例研究、并有力论证 open science 的丰富参考书： Ritchie, Stuart. <span class="citation" data-cites="ritchie2020">(<a href="#ref-ritchie2020" role="doc-biblioref">2020</a>)</span>. <em>Science Fictions: How Fraud, Bias, Negligence, and Hype Undermine the Search for Truth</em>. Metropolitan Books.</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-adashi2018" class="csl-entry" role="listitem">
+Adashi, Eli Y, LeRoy B Walters, 和 Jerry A Menikoff. 2018. <span>《The Belmont Report at 40: reckoning with time》</span>. <em>American Journal of Public Health</em> 108 (10): 1345–48.
+</div>
+<div id="ref-apaethics" class="csl-entry" role="listitem">
+American Psychological Association. 2017. <span>《Ethical Principles of Psychologists and Code of Conduct》</span>. <a href="https://www.apa.org/ethics/code">https://www.apa.org/ethics/code</a>.
+</div>
+<div id="ref-annas2006" class="csl-entry" role="listitem">
+Annas, Julia. 2006. <span>《Virtue ethics》</span>. 收入 <em>The Oxford Handbook of Ethical Theory</em>, 编辑 David Copp, 515–36. Oxford University Press.
+</div>
+<div id="ref-baade1961" class="csl-entry" role="listitem">
+Baade, Hans W. 1961. <span>《The Eichmann Trial: Some Legal Aspects》</span>. <em>Duke Law Journal</em> 10 (3): 400–420.
+</div>
+<div id="ref-baumrind1964" class="csl-entry" role="listitem">
+Baumrind, Diana. 1964. <span>《Some thoughts on ethics of research: After reading Milgram’s <span>〈Behavioral study of obedience〉</span>》</span>. <em>American Psychologist</em> 19 (6): 421.
+</div>
+<div id="ref-baumrind1985" class="csl-entry" role="listitem">
+———. 1985. <span>《Research using intentional deception: Ethical issues revisited.》</span> <em>American psychologist</em> 40 (2): 165–74.
+</div>
+<div id="ref-beauchamp2001" class="csl-entry" role="listitem">
+Beauchamp, Tom L, 和 James F Childress. 2001. <em>Principles of biomedical ethics</em>. Oxford University Press.
+</div>
+<div id="ref-biagetti2020" class="csl-entry" role="listitem">
+Biagetti, Maria Teresa, Aldis Gedutis, 和 Lai Ma. 2020. <span>《Ethical Theories in Research Evaluation: An Exploratory Approach》</span>. <em>Scholarly Assessment Reports</em> 2 (1): 1–9.
+</div>
+<div id="ref-boser2007" class="csl-entry" role="listitem">
+Boser, Susan. 2007. <span>《Power, ethics, and the IRB: Dissonance over human participant review of participatory research》</span>. <em>Qualitative Inquiry</em> 13 (8): 1060–74.
+</div>
+<div id="ref-brakewood2013" class="csl-entry" role="listitem">
+Brakewood, Beth, 和 Russell A Poldrack. 2013. <span>《The ethics of secondary data analysis: Considering the application of Belmont principles to the sharing of neuroimaging data》</span>. <em>Neuroimage</em> 82: 671–76.
+</div>
+<div id="ref-brandt1978" class="csl-entry" role="listitem">
+Brandt, Allan M. 1978. <span>《Racism and research: the case of the Tuskegee Syphilis Study》</span>. <em>Hastings center report</em> 8 (6): 21–29.
+</div>
+<div id="ref-burger2009" class="csl-entry" role="listitem">
+Burger, Jerry M. 2009. <span>《Replicating Milgram: Would people still obey today?》</span> <em>American Psychologist</em> 64 (1): 1–11.
+</div>
+<div id="ref-dillern2021" class="csl-entry" role="listitem">
+Dillern, Thomas. 2021. <span>《The Scientific Judgment-Making Process from a Virtue Ethics Perspective》</span>. <em>Journal of Academic Ethics</em> 19 (4): 501–16.
+</div>
+<div id="ref-eysenbach2006" class="csl-entry" role="listitem">
+Eysenbach, Gunther. 2006. <span>《Citation advantage of open access articles》</span>. <em>PLoS biology</em> 4 (5): e157.
+</div>
+<div id="ref-flinders1992" class="csl-entry" role="listitem">
+Flinders, David J. 1992. <span>《In search of ethical guidance: constructing a basis for dialogue》</span>. <em>International Journal of Qualitative Studies in Education</em> 5 (2): 101–15.
+</div>
+<div id="ref-gargouri2010" class="csl-entry" role="listitem">
+Gargouri, Yassine, Chawki Hajjem, Vincent Larivière, Yves Gingras, Les Carr, Tim Brody, 和 Stevan Harnad. 2010. <span>《Self-selected or mandated, open access increases citation impact for higher quality research》</span>. <em>PLoS One</em> 5 (10): e13636.
+</div>
+<div id="ref-gordijn2006" class="csl-entry" role="listitem">
+Gordijn, Ernestine H., 和 Diederik A. Stapel. 2006. <span>《<em>Retracted</em>: Behavioural effects of automatic interpersonal versus intergroup social comparison》</span>. <em>British Journal of Social Psychology</em> 45 (4): 717–29. <a href="https://doi.org/10.1348/014466605X79589">https://doi.org/10.1348/014466605X79589</a>.
+</div>
+<div id="ref-gorgolewski2016" class="csl-entry" role="listitem">
+Gorgolewski, Krzysztof J., 和 Russell A. Poldrack. 2016. <span>《A Practical Guide for Improving Transparency and Reproducibility in Neuroimaging Research》</span>. <em>PLoS Biology</em> 14 (7): e1002506. <a href="https://doi.org/10.1371/journal.pbio.1002506">https://doi.org/10.1371/journal.pbio.1002506</a>.
+</div>
+<div id="ref-katz2011" class="csl-entry" role="listitem">
+Katz, Ralph V, 和 Rueben C Warren. 2011. <em>The search for the legacy of the USPHS syphilis study at Tuskegee</em>. Lexington Books.
+</div>
+<div id="ref-kelman2017" class="csl-entry" role="listitem">
+Kelman, Herbert C. 2017. <span>《Human use of human subjects: The problem of deception in social psychological experiments》</span>. 收入 <em>Research Design</em>, 189–204. Routledge.
+</div>
+<div id="ref-kilham1974" class="csl-entry" role="listitem">
+Kilham, Wesley, 和 Leon Mann. 1974. <span>《Level of destructive obedience as a function of transmitter and executant roles in the Milgram obedience paradigm.》</span> <em>Journal of personality and social psychology</em> 29 (5): 696.
+</div>
+<div id="ref-lemmens2000" class="csl-entry" role="listitem">
+Lemmens, Trudo, 和 Benjamin Freedman. 2000. <span>《Ethics review for sale? Conflict of interest and commercial research review boards》</span>. <em>The Milbank Quarterly</em> 78 (4): 547–84.
+</div>
+<div id="ref-mahoney1943" class="csl-entry" role="listitem">
+Mahoney, John F, R C Arnold, 和 Ad Harris. 1943. <span>《Penicillin treatment of early syphilis—a preliminary report》</span>. <em>American Journal of Public Health and the Nations Health</em> 33 (12): 1387–91.
+</div>
+<div id="ref-merton1979" class="csl-entry" role="listitem">
+Merton, Robert K. 1979. <span>《The normative structure of science》</span>. <em>The sociology of science: Theoretical and empirical investigations</em>, 267–78.
+</div>
+<div id="ref-milgram1963" class="csl-entry" role="listitem">
+Milgram, Stanley. 1963. <span>《Behavioral study of obedience》</span>. <em>Journal of abnormal and social psychology</em> 67 (4): 371.
+</div>
+<div id="ref-milgram1974" class="csl-entry" role="listitem">
+———. 1974. <em>Obedience to Authority: An Experimental View</em>. Harper &amp; Row.
+</div>
+<div id="ref-mill1859" class="csl-entry" role="listitem">
+Mill, John Stuart. 1859. <span>《Utilitarianism (1863)》</span>. <em>Utilitarianism, Liberty, Representative Government</em>, 7–9.
+</div>
+<div id="ref-miller2009" class="csl-entry" role="listitem">
+Miller, Arthur G. 2009. <span>《Reflections on <span>〈Replicating Milgram〉</span> (Burger, 2009)》</span>. <em>American Psychologist</em> 64 (1): 20–27. <a href="https://doi.org/10.1037/a0014407">https://doi.org/10.1037/a0014407</a>.
+</div>
+<div id="ref-morris2016" class="csl-entry" role="listitem">
+Morris, Marilyn C, 和 Jason Z Morris. 2016. <span>《The importance of virtue ethics in the IRB》</span>. <em>Research Ethics</em> 12 (4): 201–16.
+</div>
+<div id="ref-nosek2015" class="csl-entry" role="listitem">
+Nosek, Brian A, George Alter, George C Banks, Denny Borsboom, Sara D Bowman, Steven J Breckler, Stuart Buck, 等. 2015. <span>《Promoting an open research culture》</span>. <em>Science</em> 348 (6242): 1422–25. <a href="https://doi.org/10.1126/science.aab2374">https://doi.org/10.1126/science.aab2374</a>.
+</div>
+<div id="ref-oakes2002" class="csl-entry" role="listitem">
+Oakes, J Michael. 2002. <span>《Risks and wrongs in social science research: An evaluator’s guide to the IRB》</span>. <em>Evaluation Review</em> 26 (5): 443–79.
+</div>
+<div id="ref-perry2020" class="csl-entry" role="listitem">
+Perry, Gina, Augustine Brannigan, Richard A Wanner, 和 Henderikus Stam. 2020. <span>《Credibility and incredulity in Milgram’s obedience experiments: A reanalysis of an unpublished test》</span>. <em>Social Psychology Quarterly</em> 83 (1): 88–106.
+</div>
+<div id="ref-ritchie2020" class="csl-entry" role="listitem">
+Ritchie, Stuart. 2020. <em>Science fictions: How fraud, bias, negligence, and hype undermine the search for truth</em>. Metropolitan Books.
+</div>
+<div id="ref-ross2011" class="csl-entry" role="listitem">
+Ross, Lee, 和 Richard E Nisbett. 1991. <em>The person and the situation: Perspectives of social psychology</em>. McGraw-Hill.
+</div>
+<div id="ref-shatz1986" class="csl-entry" role="listitem">
+Shatz, David. 1986. <span>《Autonomy, beneficence, and informed consent: rethinking the connections》</span>. <em>Cancer Investigation</em> 4 (3): 257–69.
+</div>
+<div id="ref-stapel2012b" class="csl-entry" role="listitem">
+Stapel, Diederik A. 2012. <em>Ontsporing</em>. Prometheus Amsterdam.
+</div>
+<div id="ref-stapel2012" class="csl-entry" role="listitem">
+Stapel, Diederik A, 和 Lonneke A J G van der Linde. 2012. <span>《<span>〈What drives self-affirmation effects? On the importance of differentiating value affirmation and attribute affirmation〉</span>: Retraction of Stapel and van der Linde (2011)》</span>. <em>Journal of Personality and Social Psychology</em> 103 (3): 505. <a href="https://doi.org/10.1037/a0029745">https://doi.org/10.1037/a0029745</a>.
+</div>
+<div id="ref-trampe2011" class="csl-entry" role="listitem">
+Trampe, Debra, Diederik A Stapel, 和 Frans W Siero. 2011. <span>《<em>Retracted</em>: The self-activation effect of advertisements: Ads can affect whether and how consumers think about the self》</span>. <em>Journal of Consumer Research</em> 37 (6): 1030–45.
+</div>
+<div id="ref-white2006" class="csl-entry" role="listitem">
+White, Robert M. 2006. <span>《Effects of untreated syphilis in the negro male, 1932 to 1972: a closure comes to the Tuskegee study, 2004》</span>. <em>Urology</em> 67 (3): 654.
+</div>
+</div>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./003-replication.html" class="pagination-link" aria-label="重复验证">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./005-estimation.html" class="pagination-link" aria-label="估计">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; 重复验证 – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./004-ethics.html" rel="next">
+<link href="./002-theories.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./001-experiments.html">基础</a></li><li class="breadcrumb-item"><a href="./003-replication.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#reproducibility可复现性" id="toc-reproducibility可复现性" class="nav-link active" data-scroll-target="#reproducibility可复现性"><span class="header-section-number">3.1</span> Reproducibility（可复现性）</a></li>
+  <li><a href="#replication重复验证" id="toc-replication重复验证" class="nav-link" data-scroll-target="#replication重复验证"><span class="header-section-number">3.2</span> Replication（重复验证）</a>
+  <ul class="collapse">
+  <li><a href="#replication-的概念框架" id="toc-replication-的概念框架" class="nav-link" data-scroll-target="#replication-的概念框架"><span class="header-section-number">3.2.1</span> Replication 的概念框架</a></li>
+  <li><a href="#replication-的-metascience元科学" id="toc-replication-的-metascience元科学" class="nav-link" data-scroll-target="#replication-的-metascience元科学"><span class="header-section-number">3.2.2</span> Replication 的 metascience（元科学）</a></li>
+  </ul></li>
+  <li><a href="#replication-failure重复验证失败的原因" id="toc-replication-failure重复验证失败的原因" class="nav-link" data-scroll-target="#replication-failure重复验证失败的原因"><span class="header-section-number">3.3</span> Replication failure（重复验证失败）的原因</a></li>
+  <li><a href="#replicationtheory-building-与-open-science" id="toc-replicationtheory-building-与-open-science" class="nav-link" data-scroll-target="#replicationtheory-building-与-open-science"><span class="header-section-number">3.4</span> Replication、theory building 与 open science</a>
+  <ul class="collapse">
+  <li><a href="#replication-与-theory-之间的互惠关系" id="toc-replication-与-theory-之间的互惠关系" class="nav-link" data-scroll-target="#replication-与-theory-之间的互惠关系"><span class="header-section-number">3.4.1</span> Replication 与 theory 之间的互惠关系</a></li>
+  <li><a href="#决定何时-replicate以最大化-epistemic-value认识价值" id="toc-决定何时-replicate以最大化-epistemic-value认识价值" class="nav-link" data-scroll-target="#决定何时-replicate以最大化-epistemic-value认识价值"><span class="header-section-number">3.4.2</span> 决定何时 replicate，以最大化 epistemic value（认识价值）</a></li>
+  <li><a href="#open-science开放科学" id="toc-open-science开放科学" class="nav-link" data-scroll-target="#open-science开放科学"><span class="header-section-number">3.4.3</span> Open science（开放科学）</a></li>
+  <li><a href="#一场危机" id="toc-一场危机" class="nav-link" data-scroll-target="#一场危机"><span class="header-section-number">3.4.4</span> 一场危机？</a></li>
+  </ul></li>
+  <li><a href="#本章小结重复验证" id="toc-本章小结重复验证" class="nav-link" data-scroll-target="#本章小结重复验证"><span class="header-section-number">3.5</span> 本章小结：重复验证</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography"></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./001-experiments.html">基础</a></li><li class="breadcrumb-item"><a href="./003-replication.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-replication" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="学习目标">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>学习目标
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>定义并区分 reproducibility（可复现性）和 replicability（可重复性）</li>
+<li>综合关于 replication 及 replication 失败原因的 metascience 文献</li>
+<li>推理 replication 与 theory building 之间的关系</li>
+</ul>
+</div>
+</div>
+<p>在前几章中，我们介绍了实验、实验与因果推断的联系，以及实验在建立心理学理论中的作用。原则上，反复开展实验研究并结合 theory building，应该能够形成强有力的研究项目，让我们以越来越大的适用范围解释和预测现象。</p>
+<p>然而，近些年来，越来越多人意识到：这种理想化的科学图景，可能并不能很好地描述我们实际在心理学文献中看到的情况。许多经典发现可能是错的，或者至少被夸大了。它们的统计检验可能不值得信任。很多论文里的实际数字甚至也是错的！而且，即使某些实验发现是“真实的”，它们也未必能广泛推广到不同的人和不同的情境中。</p>
+<p>我们怎么知道这些问题存在？一个快速发展的领域，叫做 <strong>metascience</strong>，正在提供证据。Metascience 是关于<em>研究本身</em>的研究——例如，考察某个文献中的发现有多常能够被后续研究成功建立在其上，或者试图弄清楚某些负面研究实践到底有多普遍。Metascience 让我们能够超越关于某组有问题结果的零散轶事，或关于不良实践的传闻。也许最明显的警讯是：当独立科学家在 metascience 项目中组队，试图重复先前研究时，他们常常得不到相同结果。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-replication-terms" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A table with cols dataset (same/different), rows analysis (same/different). 1st row reproducible, replicable; 2nd row robust.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-replication-terms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/replication/terms.png" class="img-fluid figure-img" alt="A table with cols dataset (same/different), rows analysis (same/different). 1st row reproducible, replicable; 2nd row robust.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-replication-terms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3.1: 理解与科学发现可重复性相关的不同术语的框架 <span class="citation" data-cites="whitaker2017">(based on <a href="#ref-whitaker2017" role="doc-biblioref">Whitaker 2017</a>)</span>。
+</figcaption>
+</figure>
+</div><div id="fn1"><p><sup>1</sup>&nbsp;你可能已经注意到，这里“相同”这个词承担了很多工作。我们如何操作化实验程序、统计分析、样本或结果的“相同”？这些都是很难的问题，下面我们会触及。请记住，这些问题没有单一答案，因此这些术语始终只是有用的指南，而不是精确标签。</p></div></div><p>在开始回顾这些证据之前，我们先讨论科学发现可以被“重复”的几种不同方式。<a href="#fig-replication-terms" class="quarto-xref">图&nbsp;<span>3.1</span></a> 为我们的定义提供了一个基本起点。对于论文中的某个特定发现，如果我们拿同一份数据、做同样的分析，并得到相同结果，我们就说这个发现是 <strong>reproducible</strong>（有时也叫 <strong>analytically</strong> 或 <strong>computationally reproducible</strong>，即分析上/计算上可复现）。如果我们用同样的方法收集<em>新的</em>数据、做同样的分析，并得到相同结果，我们就把这称为一次 <strong>replication</strong>，并说这个发现是 <strong>replicable</strong>。如果我们用同一份数据做不同分析，我们称之为 <strong>robustness check</strong>；如果得到类似结果，我们就说这个发现是 <strong>robust</strong>。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 我们把最后一个象限留空，因为文献中没有专门术语来称呼它——最终目标是得出 <strong>generalizable</strong> 的结论，但这个术语的含义不只是一个发现既 reproducible 又 replicable。</p>
+<p>在本章中，我们主要讨论 reproducibility 和 replicability（robustness 会在 <a href="011-prereg.html" class="quarto-xref"><span>章 11</span></a> 中稍微讨论）。我们会先回顾与 reproducibility 和 replicability 相关的关键概念，以及一些重要的 metascience 发现。这些文献提示我们：当你阅读一篇普通心理学论文时，默认预期应该是它可能无法 replicate！</p>
+<p>接着，我们会讨论发现无法 replicate 的一些主要原因，尤其是 <strong>analytic flexibility</strong> 和 <strong>publication bias</strong>。最后，我们会讨论 reproducibility 和 replicability 如何与心理学中的 theory building 相关，以及 <strong>open science</strong> 在这场讨论中的角色。这一讨论会聚焦于 <span class="smallcaps">transparency</span>（本书的主要主题之一）在支持 theory building 中的关键作用。</p>
+<section id="reproducibility可复现性" class="level2 page-columns page-full" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="reproducibility可复现性"><span class="header-section-number">3.1</span> Reproducibility（可复现性）</h2>
+<p>科学论文里充满数字：样本量、测量值、统计结果和可视化。要让这些数字有意义，并让其他科学家能够核查它们，我们就需要知道它们从哪里来，也就是它们的 <strong>provenance</strong>。科学家从原始数据一路处理到论文中报告数字的行动链条，有时被称为 <strong>analysis pipeline</strong>。在科学史上的很长一段时间里，科学论文通常只对 analysis pipeline 提供文字描述，而且细节很少。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;<span class="citation" data-cites="buckheit1995">Buckheit 和 Donoho (<a href="#ref-buckheit1995" role="doc-biblioref">1995</a>, p.&nbsp;5)</span> 中一个很有预见性的说法很好地概括了这种情况：“A scientific publication is not the scholarship itself, it is merely <em>advertising</em> of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures.”</p></div><div id="fn3"><p><sup>3</sup>&nbsp;很多年来，像 American Psychological Association 这样的专业学会都要求共享数据（<a href="https://www.apa.org/ethics/code" class="uri">https://www.apa.org/ethics/code</a>），但仅限于验证目的，而且只是在“按要求提供”的情况下——换句话说，科学家默认可以把数据藏起来，只有当另一位科学家请求访问时，才有责任共享。实践中，这类政策并不起作用；数据很少会在请求后被提供 <span class="citation" data-cites="wicherts2006">(<a href="#ref-wicherts2006" role="doc-biblioref">Wicherts 等 2006</a>)</span>。我们认为这种状况站不住脚。我们会在 <a href="004-ethics.html" class="quarto-xref"><span>章 4</span></a> 中给出更长的论证来说明为什么应当共享数据，并在 <a href="013-management.html" class="quarto-xref"><span>章 13</span></a> 中讨论共享的一些实践问题。</p></div></div><p>此外，研究者通常不会分享这个 pipeline 中的关键研究对象，例如分析脚本或原始数据 <span class="citation" data-cites="hardwicke2021c">(<a href="#ref-hardwicke2021c" role="doc-biblioref">Hardwicke, Thibault, 等 2021</a>)</span>。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> 没有代码和数据，科学论文中报告的数字通常不可复现——独立科学家无法重复 analysis pipeline 中的所有步骤，并得到与原作者相同的结果。</p>
+<p>Reproducibility 之所以值得追求，有很多原因。没有它：</p>
+<ul>
+<li>计算或报告错误可能导致报告结果与实际结果不一致</li>
+<li>对分析计算过程的模糊文字描述，可能让读者无法理解实际执行了哪些计算</li>
+<li>无法检查数据分析对替代模型设定的 robustness</li>
+<li>更难综合多项研究的证据；而这正是建立累积性科学知识的关键部分</li>
+</ul>
+<p>在这个列表中，错误检测和纠正大概是最紧迫的问题。但错误常见吗？已发表文献中有大量个别错误被纠正的例子 <span class="citation" data-cites="cesana-arlotti2018">(e.g., 我们中的一些人就在 <a href="#ref-cesana-arlotti2018" role="doc-biblioref">Cesana-Arlotti 等 2018</a> 中发现过一个错误)</span>，我们自己也犯过重大的分析错误 <span class="citation" data-cites="frank2013">(e.g., <a href="#ref-frank2013" role="doc-biblioref">Frank 等 2013</a>)</span>。但这些经历并不能告诉我们，一般来说错误有多频繁（或者错误会对研究者得出的结论产生什么后果）。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Gould 的 <span class="citation" data-cites="gould1996">(<a href="#ref-gould1996" role="doc-biblioref">1996</a>)</span> <em>The Mismeasure of Man</em> 中有一段非常有意思的讨论，谈到科学错误对 theory building 的有害作用。Gould 考察了关于种族智力差异的研究，并记录了支持种族差异的科学错误如何常常被忽视。错误往往是非对称地被发现的；当一个结果违背我们的偏见时，我们更有动力去复查它。</p></div></div><p>估计错误频率是一个 metascience 问题，多年来研究者一直尝试回答它。如果错误很频繁，那就说明我们需要改变政策和实践，以降低错误频率！不幸的是，数据不可得造成了一个问题：如果你一开始就无法检查计算，那么就很难判断计算是否错误。这里有一个处理这个问题的聪明办法。在标准 American Psychological Association (APA) 报告格式中，推断统计量必须报告三项信息：检验统计量、该检验的自由度，以及 <span class="math inline">\(p\)</span> 值（例如 <span class="math inline">\(t(18) = -0.74\)</span>, <span class="math inline">\(p = 0.47\)</span>）。然而，这些信息彼此冗余。因此，只要评估它们是否彼此对得上，就可以检查报告统计量的一致性——也就是说，从 <span class="math inline">\(t\)</span> 值和自由度 重新计算出来的 <span class="math inline">\(p\)</span> 值，是否与报告值一致。</p>
+<p><span class="citation" data-cites="bakker2011">Bakker 和 Wicherts (<a href="#ref-bakker2011" role="doc-biblioref">2011</a>)</span> 在 281 篇论文的样本上进行了这种统计一致性分析，发现约 18% 的统计结果报告有误。更令人担心的是，约 15% 的文章至少包含一个 decision error——也就是错误改变了所做推断方向的情况（例如，从显著变为不显著）。<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> <span class="citation" data-cites="nuijten2016">Nuijten 等 (<a href="#ref-nuijten2016" role="doc-biblioref">2016</a>)</span> 使用一种叫做 “statcheck” 的自动化方法<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> 来确认并扩展这项分析。他们检查了 1985–2013 年期间 250,000 多篇心理学论文中的 <span class="math inline">\(p\)</span> 值，发现大约一半论文至少包含一个错误的 <span class="math inline">\(p\)</span> 值！</p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;这印证了 Gould 的推测（见上方注释）：大多数导致 decision error 的报告错误都与研究者自己的假设方向一致。</p></div><div id="fn6"><p><sup>6</sup>&nbsp;Statcheck 现在可以作为 web app（<a href="http://statcheck.io" class="uri">http://statcheck.io</a>）和 R package <span class="citation" data-cites="nuijten2024">(<a href="#ref-nuijten2024" role="doc-biblioref">Nuijten 和 Epskamp 2024</a>)</span> 使用，所以你可以检查自己的 manuscript！</p></div></div><p>这些发现为文献中的错误数量提供了一个下界，并提示分析的 reproducibility 很可能非常重要。不过，它们只处理统计报告的一致性。如果我们尝试从头到尾重复整个 analysis pipeline，会发生什么？要在大规模上回答这个问题相当困难：第一，运行一次 reproducibility check 需要很长时间；第二，由于无法访问原始数据，对于大多数科学论文来说，检查 reproducibility 是不可能的。</p>
+<p>不过，几年前，我们中的一组人发现了一个检查 reproducibility 的机会：考察两本要求或鼓励数据共享的期刊上发表的研究。<span class="citation" data-cites="hardwicke2018b">Hardwicke 等 (<a href="#ref-hardwicke2018b" role="doc-biblioref">2018</a>)</span> 和 <span class="citation" data-cites="hardwicke2021d">Hardwicke, Bohn, 等 (<a href="#ref-hardwicke2021d" role="doc-biblioref">2021</a>)</span> 首先识别出共享数据的研究，然后进一步筛选出共享了<em>可复用</em>数据的研究（数据可访问、完整且可理解）。对于其中 60 篇文章，我们随后尝试复现论文中特定统计结果相关的数值。这个过程极其耗费人力，每篇文章通常需要 5–10 小时工作。结果令人担忧：只有大约三分之一文章中的目标数值，在没有原作者帮助的情况下完全可复现！在很多情况下，经过与原作者——有时是大量——通信之后，作者提供了原论文中没有报告的额外信息。在联系作者后，reproducibility 成功率提高到 62%（<a href="#fig-replication-hardwicke" class="quarto-xref">图&nbsp;<span>3.2</span></a>）。其余论文似乎有一些数值，无论是我们还是原作者都无法复现。重要的是，我们没有发现任何会严重削弱原文结论的不可复现模式；不过，其他 reproducibility 研究发现了令人不安的高数量 decision errors <span class="citation" data-cites="artner2020">(<a href="#ref-artner2020" role="doc-biblioref">Artner 等 2020</a>)</span>，尽管整体成功率稍高一些。</p>
+<div id="fig-replication-hardwicke" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="A plot with confidence intervals for before/after author contact.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-replication-hardwicke-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/replication/hardwicke2021.png" class="img-fluid figure-img" alt="A plot with confidence intervals for before/after author contact.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-replication-hardwicke-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3.2: 来自 <em>Cognition</em> 和 <em>Psychological Science</em> 中开放数据文章结果的 analytic reproducibility。来自 <span class="citation" data-cites="hardwicke2021d">Hardwicke, Bohn, 等 (<a href="#ref-hardwicke2021d" role="doc-biblioref">2021</a>)</span>，figure 1（CC BY 4.0 授权）。
+</figcaption>
+</figure>
+</div>
+<p>总之：transparency 是降低已发表文献中错误频率的关键要求。已发表文献中的报告错误和计算错误很常见，而识别这些错误依赖于发现本身是否 reproducible。如果数据不可得，那么错误通常就无法被发现。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="案例研究">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>案例研究
+</div>
+</div>
+<section id="open-science-collaboration" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="open-science-collaboration">Open Science Collaboration</h3>
+<p>大约在 2011 年，我们第一次教授 Experimental Methods 课程，课程模型基于我们和 Rebecca Saxe 合作设计过的一门课 <span class="citation" data-cites="frank2012">(<a href="#ref-frank2012" role="doc-biblioref">Frank 和 Saxe 2012</a>)</span>。这个想法是通过让学生运行 replications，向他们介绍研究的具体操作。一个叫 Brian Nosek 的人当时正在附近休 sabbatical；喝咖啡时我们得知，他正在启动一个雄心勃勃的项目，想要 replicate 2008 年发表在顶级心理学期刊上的一大批研究。</p>
+<p>那一年课上，我们从 Nosek 告诉我们的样本中选择 replication projects。其中四个项目执行得很好，并被课程助教提名纳入更大的项目。几年后，当最终 100 项 replication studies 完成时，我们看到了结果（<a href="#fig-replication-osc-2015" class="quarto-xref">图&nbsp;<span>3.3</span></a>）。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-replication-osc-2015" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A scatterplot with red (significant) and blue (not significant) points; blue points tend to be lower than red points.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-replication-osc-2015-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="003-replication_files/figure-html/fig-replication-osc-2015-1.png" class="img-fluid figure-img" style="width:75.0%" alt="A scatterplot with red (significant) and blue (not significant) points; blue points tend to be lower than red points.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-replication-osc-2015-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3.3: <span class="citation" data-cites="osc2015">Open Science Collaboration (<a href="#ref-osc2015" role="doc-biblioref">2015</a>)</span> 的结果。每个点表示样本中的一项研究，横轴位置表示原始 effect size，纵轴位置表示 replication effect size。点的大小表示估计的 statistical power。灰线表示完美 replication。
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>这篇最终产生的 metascience 论文，我们和其他人称之为“心理学中的 replication project”（RPP），对心理学家和更广泛的研究共同体都产生了很大影响；它既定义了心理学 metascience 研究的一个领域，也为多作者协作项目提供了模板 <span class="citation" data-cites="osc2015">(<a href="#ref-osc2015" role="doc-biblioref">Open Science Collaboration 2015</a>)</span>。但最引人注目的是结果：令人失望的是，只有大约三分之一 replications 得到了与原始研究相似的发现。其他研究得到的效应更小，而且在 replication sample 中不具有统计显著性（几乎所有原始研究都是显著的）。RPP 提供了第一个大规模证据，表明心理学文献中的 replicability 存在系统性问题。</p>
+<p>不过，RPP 的结果及其解释具有争议，也引发了大量讨论。尤其是，批评者指出原始研究与 replications 之间存在不同程度的 fidelity；replications 的 statistical power 不足、证据价值较低；对文献的抽样不具代表性；以及很难确定用哪些具体统计结果来判定 replication success <span class="citation" data-cites="gilbert2016 anderson2016 etz2016">(<a href="#ref-gilbert2016" role="doc-biblioref">Gilbert 等 2016</a>; <a href="#ref-anderson2016" role="doc-biblioref">Anderson 等 2016</a>; <a href="#ref-etz2016" role="doc-biblioref">Etz 和 Vandekerckhove 2016</a>)</span>。在我们看来，许多批评都有道理；你不能简单地把 RPP 的结果解释为文献中结果 replicability 的无偏估计，尽管论文标题好像暗示了这一点。 <!-- Confusingly, the title of the paper is "Estimating the reproducibility of psychological science", not "the replicability of psychological science". This caused terminological confusion for several years; it seems like at this point people have just decided it was a mistake. --></p>
+<p>尽管如此，RPP 的结果仍然重要而有说服力，并且不可否认地改变了心理学领域的方向。许多优秀研究都是这样的——它们有缺陷，但会激发后续研究来处理这些问题。对我们中的几个人来说，参与这个项目本身也具有转变意义，因为它让我们看到协作工作的力量。我们一起做出了一项我们任何一个人都不可能独立完成的研究，并且有可能对自己的领域产生影响。</p>
+</section>
+</div>
+</section>
+<section id="replication重复验证" class="level2 page-columns page-full" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="replication重复验证"><span class="header-section-number">3.2</span> Replication（重复验证）</h2>
+<p>除了核查论文原始的 analysis pipeline 之外，我们常常还想知道研究能否被 replicate——如果我们重复研究方法并获得新数据，会不会得到类似结果？引用 <span class="citation" data-cites="popper2005">Popper (<a href="#ref-popper2005" role="doc-biblioref">1959</a>, p.&nbsp;86)</span> 的说法，“The scientifically significant … effect may be defined as that which can be regularly [replicated] by anyone who carries out the appropriate experiment in the way prescribed.”</p>
+<p>开展 replications 可以有很多原因 <span class="citation" data-cites="schmidt2009">(<a href="#ref-schmidt2009" role="doc-biblioref">Schmidt 2009</a>)</span>。一个目标是验证：如果尽最大能力以完全相同的方式再次开展某项现有研究，是否还能得到它的结果。第二个目标是通过开展更大的 replication study，或者把 replication study 的结果与既有研究结合起来，获得对目标效应更精确的估计。第三个目标是考察当实验操纵以不同但仍符合理论的方式实施时，某个效应是否仍然存在。或者，我们可能想考察这个效应是否会在另一个 population 中持续存在。这类 replications 常常是在努力“replicate and extend”，无论是同一研究团队想开展一系列彼此递进的实验，还是一个新团队想建立在他们读过的一篇论文结果之上，这都很常见 <span class="citation" data-cites="rosenthal1990">(<a href="#ref-rosenthal1990" role="doc-biblioref">Rosenthal 1990</a>)</span>。</p>
+<p>metascience 文献中的大量讨论（以及随之而来的争论）都聚焦于第一个目标——简单验证。这个焦点如此强烈，以至于“replication”一词已经和怀疑主义，甚至对领域根基的攻击联系在一起。这种动态与许多科学哲学中赋予 replication 的角色相冲突；在那里，replication 被假定为“normal science”的典型组成部分。</p>
+<section id="replication-的概念框架" class="level3 page-columns page-full" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="replication-的概念框架"><span class="header-section-number">3.2.1</span> Replication 的概念框架</h3>
+<p>Replication 的关键挑战是 <strong>invariance</strong>——也就是 Popper 在上面引文中规定 replication 应当“按规定方式”开展。也就是说，对于某个特定观察，世界的哪些特征应当相对恒定？哪些特征被指定为产生效应的关键成分？Replication 在物理科学和生物科学中相对直接，部分原因是这些领域有预设的理论背景，使我们能够对 invariance 做出强推断。如果一位生物学家报告了关于某种生物特定细胞类型的观察，显微镜的颜色通常被假定不会影响这个观察。</p>
+<p>在心理学中，无论是对于实验程序还是样本，这些 invariances 都难以陈述得多。从程序上说，实验刺激的颜色应不应该影响被测量的效应？有时应该，有时不应该。<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> 然而，假设一个科学效应应当如何对实验室程序保持 invariant，已经很难；相比之下，假设这个效应应当如何跨不同人类 populations 保持 invariant，难度还要大得多！<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<!-- If color does not matter, how about the context of presentation for an experiment---should presentation to a participant at home on a web browser produce the same effect as presentation in a laboratory setting using custom software [@crump2013]?  -->
+<div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;在一项很有意思的研究中，<span class="citation" data-cites="baribault2018">Baribault 等 (<a href="#ref-baribault2018" role="doc-biblioref">2018</a>)</span> 提出了一种经验性理解心理学 invariances 的方法。他们以 subliminal priming effect 为模型系统，抽样了数千个“micro-experiments”，在这些实验中，实验程序的小参数被随机抽取。这些参数允许他们测量目标效应，并在这种无关变异上取平均。在他们的案例中，结果发现颜色并不重要。</p></div><div id="fn8"><p><sup>8</sup>&nbsp;在某种意义上，社会科学某些分支的研究项目，就是在理解人类认知中的 invariances。</p></div><div id="fn9"><p><sup>9</sup>&nbsp;如果 Toad 博士用英语而不是德语给出原始指导语，大概不会太不安——这也是我们一直担心的那些麻烦 invariances 之一！</p></div></div><p>这场讨论关系重大。如果 Frog 博士基于美国本科生发表了一个发现，而 Toad 博士随后在德国“replicates”了这个程序，那么如果效应大小不同或者效应消失，我们应该在多大程度上感到不安？<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Meta-researchers 制定了许多 replication taxonomies，试图量化两个实验之间的方法一致性程度。</p>
+<p>一些研究者试图区分 “direct replications”<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> 和 “conceptual replications”。Direct replications 试图复现先前研究的所有 salient features，直到实验者认为存在的那些 invariances 为止（例如油漆颜色或实验者性别）。相比之下，conceptual replications 通常是一些试图通过不同的操纵和/或测量操作化来检验同一假设的 paradigms。我们同意 <span class="citation" data-cites="zwaan2018">Zwaan 等 (<a href="#ref-zwaan2018" role="doc-biblioref">2018</a>)</span>: 把第二类实验标记为 “replication” 有点误导。更准确地说，所谓 conceptual replications 其实是对你理论同一部分的不同检验。这类检验可能极有价值，但它们服务的目标不同于 replication。</p>
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;这些有时也被称为 “exact replications”。我们认为这个术语会误导人，因为两个不同实验之间的相似性永远是在一个梯度上变化的，而你在这个连续体上从哪里切开，永远都是一个带有理论负载的决定。一个人的“exact”，可能就是另一个人的“inexact”。</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="事故报告">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>事故报告
+</div>
+</div>
+<section id="small-telescopes" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="small-telescopes">“Small Telescopes”</h3>
+<p>我们一直在讨论关于程序和样本的 invariance 问题，但还没有真正讨论关于研究统计结果的 invariance。我们在多大程度上可以认为两个统计结果是“相同的”？几种显而易见的指标，包括 RPP 使用的指标，都有重要局限 <span class="citation" data-cites="simonsohn2015">(<a href="#ref-simonsohn2015" role="doc-biblioref">Simonsohn 2015</a>)</span>。例如，如果一个发现统计显著而另一个不显著，它们的 effect sizes 实际上仍然可能彼此相当接近，部分原因是其中一个研究的样本量可能比另一个更大。或者，你也可能有两个显著发现，但二者的 effect sizes 却非常不同。</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-replication-telescopes" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot with confidence intervals for original (very wide) and replication 1 and 2 (very narrow and near zero).">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-replication-telescopes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="003-replication_files/figure-html/fig-replication-telescopes-1.png" class="img-fluid figure-img" style="width:60.0%" alt="A plot with confidence intervals for original (very wide) and replication 1 and 2 (very narrow and near zero).">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-replication-telescopes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3.4: <span class="citation" data-cites="schwarz1983">Schwarz 和 Clore (<a href="#ref-schwarz1983" role="doc-biblioref">1983</a>)</span> 的原始发现，以及两个样本量大得多的 replications。三个估计都包含 95% confidence interval，但两个 replication studies 的 confidence intervals 非常小。蓝色虚线显示原始研究能够合理检测到的最小效应。Based on <span class="citation" data-cites="simonsohn2015">Simonsohn (<a href="#ref-simonsohn2015" role="doc-biblioref">2015</a>)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>在一项经典研究中，<span class="citation" data-cites="schwarz1983">Schwarz 和 Clore (<a href="#ref-schwarz1983" role="doc-biblioref">1983</a>)</span> 报告说，参与者（<span class="math inline">\(N = 28\)</span>）在晴天比雨天给自己的生活满意度评分更高，这提示他们把对天气的短暂幸福感错误归因于更长期的生活满意度。然而，两个较新的研究考察了非常大的调查回答样本，得到的效应估计要小得多。（所有这些效应都经过标准化，因此它们可以用一个叫 Cohen’s <span class="math inline">\(d\)</span> 的指标放在同一尺度上；我们会在 <a href="005-estimation.html" class="quarto-xref"><span>章 5</span></a> 中更正式地介绍它。）在一项调查中，效应统计显著但极小；在另一项调查中，效应基本为零（<a href="#fig-replication-telescopes" class="quarto-xref">图&nbsp;<span>3.4</span></a>）。如果用 statistical significance 作为 replication success 的指标，你可能会倾向于说，第一项研究是成功 replication，第二项研究是失败 replication。</p>
+<p>Simonsohn 指出，这种解释说不通。他用研究样本量作为望远镜的类比来说明。按照这个类比，Schwarz 和 Clore 拥有一台很小的望远镜（也就是很小的样本量），他们把它指向某个方向，并声称观察到了一颗行星（也就是一个非零效应）。现在，当你用一台大得多的望远镜看过去时，结果可能发现那个位置<em>确实有</em>一颗行星（第一次 replication），也可能发现<em>没有</em>（第二次 replication）。但无论如何，原来的小望远镜根本没有足够 power 去看见那里究竟有什么。无论它们观察到的效应方向是否相同，这两项研究都没有 replicate 原始观察。</p>
+<p>沿着 Simonsohn 的例子，许多 replication success 指标被提出 <span class="citation" data-cites="mathur2020">(<a href="#ref-mathur2020" role="doc-biblioref">Mathur 和 VanderWeele 2020</a>)</span>。其中较好的指标会远离“单个 replication 是否成功可以用二元检验判定”的想法，转向比较两个效应，并判断它们是否看起来与同一个理论一致。<span class="citation" data-cites="gelman2018">Gelman (<a href="#ref-gelman2018" role="doc-biblioref">2018</a>)</span> 提出了 “time reversal” heuristic——与其把 replication 想成成功或失败，不如考虑一个替代世界：replication study 先被完成，原始研究随后才出现。</p>
+<p>如果我们放下原始研究具有优先性的想法，那么考虑多项实验中所有证据的总和会更有道理。用这种方法来看，天气误归因效应最多也只是人们总体生活满意度判断中的一个微小因素，即便曾经有一项小研究发现了较大的效应。</p>
+</section>
+</div>
+</section>
+<section id="replication-的-metascience元科学" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="replication-的-metascience元科学"><span class="header-section-number">3.2.2</span> Replication 的 metascience（元科学）</h3>
+<p>在 RPP 中，replication teams 主观报告说 39% 的 replications 是成功的，其中 36% 报告了与原始研究同方向的显著效应。这个估计有多 generalizable——更广泛地说，心理学研究到底有多 replicable？基于上面的讨论，我们希望你已经怀疑：至少在没有额外限定的情况下，这不是一个定义良好的问题。任何答案都必须说明这个主张的适用范围、所使用的 replication 定义，以及 replication success 的指标。另一方面，这个问题的不同<em>版本</em>已经催生了许多经验研究，帮助我们更好地理解 replication 问题的范围。</p>
+<!-- We'll review these briefly here because we think a good understanding of the metascience literature on replication can help us decide how worried we should be about the state of the psychology literature.  -->
+<p>许多后续关于 replication 的经验研究，都聚焦于特定子领域或期刊，目标是为特定领域的实践或问题提供信息。例如，<span class="citation" data-cites="camerer2016">Camerer 等 (<a href="#ref-camerer2016" role="doc-biblioref">2016</a>)</span> replicate 了 2011–2014 年期间两本顶级经济学期刊发表的所有 between-subject laboratory articles。他们发现，与原始研究同方向的显著效应 replication rate 为 61%，高于 RPP 中的比例，但低于基于其 statistical power 水平的朴素预期。另一项研究试图 replicate 2010–2015 年发表于 <em>Science</em> 和 <em>Nature</em> 的全部 21 个行为实验，发现显著效应的 replication rate 为 62% <span class="citation" data-cites="camerer2018">(<a href="#ref-camerer2018" role="doc-biblioref">Camerer 等 2018</a>)</span>。这项研究值得注意，因为他们采用了两步程序——在第一轮 replications 之后，他们会针对失败案例咨询原作者，并追求极大的样本量。因此，得到的估计较少受到原始 RPP 论文许多批评的影响。虽然这些类型的研究不能回答关于 RPP 的所有问题，但它们提示我们：即使在抽样和单项研究方案上都很谨慎，顶级实验的 replication rates 也没有我们希望的那么高。</p>
+<p>同一领域中的其他科学家常常能够预测一个实验什么时候会 fail to replicate。<span class="citation" data-cites="dreber2015">Dreber 等 (<a href="#ref-dreber2015" role="doc-biblioref">2015</a>)</span> 表明，prediction markets（参与者用少量真钱押注 replication outcomes 的市场）在总体上能够相当准确地估计 replication success。这个结果本身现在也已经被 replicate 了好几次 <span class="citation" data-cites="camerer2018">(e.g., 在前面描述的 <a href="#ref-camerer2018" role="doc-biblioref">Camerer 等 2018</a> 研究中)</span>。也许更令人惊讶的是，有一些证据表明，根据论文文本训练的机器学习模型也能预测 replication success <span class="citation" data-cites="yang2020 youyou2023">(<a href="#ref-yang2020" role="doc-biblioref">Yang, Youyou, 和 Uzzi 2020</a>; <a href="#ref-youyou2023" role="doc-biblioref">Youyou, Yang, 和 Uzzi 2023</a>)</span>，不过仍然需要更多工作来验证这些模型，并理解它们使用了哪些特征。更一般地说，这两条研究线索提示我们，也许可以分离出一些稳定因素，解释 replication success 或 failure。（下一节我们会更深入地考虑这些因素是什么。）</p>
+<p>虽然还需要更多工作才能得到关于 replicability 的 generalizable estimates，但合在一起看，metascience 文献确实让我们对应该期待什么有了更清晰认识。总体而言，对于社会心理学和认知心理学中一个普通实验的显著发现，在一次（well-powered）replication study 中得到显著结果的概率很可能约为 56%。此外，replication effect 平均可能约为原效应的 53% <span class="citation" data-cites="nosek2021">(<a href="#ref-nosek2021" role="doc-biblioref">Nosek 等 2022</a>)</span>。</p>
+<p>另一方面，这些大规模 replication studies 也有很大局限。除了少数例外，被选择用于 replication 的研究使用的都是较短的计算机化任务，而且大多属于社会心理学和认知心理学类别。进一步说，从 theory development 的角度看，也许最令人不安的是：它们只告诉我们某个特定实验效应是否能被 replicate。它们告诉我们的要少得多：这个效应本来要操作化的 construct 是否真实存在！我们会在本章最后一节回到 replication 和 theory construction 如何相互关联这一困难问题。</p>
+<p>有些人把从这些 metascience 研究总和中浮现出来的叙事称为 “replication crisis”。我们把它理解为对已发表文献预期的一次重大降温。你的朴素预期也许很合理：你可以读一篇典型期刊论文，从中选择一个实验，然后在自己的研究中 replicate 这个实验。不幸的是，这些文献的要点是：如果你真的尝试选择并 replicate 一个实验，你很可能会对结果感到失望。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="事故报告">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>事故报告
+</div>
+</div>
+<section id="对研究的后果对人的后果" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="对研究的后果对人的后果">对研究的后果，对人的后果</h3>
+<p>“Power posing” 是这样一个想法：采取更加开放、扩张的身体姿势，也可能改变你的自信。<span class="citation" data-cites="carney2010">Carney, Cuddy, 和 Yap (<a href="#ref-carney2010" role="doc-biblioref">2010</a>)</span> 告诉 42 名参与者，他们正在参加一项生理记录研究。随后，他们保持两个姿势，每个姿势一分钟。在一个 condition 中，姿势是扩张性的（例如，双腿打开、双手抱头）；在另一个 condition 中，姿势是收缩性的（例如，双臂和双腿交叉）。处于扩张姿势 condition 的参与者睾酮增加、唾液皮质醇（一种压力标记物）下降，他们在赌博任务中承担了更多风险，并且在问卷中报告自己更“in charge”。这个结果提示，一个两分钟的操纵就能带来显著的生理和心理变化——进而使 power posing 稳固地进入商业等领域推荐策略的集合。原始发表也推动了研究者职业生涯的上升，包括成为作者之一 Amy Cuddy 的一个极受欢迎 TED talk 中的核心证据。</p>
+<p>不过，后续研究质疑了这些发现。一项样本量更大的 replication study（<span class="math inline">\(N = 200\)</span>）没有发现 power posing 产生生理效应的证据，尽管它确实发现了一些对参与者自身信念的影响 <span class="citation" data-cites="ranehill2015">(<a href="#ref-ranehill2015" role="doc-biblioref">Ranehill 等 2015</a>)</span>。而且，一篇对已发表文献的综述提示，许多发现似乎都是某种 publication bias 的结果，因为其中有太多 <span class="math inline">\(p\)</span> 值非常接近 <span class="math inline">\(0.05\)</span> 阈值 <span class="citation" data-cites="simmons2017">(<a href="#ref-simmons2017" role="doc-biblioref">Simmons 和 Simonsohn 2017</a>)</span>。鉴于这些证据，replication study 的第一作者勇敢地公开声明，她不相信 “power pose” effects 是真实的 <span class="citation" data-cites="carney2016">(<a href="#ref-carney2016" role="doc-biblioref">Carney 2016</a>)</span>。</p>
+<p>从科学视角看，很容易把这个例子理解为科学生态系统自我纠正的案例。虽然很多人仍在引用最初的 power posing 研究，但我们怀疑这些问题在整个社会心理学共同体中已经广为人知，而且普通公众的总体兴趣也下降了。但这种叙事遮蔽了自我纠正过程对真实个体造成的影响，而这会提出一些伦理问题：我们应该用什么方式处理科学记录中的问题？</p>
+<p>围绕个别发现的辩论和讨论过程可能伤人而复杂。在 power posing 案例中，Cuddy 本人和这些发现紧密绑定，许多对发现的批评也变成了对个人的批评。一些评论者把 Cuddy 的名字当作低质量心理学结果的代称，可能是因为她很有名，也可能还因为她的性别和年龄。这些评论对 Cuddy 个人以及她的整体职业生涯都有伤害。 <!-- ^[For further reading, see ["When the Revolution Came for Amy Cuddy"](https://www.nytimes.com/2017/10/18/magazine/when-the-revolution-came-for-amy-cuddy.html).] --></p>
+<p>科学家应当 critique、reproduce 和 replicate 结果——这些都是 normal science 进展的一部分。但重要的是，要以一种对相关人员敏感的方式来做这些事。下面是一些礼貌且合乎伦理的行为准则：</p>
+<ul>
+<li>始终围绕工作沟通，而不是围绕个人。尽量使用针对被批评的分析或设计的具体语言，而不是针对做出分析或想出设计的人。</li>
+<li>避免使用预设负面意图的语言，例如“作者误导性地声称……”</li>
+<li>在你点击发送之前，请别人阅读你的论文、邮件、blogpost 或 tweet。预测别人会如何体验你写作的语气可能非常困难；读者可以帮助你做出判断。</li>
+<li>考虑先私下沟通，再公开沟通。正如 power posing 争论中的一位批评者 Joe Simmons 所说：“I wish I’d had the presence of mind to pick up the phone and call [before publishing my critique]” <span class="citation" data-cites="dominus2017">(<a href="#ref-dominus2017" role="doc-biblioref">Dominus 2017</a>)</span>。私人沟通并不总是必要（而且由于权力或地位不对称，也可能很困难），但它可能有帮助。</li>
+</ul>
+<p>正如我们将在下一章论证的那样，作为科学家，我们有伦理义务促进好的科学，并批评低质量科学。但我们也对同事和共同体负有责任：要善待彼此。</p>
+</section>
+</div>
+</section>
+</section>
+<section id="replication-failure重复验证失败的原因" class="level2 page-columns page-full" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="replication-failure重复验证失败的原因"><span class="header-section-number">3.3</span> Replication failure（重复验证失败）的原因</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="深入">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>深入
+</div>
+</div>
+<section id="context情境moderators-与-expertise专业经验" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="context情境moderators-与-expertise专业经验">Context（情境）、moderators 与 expertise（专业经验）</h3>
+<p>失败的 replications 有许多解释。Metascience 的好处在于，这些解释可以接受经验检验！</p>
+<p>我们先从这个想法开始：某个理论的具体实验操作化可能是 “context sensitive” 的，尤其是在社会心理学这类子领域中，因为它们的理论本来就会指向环境 context <span class="citation" data-cites="van-bavel2016">(<a href="#ref-van-bavel2016" role="doc-biblioref">Van Bavel 等 2016</a>)</span>。批评者曾针对 RPP 提出这个问题；其中有几项研究的原始实验材料是为某种文化 context 定制的，但随后被部署到另一种 context 中，可能因为不匹配而导致失败 <span class="citation" data-cites="gilbert2016">(<a href="#ref-gilbert2016" role="doc-biblioref">Gilbert 等 2016</a>)</span>。</p>
+<p>Context sensitivity 看起来是一个很好的解释，因为在某种意义上，它<em>必然</em>是对的。如果实验 context 包含了我们所有人都拥有的庞大学习联结、实践和信念网络，那么毫无疑问，实验材料会在某种程度上触及这个 context。例如，如果你的实验依赖 <em>doctor</em> 和 <em>nurse</em> 概念之间的联结，你就会预期这个实验在过去会以不同方式运行，因为那时 <em>nurse</em> 的含义更接近 <em>nanny</em> <span class="citation" data-cites="ramscar2016">(<a href="#ref-ramscar2016" role="doc-biblioref">Ramscar 2016</a>)</span>。</p>
+<p>另一方面，作为对具体 replication failures 的解释，context sensitivity 的表现并不好。“ManyLabs” 项目是一系列 replication projects，其中<em>多个</em>实验室独立尝试 replicate 若干原始研究。（相比之下，在 RPP 及类似研究中，每个原始研究只进行一次 replication。）一些 Many Labs 项目评估了不同实验室之间 replication success 的变异。在 ManyLabs 2 中，<span class="citation" data-cites="klein2018b">Klein 等 (<a href="#ref-klein2018b" role="doc-biblioref">2018</a>)</span> replicate 了 28 个发现，分布在 125 个不同样本和超过 15,000 名参与者中。ManyLabs 2 几乎没有支持 context sensitivity hypothesis 作为 replication failure 的解释。一般来说，当效应 fail to replicate 时，无论是面对面实施还是在线实施，它们都会失败，而且这些失败在许多文化和实验室中保持一致。 <!-- The size of effects in successful replications were modulated a bit by contextual factors, but heterogeneity in general was not high.  --></p>
+<p>另一方面，一篇对若干 Many Labs 风格 replication projects 的综述在重新分析后指出，即便 replication protocols 彼此非常相似，population effects 在不同 replication labs 之间也存在差异 <span class="citation" data-cites="olsson2020heterogeneity errington2021investigating">(<a href="#ref-olsson2020heterogeneity" role="doc-biblioref">Olsson-Collentine, Wicherts, 和 Assen 2020</a>; <a href="#ref-errington2021investigating" role="doc-biblioref">Errington 等 2021</a>)</span>。所以，context sensitivity 几乎肯定存在——我们会在下一节回到 generalizability、context 和 invariance 的更广泛问题——但到目前为止，我们还没有识别出能够可靠影响 replication success 的具体 context sensitivity 形式。</p>
+<!-- ![Forest plot showing effect sizes and confidence intervals for all of the studies in the paper as well as the two original studies being replicated and the meta-analytic effect (red diamond).](images/replication/lewis-data.png){#fig-replication-lf2} -->
+<p>这些观察——即（1）direct replications 在成功程度上存在差异，但（2）我们无法识别具体的 contextual moderators——合在一起提示，可能存在 “hidden moderators”。也就是说，当面对一项成功的原始研究和一次失败的 replication 时，可能有某个或某些未知因素 moderates 了效应。</p>
+<p>我们个人有过几次经历，支持 hidden moderators 这个想法。例如，在 <span class="citation" data-cites="lewis2016">Lewis 和 Frank (<a href="#ref-lewis2016" role="doc-biblioref">2016</a>)</span> 中，我们未能 replicate 一个简单的分类实验。随后，我们对刺激和指导语做了一系列迭代修改，例如改变刺激的颜色和图案（<a href="#fig-replication-lf" class="quarto-xref">图&nbsp;<span>3.5</span></a>），最终得到一个更大（且统计显著）的效应——尽管仍然远小于原始效应。不过关键在于，我们对程序做出的每一次改变，都只带来了很小的效应变化；要准确弄清楚究竟是哪一次改变造成了差异，我们需要数千名参与者。（如果你在记账，这里就是一个刺激颜色<em>确实</em>影响实验结果的案例！）</p>
+<div id="fig-replication-lf" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Sets of multi-colored shapes that are either two intersecting arrows or a crossed out circle.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-replication-lf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/replication/lewis-stims.png" class="img-fluid figure-img" style="width:70.0%" alt="Sets of multi-colored shapes that are either two intersecting arrows or a crossed out circle.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-replication-lf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3.5: <span class="citation" data-cites="lewis2016">Lewis 和 Frank (<a href="#ref-lewis2016" role="doc-biblioref">2016</a>)</span> 所描述一系列实验中的刺激（见 <a href="https://github.com/mllewis/xtSamp" class="uri">https://github.com/mllewis/xtSamp</a>）。
+</figcaption>
+</figure>
+</div>
+<p>另一个常被引用的 replication failure 解释是实验者 expertise <span class="citation" data-cites="schwarz2014">(e.g., <a href="#ref-schwarz2014" role="doc-biblioref">Schwarz 和 Strack 2014</a>)</span>。按照这个假设，replications 会失败，是因为执行 replication 的研究者没有足够 expertise 来开展研究。和 context sensitivity 一样，这个解释在某些 replications 中几乎肯定是对的。在我们自己的工作中，我们反复做过一些实验，而这些实验失败是因为我们自己的 incompetence！</p>
+<p>然而，作为对 metascience 发现模式的解释，expertise hypothesis 并没有获得经验支持。首先，团队 expertise 并不是 RPP 中 replication success 的预测变量 <span class="citation" data-cites="bench2017">(cf. <a href="#ref-bench2017" role="doc-biblioref">Bench 等 2017</a>)</span>。更有说服力的是，Many Labs 5 从 RPP 中选取了十个未成功 replicate 的发现，并系统评估对 protocols 进行正式专家同行评审（包括由原始研究作者评审）是否会带来更大的 effect sizes。尽管样本量巨大、审查过程极为彻底，经过审查的 protocols 相对于 RPP 中使用的原始 protocol，效应几乎没有变化 <span class="citation" data-cites="ebersole2020">(<a href="#ref-ebersole2020" role="doc-biblioref">Ebersole 等 2020</a>)</span>。</p>
+<p>Context、moderators 和 expertise 看起来都是解释个别 replication failures 的合理因素。当然，我们应当期待它们具有解释力！但如果这些假设要以能够影响我们评估 metascientific evidence 的方式被操作化，它们就必须接受经验评估，而不是被不加批判地接受。当这类评估真的开展时，它们并没有支持这些因素发挥很大作用。</p>
+</section>
+</div>
+<p>本章的一般论点是：experimental psychology 中并非一切都没问题，因此我们需要改变方法实践，避免产生不可复现论文和不可重复结果这样的负面后果。为了这个目标，我们一直在呈现关于 reproducibility 和 replicability 的 metascientific evidence。但这些证据至少可以说是颇具争议！像 RPP 这样的大规模 replication studies——或者更小规模、针对 “power posing” 这类效应的个别 replications——真的能导向“我们的方法需要改变”这一结论吗？或者，有没有理由认为较低的 replication rate 实际上也可以与一种累积性的、积极的心理学图景相容？</p>
+<p>一种论证路径通过科学变化的动态来处理这个问题。这个论证有许多版本，其中一个由 <span class="citation" data-cites="wilson2020">Wilson, Harris, 和 Wixted (<a href="#ref-wilson2020" role="doc-biblioref">2020</a>)</span> 提出。其想法是，心理学进展包含一个两步过程：候选想法先通过小而 noisy 的实验被 “screened”，这些实验揭示出有希望但暂时性的想法；随后这些想法再由大规模 replications 来 “confirmed”。在这种观点下，发现许多随机选择的发现无法在大规模 replications 中站住脚，是 business as usual；因此我们不应该因为 RPP 这样的结果而感到痛苦。进展的关键，是找到少数确实<em>能</em>站住脚的发现，这会导向新的研究领域。我们不确定这种观点是否很好地描述了当前实践，也不确定它是否是科学进步的良好规范目标，但我们这里不会聚焦批评 Wilson 等人的论证。相反，既然这本书是写给正在接受训练的实验者的，我们假定<em>你</em>并不希望自己的实验成为 noisy screening procedure 产生的 false positive，无论你对其余文献有什么感受！</p>
+<p>在 RPP 和后续 metascience 研究中，<span class="math inline">\(p\)</span> 值更低、effect sizes 更大、样本量更大的原始研究更有可能成功 replicate <span class="citation" data-cites="yang2020">(<a href="#ref-yang2020" role="doc-biblioref">Yang, Youyou, 和 Uzzi 2020</a>)</span>。从理论视角看，这个结果是可以预期的，因为 <span class="math inline">\(p\)</span> 值字面上捕捉的是在无效应的 null hypothesis 下，数据（或任何“更极端”数据）的概率。因此，更低的 <span class="math inline">\(p\)</span> 值应该表示 spurious result 的概率更低。<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> 在某种意义上，replication metascience 文献的根本问题是：为什么 <span class="math inline">\(p\)</span> 值<em>不是</em>更好的 replicability 预测变量！例如，<span class="citation" data-cites="camerer2018">Camerer 等 (<a href="#ref-camerer2018" role="doc-biblioref">2018</a>)</span> 基于效应和样本量计算了预期成功 replications 数量——而他们实际成功 replications 的比例显著低于这个数。<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> <!-- Such heterogeneity is not uncommon, even if it is relatively small, in multi-site replications in which heterogeneity can be directly estimated [@ebersole2020, olsson2020heterogeneity]. As such, the metrics will typically underestimate replication success when there is heterogeneity within pairs [@mathur2020]. --></p>
+<div class="no-row-height column-margin column-container"><div id="fn11"><p><sup>11</sup>&nbsp;在 <a href="006-inference.html" class="quarto-xref"><span>章 6</span></a> 中，我们会对 <span class="math inline">\(p &lt; 0.05\)</span> 说很多；但现在，我们基本上只把它当作一种特定研究结果。</p></div><div id="fn12"><p><sup>12</sup>&nbsp;这个计算和大多数其他 replication success 指标一样，假设 replication 和原始研究的底层 population effect 完全相同。这是一个局限，因为可能存在未测量的 moderators，在两个估计之间产生真正有实质意义的差异。</p></div><div id="fn13"><p><sup>13</sup>&nbsp;这些术语基本上指的是同一类问题，而且在文献中使用得并不精确。<span class="math inline">\(p\)</span>-hacking 是一个非正式术语，听起来像是你知道自己正在做坏事；有时人们确实知道，有时并不知道。Questionable research practices 是一个听起来更正式的术语，原则上足够模糊，可以涵盖许多伦理失误，但实践中常被用来讨论 <span class="math inline">\(p\)</span>-hacking。除非 <span class="math inline">\(p\)</span>-hacking 的意图非常明确，否则我们更偏好两个笨一点但更准确的术语：“data-dependent decision-making” 和 “undisclosed analytic flexibility”。这些术语更精确地描述了实际实践：在看过数据之后尝试许多不同做法，通常又不报告全部做法。</p></div></div><p>一个解释是，论文中呈现的统计证据常常极大夸大了研究中的真实证据。这是因为两个普遍而关键的问题：analytic flexibility（也称为 <strong><span class="math inline">\(p\)</span>-hacking</strong> 或 <strong>questionable research practices</strong>）和 <strong>publication bias</strong>。<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+<p>Publication bias 指的是科学家和其他利益相关方（如期刊）相对偏好“work”的实验，而不是不 work 的实验；这里 “work” 通常被定义为在 <span class="math inline">\(p&lt;0.05\)</span> 下得到显著结果。由于这种偏好，阳性（统计显著）结果通常更容易发表。阴性结果的相对缺席会在文献中造成偏差。直觉上，这种偏差会导致文献充满 <span class="math inline">\(p&lt;0.05\)</span> 的论文。阴性发现则会留在所谓的 “file drawer” 中，未被发表 <span class="citation" data-cites="rosenthal1979">(<a href="#ref-rosenthal1979" role="doc-biblioref">Rosenthal 1979</a>)</span>。<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> 在 publication bias 程度很高的文献中，许多发现会是 spurious，因为实验者只是运气好，发表了那个 “worked” 的研究，即便这种成功只是由随机变异造成。在这种情况下，这些 spurious findings 不会 replicable，因此文献的整体 replicability rate 会降低。<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn14"><p><sup>14</sup>&nbsp;有一个估计是，96% 的（未预注册）论文报告阳性发现 <span class="citation" data-cites="scheel2021">(<a href="#ref-scheel2021" role="doc-biblioref">Scheel, Schijen, 和 Lakens 2021</a>)</span>。我们会分别在 chapters <a href="011-prereg.html" class="quarto-xref"><span>11</span></a> 和 <a href="016-meta.html" class="quarto-xref"><span>16</span></a> 中，对 analytic flexibility 和 publication bias 说更多。</p></div><div id="fn15"><p><sup>15</sup>&nbsp;Publication bias 场景背后的数学让一些观察者觉得不太可信：大多数心理学家并不会运行几十项研究，然后每组只报告其中一个 <span class="citation" data-cites="nelson2018">(<a href="#ref-nelson2018" role="doc-biblioref">Nelson, Simmons, 和 Simonsohn 2018</a>)</span>。相反，更典型的场景是开展许多不同分析，然后报告最成功的那个；这会产生与 publication bias 类似的一些效果——促进 spurious variation——但不需要有一整个装满失败研究的 file drawer。</p></div></div><p>我们认为，publication bias 及其更普遍的近亲 analytic flexibility，很可能是较低 replicability 的关键驱动因素。我们承认，支持这一假设的 metascientific evidence 并不完全明确，但这是因为没有可靠方法能够在一篇具体论文中诊断 analytic flexibility——因为我们几乎永远无法重构数据收集和分析过程中做出的精确选择！另一方面，分析特定文献中的 publication bias 指标是可能的，而且有好几个案例中，publication bias diagnostics 似乎与 replication failure 相伴出现。例如，在前面描述的 “power posing” 例子中，<span class="citation" data-cites="simmons2017">Simmons 和 Simonsohn (<a href="#ref-simmons2017" role="doc-biblioref">2017</a>)</span> 指出整个文献中存在强烈的 analytic flexibility 证据，并因此得出结论：该文献没有 evidential value。而在 “money priming”（偶然暴露于关于金钱的图像或文本，被假设会导致政治态度变化）的案例中，强有力的 publication bias 证据 <span class="citation" data-cites="vadillo2016">(<a href="#ref-vadillo2016" role="doc-biblioref">Vadillo, Hardwicke, 和 Shanks 2016</a>)</span> 伴随着一连串失败的 replications <span class="citation" data-cites="rohrer2015">(<a href="#ref-rohrer2015" role="doc-biblioref">Rohrer, Pashler, 和 Harris 2015</a>)</span>。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="事故报告">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>事故报告
+</div>
+</div>
+<section id="analytic-flexibility分析灵活性-揭示了青春永驻之泉" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="analytic-flexibility分析灵活性-揭示了青春永驻之泉">Analytic flexibility（分析灵活性） 揭示了青春永驻之泉</h3>
+<p>按照 Joseph Simmons、Leif Nelson 和 Uri Simonsohn <span class="citation" data-cites="simmons2018">(<a href="#ref-simmons2018" role="doc-biblioref">2018</a>)</span> 自己的说法，他们写关于 “false positive psychology” 的论文 <span class="citation" data-cites="simmons2011">(<a href="#ref-simmons2011" role="doc-biblioref">Simmons, Nelson, 和 Simonsohn 2011</a>)</span>，是为了获得某种宣泄。他们厌倦了那些利用数据分析灵活性来产生 <span class="math inline">\(p &lt; 0.05\)</span> 结果的研究；这些结果虽然被显著性加持，却不太可能反映 replicable effects。他们把这种实践称为 <span class="math inline">\(p\)</span>-hacking：尝试不同做法，让你的 <span class="math inline">\(p\)</span> 值低于 <span class="math inline">\(0.05\)</span>。</p>
+<p>他们的论文报告了一个简单实验：他们让参与者听 Beatles 的歌曲 “When I’m 64”，或者一首 control song，然后要求他们报告出生日期 <span class="citation" data-cites="simmons2011">(<a href="#ref-simmons2011" role="doc-biblioref">Simmons, Nelson, 和 Simonsohn 2011</a>)</span>。这个操纵产生了显著的一年半返老还童效应。听 Beatles 似乎让参与者变年轻了！</p>
+<p>这个结果当然是不可能的。但作者确实制造出了两组之间的统计显著差异，而按照定义，这就是一个 <strong>false positive</strong>——统计检验指示两组存在差异，但实际上并不存在差异。实质上，他们是通过尝试许多可能分析，并 “cherry-picking” 其中产生阳性结果的那个来做到这一点的。当然，这种做法会使统计检验本应帮助你做出的推断失效。他们遵循的几种实践包括：</p>
+<ul>
+<li>选择性报告 dependent measures（例如，收集多个测量，但只报告一个）</li>
+<li>选择性删除 manipulation conditions</li>
+<li>先进行统计检验；如果没有看到显著发现，再测试额外参与者</li>
+<li>如果把性别作为 covariate 加入分析会产生显著效应，就在分析中调整性别</li>
+</ul>
+<p>作者在返老还童研究中遵循的许多实践，在研究文献中曾经（也许现在仍然！）很常见。<span class="citation" data-cites="john2012">John, Loewenstein, 和 Prelec (<a href="#ref-john2012" role="doc-biblioref">2012</a>)</span> 调查了研究心理学家，询问他们所谓 questionable research practices 的流行程度。大多数参与者承认自己遵循过其中一些实践——包括返老还童研究中使用的完全相同实践。</p>
+<p>对领域中的很多人来说，“false positive psychology” 是一个激发行动的时刻，使他们意识到常见实践如何会导向完全 spurious（甚至不可能）的结论。正如 Simmons、Nelson 和 Simonsohn 在文章中写到的 <span class="citation" data-cites="simmons2018">(<a href="#ref-simmons2018" role="doc-biblioref">2018</a>, p.&nbsp;255)</span>：“Everyone knew [<span class="math inline">\(p\)</span>-hacking] was wrong, but they thought it was wrong the way it is wrong to jaywalk. We decided to write ‘False-Positive Psychology’ when simulations revealed that it was wrong the way it is wrong to rob a bank.”</p>
+</section>
+</div>
+</section>
+<section id="replicationtheory-building-与-open-science" class="level2 page-columns page-full" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="replicationtheory-building-与-open-science"><span class="header-section-number">3.4</span> Replication、theory building 与 open science</h2>
+<p>实验心理学文献中的 reproducibility 和 replicability 的经验测量值都很低——低于我们原本可能朴素怀疑的程度，也低于我们希望的水平。我们该如何处理这些问题？这些问题又如何与建立理论的目标相互作用？在本节中，我们讨论 replication 与 theory 之间的关系，以及开放、透明的研究实践可以发挥什么作用。</p>
+<section id="replication-与-theory-之间的互惠关系" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="replication-与-theory-之间的互惠关系"><span class="header-section-number">3.4.1</span> Replication 与 theory 之间的互惠关系</h3>
+<p>Analytic reproducibility 是 theory building 的前提，因为如果理论的双重目标是解释和预测实验测量，那么充满错误的文献会破坏这个目标。如果文献中报告的所有数值中有一部分只是简单、无意的 typo，那么这种情况会制造额外的噪声——无关的随机变异——妨碍我们获得足够精确的测量来区分理论。但情况可能更糟：错误更常朝着有利于作者自身假设的方向发生。因此，irreproducibility 不仅会降低我们的精确度，也会增加文献中的 bias，从而阻碍我们基于数据公平评估理论。</p>
+<p>Replicability 同样是 theory building 的基础。关于科学如何运作，有许多不同理解；在其中一系列观点中，科学理论都要根据它们与世界的关系来评估。理论必须得到具体观察的支持，或者至少没有被具体观察 falsified。某些观察可能本质上无法重复（例如，某个天体物理事件也许一个人的一生只能观察到一次）。但对于实验室科学——实验心理学至少在某种程度上也可以算在其中——对理论进行独立且怀疑性的评估，要求测量具有 repeatability。</p>
+<p>一些作者（追随哲学家 Heraclitus）主张 “You Cannot Step into the Same River Twice” <span class="citation" data-cites="mcshane2014">(<a href="#ref-mcshane2014" role="doc-biblioref">McShane 和 Böckenholt 2014</a> 的标题)</span>——意思是心理学实验的环境和 context 在不断变化，没有任何观察会与另一个观察完全相同。从哲学角度看，这当然在技术上为真。但这正是 theory 进入的地方！正如我们上面讨论的，我们的理论会提出那些 invariances，使我们能够把相似观察归为一类，并在它们之间 generalize。</p>
+<p>在这个意义上，replication 对 theory 至关重要，但 theory 对 replication 也至关重要。如果没有关于某个 outcome 中“什么重要”的理论，我们确实就是在踏入一条不断变化的河流。但一个好的理论能够把我们的预期集中到小得多的一组因果关系上，使我们能够对哪些因素应当、哪些因素不应当影响实验结果做出强预测。回到前面讨论过的一个例子：刺激颜色是否应当影响实验结果？我们的理论可以告诉我们，在一个 priming experiment 中它不应当重要 <span class="citation" data-cites="baribault2018">(<a href="#ref-baribault2018" role="doc-biblioref">Baribault 等 2018</a>)</span>，但在一个 generalization experiment 中它应当重要 <span class="citation" data-cites="lewis2016">(<a href="#ref-lewis2016" role="doc-biblioref">Lewis 和 Frank 2016</a>)</span>。</p>
+</section>
+<section id="决定何时-replicate以最大化-epistemic-value认识价值" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="决定何时-replicate以最大化-epistemic-value认识价值"><span class="header-section-number">3.4.2</span> 决定何时 replicate，以最大化 epistemic value（认识价值）</h3>
+<p>作为一个科学共同体，我们应该多重视 replication？用 <span class="citation" data-cites="newell1973">Newell (<a href="#ref-newell1973" role="doc-biblioref">1973</a>)</span> 的话说，“You Can’t Play 20 Questions with Nature and Win.” 一系列经过良好 replication 的测量，本身并不构成理论。Theory construction 是它自己的重要活动。我们在这里试图说明，一个 reproducible 且 replicable 的文献，是 theory building 的关键基础。但这并不一定意味着你必须一直做 replications。</p>
+<p>更一般地说，任何科学共同体都需要在探索新现象和确认先前报告的效应之间做权衡。在一篇发人深省的分析中，<span class="citation" data-cites="oberauer2019">Oberauer 和 Lewandowsky (<a href="#ref-oberauer2019" role="doc-biblioref">2019</a>)</span> 提出，也许 replications 也不是检验理论假设的最佳方式。在他们的分析中，如果你没有理论，那么尝试发现新现象并随后 replicate 它们是有道理的。如果你<em>有</em>理论，你应该把精力花在检验新预测上，而不是在多次 replications 中重复同一个检验。像 <span class="citation" data-cites="oberauer2019">Oberauer 和 Lewandowsky (<a href="#ref-oberauer2019" role="doc-biblioref">2019</a>)</span> 这样的分析可以为我们如何分配科学努力提供指导。</p>
+<p>本书的目标与 metascientists 思考科学应如何开展的一般目标有所不同。一旦作为研究者的<em>你</em>决定做某个特定实验，我们认为你会想最大化它的科学价值，因此会希望它是 replicable 的。但我们并不是在建议你一定要做一项 replication study。是否 replicate 涉及许多考量——不仅包括你是否在尝试收集关于某个现象的证据，也包括你是否在尝试掌握与该现象相关的技术和 paradigms。正如我们在本章开头所说，并非所有 replication 都以验证为目的；作为研究者，你可以基于信息做出决定，判断哪种实验策略最适合自己。</p>
+</section>
+<section id="open-science开放科学" class="level3 page-columns page-full" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="open-science开放科学"><span class="header-section-number">3.4.3</span> Open science（开放科学）</h3>
+<p><strong>Open science movement</strong> 在某种程度上是对 reproducibility 和 replicability 挑战的回应——更准确地说，是一组回应。Open science（以及现在更宽泛的 <strong>open scholarship</strong>）运动是一个宽大的伞状概念（<a href="#fig-replication-umbrella" class="quarto-xref">图&nbsp;<span>3.6</span></a>），但在本书中，我们把 open science 理解为一组围绕 transparency 和 verifiability 在科学实践中的中心角色组织起来的信念、研究实践、结果和政策。<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> 这一运动的核心是 “nullius in verba”（British Royal Society 的座右铭，大致意思是“不要只相信任何人的话”）这一想法。<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn16"><p><sup>16</sup>&nbsp;Open science 伞状概念的另一部分，是通过开放科学访问来使科学过程更加民主化。这个过程既包括去除访问科学文献的障碍，也包括努力去除科学训练的障碍——尤其是为那些在科学中历史上代表性不足的群体去除障碍。希望这些过程能增加参与科学的人群，也增加贡献给科学的 perspectives 范围。我们认为这些变化并不比 open science movement 中的 transparency 面向更不重要，尽管它们与当前关于 reproducibility 和 replicability 的讨论关系更间接。</p></div><div id="fn17"><p><sup>17</sup>&nbsp;至少这是一个合理的意译；<span class="citation" data-cites="gould1991">Gould (<a href="#ref-gould1991" role="doc-biblioref">1991</a>)</span> 的一封信中对 Horace 这句话真正意思有一些很有意思的讨论。</p></div><div id="fig-replication-umbrella" class="quarto-float quarto-figure quarto-figure-center anchored" alt="An umbrella labelled open science over open scholarship/access/source/data, equity diversion and inclusion, citizen science.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-replication-umbrella-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/replication/umbrella.png" class="img-fluid figure-img" alt="An umbrella labelled open science over open scholarship/access/source/data, equity diversion and inclusion, citizen science.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-replication-umbrella-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3.6: Open science 的宽大伞状结构（adapted from an image created for the Stanford Lane Library Blog）。
+</figcaption>
+</figure>
+</div></div>
+<p>Transparency initiatives 对确保 reproducibility 至关重要。正如上面讨论的，如果没有数据共享，你甚至无法评估 reproducibility。Code sharing 可以更进一步帮助 reproducibility，因为代码会把数据分析中涉及的精确计算表达得比论文中常见的文字描述明确得多 <span class="citation" data-cites="hardwicke2018b">(<a href="#ref-hardwicke2018b" role="doc-biblioref">Hardwicke 等 2018</a>)</span>。此外，正如我们将在 <a href="013-management.html" class="quarto-xref"><span>章 13</span></a> 中讨论的，准备材料以便共享所涉及的一组实践，本身也可以通过带来更好的研究数据、材料和代码组织实践，促进 reproducibility。</p>
+<p>Transparency 也在推进 replicability 方面发挥重要作用。这一点一开始可能并不显然——为什么公开分享东西会带来更 replicable 的实验？——但它是本书的主要论点之一，所以我们会稍微展开。下面是几条 transparent practices 导致更高 replication rates 的路径。</p>
+<ol type="1">
+<li><p>共享实验材料使得 replications 能够紧密遵循原始研究方法。对许多 replications 的一种批评是，它们在关键方面不同于原始研究。有时这些偏离是有意的，但在另一些情况下，仅仅是因为 replicators 无法使用原始实验材料。共享材料可以解决这个问题。</p></li>
+<li><p>共享抽样和分析计划，使得 design 和 analysis 的关键方面可以被 replicate；这些方面在文字描述中可能并不清楚，例如 exclusion criteria 或 data preprocessing 的细节。</p></li>
+<li><p>通过 preregistration 共享 analytic decision-making，可以减少 <span class="math inline">\(p\)</span>-hacking 和其他可能引入 bias 的实践。原始研究中的统计证据强度，是后续研究中 replicability 的预测变量。如果原始研究经过 preregistered，它们更可能报告不受 questionable research practices 膨胀影响的效应。</p></li>
+<li><p>Preregistration 还可以澄清 confirmatory 和 exploratory findings 之间的区别，帮助后续实验者更有依据地判断哪些效应可能是好的 replication targets。</p></li>
+</ol>
+<p>基于所有这些原因，我们相信 open science practices 可以在提高 reproducibility 和 replicability 方面发挥关键作用。</p>
+</section>
+<section id="一场危机" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="一场危机"><span class="header-section-number">3.4.4</span> 一场危机？</h3>
+<p>那么，是否存在一场 “replication crisis”？ “Crisis” 的常见意思是“一段困难时期”。我们在本章回顾的数据提示，心理学文献的 reproducibility 和 replicability 确实存在真实问题。但没有证据表明情况变得更糟。如果说有什么的话，我们对过去十年中实践发生的变化感到乐观。所以在这个意义上，我们不确定 crisis narrative 是否站得住脚。</p>
+<p>另一方面，对 <span class="citation" data-cites="kuhn1962">Kuhn (<a href="#ref-kuhn1962" role="doc-biblioref">1962</a>)</span> 来说，“crisis” 这个术语有特殊含义：它是一个科学领域中由某个 paradigm 失败引发的强烈不确定时期（<a href="002-theories.html" class="quarto-xref"><span>章 2</span></a>）。Crisis 通常预示着 paradigm shift，新的方法和现象会走到前台。</p>
+<p>在这个意义上，replication crisis 叙事并不与其他 crisis narratives 互斥，包括 “generalizability crisis” <span class="citation" data-cites="yarkoni2020">(<a href="#ref-yarkoni2020" role="doc-biblioref">Yarkoni 2020</a>)</span> 和 “theory crisis” <span class="citation" data-cites="oberauer2019">(<a href="#ref-oberauer2019" role="doc-biblioref">Oberauer 和 Lewandowsky 2019</a>)</span>。所有这些都是对 status quo 不满的症状。我们也有这种不满！我们写这本书，是为了鼓励实验方法和实践进一步改变，以改善 reproducibility 和 replicability outcomes——其中许多改变由被称为 “open science” 的更宽泛理念集合推动。这些变化也许不会在 Kuhn 意义上导致 paradigm shift，但我们希望它们最终会带来改善。在这个意义上，我们认为同意那些说 “replication crisis” 已经带来 “credibility revolution” 的人 <span class="citation" data-cites="vazire2018">(<a href="#ref-vazire2018" role="doc-biblioref">Vazire 2018</a>)</span>。</p>
+</section>
+</section>
+<section id="本章小结重复验证" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="本章小结重复验证"><span class="header-section-number">3.5</span> 本章小结：重复验证</h2>
+<p>在本章中，我们介绍了 reproducibility 和 replicability 这两个相互关联的概念：前者是从同一分析中得到相同数字，后者是从新数据集中得到相同结论。二者都是累积性科学文献的关键前提，但 metascience 文献提示，已发表文献中 reproducibility 和 replicability 的比例都远低于我们希望的水平。低 reproducibility 的一个强候选解释很简单：代码和数据很少随已发表研究一起共享。较低 replicability 更难解释，但我们最好的猜测是 analytic flexibility（“<span class="math inline">\(p\)</span>-hacking”） 至少负有部分责任。在我们的理解中，replication 是一种用于理解科学文献状态的 metascientific tool，而不是目的本身。相反，我们把 open science movement——一个聚焦科学过程中 transparency 作用的运动——视为回应 reproducibility 和 replicability 问题的有希望路径。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="讨论问题">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>讨论问题
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>你会如何设计一个实验 context sensitivity 的测量？想一个可以事后应用于实验描述（例如读论文时）的测量，使你能够拿一组实验并标注它们在某个尺度上有多 context-sensitive。</p></li>
+<li><p>使用你上面设计的测量。你会如何检验这个测量是否真的以非循环的方式捕捉了 context sensitivity？什么会是 context sensitivity 的 “objective measure”？</p></li>
+<li><p>你认为 reproducibility failures 中有多大比例来自实验者的 questionable practices，而不是普通错误？你会如何检验你的假设？</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="阅读材料">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>阅读材料
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>关于 <span class="math inline">\(p\)</span>-hacking 这一想法，仍然非常易读且有趣的入门材料：Joseph P. Simmons, Leif D. Nelson, and Uri Simonsohn. <span class="citation" data-cites="simmons2011">(<a href="#ref-simmons2011" role="doc-biblioref">2011</a>)</span>. “False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant.” <em>Psychological Science</em> 22 (11):1359–1366. <a href="https://doi.org/10.1177/0956797611417632" class="uri">https://doi.org/10.1177/0956797611417632</a>.</p></li>
+<li><p>一篇关于心理学中 replication 问题的综述：Brian A. Nosek, Tom E. Hardwicke, Hannah Moshontz, Aurélien Allard, Katherine S. Corker, Anna Dreber Almenberg, Fiona Fidler, et al. <span class="citation" data-cites="nosek2021">(<a href="#ref-nosek2021" role="doc-biblioref">2022</a>)</span>. “Replicability, Robustness, and Reproducibility in Psychological Science.” <em>Annual Review of Psychology</em> 73 (1): 719–748. <a href="https://doi.org/10.1146/annurev-psych-020821-114157" class="uri">https://doi.org/10.1146/annurev-psych-020821-114157</a>.</p></li>
+</ul>
+</div>
+</div>
+
+
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-anderson2016" class="csl-entry" role="listitem">
+Anderson, Christopher J, Bahník Štěpán, Barnett-Cowan Michael, Bosco Frank A, Chandler Jesse, Chartier Christopher R, Cheung Felix, 等. 2016. <span>《Response to comment on <span>〈Estimating the reproducibility of psychological science〉</span>》</span>. <em>Science</em> 351 (6277): 1037.
+</div>
+<div id="ref-artner2020" class="csl-entry" role="listitem">
+Artner, Richard, Thomas Verliefde, Sara Steegen, Sara Gomes, Frits Traets, Francis Tuerlinckx, 和 Wolf Vanpaemel. 2020. <span>《The reproducibility of statistical results in psychological research: An investigation using unpublished raw data》</span>. <em>Psychological Methods</em> 26 (5): 527–46.
+</div>
+<div id="ref-bakker2011" class="csl-entry" role="listitem">
+Bakker, Marjan, 和 Jelte M Wicherts. 2011. <span>《The (mis) reporting of statistical results in psychology journals》</span>. <em>Behavior Research Methods</em> 43 (3): 666–78.
+</div>
+<div id="ref-baribault2018" class="csl-entry" role="listitem">
+Baribault, Beth, Chris Donkin, Daniel R Little, Jennifer S Trueblood, Zita Oravecz, Don Van Ravenzwaaij, Corey N White, Paul De Boeck, 和 Joachim Vandekerckhove. 2018. <span>《Metastudies for robust tests of theory》</span>. <em>Proceedings of the National Academy of Sciences</em> 115 (11): 2607–12.
+</div>
+<div id="ref-bench2017" class="csl-entry" role="listitem">
+Bench, Shane W, Grace N Rivera, Rebecca J Schlegel, Joshua A Hicks, 和 Heather C Lench. 2017. <span>《Does expertise matter in replication? An examination of the reproducibility project: Psychology》</span>. <em>Journal of Experimental Social Psychology</em> 68: 181–84.
+</div>
+<div id="ref-buckheit1995" class="csl-entry" role="listitem">
+Buckheit, Jonathan B, 和 David L Donoho. 1995. <span>《Wavelab and reproducible research》</span>. 收入 <em>Wavelets and statistics</em>, 55–81. Springer.
+</div>
+<div id="ref-camerer2016" class="csl-entry" role="listitem">
+Camerer, Colin F, Anna Dreber, Eskil Forsell, Teck-Hua Ho, Jürgen Huber, Magnus Johannesson, Michael Kirchler, 等. 2016. <span>《Evaluating replicability of laboratory experiments in economics》</span>. <em>Science</em> 351 (6280): 1433–36.
+</div>
+<div id="ref-camerer2018" class="csl-entry" role="listitem">
+Camerer, Colin F, Anna Dreber, Felix Holzmeister, Teck-Hua Ho, Jürgen Huber, Magnus Johannesson, Michael Kirchler, 等. 2018. <span>《Evaluating the replicability of social science experiments in Nature and Science <span>between</span> 2010 and 2015》</span>. <em>Nature Human Behaviour</em> 2 (9): 637–44.
+</div>
+<div id="ref-carney2016" class="csl-entry" role="listitem">
+Carney, Dana R. 2016. <span>《My position on power poses》</span>. <em>Unpublished manuscript. Haas School of Business, University of California</em>. <a href="https://faculty.haas.berkeley.edu/dana_carney/pdf_my%20position%20on%20power%20poses.pdf">https://faculty.haas.berkeley.edu/dana_carney/pdf_my%20position%20on%20power%20poses.pdf</a>.
+</div>
+<div id="ref-carney2010" class="csl-entry" role="listitem">
+Carney, Dana R, Amy J C Cuddy, 和 Andy J Yap. 2010. <span>《Power posing: Brief nonverbal displays affect neuroendocrine levels and risk tolerance》</span>. <em>Psychological science</em> 21 (10): 1363–68.
+</div>
+<div id="ref-cesana-arlotti2018" class="csl-entry" role="listitem">
+Cesana-Arlotti, Nicoló, Ana Martín, Ernő Téglás, Liza Vorobyova, Ryszard Cetnarski, 和 Luca L. Bonatti. 2018. <span>《Erratum for the Report <span>〈Precursors of logical reasoning in preverbal human infants〉</span>》</span>. <em>Science</em> 361 (6408): 1263–66.
+</div>
+<div id="ref-dominus2017" class="csl-entry" role="listitem">
+Dominus, Susan. 2017. <span>《When the Revolution Came for Amy Cuddy》</span>. <em>New York Times</em>. <a href="https://www.nytimes.com/2017/10/18/magazine/when-the-revolution-came-for-amy-cuddy.html">https://www.nytimes.com/2017/10/18/magazine/when-the-revolution-came-for-amy-cuddy.html</a>.
+</div>
+<div id="ref-dreber2015" class="csl-entry" role="listitem">
+Dreber, Anna, Thomas Pfeiffer, Johan Almenberg, Siri Isaksson, Brad Wilson, Yiling Chen, Brian A Nosek, 和 Magnus Johannesson. 2015. <span>《Using prediction markets to estimate the reproducibility of scientific research》</span>. <em>Proceedings of the National Academy of Sciences</em> 112 (50): 15343–47.
+</div>
+<div id="ref-ebersole2020" class="csl-entry" role="listitem">
+Ebersole, Charles R, Maya B Mathur, Erica Baranski, Diane-Jo Bart-Plange, Nicholas R Buttrick, Christopher R Chartier, Katherine S Corker, 等. 2020. <span>《Many Labs 5: Testing pre-data-collection peer review as an intervention to increase replicability》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 3 (3): 309–31.
+</div>
+<div id="ref-errington2021investigating" class="csl-entry" role="listitem">
+Errington, Timothy M, Maya B Mathur, Courtney K Soderberg, Alexandria Denis, Nicole Perfito, Elizabeth Iorns, 和 Brian A Nosek. 2021. <span>《Investigating the replicability of preclinical cancer biology》</span>. <em>Elife</em> 10: e71601.
+</div>
+<div id="ref-etz2016" class="csl-entry" role="listitem">
+Etz, Alexander, 和 Joachim Vandekerckhove. 2016. <span>《A Bayesian perspective on the reproducibility project: Psychology》</span>. <em>PloS one</em> 11 (2): e0149794.
+</div>
+<div id="ref-frank2012" class="csl-entry" role="listitem">
+Frank, Michael C, 和 Rebecca Saxe. 2012. <span>《Teaching Replication》</span>. <em>Perspectives on Psychological Science</em> 7 (6): 600–604. <a href="https://doi.org/10.1177/1745691612460686">https://doi.org/10.1177/1745691612460686</a>.
+</div>
+<div id="ref-frank2013" class="csl-entry" role="listitem">
+Frank, Michael C, Jonathan A Slemmer, Gary F Marcus, 和 Scott P Johnson. 2013. <span>《<span>〈Information from multiple modalities helps 5-month-olds learn abstract rules〉</span>: Erratum》</span>. <em>Developmental Science</em> 16 (2): 324. <a href="https://doi.org/10.1111/desc.12060">https://doi.org/10.1111/desc.12060</a>.
+</div>
+<div id="ref-gelman2018" class="csl-entry" role="listitem">
+Gelman, Andrew. 2018. <span>《Don’t characterize replications as successes or failures》</span>. <em>Behavioral and Brain Sciences</em> 41.
+</div>
+<div id="ref-gilbert2016" class="csl-entry" role="listitem">
+Gilbert, Daniel T, Gary King, Stephen Pettigrew, 和 Timothy D Wilson. 2016. <span>《Comment on <span>〈Estimating the reproducibility of psychological science〉</span>》</span>. <em>Science</em> 351 (6277): 1037.
+</div>
+<div id="ref-gould1991" class="csl-entry" role="listitem">
+Gould, Stephen Jay. 1991. <span>《Royal shorthand》</span>. <em>Science</em> 251 (4990): 142.
+</div>
+<div id="ref-gould1996" class="csl-entry" role="listitem">
+———. 1996. <em>The mismeasure of man</em>. W. W. Norton &amp; Company.
+</div>
+<div id="ref-hardwicke2021d" class="csl-entry" role="listitem">
+Hardwicke, Tom E, Manuel Bohn, Kyle MacDonald, Emily Hembacher, Michèle B. Nuijten, Benjamin N. Peloquin, Benjamin E. deMayo, Bria Long, Erica J. Yoon, 和 Michael C. Frank. 2021. <span>《Analytic reproducibility in articles receiving open data badges at the journal <span>Psychological</span> <span>Science</span>: an observational study》</span>. <em>Royal Society Open Science</em> 8 (1): 201494. <a href="https://doi.org/10.1098/rsos.201494">https://doi.org/10.1098/rsos.201494</a>.
+</div>
+<div id="ref-hardwicke2018b" class="csl-entry" role="listitem">
+Hardwicke, Tom E, Maya B Mathur, Kyle Earl MacDonald, Gustav Nilsonne, George Christopher Banks, Mallory Kidwell, Alicia Hofelich Mohr, 等. 2018. <span>《Data availability, reusability, and analytic reproducibility: Evaluating the impact of a mandatory open data policy at the journal Cognition》</span>. <em>Royal Society Open Science</em> 5. <a href="https://doi.org/10.1098/rsos.180448">https://doi.org/10.1098/rsos.180448</a>.
+</div>
+<div id="ref-hardwicke2021c" class="csl-entry" role="listitem">
+Hardwicke, Tom E, Robert T. Thibault, Jessica Kosie, Joshua D. Wallach, Mallory C. Kidwell, 和 John P. A. Ioannidis. 2021. <span>《Estimating the prevalence of transparency and reproducibility-related research practices in psychology (2014-2017)》</span>. <em>Perspectives on Psychological Science</em> 17 (1). <a href="https://doi.org/10.1177/1745691620979806">https://doi.org/10.1177/1745691620979806</a>.
+</div>
+<div id="ref-john2012" class="csl-entry" role="listitem">
+John, Leslie K, George Loewenstein, 和 Drazen Prelec. 2012. <span>《Measuring the prevalence of questionable research practices with incentives for truth telling》</span>. <em>Psychological science</em> 23 (5): 524–32.
+</div>
+<div id="ref-klein2018b" class="csl-entry" role="listitem">
+Klein, Richard A, Michelangelo Vianello, Fred Hasselman, Byron G Adams, Reginald B Adams Jr, Sinan Alper, Mark Aveyard, 等. 2018. <span>《Many Labs 2: Investigating variation in replicability <span>a</span>cross samples and settings》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 1 (4): 443–90.
+</div>
+<div id="ref-kuhn1962" class="csl-entry" role="listitem">
+Kuhn, Thomas. 1962. <em>The structure of scientific revolutions</em>. Princeton University Press.
+</div>
+<div id="ref-lewis2016" class="csl-entry" role="listitem">
+Lewis, Molly L, 和 Michael C Frank. 2016. <span>《Understanding the effect of social context on learning: A replication of Xu and Tenenbaum (2007b).》</span> <em>Journal of Experimental Psychology: General</em> 145 (9): e72.
+</div>
+<div id="ref-mathur2020" class="csl-entry" role="listitem">
+Mathur, Maya B, 和 Tyler J VanderWeele. 2020. <span>《New statistical metrics for multisite replication projects》</span>. <em>Journal of the Royal Statistical Society, Series A (Statistics in Society)</em> 183 (3): 1145–66.
+</div>
+<div id="ref-mcshane2014" class="csl-entry" role="listitem">
+McShane, Blakeley B, 和 Ulf Böckenholt. 2014. <span>《You cannot step into the same river twice: When power analyses are optimistic》</span>. <em>Perspectives on Psychological Science</em> 9 (6): 612–25.
+</div>
+<div id="ref-nelson2018" class="csl-entry" role="listitem">
+Nelson, Leif D, Joseph Simmons, 和 Uri Simonsohn. 2018. <span>《Psychology’s renaissance》</span>. <em>Annual review of psychology</em> 69: 511–34.
+</div>
+<div id="ref-newell1973" class="csl-entry" role="listitem">
+Newell, Allen. 1973. <span>《You can’t play 20 questions with nature and win: Projective comments on the papers of this symposium》</span>. 收入 <em>Visual Information Processing</em>, 编辑 W. G. Chase. Academic Press.
+</div>
+<div id="ref-nosek2021" class="csl-entry" role="listitem">
+Nosek, Brian A, Tom E Hardwicke, Hannah Moshontz, Aurélien Allard, Katherine S Corker, Anna Dreber Almenberg, Fiona Fidler, Joseph Hilgard, Melissa Kline, 和 Michèle B. Nuijten. 2022. <span>《Replicability, robustness, and reproducibility in psychological science》</span>. <em>Annual Review of Psychology</em> 73 (1): 719–48. <a href="https://doi.org/10.1146/annurev-psych-020821-114157">https://doi.org/10.1146/annurev-psych-020821-114157</a>.
+</div>
+<div id="ref-nuijten2024" class="csl-entry" role="listitem">
+Nuijten, Michèle B., 和 Sacha Epskamp. 2024. <em><span>statcheck</span>: Extract Statistics from Articles and Recompute P-Values</em>. <a href="https://CRAN.R-project.org/package=statcheck">https://CRAN.R-project.org/package=statcheck</a>.
+</div>
+<div id="ref-nuijten2016" class="csl-entry" role="listitem">
+Nuijten, Michèle B., Chris H J Hartgerink, Marcel A L M van Assen, Sacha Epskamp, 和 Jelte M Wicherts. 2016. <span>《The prevalence of statistical reporting errors in psychology (1985–2013)》</span>. <em>Behavior Research Methods</em> 48 (4): 1205–26.
+</div>
+<div id="ref-oberauer2019" class="csl-entry" role="listitem">
+Oberauer, Klaus, 和 Stephan Lewandowsky. 2019. <span>《Addressing the theory crisis in psychology》</span>. <em>Psychonomic bulletin &amp; review</em> 26 (5): 1596–1618.
+</div>
+<div id="ref-olsson2020heterogeneity" class="csl-entry" role="listitem">
+Olsson-Collentine, Anton, Jelte M Wicherts, 和 Marcel A L M van Assen. 2020. <span>《Heterogeneity in direct replications in psychology and its association with effect size.》</span> <em>Psychological Bulletin</em> 146 (10): 922–40.
+</div>
+<div id="ref-osc2015" class="csl-entry" role="listitem">
+Open Science Collaboration. 2015. <span>《Estimating the reproducibility of psychological science》</span>. <em>Science</em> 349 (6251).
+</div>
+<div id="ref-popper2005" class="csl-entry" role="listitem">
+Popper, Karl. 1959. <em>The logic of scientific discovery</em>. Hutchinson &amp; Co.
+</div>
+<div id="ref-ramscar2016" class="csl-entry" role="listitem">
+Ramscar, Michael. 2016. <span>《Learning and the replicability of priming effects》</span>. <em>Current Opinion in Psychology</em> 12: 80–84.
+</div>
+<div id="ref-ranehill2015" class="csl-entry" role="listitem">
+Ranehill, Eva, Anna Dreber, Magnus Johannesson, Susanne Leiberg, Sunhae Sul, 和 Roberto A Weber. 2015. <span>《Assessing the robustness of power posing: No effect on hormones and risk tolerance in a large sample of men and women》</span>. <em>Psychological science</em> 26 (5): 653–56.
+</div>
+<div id="ref-rohrer2015" class="csl-entry" role="listitem">
+Rohrer, Doug, Harold Pashler, 和 Christine R Harris. 2015. <span>《Do subtle reminders of money change people’s political views?》</span> <em>Journal of experimental psychology: General</em> 144 (4): e73.
+</div>
+<div id="ref-rosenthal1979" class="csl-entry" role="listitem">
+Rosenthal, Robert. 1979. <span>《The file drawer problem and tolerance for null results.》</span> <em>Psychological bulletin</em> 86 (3): 638.
+</div>
+<div id="ref-rosenthal1990" class="csl-entry" role="listitem">
+———. 1990. <span>《Replication in behavioral research》</span>. <em>Journal of Social Behavior and Personality</em> 5 (4): 1–30.
+</div>
+<div id="ref-scheel2021" class="csl-entry" role="listitem">
+Scheel, Anne M, Mitchell R M J Schijen, 和 Daniël Lakens. 2021. <span>《An excess of positive results: Comparing the standard Psychology literature with Registered Reports》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 4 (2): 25152459211007467.
+</div>
+<div id="ref-schmidt2009" class="csl-entry" role="listitem">
+Schmidt, Stefan. 2009. <span>《Shall we really do it again? The powerful concept of replication is neglected in the social sciences.》</span> <em>Review of General Psychology</em> 13: 90–100.
+</div>
+<div id="ref-schwarz1983" class="csl-entry" role="listitem">
+Schwarz, Norbert, 和 Gerald L Clore. 1983. <span>《Mood, misattribution, and judgments of well-being: informative and directive functions of affective states.》</span> <em>Journal of personality and social psychology</em> 45 (3): 513–23.
+</div>
+<div id="ref-schwarz2014" class="csl-entry" role="listitem">
+Schwarz, Norbert, 和 Fritz Strack. 2014. <span>《Does merely going <span>t</span>hrough the same moves make for a <span>〈direct〉</span> replication? Concepts, contexts, and operationalizations.》</span> <em>Social Psychology</em> 45 (4): 305–6.
+</div>
+<div id="ref-simmons2011" class="csl-entry" role="listitem">
+Simmons, Joseph P, Leif D Nelson, 和 Uri Simonsohn. 2011. <span>《False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant》</span>. <em>Psychological science</em> 22 (11): 1359–66. <a href="https://doi.org/10.1177/0956797611417632">https://doi.org/10.1177/0956797611417632</a>.
+</div>
+<div id="ref-simmons2018" class="csl-entry" role="listitem">
+———. 2018. <span>《False-positive citations》</span>. <em>Perspectives on Psychological Science</em> 13 (2): 255–59.
+</div>
+<div id="ref-simmons2017" class="csl-entry" role="listitem">
+Simmons, Joseph P, 和 Uri Simonsohn. 2017. <span>《Power posing: <em>P</em>-curving the evidence》</span>. <em>Psychological science</em> 28 (5): 687–93.
+</div>
+<div id="ref-simonsohn2015" class="csl-entry" role="listitem">
+Simonsohn, Uri. 2015. <span>《Small telescopes: detectability and the evaluation of replication results》</span>. <em>Psychological Science</em> 26 (5): 559–69.
+</div>
+<div id="ref-vadillo2016" class="csl-entry" role="listitem">
+Vadillo, Miguel A, Tom E Hardwicke, 和 David R Shanks. 2016. <span>《Selection bias, vote counting, and money-priming effects: A comment on Rohrer, Pashler, and Harris (2015) and Vohs (2015)》</span>. <em>Journal of Experimental Psychology: General</em> 145 (5): 655–63.
+</div>
+<div id="ref-van-bavel2016" class="csl-entry" role="listitem">
+Van Bavel, Jay J, Peter Mende-Siedlecki, William J Brady, 和 Diego A Reinero. 2016. <span>《Contextual sensitivity in scientific reproducibility》</span>. <em>Proceedings of the National Academy of Sciences</em> 113 (23): 6454–59.
+</div>
+<div id="ref-vazire2018" class="csl-entry" role="listitem">
+Vazire, Simine. 2018. <span>《Implications of the credibility revolution for productivity, creativity, and progress》</span>. <em>Perspectives on Psychological Science</em> 13 (4): 411–17.
+</div>
+<div id="ref-whitaker2017" class="csl-entry" role="listitem">
+Whitaker, K. 2017. <span>《Publishing a reproducible paper》</span>. Presentation. <a href="https://doi.org/10.6084/m9.figshare.5440621.v2">https://doi.org/10.6084/m9.figshare.5440621.v2</a>.
+</div>
+<div id="ref-wicherts2006" class="csl-entry" role="listitem">
+Wicherts, Jelte M, Denny Borsboom, Judith Kats, 和 Dylan Molenaar. 2006. <span>《The poor availability of psychological research data for reanalysis.》</span> <em>American psychologist</em> 61 (7): 726–28.
+</div>
+<div id="ref-wilson2020" class="csl-entry" role="listitem">
+Wilson, Brent M, Christine R Harris, 和 John T Wixted. 2020. <span>《Science is not a signal detection problem》</span>. <em>Proceedings of the National Academy of Sciences</em> 117 (11): 5559–67.
+</div>
+<div id="ref-yang2020" class="csl-entry" role="listitem">
+Yang, Yang, Wu Youyou, 和 Brian Uzzi. 2020. <span>《Estimating the deep replicability of scientific findings using human and artificial intelligence》</span>. <em>Proceedings of the National Academy of Sciences</em> 117 (20): 10762–68.
+</div>
+<div id="ref-yarkoni2020" class="csl-entry" role="listitem">
+Yarkoni, Tal. 2020. <span>《The generalizability crisis》</span>. <em>Behavioral and Brain Sciences</em> 45: 1–37.
+</div>
+<div id="ref-youyou2023" class="csl-entry" role="listitem">
+Youyou, Wu, Yang Yang, 和 Brian Uzzi. 2023. <span>《A discipline-wide investigation of the replicability of Psychology papers over the past two decades》</span>. <em>Proceedings of the National Academy of Sciences</em> 120 (6): e2208863120.
+</div>
+<div id="ref-zwaan2018" class="csl-entry" role="listitem">
+Zwaan, Rolf Antonius, Alexander Etz, Richard E Lucas, 和 Brent Donnellan. 2018. <span>《Making Replication Mainstream》</span>. <em>Behavioral and Brain Sciences</em> 41: e120.
+</div>
+</div>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./002-theories.html" class="pagination-link" aria-label="理论">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./004-ethics.html" class="pagination-link" aria-label="伦理">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

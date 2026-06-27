@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>8&nbsp; 测量 – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./009-design.html" rel="next">
+<link href="./007-models.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./008-measurement.html">规划</a></li><li class="breadcrumb-item"><a href="./008-measurement.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#信度" id="toc-信度" class="nav-link active" data-scroll-target="#信度"><span class="header-section-number">8.1</span> 信度</a>
+  <ul class="collapse">
+  <li><a href="#测量尺度" id="toc-测量尺度" class="nav-link" data-scroll-target="#测量尺度"><span class="header-section-number">8.1.1</span> 测量尺度</a></li>
+  <li><a href="#测量信度" id="toc-测量信度" class="nav-link" data-scroll-target="#测量信度"><span class="header-section-number">8.1.2</span> 测量信度</a></li>
+  <li><a href="#计算信度的实用建议" id="toc-计算信度的实用建议" class="nav-link" data-scroll-target="#计算信度的实用建议"><span class="header-section-number">8.1.3</span> 计算信度的实用建议</a></li>
+  </ul></li>
+  <li><a href="#效度" id="toc-效度" class="nav-link" data-scroll-target="#效度"><span class="header-section-number">8.2</span> 效度</a>
+  <ul class="collapse">
+  <li><a href="#实践中的效度论证" id="toc-实践中的效度论证" class="nav-link" data-scroll-target="#实践中的效度论证"><span class="header-section-number">8.2.1</span> 实践中的效度论证</a></li>
+  <li><a href="#避免可疑的测量实践" id="toc-避免可疑的测量实践" class="nav-link" data-scroll-target="#避免可疑的测量实践"><span class="header-section-number">8.2.2</span> 避免可疑的测量实践！</a></li>
+  </ul></li>
+  <li><a href="#如何选择一个好的测量" id="toc-如何选择一个好的测量" class="nav-link" data-scroll-target="#如何选择一个好的测量"><span class="header-section-number">8.3</span> 如何选择一个好的测量？</a>
+  <ul class="collapse">
+  <li><a href="#简单行为-vs-复杂行为" id="toc-简单行为-vs-复杂行为" class="nav-link" data-scroll-target="#简单行为-vs-复杂行为"><span class="header-section-number">8.3.1</span> 简单行为 vs 复杂行为</a></li>
+  <li><a href="#隐性行为-vs-显性行为" id="toc-隐性行为-vs-显性行为" class="nav-link" data-scroll-target="#隐性行为-vs-显性行为"><span class="header-section-number">8.3.2</span> 隐性行为 vs 显性行为</a></li>
+  </ul></li>
+  <li><a href="#想测很多东西的诱惑" id="toc-想测很多东西的诱惑" class="nav-link" data-scroll-target="#想测很多东西的诱惑"><span class="header-section-number">8.4</span> 想测很多东西的诱惑</a></li>
+  <li><a href="#本章小结测量" id="toc-本章小结测量" class="nav-link" data-scroll-target="#本章小结测量"><span class="header-section-number">8.5</span> 本章小结：测量</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography"></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./008-measurement.html">规划</a></li><li class="breadcrumb-item"><a href="./008-measurement.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-measurement" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="learning goals">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>learning goals
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>讨论心理测量的信度与效度</li>
+<li>推理不同测量和测量类型之间的取舍</li>
+<li>识别设计良好的调查问题具有什么特征</li>
+<li>说明测量灵活性的风险，以及使用多个测量的成本和收益</li>
+</ul>
+</div>
+</div>
+<p>在本书第二部分，我们介绍了一组以测量为中心的统计技术，用来量化并最大化我们的精度。现在，在第三部分，也就是关于实验规划的部分，我们会继续扩展工具箱，讨论如何设计测量（本章）、manipulation（<a href="009-design.html" class="quarto-xref"><span>章 9</span></a>）和抽样策略（<a href="010-sampling.html" class="quarto-xref"><span>章 10</span></a>），从而创造和评估实验。这几章构成了我们所谓“experimentology”方法的核心：一系列用来<span class="smallcaps">减少偏差</span>、最大化<span class="smallcaps">测量精度</span>、并评估<span class="smallcaps">可推广性</span>的决策。先从测量开始。</p>
+<p>在科学史上，测量的进步总是和知识的进步相伴而行。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 望远镜革新了天文学，显微镜革新了生物学，膜片钳技术革新了生理学。但测量并不容易。即便是看似普通的温度计，也就是让我们可靠测量温度的工具，也经历了数百年的艰苦努力才逐步完善 <span class="citation" data-cites="chang2004inventing">(<a href="#ref-chang2004inventing" role="doc-biblioref">Chang 2004</a>)</span>。心理学和行为科学也不例外：我们需要可靠的工具来测量自己关心的东西。本章会讨论心理学测量面临的挑战，以及好工具和坏工具之间的区别。</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;因此，测量一直是科学哲学中反复引发争论的话题。关于不同测量框架的概览，见 <span class="citation" data-cites="sep-measurement-science">Tal (<a href="#ref-sep-measurement-science" role="doc-biblioref">2020</a>)</span>；<span class="citation" data-cites="maul2016philosophical">Maul, Irribarra, 和 Wilson (<a href="#ref-maul2016philosophical" role="doc-biblioref">2016</a>)</span> 则专门讨论心理学中的测量。</p></div></div><p>测量某个东西到底是什么意思？直觉上，我们知道尺子测量的是长度，秤测量的是质量 <span class="citation" data-cites="kisch1965scales">(<a href="#ref-kisch1965scales" role="doc-biblioref">Kisch 1965</a>)</span>。如 <a href="002-theories.html" class="quarto-xref"><span>章 2</span></a> 所说，这些量是<em>潜在的</em>（未被直接观察到的）。与此相对，单次测量是<em>显现的</em>：它们可以被我们观察到。那么，测量一个心理构念是什么意思？也就是，测量一个假设存在于头脑中的理论量，是什么意思？</p>
+<!-- According to @stevens1946, measurement is simply the practice of assigning numbers to things, but  there's more to it than that.  -->
+<p>首先要记住，并不是所有测量都同样精确。想到物理测量工具时，这一点很明显：卡尺给出的厚度估计会比尺子精确得多。判断测量更精确的一种方式，是重复测量很多次。卡尺得到的测量值通常会彼此更接近，这反映出每次单独测量中的误差更小。心理测量也可以做类似的事：重复测量并评估变异，不过我们后面会看到，这里会更棘手一些。误差更少的测量工具被称为更有<strong>信度</strong>的工具。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;信度和<strong>精度</strong>是一回事吗？差不多是。容易混淆的是，不同领域会用不同名字称呼这些概念 <span class="citation" data-cites="brandmaier2018">(<a href="#ref-brandmaier2018" role="doc-biblioref">Brandmaier 等 2018</a> 中有一张很有用的名称对照表)</span>。这里我们会把信度当作工具本身的属性来讨论，而把精度用于描述测量本身。</p></div><div id="fn3"><p><sup>3</sup>&nbsp;我们在 <a href="009-design.html" class="quarto-xref"><span>章 9</span></a> 也会讨论 manipulation 的效度。识别某个测量上的因果效应，同样需要对某个构念做操作化。为了识别因果效应，我们必须把某个目标构念和实验中可以具体操纵的东西连接起来，比如刺激或指令。</p></div></div><p>第二，心理测量并不会直接反映我们感兴趣的潜在理论构念，也就是幸福、智力或语言加工能力这类量。而且，不同于长度和质量这类量，心理学中常常会对“正确的理论量是什么”存在分歧。因此，我们必须测量某种可观察行为，也就是对构念的操作化，然后论证这个测量如何关联到某个被提出的目标构念（有时还要论证这个构念是否真的存在）。这个论证关乎测量的<strong>效度</strong>。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>信度和效度这两个概念，为评估心理测量以及它在多大程度上服务于研究者目标提供了一套概念工具。</p>
+<section id="信度" class="level2 page-columns page-full" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="信度"><span class="header-section-number">8.1</span> 信度</h2>
+<p>信度是一种描述测量相对于噪声能产生多少信号的方式。直觉上，如果噪声更少，那么针对同一个量的不同测量之间会更加相似；<a href="#fig-measurement-brandmaier" class="quarto-xref">图&nbsp;<span>8.1</span></a> 中靶心上的点聚得更紧，就表现了这一点。但我们怎么测量信号和噪声？ </p>
+<div id="fig-measurement-brandmaier" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="一个 4 个靶子的图，按高/低精度（点有多聚集）和效度（点离靶心有多近）排列。">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-measurement-brandmaier-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/measurement/reliability-validity.png" class="img-fluid figure-img" style="width:50.0%" alt="一个 4 个靶子的图，按高/低精度（点有多聚集）和效度（点离靶心有多近）排列。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-measurement-brandmaier-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;8.1: 信度和效度的可视化。工具的信度是它的预期精度。一个工具产生的测量偏差，也可以作为理解效度的一个比喻。
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="case study">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>case study
+</div>
+</div>
+<section id="一个有信度也有效度的儿童词汇测量" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="一个有信度也有效度的儿童词汇测量">一个有信度也有效度的儿童词汇测量</h3>
+<p>任何和小孩子一起工作过，或自己有孩子的人，都能体会到儿童早期语言有多大差异。有些孩子很早就说得很清楚，还能说长句；另一些孩子则比较吃力。这种差异似乎和后来的学校表现有关 <span class="citation" data-cites="marchman2008">(<a href="#ref-marchman2008" role="doc-biblioref">Marchman 和 Fernald 2008</a>)</span>。因此，我们有很多理由想要精确测量“儿童早期语言能力”这个目标潜在构念。</p>
+<p>把儿童带进实验室可能成本很高，因此一个常用的替代方案是 MacArthur Bates Communicative Development Inventory（简称 CDI）：这是一份让父母标记孩子会说或能理解哪些词的表格。CDI 表格基本上就是很长的词汇清单。但父母报告是不是一个有信度或有效度的儿童早期语言测量呢？</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-measurement-psycho-cors" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一张 test-retest 相关与测量间隔的散点图，并带有下降趋势线。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-measurement-psycho-cors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="008-measurement_files/figure-html/fig-measurement-psycho-cors-1.png" class="img-fluid figure-img" style="width:50.0%" alt="一张 test-retest 相关与测量间隔的散点图，并带有下降趋势线。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-measurement-psycho-cors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;8.2: 同一个孩子两次填写 CDI，中间相隔数月时所得分数之间的纵向（test-retest）相关。基于 <span class="citation" data-cites="frank2021">Frank 等 (<a href="#ref-frank2021" role="doc-biblioref">2021</a>)</span>。
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>下面会看到，测量 CDI 信度的一种方式，是计算同一个孩子两次填写表格所得分数之间的相关。不幸的是，这个分析有一个问题：两次观察之间等得越久，孩子本身变化就越大！<a href="#fig-measurement-psycho-cors" class="quarto-xref">图&nbsp;<span>8.2</span></a> 展示了两次 CDI 之间的相关，可以看到随着观察间隔变长，相关一开始很高，随后逐渐下降 <span class="citation" data-cites="frank2021">(<a href="#ref-frank2021" role="doc-biblioref">Frank 等 2021</a>)</span>。</p>
+<!-- ![Relations between an early form of the CDI (the ELI) and several other measurements of children's early language from both transcripts and direct assessments, as assessed using structural equation modeling. Arrows indicate loadings of different measures (boxes) onto a single construct (circle). Numbers give standardized weights. From @bornstein1998.](images/measurement/cdi-validity.png){#fig-measurement-cdi-validity} -->
+<p>既然 CDI 表格是相对有信度的工具，它们有效度吗？也就是说，它们真的测量了目标构念，也就是儿童早期语言能力吗？<span class="citation" data-cites="bornstein1998">Bornstein 和 Haynes (<a href="#ref-bornstein1998" role="doc-biblioref">1998</a>)</span> 收集了许多不同的儿童语言测量，包括 Early Language Inventory（ELI，一种早期 CDI 表格）和其他“金标准”测量，比如儿童真实语言样本的转录。CDI 分数和这些不同测量都高度相关，说明 CDI 是这个构念的有效测量。</p>
+<p>信度和效度证据结合起来说明，CDI 是儿童早期语言数据的有用来源，而且相对便宜；事实上，它们已经成为这个年龄段最常见的评估之一！</p>
+<!-- The story of the CDI is a success story---it's a relatively inexpensive measure that has some evidence for both reliability and validity. We should celebrate (and also use it as a potential outcome measure in our studies). But there is also plenty more work to do! A critic could very reasonably point out that we haven't shown any evidence that reliability and validity extends across different populations or ages. For any measure, it's important to start by asking whether there is *any* evidence for reliability and validity. But once you have a specific target population in mind, you can also ask how likely it is that the measure will yield reliable and valid data with *that particular population*. Oftentimes you yourself will have to do this measurement work, "checking" that your instruments function appropriately in the particular situation you want to use them. This is sometimes a lot of hard work, but it's an important part of doing good experimental measurement! -->
+</section>
+</div>
+<section id="测量尺度" class="level3 page-columns page-full" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="测量尺度"><span class="header-section-number">8.1.1</span> 测量尺度</h3>
+
+<div class="no-row-height column-margin column-container"><div id="fig-measurement-cv" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一段从零开始的线段，标出真实身高的位置，并有一组点围绕在它周围。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-measurement-cv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/measurement/cv.png" class="img-fluid figure-img" alt="一段从零开始的线段，标出真实身高的位置，并有一组点围绕在它周围。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-measurement-cv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;8.3: 计算变异系数（CV）。
+</figcaption>
+</figure>
+</div></div><p>在物理科学中，常常用变异系数来测量一个工具的精度 <span class="citation" data-cites="brandmaier2018">(<a href="#ref-brandmaier2018" role="doc-biblioref">Brandmaier 等 2018</a>)</span>： <span class="math display">\[ \text{CV} = \frac{\sigma_w}{\mu_w} \]</span> 其中 <span class="math inline">\(\sigma_w\)</span> 是个体内多次测量值的标准差，<span class="math inline">\(\mu_w\)</span> 是这些测量值的平均值（<a href="#fig-measurement-cv" class="quarto-xref">图&nbsp;<span>8.3</span></a>）。</p>
+<p>想象我们测量一个人的身高五次，得到 <span class="math inline">\(171\)</span> cm、<span class="math inline">\(172\)</span> cm、<span class="math inline">\(171\)</span> cm、<span class="math inline">\(173\)</span> cm 和 <span class="math inline">\(172\)</span> cm。这些数值是这个人的真实身高（我们假设他有一个真实身高！）和一些<strong>测量误差</strong>的组合。现在我们可以用这些测量来计算变异系数，也就是 <span class="math inline">\(0.005\)</span>。这说明相对于正在测量的整体量，变异非常有限。为什么心理测量不能直接这样做呢？</p>
+<p>思考这个问题会让我们绕到心理学研究中使用的不同测量尺度上 <span class="citation" data-cites="stevens1946">(<a href="#ref-stevens1946" role="doc-biblioref">Stevens 1946</a>)</span>。我们例子里的身高测量处在所谓<strong>比率</strong>尺度上：在这种尺度上，数值之间的间距相等，并且有一个真正的零点。这类尺度在物理量中很常见，但在心理学中相对少一些（反应时是一个重要例外）。更常见的是<strong>区间</strong>尺度，它没有真正的零点。例如，IQ（以及其他标准化分数）意在捕捉某个维度上的区间变化，但零没有意义：IQ 为零并不对应任何特定解释。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;在足够严格的意义上可以证明，比率尺度和区间尺度（以及另一个介于两者之间的尺度）是实数上<em>唯一</em>可能的尺度 <span class="citation" data-cites="narens1986measurement">(<a href="#ref-narens1986measurement" role="doc-biblioref">Narens 和 Luce 1986</a>)</span>。</p></div></div><p><strong>顺序</strong>尺度也经常使用。这些尺度有顺序，但各级之间不一定等距。例如，教育成就水平（“小学”、“高中”、“一些大学教育”、“大学”、“研究生院”）是有序的，但没有意义说“高中”和“小学”的距离等于“研究生院”和“大学”的距离。Stevens 层级中的最后一种是<strong>名义</strong>尺度，其中连顺序也不存在。例如，种族是一个无序尺度，其中有多个类别，但这些类别没有内在顺序。这个层级见 <a href="#tbl-stevens" class="quarto-xref">表&nbsp;<span>8.1</span></a>。</p>
+<!-- ::: {.margin-caption} -->
+<!-- \vspace{-1em} -->
+<div id="tbl-stevens" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-stevens-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;8.1: Measurement scale types and their associated operations and statistics <span class="citation" data-cites="stevens1946">(<a href="#ref-stevens1946" role="doc-biblioref">Stevens 1946</a>)</span>.
+</figcaption>
+<div aria-describedby="tbl-stevens-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 25%">
+<col style="width: 32%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Scale</th>
+<th>Definition</th>
+<th>Operations</th>
+<th>Statistics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nominal</td>
+<td>Unordered list</td>
+<td>Equality</td>
+<td>Mode</td>
+</tr>
+<tr class="even">
+<td>Ordinal</td>
+<td>Ordered list</td>
+<td>Greater than or less than</td>
+<td>Median</td>
+</tr>
+<tr class="odd">
+<td>Interval</td>
+<td>Numerical</td>
+<td>Equality of intervals</td>
+<td>Mean, SD</td>
+</tr>
+<tr class="even">
+<td>Ratio</td>
+<td>Numerical &amp; zero</td>
+<td>Equality of ratios</td>
+<td>Coefficient of variation</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<!-- \vspace{1em} -->
+<!-- ::: -->
+<p>关键是，不同尺度类型适用的汇总指标不同。如果你有一份无序列表，比如调查中关于种族的问题选项，你可以呈现众数（最可能的回答）。去想中位数是什么甚至都没有意义，因为没有顺序！对于有序的教育水平，中位数是可能的，但不能计算平均数。对于“数学测试正确题数”这样的区间变量，则可以计算平均数和标准差。<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;你可能会想，“正确题数”是不是比率变量？但零真的有意义吗？它真的对应“没有数学知识”吗？还是只是代表“数学知识少于这份测试所要求的水平”？</p></div></div><p>现在我们可以回答最初的问题了：为什么不能用变异系数来量化信度。除非你有一个带真正零点的比率尺度，否则就不能计算变异系数。想想 IQ 分数：按照惯例，标准化 IQ 分数目前被设定为平均数 <span class="math inline">\(100\)</span>。如果我们多次测试某个人，发现其测试分数的标准差是 4 分，那么我们可以把测量精度估计为 <span class="math inline">\(4/100 = 0.04\)</span> 的“CV”。但由于 IQ 为零没有意义，我们完全可以把总体的平均 IQ 设为 <span class="math inline">\(200\)</span>。测试本身没有变，于是 CV 会变成 <span class="math inline">\(4/200 = 0.02\)</span>。按这个逻辑，我们只是重新缩放了测试，就把测量精度翻倍了！这显然说不通。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>depth
+</div>
+</div>
+<section id="心理测量早期争论" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="心理测量早期争论">心理测量早期争论</h3>
+<blockquote class="blockquote">
+<p>Psychology cannot attain the certainty and exactness of the physical sciences, unless it rests on a foundation of … measurement.<br>
+—<span class="citation" data-cites="cattel1890mental">Cattel (<a href="#ref-cattel1890mental" role="doc-biblioref">1890</a>, p.&nbsp;373)</span></p>
+</blockquote>
+<p>实验心理学的奠基者们迷恋测量，这并非巧合 <span class="citation" data-cites="heidelberger2004nature">(<a href="#ref-heidelberger2004nature" role="doc-biblioref">Heidelberger 2004</a>)</span>。 测量被视为心理学成为一门合法定量科学路上面临的主要障碍。 例如，Hermann von Helmholtz（Wilhelm Wundt 的博士导师）最后几篇作品之一，是 1887 年一篇题为 “Zahlen und Messen” <span class="citation" data-cites="darrigol2003number">(“Counting and Measuring”，见 <a href="#ref-darrigol2003number" role="doc-biblioref">Darrigol 2003</a>)</span> 的哲学论文。 同一年，<span class="citation" data-cites="fechner1887">Fechner (<a href="#ref-fechner1887" role="doc-biblioref">1987 [1887]</a>)</span> 在 “Über die psychischen Massprincipien”（“On psychic measurement principles”）中明确讨论了测量的基础问题。</p>
+<p>许多早期测量争论都围绕新兴的<em>心理物理学</em>展开，也就是如何把客观的物理刺激（如光、声音、压力）和它们在心中产生的主观感觉联系起来。 例如，<span class="citation" data-cites="fechner1860elemente">Fechner (<a href="#ref-fechner1860elemente" role="doc-biblioref">1860</a>)</span> 感兴趣的是一个叫“最小可觉差”的量，即我们的感官能够分辨出的刺激最小变化。 他主张存在一种有规律的（对数）关系：比如亮度强度的对数变化，对应于人们报告强度的线性变化（差一个常数）。 换句话说，感觉可以通过最小可觉差这类工具来<em>测量</em>。</p>
+<p>在今天听来，“可测量性”这个基本主张居然有争议，可能有些令人意外，尽管心理物理函数的具体形式确实还会继续被争论。 但这个主张引发了一场非常尖锐的争论，最终导致了所谓 Ferguson Committee 的成立。这个委员会由 British Association for the Advancement of Science 于 1932 年成立，目的是调查这类心理物理程序是否真的能算作对任何东西的定量“测量” <span class="citation" data-cites="moscati2018measuring">(<a href="#ref-moscati2018measuring" role="doc-biblioref">Moscati 2018</a>)</span>。 委员会无法得出结论，物理学家和心理学家僵持不下：</p>
+<blockquote class="blockquote">
+<p>Having found that individual sensations have an order, they [some psychologists] assume that they are <em>measurable</em>. Having travestied physical measurement in order to justify that assumption, they assume that their sensation intensities will be related to stimuli by numerical laws … which, if they mean anything, are certainly false.<br>
+—<span class="citation" data-cites="ferguson1940">Ferguson 等 (<a href="#ref-ferguson1940" role="doc-biblioref">1940</a>, p.&nbsp;347)</span></p>
+</blockquote>
+<p>分歧的核心在于，对 quantity 的经典定义要求一种严格的<em>可加</em>结构。 一个属性只有在存在有意义的拼接操作时，才被认为是可测量的。 例如，重量是一个可测量属性，因为把装有三块石头的袋子放到秤上，得到的数值和把三块石头分别放到秤上再把数值相加是一样的（在科学哲学中，具有这种拼接属性的属性被称为“广延”属性，与“强度”属性相对）。 Ferguson Committee 最重要的成员之一 Norman Campbell，刚刚以这种方式定义了<em>基本</em>测量 <span class="citation" data-cites="campbell1928account">(例如 <a href="#ref-campbell1928account" role="doc-biblioref">Campbell 1928</a>)</span>，并把它和<em>派生测量</em>相对照；后者指的是基于一个或多个基本测量计算某个函数。 按照 Ferguson Committee 上物理学家的看法，测量心理感觉是不可能的，因为它们永远无法建立在任何具有这种可加操作的<em>基本</em>尺度之上。 把人的感觉像重量或长度一样拆成几个部分是说不通的：感觉并不是可以组合的“多少”或“数量” <span class="citation" data-cites="cattell1962relational">(<a href="#ref-cattell1962relational" role="doc-biblioref">Cattell 1962</a>)</span>。 到委员会成立时，即便是 Donders <span class="citation" data-cites="donders1969">(<a href="#ref-donders1969" role="doc-biblioref">1969 [1868]</a>)</span> 用来测量心理过程速度的“减法法”中那种直观的可加逻辑，也出于同样理由受到了怀疑（例如，在一本早期教材中，<span class="citation" data-cites="woodworth1938">Woodworth (<a href="#ref-woodworth1938" role="doc-biblioref">1938</a>, p.&nbsp;83)</span> 断言：“We cannot break up the reaction into successive acts and obtain the time for each act”）。</p>
+<p>Ferguson Committee 调查的主要对象，是心理学家 S. S. Stevens。他声称自己使用心理物理工具测量了响度感觉。 在被经典测量框架排斥之后，他开始发展一种替代性的“操作主义”框架 <span class="citation" data-cites="stevens1946">(<a href="#ref-stevens1946" role="doc-biblioref">Stevens 1946</a>)</span>。在这个框架里，物理学家承认的经典比率尺度只是给事物分配数字的若干方式之一（见上面的 <a href="#tbl-stevens" class="quarto-xref">表&nbsp;<span>8.1</span></a>）。 Stevens 的框架迅速传播开来，催生了大量被提出的测量。 不过，操作主义在心理学之外仍然有争议 <span class="citation" data-cites="michell1999measurement">(<a href="#ref-michell1999measurement" role="doc-biblioref">Michell 1999</a>)</span>。 Stevens <span class="citation" data-cites="stevens1946">(<a href="#ref-stevens1946" role="doc-biblioref">1946</a>, p.&nbsp;677)</span> 立场中最极端的版本（“Measurement … is defined as the assignment of numerals to objects or events according to rules”）允许研究者用一个测量来操作性地<em>定义</em>构念 <span class="citation" data-cites="hardcastle1995ss">(<a href="#ref-hardcastle1995ss" role="doc-biblioref">Hardcastle 1995</a>)</span>。 例如，人们可以说智力这个构念就是 IQ 所测到的<em>那个东西</em>。 于是，研究者自己决定他们提出的测量应该属于哪一种尺度类型。</p>
+<p>在 <a href="002-theories.html" class="quarto-xref"><span>章 2</span></a> 中，我们勾勒了一种略有不同的看法，它更接近某种建构实在论 <span class="citation" data-cites="giere2004models putnam1999threefold">(<a href="#ref-giere2004models" role="doc-biblioref">Giere 2004</a>; <a href="#ref-putnam1999threefold" role="doc-biblioref">Putnam 2000</a>)</span>。 像幸福这样的心理构念被认为独立于任何特定操作化而存在，这让我们更有基础去讨论同一个构念的不同测量方式各有什么优点和缺点。 换句话说，我们不能想怎么分配数字就怎么分配。 某个特定构念或量在某个特定尺度上<em>是否可测量</em>，应该被当作一个经验问题。</p>
+<p>测量理论的下一个重大突破，出现在 1960 年代数学心理学诞生之时；它试图为心理测量建立更严格的基础。 这一努力最终形成了三卷本 Foundations of Measurement 系列 <span class="citation" data-cites="krantz2006additive suppes2007foundations luce2007foundations">(<a href="#ref-krantz2006additive" role="doc-biblioref">Krantz 等 1971</a>; <a href="#ref-suppes2007foundations" role="doc-biblioref">Suppes 等 1989</a>; <a href="#ref-luce2007foundations" role="doc-biblioref">Luce 等 1990</a>)</span>，它已经成为每个想理解非物理科学中测量问题的心理学学生的经典读物。 <!-- ^[It is worth noting that 20th century physics has also seriously challenged the classical additive understanding of measurement. For example, velocities are revealed to be non-additive under general relativity, and properties of quantum particles are only measurable under a complex probabilistic framework.] --> 其中一个关键突破，是把负担从测量构念自身的（可加性）转移到测量构念彼此结合时产生的（可加）<em>效应</em>上：</p>
+<blockquote class="blockquote">
+<p>When no natural concatenation operation exists, one should try to discover a way to measure factors and responses such that the ‘effects’ of different factors are additive.<br>
+—<span class="citation" data-cites="luce1964simultaneous">Luce 和 Tukey (<a href="#ref-luce1964simultaneous" role="doc-biblioref">1964</a>, p.&nbsp;4)</span></p>
+</blockquote>
+<p>这种现代观点大体上影响了我们在这里描述的立场。</p>
+</section>
+</div>
+</section>
+<section id="测量信度" class="level3 page-columns page-full" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="测量信度"><span class="header-section-number">8.1.2</span> 测量信度</h3>
+<p>那么，当我们没有真正的零点时，应该如何测量信号和噪声呢？我们仍然可以查看重复测量之间的变异，但不是把测量之间的变异和平均数相比，而是把它和另一种变异相比，例如人与人之间的变异。接下来，我们会讨论区间尺度上的信度，但许多相同工具也已经被发展出来，用于顺序和名义尺度。</p>
+<p>想象你正在开发一种工具，用来测量某种认知能力。我们假设每个参与者都有一个真实能力 <span class="math inline">\(t\)</span>，就像上面的例子中他们有一个真实身高一样。不过，每次我们用这个工具测量真实能力时，它都会受到某些测量误差的影响。设定这个误差服从均值为零的正态分布，也就是说，它不会<strong>偏倚</strong>测量，只是加入噪声。结果就是我们的观察分数 <span class="math inline">\(o\)</span>。<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;我们用来介绍这一组思想的方法叫<strong>经典测验理论</strong>。还有其他更现代的替代方法，但 CTT（通常这么叫）是思考这些概念的好起点。</p></div></div><p>采用这种方法，我们可以定义一个相对版本的变异系数。 其想法是，测量信度是真实分数方差（信号）在观察分数方差（包含噪声）中所占的比例。如果 <span class="math inline">\(\sigma^2_t\)</span> 是真实分数方差，<span class="math inline">\(\sigma^2_o\)</span> 是观察分数方差，那么这个比率就是： <span class="math display">\[
+R = \frac{\sigma^2_t}{\sigma^2_o}.
+\]</span> 当噪声很高时，分母会很大，<span class="math inline">\(R\)</span> 会下降到 <span class="math inline">\(0\)</span>；当噪声很低时，分子和分母几乎相同，<span class="math inline">\(R\)</span> 会接近 <span class="math inline">\(1\)</span>。</p>
+<p>这一切听起来很好，只有一个问题：如果不知道真实分数及其方差，就无法用这个公式计算信度。但如果我们已经知道这些东西，就根本不需要测量了！</p>
+<p>有两种主要方法可以从数据中计算信度。每种方法都做了一个假设，让你绕过这个根本问题：我们只能接触到观察分数，而不能接触到真实分数。让我们在数学测试的语境中想一想。</p>
+<p><strong>Test-retest reliability</strong>。 想象你有两套平行版本的数学测试，它们难度相同。因此，你认为学生在任意一个版本上的分数都会反映同一个真实分数，只是带有一些噪声。在这种情况下，你可以用这两组观察分数（<span class="math inline">\(o_1\)</span> 和 <span class="math inline">\(o_2\)</span>）来计算工具的信度，只需要计算它们之间的相关（<span class="math inline">\(\rho_{o_1, o_2}\)</span>）。其逻辑是，如果两个版本都反映同一个真实分数，那么它们之间共享的方差（按 <a href="005-estimation.html" class="quarto-xref"><span>章 5</span></a> 中的说法就是<strong>协方差</strong>）就是 <span class="math inline">\(\sigma^2_t\)</span>，也就是真实分数方差，也正是我们原本想知道却拿不到的变量。因此，test-retest reliability 是一种非常方便的信度测量方式（<a href="#fig-measurement-trt" class="quarto-xref">图&nbsp;<span>8.4</span></a>）。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-measurement-trt" class="quarto-float quarto-figure quarto-figure-center anchored" alt="一个由两条线段组成的图，每条线段上的成对点彼此相连。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-measurement-trt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/measurement/trt.png" class="img-fluid figure-img" alt="一个由两条线段组成的图，每条线段上的成对点彼此相连。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-measurement-trt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;8.4: 计算 test-retest reliability。
+</figcaption>
+</figure>
+</div><div id="fn7"><p><sup>7</sup>&nbsp;问题在于，每一半都……只有原始工具的一半长。为了解决这个问题，可以使用一种叫 Spearman-Brown correction 的校正，用来估计完整长度工具的预期相关。你还需要确保测试不会从开头到结尾越来越难。如果确实会变难，你可能要把偶数题和奇数题分别作为两个平行版本。</p></div></div><p><strong>内部信度</strong>。如果你没有两套平行版本的测试，或者因为某些原因不能测两次，那么还有另一个选择。假设你的数学测试有多个问题（这是个好主意！），你就可以把测试拆成几部分，把每个子部分的分数当作平行版本。最简单的方式是把工具分成两半，计算参与者在两半上的分数相关；这个量叫<strong>split half reliability</strong>。<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>另一种计算内部信度（测试的<strong>一致性</strong>）的方法，是把每个 item 当作一个子工具，并计算所有拆分方式下 split-half 相关的平均值。这个方法得到的统计量是 <strong>Cronbach’s</strong> <span class="math inline">\(\alpha\)</span>（“alpha”）。<span class="math inline">\(\alpha\)</span> 被广泛报告，但也被广泛误解 <span class="citation" data-cites="sijtsma2009">(<a href="#ref-sijtsma2009" role="doc-biblioref">Sijtsma 2009</a>)</span>。第一，它其实是信度的下界，而不是信度本身的好估计。第二，它常被误解为证明一个工具产生的分数“内部一致”，但它并不能证明这一点；它不是维度性的准确概括。<span class="math inline">\(\alpha\)</span> 是一个标准统计量，但应该谨慎使用。</p>
+<!-- you can get the same alpha value from a low-reliability one-factor scale or a high-reliability three-factor  [@sijtsma2009]!] -->
+<p>最后补充一点：信度这个概念也常用来量化不同观察者对同一刺激评分的一致性（<strong>inter-rater</strong> 或 <strong>inter-annotator reliability</strong>），例如让两个编码者评价视频中某个人看起来有多攻击性。最常见的标注者间一致性测量，是用于类别一致性的一种分类指标，叫 <strong>Cohen’s <span class="math inline">\(\kappa\)</span></strong>（“kappa”）；不过，对于连续数据，也可以使用<strong>组内相关系数</strong>（见下面的 <span class="smallcaps">Depth</span> 框），以及许多其他指标。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>depth
+</div>
+</div>
+<section id="信度悖论" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="信度悖论">信度悖论！</h3>
+<p>用我们这里描述的方法计算信度有一个大问题：因为信度被定义为两个变异量的比率，它永远都会相对于样本中的变异。因此，如果一个样本的变异更小，信度就会下降！</p>
+<p>一种正式定义信度的方法，是使用组内相关系数（ICC）： <span class="math display">\[ \text{ICC} = \frac{\sigma^2_b}{\sigma^2_w + \sigma^2_b} \]</span> 其中 <span class="math inline">\(\sigma^2_w\)</span> 是测量中的被试内方差，<span class="math inline">\(\sigma^2_b\)</span> 是测量中的被试间方差。分母来自把上面信度公式中的总观察方差 <span class="math inline">\(\sigma^2_o\)</span> 做分解。</p>
+<p>所以现在，我们不是把变异和平均数相比，而是把一个维度上的变异（参与者之间）和总变异（参与者内加参与者间）相比。ICC 很棘手，而且根据你的数据结构和分析目的，有好几种不同版本可用。<span class="citation" data-cites="mcgraw1996">McGraw 和 Wong (<a href="#ref-mcgraw1996" role="doc-biblioref">1996</a>)</span> 和 <span class="citation" data-cites="gwet2014">Gwet (<a href="#ref-gwet2014" role="doc-biblioref">2014</a>)</span> 对如何在不同情境下计算和解释这个统计量提供了大量指导。</p>
+<p>回到我们 <span class="smallcaps">case study</span> 中显示出高信度的 CDI 数据。现在想象我们把样本限制在 16–18 个月儿童的变化分数上（之前的样本是 16–30 个月）。在这个限制更严格的子集中，整体词汇量会更低，并且彼此更相似；因此，一个孩子<em>内部</em>的平均变化量（<span class="math inline">\(\sigma_w\)</span>）相对于孩子<em>之间</em>的差异（<span class="math inline">\(\sigma_b\)</span>）会更大。这会让我们的信度<em>下降</em>，即便我们是在完全同一批数据的一个子集上计算它。</p>
+<p>这听起来还不算太糟。但我们可以构造出同一个问题更令人担忧的版本。假设我们在管理 CDI 时非常马虎，制造了大量参与者间变异， 比如给不同家庭不同指令。这种做法实际上会<em>提高</em>我们的 split-half reliability 估计（因为提高了 <span class="math inline">\(\sigma_b\)</span>）。参与者内变异保持不变，但参与者间变异会升高！你可以把这叫作“信度悖论”：更马虎的数据收集，反而可能导致更高的信度。 <!-- ^[If you get interested in this topic, take a look at @luck2019. There's also a fascinating article by @hedge2018 that shows why many highly replicable cognitive tasks like the Stroop task nevertheless have low reliability: they don't vary very much between individuals!]  --></p>
+<p>我们需要对自己在信度计算中量化的是哪些变异来源保持敏感，也就是同时关注分子和分母。如果我们计算 split-half reliability，通常是在比较测试题目之间的变异（来自某个题库）和个体之间的变异（来自某个总体）。这两种抽样决策都会影响信度：如果总体更有变异，或者题目更少变异，我们会得到更高的信度。总之，<em>信度是相对的</em>：信度测量依赖于它被计算时的具体情境。</p>
+</section>
+</div>
+<!-- \clearpage -->
+</section>
+<section id="计算信度的实用建议" class="level3" data-number="8.1.3">
+<h3 data-number="8.1.3" class="anchored" data-anchor-id="计算信度的实用建议"><span class="header-section-number">8.1.3</span> 计算信度的实用建议</h3>
+<p>如果你不知道实验中测量的信度，你就有浪费自己和参与者时间的风险。Ignorance is not bliss。信度更高的测量会带来对目标因果效应更精确的测量，因此也会降低所需样本量。</p>
+<p>Test-retest reliability 通常是实践中最保守的信度测量。Test-retest 估计不仅包含测量误差，也包含参与者在不同测试时段之间的状态变化，以及工具不同版本之间差异造成的方差。这些真实世界中的量在内部信度估计中不存在，因而内部信度可能会让你错误地以为工具中存在比实际更多的信号。虽然 <span class="math inline">\(\alpha\)</span> 在理论上是信度的下界，但在实践中，test-retest 准确性常常低于 <span class="math inline">\(\alpha\)</span>，因为它整合了所有这些其他变异来源。测量 test-retest reliability 很费力，部分原因是你需要两个不同版本的测试（以避免记忆效应）。不过，如果你计划使用某个工具不止一两次，这项工作很可能是值得的！</p>
+<p>最后，如果你的工具包含多个测量 item，请确保评估它们如何影响工具信度。也许你有几个调查问题，想用来测量同一个构念；也许你有多个内容或难度不同的实验 vignette。其中有些 item 可能不会提高工具信度，有些甚至会拉低信度。至少，你应该始终可视化各 item 的反应分布，快速检查是否存在<strong>地板效应和天花板效应</strong>，也就是 item 的回答总是聚集在量表底端或顶端，限制了它们的用途；同时也要看看是否有某些 item 和其他 item 不相关。</p>
+<p>如果你正在考虑开发一个会反复使用的工具，使用更复杂的心理测量模型来估计工具反应的维度性以及单个 item 的属性，可能会很有用。如果你的 item 是二元答案，比如测试题，那么<strong>item response theory</strong> 是一个不错的起点 <span class="citation" data-cites="embretson2013">(<a href="#ref-embretson2013" role="doc-biblioref">Embretson 和 Reise 2013</a>)</span>。如果你的 item 更像是连续（区间或比率）尺度上的评分，那么可以看看因子分析及相关方法 <span class="citation" data-cites="furr2021">(<a href="#ref-furr2021" role="doc-biblioref">Furr 2021</a>)</span>。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="accident report">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>accident report
+</div>
+</div>
+<section id="被浪费的努力" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="被浪费的努力">被浪费的努力</h3>
+<p>低信度测量会限制你检测测量之间相关的能力。Mike 在研究生阶段曾花了几个月却毫无结果：他让几十名参与者完成一组语言加工任务，然后计算任务之间结果的相关。每次数据收集结束，总会有一个或另一个（虚假的）相关出现在数据分析里。总有什么东西和另一些东西相关。幸好，他总是会试图在新样本中重复这个相关；而在下一个数据集中，我们试图重复的相关会变成零，但另一个（同样很可能虚假的）相关又会出现。</p>
+<p>这个练习是在浪费时间，因为多数任务信度太低，以至于即便它们彼此真的高度相关，如果没有巨大样本量，也几乎不可能检测出这种关系。（如果有人提醒他 multiplicity 校正 [<a href="006-inference.html" class="quarto-xref"><span>章 6</span></a>]，也会很有帮助。）</p>
+<p>对这类个体差异设计，一个有用的经验法则是：两个变量 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 之间能够观察到的最大相关，是它们信度乘积的平方根：<span class="math inline">\(\sqrt{r_x r_y}\)</span>。所以，如果你有两个信度都是 <span class="math inline">\(0.25\)</span> 的测量，那么它们之间可测得的最大相关也只有 0.25！这类方法现在经常被用于认知神经科学（以及其他领域），用来计算所谓测量的<strong>noise ceiling</strong>：原则上<em>可能</em>被预测到的最大信号量 <span class="citation" data-cites="lage-castellanos2019">(<a href="#ref-lage-castellanos2019" role="doc-biblioref">Lage-Castellanos 等 2019</a>)</span>。如果你的样本量太小，以至于无法测量低于 noise ceiling 的相关（见 <a href="010-sampling.html" class="quarto-xref"><span>章 10</span></a>），那么这个研究就不值得做。</p>
+</section>
+</div>
+</section>
+</section>
+<section id="效度" class="level2 page-columns page-full" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="效度"><span class="header-section-number">8.2</span> 效度</h2>
+<p>在 <a href="002-theories.html" class="quarto-xref"><span>章 2</span></a> 中，我们把理论建构过程说成描述构念之间关系的过程。但为了检验理论，必须测量这些构念，这样才能检验它们之间的关系！因此，测量和测量建构与理论建构紧密相关，而效度这一概念处在核心位置。<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;一些作者把“效度”当作一个更宽泛的概念，可以包括例如统计问题 <span class="citation" data-cites="shadish2002">(<a href="#ref-shadish2002" role="doc-biblioref">Shadish, Cook, 和 Campbell 2002</a>)</span>。我们这里关心的效度含义更具体一些。我们聚焦于<strong>构念效度</strong>，也就是测量和构念之间的关系。</p></div><div id="fn9"><p><sup>9</sup>&nbsp;这个比喻是一个不错的粗略指引，但它没有区分两种情况：一种工具是系统性偏倚的（例如对某个群体的分数估计过低），另一种工具是无效的（因为它测量的是错误构念）。</p></div></div><p>有效度的工具测量的是目标构念。在 <a href="#fig-measurement-brandmaier" class="quarto-xref">图&nbsp;<span>8.1</span></a> 中，无效度被画成偏差：靶子上的孔聚得很紧，但位置错了。<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> 既然目标构念没有被观察到，你怎么判断一个测量是否有效？不存在单一的效度检验 <span class="citation" data-cites="cronbach1955">(<a href="#ref-cronbach1955" role="doc-biblioref">Cronbach 和 Meehl 1955</a>)</span>。相反，如果有证据说明该测量能融入更宽广的理论，特别是能关联到它本应测量的特定构念，那么这个测量就是有效的。例如，它应该和同一构念的其他测量强相关，但和不同构念的测量没有那么相关。</p>
+<!-- \clearpage -->
+<p>怎样确立一个测量能融入更宽广的理论？测量效度通常通过一种论证来确立，这种论证会调用不同来源的支持 <span class="citation" data-cites="kane1992">(<a href="#ref-kane1992" role="doc-biblioref">Kane 1992</a>)</span>。以下是一些可以用来支持测量和构念之间关系的方式：</p>
+<ul>
+<li><strong>表面效度</strong>： 测量看起来像这个构念，因此直觉上认为它测量了这个构念是合理的。表面效度是比较弱的效度证据来源，因为它主要依赖前理论直觉，而不是任何定量评估。例如，反应时通常与智力测试结果相关 <span class="citation" data-cites="jensen1979">(例如 <a href="#ref-jensen1979" role="doc-biblioref">Jensen 和 Munro 1979</a>)</span>，但它看起来并不是一个有表面效度的智力测量，因为“只是快”并不符合我们对“聪明”意味着什么的直觉！</li>
+<li><strong>生态效度</strong>： 测量和人们生活中的情境相关。例如，在课堂中对儿童行为自我控制的评分，比实验室中执行的反应时任务更像是一个有生态效度的执行功能测量。生态效度论证可以基于实验任务、刺激，以及实验的总体设置 <span class="citation" data-cites="schmuckler2001">(<a href="#ref-schmuckler2001" role="doc-biblioref">Schmuckler 2001</a>)</span>。研究者会根据自己的目标和理论取向，对生态效度赋予不同权重。</li>
+</ul>
+<ul>
+<li><strong>内部效度</strong>： 通常以负面方式使用。所谓“对内部效度的挑战”，指的是测量实施方式削弱了测量与构念之间关系的情况。例如，如果数学测试后面的 item 表现更差，是因为应试者疲劳，而不是因为他们对概念掌握更差，那么这个测试可能存在内部效度问题。<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></li>
+<li><strong>聚合效度</strong>： 展示效度的经典策略，是证明一个测量和同一构念的其他候选测量相关（通常是相关）。当这些关系被同时测量时，有时称为<strong>同时效度</strong>。正如我们在 <a href="002-theories.html" class="quarto-xref"><span>章 2</span></a> 中提到的，幸福的自我报告和朋友及家人的独立评分相关，这说明两者测量的是同一个底层构念 <span class="citation" data-cites="sandvik1993">(<a href="#ref-sandvik1993" role="doc-biblioref">Sandvik, Diener, 和 Seidlitz 1993</a>)</span>。<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></li>
+<li><strong>预测效度</strong>。 如果某个测量能够预测后来对同一构念的其他测量，或预测可能具有更广泛意义的相关结果。预测效度常用于毕生发展研究和发展研究中，在这些领域，一个测量能否预测未来有意义的人生结果（如教育成功）尤其受重视。例如，课堂自我控制评分（以及其他测量）似乎能强烈预测后来的健康和财富结果 <span class="citation" data-cites="moffitt2011">(<a href="#ref-moffitt2011" role="doc-biblioref">Moffitt 等 2011</a>)</span>。</li>
+<li><strong>区分效度</strong>。 如果能够证明某个测量不同于另一个构念的测量，这种证据就有助于确立它和目标构念之间的特定联系。例如，幸福（更具体说，生活满意度）的测量可以和乐观的测量以及积极、消极情感的测量区分开，这说明它们是不同构念 <span class="citation" data-cites="lucas1996">(<a href="#ref-lucas1996" role="doc-biblioref">Lucas, Diener, 和 Suh 1996</a>)</span>。</li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;这个概念也常被说成和 <em>manipulation</em> 的效度有关，例如，当构念的 manipulation 被混淆，并且另一个心理变量也被同时操纵时。我们会在 <a href="009-design.html" class="quarto-xref"><span>章 9</span></a> 进一步讨论内部效度。</p></div><div id="fn11"><p><sup>11</sup>&nbsp;这种聚合效度的思想和我们在 <a href="002-theories.html" class="quarto-xref"><span>章 2</span></a> 中描述的 holism 有关。如果一个测量和其他有效测量相关，那么它就是有效的；而那些其他测量本身也只有在第一个测量有效时才有效！测量之所以有效，是因为理论有效；理论之所以有效，是因为测量有效。这种循环性是建构心理学理论中困难但也许不可避免的一部分（见上面关于测量史的 <span class="smallcaps">Depth</span> 框）。我们研究人类心智时，并没有一个客观的起点。</p></div></div><section id="实践中的效度论证" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="实践中的效度论证"><span class="header-section-number">8.2.1</span> 实践中的效度论证</h3>
+<p>让我们看看如何为 CDI，也就是 <span class="smallcaps">case study</span> 中的词汇工具，做一个效度论证。首先，CDI 有表面效度：它显然关于早期语言能力。相比之下，虽然儿童身高很可能和他们的早期语言能力相关，但由于它缺乏表面效度，我们应该对这个测量保持怀疑。此外，CDI 显示出良好的聚合效度和预测效度。 在同时测量时，CDI 与儿童真实语音转录以及标准化语言评估中的证据高度相关（如上面 <span class="smallcaps">case study</span> 所讨论）。在预测方面，2 岁时的 CDI 分数与小学阶段的阅读分数相关 <span class="citation" data-cites="marchman2008">(<a href="#ref-marchman2008" role="doc-biblioref">Marchman 和 Fernald 2008</a>)</span>。</p>
+<p>另一方面，CDI 的使用者必须避免对他们所收集数据的内部效度造成挑战。例如，有些 CDI 数据会因为说明不清或数据收集流程很差而受损 <span class="citation" data-cites="frank2021">(<a href="#ref-frank2021" role="doc-biblioref">Frank 等 2021</a>)</span>。此外，CDI 的支持者和批评者也会争论它的生态效度。 让父母和照护者来报告孩子的能力，这确实有相当强的生态效度，因为他们是自己孩子的专家。另一方面，填写一份估计语言能力的结构化表格，对一些高教育背景家庭来说，可能比对低教育背景家庭更熟悉。因此，批评者可以合理地说，跨社会经济阶层比较 CDI 分数可能是一种无效使用 <span class="citation" data-cites="feldman2000">(<a href="#ref-feldman2000" role="doc-biblioref">Feldman 等 2000</a>)</span>。</p>
+<!-- \clearpage -->
+</section>
+<section id="避免可疑的测量实践" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="避免可疑的测量实践"><span class="header-section-number">8.2.2</span> 避免可疑的测量实践！</h3>
+<p>实验研究者有时倾向于临时编造一些 ad hoc 测量。这样做时，重要的是必须用信度和效度来说明自己的选择。<a href="#tbl-flake-questions" class="quarto-xref">表&nbsp;<span>8.2</span></a> 给出了一组问题，用来引导对测量实践做出更周到的报告。</p>
+<!-- ::: {.margin-caption} -->
+<!-- \vspace{-2em} -->
+<div id="tbl-flake-questions" class="quarto-float quarto-figure quarto-figure-center anchored" data-tbl-colwidths="[40,60]">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-flake-questions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;8.2: Questions about measurement that every reseacher should answer in their paper. Adapted from <span class="citation" data-cites="flake2020">Flake 和 Fried (<a href="#ref-flake2020" role="doc-biblioref">2020</a>)</span>.
+</figcaption>
+<div aria-describedby="tbl-flake-questions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Information to Report</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>What is your construct?</td>
+<td>Define construct, describe theory and research.</td>
+</tr>
+<tr class="even">
+<td>What measure did you use to operationalize your construct?</td>
+<td>Describe measure and justify operationalization.</td>
+</tr>
+<tr class="odd">
+<td>Did you select your measure from the literature or create it from scratch?</td>
+<td>Justify measure selection and review evidence on reliability and validity (or disclose the lack of such evidence).</td>
+</tr>
+<tr class="even">
+<td>Did you modify your measure during the process?</td>
+<td>Describe and justify any modifications; note whether they occurred before or after data collection.</td>
+</tr>
+<tr class="odd">
+<td>How did you quantify your measure?</td>
+<td>Describe decisions underlying the calculation of scores on the measure; note whether these were established before or after data collection and whether they are based on standards from previous literature.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<!-- ::: -->
+<p>需要特别小心的一个大问题是，研究者有时会在数据收集之后修改自己的量表和量表计分实践（例如，从调查中删掉 item，或重新缩放回答）。这种事后修改测量的做法有时可以由数据来正当化，但它也可能看起来很像 <span class="math inline">\(p\)</span>-hacking！ 如果研究者在看过数据之后修改测量策略，就需要披露这个决定，而且它可能会削弱统计推断。</p>
+<!-- \clearpage -->
+<div class="callout callout-style-default callout-note callout-titled" title="accident report">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>accident report
+</div>
+</div>
+<section id="这可真是灵活测量" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="这可真是灵活测量">这可真是灵活测量！</h3>
+<p>竞争性反应时任务（CRTT） 是一种基于实验室的攻击性测量。参与者被告知他们正在和另一名玩家进行反应时游戏，并被要求设定会播放给对手的噪声音爆参数。不幸的是，在一项关于 CRTT 文献的分析中，<span class="citation" data-cites="elson2014">Elson 等 (<a href="#ref-elson2014" role="doc-biblioref">2014</a>)</span> 发现不同论文在使用 CRTT 时，使用了差异巨大的任务计分方法。有时分析聚焦于噪声音爆的音量，有时聚焦于持续时间。有时这些分数会被转换（通过对数）或设定阈值。有时它们会被合并成一个总分。Elson 对这种灵活性感到非常担心，于是建立了一个网站（<a href="https://flexiblemeasures.com" class="uri">https://flexiblemeasures.com</a>）来记录他观察到的变异。</p>
+<!-- ![Data on the number of publications using CRTT and the number of different quantifications of CRTT, plotted cumulatively until 2016. Image from <https://flexiblemeasures.com>.](images/measurement/CRTT.png){#fig-crtt} -->
+<p>截至 2016 年，Elson 发现有 <span class="math inline">\(130\)</span> 篇论文使用了 CRTT。 在这些论文中，他记录了惊人的 <span class="math inline">\(157\)</span> 种量化策略。一篇论文报告了从这个测量中提取数值的十种不同策略！更令人担心的是，Elson 和同事发现，当他们在自己的数据上尝试其中一些策略时，不同策略会导致非常不同的效应量和统计显著性水平。实际上，他们可以根据自己选择的计分方式，让一个发现看起来更大或更小。</p>
+<p>通过多个预先指定的测量来三角定位一个构念，可以是一件好事。但 CRTT 分析的问题在于，测量策略的变化似乎是以事后、数据驱动的方式做出的，目的是最大化实验 manipulation 的显著性（就像我们在 <a href="003-replication.html" class="quarto-xref"><span>3</span></a> 和 <a href="006-inference.html" class="quarto-xref"><span>6</span></a> 章讨论过的 <span class="math inline">\(p\)</span>-hacking 一样）。</p>
+<p>这项对 CRTT 测量使用情况的考察有几点启示。第一，也是最令人不安的一点，文献中对 CRTT 数据的分析可能存在未披露的灵活性；研究者利用缺乏标准化这一点，尝试许多不同分析版本，并报告最有利于自己假设的那个。第二，事实上哪一种 CRTT 行为量化方式最有信度和效度，目前并不知道。既然其中一些版本大概比另一些更好，研究者使用次优量化时，实际上就是在“把钱留在桌上”。结果是，如果研究者采用 CRTT，他们很难从文献中获得关于应采用哪种量化方式的指导。</p>
+</section>
+</div>
+</section>
+</section>
+<section id="如何选择一个好的测量" class="level2 page-columns page-full" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="如何选择一个好的测量"><span class="header-section-number">8.3</span> 如何选择一个好的测量？</h2>
+<p>理想情况下，你想要一个有信度也有效度的测量。怎么得到它？一个重要的第一原则是使用已经存在的测量。也许别人已经完成了整理信度和效度证据的辛苦工作；在这种情况下，你大概率会想借用这些工作。标准化测量通常适用范围很广，因此人们可能倾向于抛弃它们，因为它们并不是专门为我们的研究量身定做的。但标准化测量的收益很大。你不仅可以用既有文献来为测量辩护，还可以通过把绝对分数和其他报告进行比较，得到一个重要的总体变异指标。<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>&nbsp;比较绝对测量值是对数据做“sanity check”的一个非常重要技巧。如果你的测量和你要 follow up 的论文中很不一样（例如，反应时长得多或短得多，或测试准确率高得多或低得多），这可能是某些东西出了问题的信号。</p></div></div><p>如果你不使用别人已有的测量，就需要自己造一个。大多数实验者在某个阶段都会走上这条路，但如果你这样做，请记住，你需要弄清楚如何估计它的信度，也需要弄清楚如何为它的效度做论证！</p>
+<p>我们几乎可以给人们做的任何事情分配数字。我们可以对儿童探索性游戏做实验，计算他们与另一个孩子互动的次数 <span class="citation" data-cites="ross1989">(<a href="#ref-ross1989" role="doc-biblioref">Ross 和 Lollis 1989</a>)</span>；也可以做一个关于攻击性的实验，量化参与者给别人盛了多少辣酱 <span class="citation" data-cites="lieberman1999">(<a href="#ref-lieberman1999" role="doc-biblioref">Lieberman 等 1999</a>)</span>。不过，多数时候我们会从相对较小的一组操作变量中选择：询问调查问题、收集选择和反应时、测量眼动等生理变量。除了沿用这些惯例之外，我们如何为特定实验选择正确的测量类型？</p>
+<p>对于应该测量行为的哪一方面，并没有硬性规则；但这里我们会聚焦两个维度，它们可以帮助我们整理可能测量目标的广阔空间。<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> 第一个维度是简单行为到复杂行为的连续体。第二个维度是显性、自愿行为与隐性或非自愿行为之间的焦点差异。</p>
+<div class="no-row-height column-margin column-container"><div id="fn13"><p><sup>13</sup>&nbsp;一些作者区分“自我报告”和“观察性”测量。这个区分乍看很简单，但实际上会变得很复杂。面部表情算“自我报告”吗？语言并不是人们彼此交流的唯一方式，许多行动也是有意图地用于交流的 <span class="citation" data-cites="shafto2012">(<a href="#ref-shafto2012" role="doc-biblioref">Shafto, Goodman, 和 Frank 2012</a>)</span>。</p></div></div><section id="简单行为-vs-复杂行为" class="level3 page-columns page-full" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="简单行为-vs-复杂行为"><span class="header-section-number">8.3.1</span> 简单行为 vs 复杂行为</h3>
+<p><a href="#fig-measurement-considerations" class="quarto-xref">图&nbsp;<span>8.5</span></a> 展示了简单行为和复杂行为之间的连续体。最简单的可测量行为往往是按键，例如：</p>
+<ul>
+<li>在逐词自定步速阅读研究中，按键前进到下一个词；</li>
+<li>在词汇判断任务中选择“是”或“否”；以及</li>
+<li>在不同备选项之间做强迫选择，以表明之前见过哪一个。</li>
+</ul>
+<div id="fig-measurement-considerations" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="一个测量复杂度连续体图：从更受约束、较易分析，到更开放、较难分析。">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-measurement-considerations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/measurement/measure-considerations.png" class="img-fluid figure-img" style="width:80.0%" alt="一个测量复杂度连续体图：从更受约束、较易分析，到更开放、较难分析。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-measurement-considerations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;8.5: 选择一个测量，常常可以被归结为在一个连续体上的选择：一端是简单测量，提供的信息较少，但快速且容易重复；另一端是提供丰富得多的信息，但需要更多时间。
+</figcaption>
+</figure>
+</div>
+<p>这些具体测量，以及许多类似测量，是大量认知心理学研究的日常基本工具。因为它们快速、容易解释，这些任务可以在许多 trial 中反复执行。它们也可以在更广泛的总体中使用，包括幼儿，有时甚至包括非人动物，只要做适当改编即可。（这些范式还有一个额外好处：它们可以产生有用的反应时数据，我们会在下面进一步讨论。）</p>
+<p>相比之下，心理学家研究过范围非常广的复杂行为，包括：</p>
+<ul>
+<li>开放式口头访谈；</li>
+<li>书面表达，例如通过笔迹或写作风格；</li>
+<li>身体运动，包括手势、行走或舞蹈；以及</li>
+<li>绘画或制作物品。</li>
+</ul>
+<p>研究这些行为有很多理由。第一，这些行为本身可能就是目标任务的例子（例如，研究绘画以理解艺术表达的起源）。或者，这个行为也可能代表其他更复杂的目标行为，例如在打字研究中，用打字行为作为词汇知识的 proxy <span class="citation" data-cites="rumelhart1982">(<a href="#ref-rumelhart1982" role="doc-biblioref">Rumelhart 和 Norman 1982</a>)</span>。</p>
+<p>复杂行为通常允许非常多样的测量策略。因此，任何使用复杂行为某个特定测量的实验，通常都需要在前期做大量工作，说明为什么选择这种测量策略，例如如何量化舞蹈、手势或打字错误，并对其信度提供一定保证。此外，让参与者在相同条件下重复复杂行为许多次，通常也困难得多。想象一下，让某人画几百张草图，而不是按几百次键！因此，选择复杂行为，往往意味着放弃大量简单 trial，换取少量更复杂的 trial。</p>
+<p>复杂行为在一个研究计划的开头或结尾尤其有用。在一组实验的开头，它们可以让你看到目标行为的丰富性，并洞察影响它的许多因素。在结尾，它们可以提供一个有生态效度的测量，用来补充一个有信度但更人工化的实验室行为。</p>
+<p>不过，行为越复杂，它在个体之间的变异就越大，受环境和情境因素影响也越大。这些因素可能是现象的重要组成部分，但也可能是很难被实验控制的 nuisance factor。<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> 简单测量通常更容易使用，因此也更容易在一组实验中反复部署，用来迭代你的 manipulation 并检验因果理论。</p>
+<div class="no-row-height column-margin column-container"><div id="fn14"><p><sup>14</sup>&nbsp;如果设计不够仔细，复杂、开放式行为（例如口头访谈）可能特别容易受到我们将在 <a href="009-design.html" class="quarto-xref"><span>章 9</span></a> 中描述的实验偏差影响，包括例如<strong>demand characteristics</strong>，即参与者会说出他们认为实验者想听到的话。定性访谈方法本身可以非常强大，但如果被用作实验干预的测量，就应该谨慎部署。</p></div></div></section>
+<section id="隐性行为-vs-显性行为" class="level3 page-columns page-full" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="隐性行为-vs-显性行为"><span class="header-section-number">8.3.2</span> 隐性行为 vs 显性行为</h3>
+<p>组织测量的第二个重要维度，是隐性测量和显性测量之间的差异。显性测量测量的是参与者有意识觉察的行为，例如对一个问题的回答。相反，隐性测量测量的是参与者无法报告（或偶尔是不愿报告）的心理过程。<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> 长期以来，隐性测量，尤其是反应时，一直被认为能反映内部心理过程 <span class="citation" data-cites="donders1969">(<a href="#ref-donders1969" role="doc-biblioref">Donders 1969 [1868]</a>)</span>。它们也被提议用于测量种族偏见这类参与者可能有动机不披露的品质 <span class="citation" data-cites="greenwald1998">(<a href="#ref-greenwald1998" role="doc-biblioref">Greenwald, McGhee, 和 Schwartz 1998</a>)</span>。 当然，也有大量生理测量可用。其中一些测量眼动、心率或皮肤电，这些都可以和认知过程的某些方面联系起来。另一些则通过 MRI（magnetic resonance imaging）、MEG（magnetoencephalography）、NIRS（near-infrared spectroscopy）和 EEG（electroencephalogram）测量相关信号，反映底层脑活动。这些方法超出了本书范围，不过我们要指出，这里讨论的测量问题当然也适用于它们 <span class="citation" data-cites="zuo2019">(例如 <a href="#ref-zuo2019" role="doc-biblioref">Zuo, Xu, 和 Milham 2019</a>)</span>。</p>
+<div class="no-row-height column-margin column-container"><div id="fn15"><p><sup>15</sup>&nbsp;隐性/显性很可能更像一个连续体，不过一个切分点是参与者的行为是否被认为是有意图的：也就是说，参与者<em>意图</em>按键来登记一个决策，但他们很可能并不意图因为看到了 prime 而在 300 毫秒而不是 350 毫秒内反应。</p></div><div id="fn16"><p><sup>16</sup>&nbsp;描述这种权衡背后信息加工的一种方式，是 drift diffusion models（DDMs），它允许对准确率和反应时做联合分析 <span class="citation" data-cites="voss2013">(<a href="#ref-voss2013" role="doc-biblioref">Voss, Nagler, 和 Lerche 2013</a>)</span>。如果使用得当，DDM 可以提供一种移除速度-准确性权衡的方法，并从同时测量准确率和反应时的任务中提取更可靠的信号 <span class="citation" data-cites="johnson2017">(武器决策任务中的 DDM 示例见 <a href="#ref-johnson2017" role="doc-biblioref">Johnson 等 2017</a>)</span>。</p></div></div><p>许多任务同时产生准确率和反应时数据。它们常常以经典的<strong>速度-准确性权衡</strong>相互取舍：参与者反应越快，就越不准确。例如，为了研究执法中的种族偏见，<span class="citation" data-cites="payne2001">Payne (<a href="#ref-payne2001" role="doc-biblioref">2001</a>)</span> 给美国大学生展示了一系列工具和枪支图片，图片前面先呈现白人面孔或黑人面孔作为 prime。在第一项研究中，当 prime 是黑人面孔时，参与者识别武器更快，但准确率相似。第二项研究加入了反应截止时间，以加快判断速度；结果是不同条件下反应时相等，但在黑人面孔之后武器识别错误更多。这些研究很可能揭示了同一个现象，也就是某种把黑人面孔和武器联系起来的偏差，但任务设计把参与者推到了速度-准确性权衡上的不同位置，从而在不同测量上产生效应。<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></p>
+<p>简单、显性的行为常常是一个很好的起点。使用这些测量的工作，虽然往往生态效度最低，但可以通过隐性测量或更复杂行为的测量得到丰富化。</p>
+</section>
+</section>
+<section id="想测很多东西的诱惑" class="level2 page-columns page-full" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="想测很多东西的诱惑"><span class="header-section-number">8.4</span> 想测很多东西的诱惑</h2>
+<p>如果一个测量很好，两个不是更好吗？许多实验者会在实验中加入多个测量，理由是数据越多越好。但这并不总是真的！</p>
+<p>决定是否纳入多个测量，既是审美和实践问题，也是科学问题。在本书中，我们一直提倡一种观点：实验应该尽可能简单。对我们来说，最好的实验是这样的：一个简单且有效的 manipulation 影响一个有信度且有效度的单一测量。<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> 如果你想纳入不止一个测量，看看我们能不能劝你放弃。<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn17"><p><sup>17</sup>&nbsp;在一篇有趣的文章 “Things I Have Learned (So Far)” 中，<span class="citation" data-cites="cohen1990">Cohen (<a href="#ref-cohen1990" role="doc-biblioref">1990</a>)</span> 打趣说，他如此倾向于大量观察和少量测量，以至于有些学生觉得他的完美研究有 10,000 名参与者，却<em>没有</em>测量。</p></div><div id="fn18"><p><sup>18</sup>&nbsp;和往常一样，我们要限定一下：这里我们只是在谈随机实验！在观察性研究中，重点常常是测量多个测量之间的关联，所以你通常<em>必须</em>纳入不止一个测量。此外，本书的一些作者主张在纵向观察性研究中测量多个 outcome，这可以减少研究者偏差、鼓励报告零效应、便于比较效应量，并提高研究效率 <span class="citation" data-cites="vanderweele2020outcome">(<a href="#ref-vanderweele2020outcome" role="doc-biblioref">VanderWeele, Mathur, 和 Chen 2020</a>)</span>。我们也做过很多描述性研究，这些研究可以非常有价值。在描述性语境中，目标常常是纳入尽可能多的测量，以便对目标现象形成整体图景。</p></div></div><p>第一，确保加入更多测量不会损害每个单独测量。这可能通过疲劳或延续效应发生。例如，如果一个短暂的态度 manipulation 后面接着多个问卷测量，那么很有可能随着时间推移，效应会“fade out”，所以它不会对第一个问卷和最后一个问卷产生同样影响。此外，即便某个 manipulation 对参与者有持续时间较长的影响，调查疲劳也可能导致后面问题的回答更少有意义 <span class="citation" data-cites="herzog1981">(<a href="#ref-herzog1981" role="doc-biblioref">Herzog 和 Bachman 1981</a>)</span>。</p>
+<p>第二，考虑你是否对每个测量都有强预测，还是只是想找更多方式来看到 manipulation 的效应。如 <a href="002-theories.html" class="quarto-xref"><span>章 2</span></a> 所说，我们把实验看作一个“赌注”。你加入的测量越多，就下了越多赌注，但放在每个赌注上的价值就越低。实质上，你是在“hedging your bets”，因此任何一个赌注成功都没那么有说服力。</p>
+<p>第三，如果你在实验中纳入多个测量，就需要考虑如何解释不一致结果。想象你让实验参与者进行一段简短的书面反思，并假设它会影响某个构念（相对于控制写作练习，比如列出饭菜）。如果你纳入了该目标构念的两个测量，其中一个显示出更大效应，你会得出什么结论？你可能会想当然地认为显示更大效应的那个是“更好的测量”，但这个逻辑是循环的：只有当 manipulation 影响了目标构念时，它才是更好的测量，而这正是你一开始要检验的东西！因为不确定哪个测量和构念更相关而纳入多个测量，会放任这种循环逻辑，因为实验本身往往无法解决这个局面。在这种情况下，更好的做法是先做一项初步研究，考察两个测量的信度和效度，从而选择一个作为实验的 primary endpoint。<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn19"><p><sup>19</sup>&nbsp;这个论点有一个例外：有时考察一个 manipulation 对不同测量的影响是有用的，因为这些测量本身很重要。例如，你可能关心某个教育干预是否既提高了成绩，<em>又</em>降低了辍学率。这两个 outcome measure 都很重要，因此把两者都纳入研究是有用的。</p></div></div><p>最后，如果你确实纳入多个测量，选择性报告显著或符合假设的测量就会成为真实风险。因此，preregistration 和透明报告所有测量会变得更加重要。</p>
+<p>有些情况下，更多测量确实更好。实验越昂贵，就越不可能重复做一次来获得同一个 manipulation 效应的新测量。因此，更大型研究为纳入多个测量提供了更强理由。临床试验常常涉及可能影响许多不同测量的干预；想象一种癌症治疗可能影响死亡率、生活质量、肿瘤增长率和其他测量。此外，这类试验极其昂贵，也很难重复。因此，在这类研究中纳入更多测量是有充分理由的。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>depth
+</div>
+</div>
+<section id="调查测量" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="调查测量">调查测量</h3>
+<p>有时，从参与者那里获取信息最简单的方式就是直接询问。调查是实验测量的重要组成部分，所以我们会分享几个最佳实践，主要来自 <span class="citation" data-cites="krosnick2010">Krosnick 和 Presser (<a href="#ref-krosnick2010" role="doc-biblioref">2010</a>)</span>。</p>
+<p>把调查问题当作一场对话。你的 item 越容易理解越好。不要重复同一个问题的变体，除非你想得到不同答案！尽量让顺序合理，例如把同一主题的问题放在一起，并从更一般的问题移动到更具体的问题。你加入的“tricky” item 越多，就越容易把棘手答案带进本来直接的问题。一类具体的 tricky question 是评估参与者配合程度的“check” question。我们会在 <a href="012-collection.html" class="quarto-xref"><span>章 12</span></a> 中进一步讨论评估配合程度的各种方式及其优缺点。</p>
+<p>开放式调查问题可以非常丰富且有信息量，尤其是在事先制定了适当的编码（分类）方案，并把回答归入相对较少类别时。另一方面，它们也有现实障碍，因为它们需要编码（往往还需要多个编码者以确保编码信度）。此外，它们往往产生名义数据，而这类数据对定量理论化通常不那么有用。开放式问题是一个有用工具，可以为实验解释增加细微差别和具体色彩。</p>
+<p>调查开发者常犯的一个错误，是试图把太多东西塞进一个问题。想象向餐厅顾客提出这样一个数值评分问题：“你觉得我们的食物和服务怎么样？”如果他们喜欢食物但讨厌服务，或者反过来呢？他们会选择一个中间选项吗？同时询问不止一件事的 item 被称为<strong>double-barreled</strong> 问题。它们会让参与者困惑和沮丧，也会导致数据无法解释。</p>
+<p>特别是考虑到 <strong>Likert scales</strong> 在商业调查研究中无处不在，这类具有固定数量、有序、数值化回答选项的量表，是收集态度和判断问题数据的一种简单且常规的方法（<a href="#fig-measurement-likert" class="quarto-xref">图&nbsp;<span>8.6</span></a>）。双极量表的两个端点代表相反方向，例如“强烈不喜欢”到“强烈喜欢”之间的连续体。单极量表有一个中性端点，例如“无痛”到“非常剧烈疼痛”之间的连续体。调查方法研究表明，当双极量表有 7 个点、单极量表有 5 个点时，信度最大。最好为量表上的每个点都标上文字标签，而不是只标端点。</p>
+<div id="fig-measurement-likert" class="quarto-float quarto-figure quarto-figure-center anchored" alt="由两条线段组成的图：7 个刻度从 extremely bad 到 extremely good；5 个刻度从 never 到 always。">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-measurement-likert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/measurement/likert.png" class="img-fluid figure-img" style="width:70.0%" alt="由两条线段组成的图：7 个刻度从 extremely bad 到 extremely good；5 个刻度从 never 到 always。">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-measurement-likert-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;8.6: 基于调查最佳实践的 Likert scales：一个七点双极观点量表和一个五点单极频率量表。两个量表的所有点都有标签。
+</figcaption>
+</figure>
+</div>
+<p>一个重要问题是，是否应该把 Likert scales 的数据当作顺序数据还是区间数据来处理。假设 Likert 评分是区间数据非常常见（也很方便），这样就可以使用平均数、标准差和线性回归这类标准统计工具。这种做法的风险在于，量表 item 之间可能并不等距。例如，在标为“从不”、“很少”、“偶尔”、“经常”和“总是”的量表上，“经常”到“总是”的距离可能大于“很少”到“偶尔”的距离。</p>
+<p>在实践中，你可以选择使用适当的回归变体，例如顺序 logistic regression 及其变体；也可以尝试评估并缓解把数据当作区间数据的风险。如果选择第二种方式，仔细查看单个 item 的原始分布，看看它们是否近似正态，是非常好的做法（见 <a href="015-viz.html" class="quarto-xref"><span>章 15</span></a>）。</p>
+<p>最近，一些研究者开始使用“visual analog scales”（或 sliders）作为解决方案。我们不推荐这些做法，因为所得数据的分布常常锚定在起点或端点 <span class="citation" data-cites="matejka2016">(<a href="#ref-matejka2016" role="doc-biblioref">Matejka 等 2016</a>)</span>，而且一项 meta-analysis&nbsp;显示，它们的信度远低于 Likert scales <span class="citation" data-cites="krosnick2010">(<a href="#ref-krosnick2010" role="doc-biblioref">Krosnick 和 Presser 2010</a>)</span>。</p>
+<p>在调查问题中加入“我不知道”或“其他”选项，通常并没有什么帮助。这些做法属于鼓励<strong>satisficing</strong>的一类实践，也就是调查作答者给出足够好、但并没有对问题做充分思考的答案。satisficing 导致的另一个行为是“straight-lining”，也就是每个问题都选择同一个选项。一般来说，防止 straight-lining 的最好方法，是让调查相对简短、有吸引力，并给予合理报酬。通过“reverse coding”让一些问题的预期答案更负面，可以阻止 straight-lining，但代价是 item 会更令人困惑。一些显而易见的格式选项也可以减少 straight-lining，例如，把量表放得更分散，或放在后续（网页）页面上。</p>
+<p>总之，调查问题可以是一个有用工具，用来诱发对显性问题的分级判断。把它们做好，最好的方式就是尽量让问题清楚、容易回答。</p>
+</section>
+</div>
+</section>
+<section id="本章小结测量" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="本章小结测量"><span class="header-section-number">8.5</span> 本章小结：测量</h2>
+<p>在早些时候，所有心理学家都会去同样的会议，担心同样的事情。但后来，不同群体之间发生了分化。教育心理学家和心理测量学家非常关心测试中的不同题目如何具有不同测量属性。他们开始探索如何选择好 item 和坏 item，以及如何在抽离具体 item 的情况下弄清人的能力。这项研究产生了大量关于测量的有趣思想，但这些思想很少渗透到心理学其他领域的日常实践中。 例如，认知心理学家收集很多 trial，并以高精度测量目标量，但他们较少担心测量效度。 社会心理学家在实验中花更多时间担心生态效度问题，但他们常常使用心理测量属性很差的 ad hoc 量表。</p>
+<p>这些领域之间的社会学差异导致了一种遗憾的分歧：实验研究者常常没有认识到那些为辅助测量而发展出来的概念工具的价值，因此没能用有助于做出更好推断的方式，来推理自己测量的信度和效度。如我们在讨论信度时所说，Ignorance is not bliss。把这些选择想清楚要好得多！</p>
+<!-- ::: {.callout-note title="accident report"} -->
+<!-- failure of measurement invariance in IQ example (the use of precious stone names as vocabulary items) leading to potentially spurious conclusions (Wicherts and Dolan 2010). -->
+<!-- ::: -->
+<div class="callout callout-style-default callout-note callout-titled" title="discussion questions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>discussion questions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>回到 <a href="001-experiments.html" class="quarto-xref"><span>章 1</span></a> 中关于金钱和幸福关系的例子。你能想出多少种不同的幸福测量？列出至少五种。</p></li>
+<li><p>从你的幸福测量中选择一个，并为它设计一个 validation strategy，至少引用三种不同类型的效度。这个 validation 工作需要收集哪些数据？</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="readings">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>readings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>一本经典的心理测量学教材，以简单易读的方式介绍信度和效度概念：Furr, R. Michael <span class="citation" data-cites="furr2021">(<a href="#ref-furr2021" role="doc-biblioref">2021</a>)</span>. <em>Psychometrics: An Introduction</em>. SAGE publications.</p></li>
+<li><p>一篇很好的问卷设计入门：Krosnick, Jon A. <span class="citation" data-cites="krosnick2018">(<a href="#ref-krosnick2018" role="doc-biblioref">2018</a>)</span>. “Improving Question Design to Maximize Reliability and Validity.” In <em>The Palgrave Handbook of Survey Research</em>, edited by David L. Vannette and Jon A. Krosnick, 95–101. Springer. <a href="https://doi.org/10.1007/978-3-319-54395-6_13" class="uri">https://doi.org/10.1007/978-3-319-54395-6_13</a>.</p></li>
+<li><p>关于测量问题以及为什么不应忽视这些问题的介绍：Flake, Jessica Kay, and Eiko I. Fried <span class="citation" data-cites="flake2020">(<a href="#ref-flake2020" role="doc-biblioref">2020</a>)</span>. “Measurement Schmeasurement: Questionable Measurement Practices and How to Avoid Them.” <em>Advances in Methods and Practices in Psychological Science</em> 3 (4): 456–465. <a href="https://doi.org/10.1177/2515245920952393" class="uri">https://doi.org/10.1177/2515245920952393</a>.</p></li>
+<li><p>一本通俗易懂的科学测量大众读物：Vincent, James <span class="citation" data-cites="vincent2022">(<a href="#ref-vincent2022" role="doc-biblioref">2022</a>)</span>. <em>Beyond Measure: The Hidden History of Measurement from Cubits to Quantum Constants</em>. Faber &amp; Faber.</p></li>
+</ul>
+</div>
+</div>
+
+
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bornstein1998" class="csl-entry" role="listitem">
+Bornstein, Marc H, 和 O Maurice Haynes. 1998. <span>《Vocabulary competence in early childhood: Measurement, latent construct, and predictive validity》</span>. <em>Child development</em> 69 (3): 654–71.
+</div>
+<div id="ref-brandmaier2018" class="csl-entry" role="listitem">
+Brandmaier, Andreas M, Elisabeth Wenger, Nils C Bodammer, Simone Kühn, Naftali Raz, 和 Ulman Lindenberger. 2018. <span>《Assessing reliability in neuroimaging research <span>t</span>hrough intra-class effect decomposition (ICED)》</span>. <em>Elife</em> 7: e35718.
+</div>
+<div id="ref-campbell1928account" class="csl-entry" role="listitem">
+Campbell, Norman Robert. 1928. <em>An account of the principles of measurement and calculation</em>. Longmans, Green &amp; Company.
+</div>
+<div id="ref-cattel1890mental" class="csl-entry" role="listitem">
+Cattel, J McK. 1890. <span>《Mental tests and measurements》</span>. <em>Mind</em> 15: 373–80.
+</div>
+<div id="ref-cattell1962relational" class="csl-entry" role="listitem">
+Cattell, Raymond B. 1962. <span>《The relational simplex theory of equal interval and absolute scaling》</span>. <em>Acta Psychologica</em> 20: 139–58.
+</div>
+<div id="ref-chang2004inventing" class="csl-entry" role="listitem">
+Chang, Hasok. 2004. <em>Inventing temperature: Measurement and scientific progress</em>. Oxford University Press.
+</div>
+<div id="ref-cohen1990" class="csl-entry" role="listitem">
+Cohen, Jacob. 1990. <span>《Things <span>I</span> Have Learned (<span>S</span>o Far)》</span>. <em>American Psychologist</em> 45: 1304–12.
+</div>
+<div id="ref-cronbach1955" class="csl-entry" role="listitem">
+Cronbach, Lee J., 和 Paul E. Meehl. 1955. <span>《Construct validity in psychological tests》</span>. <em>Psychological bulletin</em> 52 (4): 281–302.
+</div>
+<div id="ref-darrigol2003number" class="csl-entry" role="listitem">
+Darrigol, Olivier. 2003. <span>《Number and measure: Hermann von Helmholtz at the crossroads of mathematics, physics, and psychology》</span>. <em>Studies in History and Philosophy of Science Part A</em> 34 (3): 515–73.
+</div>
+<div id="ref-donders1969" class="csl-entry" role="listitem">
+Donders, Franciscus Cornelis. 1969 [1868]. <span>《On the speed of mental processes》</span>. 翻译 W. G. Koster. <em>Acta psychologica</em> 30 (1969): 412–31. <a href="https://doi.org/10.1016/0001-6918(69)90065-1">https://doi.org/10.1016/0001-6918(69)90065-1</a>.
+</div>
+<div id="ref-elson2014" class="csl-entry" role="listitem">
+Elson, Malte, M. Rohangis Mohseni, Johannes Breuer, Michael Scharkow, 和 Thorsten Quandt. 2014. <span>《Press <span>CRTT</span> to measure aggressive behavior: The unstandardized use of the competitive reaction time task in aggression research.》</span> <em>Psychological Assessment</em> 26 (2): 419–32. <a href="https://doi.org/10.1037/a0035569">https://doi.org/10.1037/a0035569</a>.
+</div>
+<div id="ref-embretson2013" class="csl-entry" role="listitem">
+Embretson, Susan E, 和 Steven P Reise. 2013. <em>Item response theory</em>. Psychology Press.
+</div>
+<div id="ref-fechner1887" class="csl-entry" role="listitem">
+Fechner, Gustav Theodor. 1987 [1887]. <span>《My own viewpoint on mental measurement (1887)》</span>. 翻译 Eckart Scheerer. <em>Psychologcal Research</em> 49 (4): 213–19.
+</div>
+<div id="ref-fechner1860elemente" class="csl-entry" role="listitem">
+———. 1860. <em>Elemente der psychophysik</em>. 卷 2. Breitkopf u. H<span>ä</span>rtel.
+</div>
+<div id="ref-feldman2000" class="csl-entry" role="listitem">
+Feldman, Heidi M, Christine A Dollaghan, Thomas F Campbell, Marcia Kurs-Lasky, Janine E Janosky, 和 Jack L Paradise. 2000. <span>《Measurement properties of the MacArthur Communicative Development Inventories at ages one and two years》</span>. <em>Child development</em> 71 (2): 310–22.
+</div>
+<div id="ref-ferguson1940" class="csl-entry" role="listitem">
+Ferguson, A., C. S. Myers, R. J. Bartlett, H. Banister, F. C. Bartlett, W. Brown, 和 W. S. Tucker. 1940. <span>《Quantitative Estimates of Sensory Events, Final Report》</span>. <em>Report of the British Association for the Advancement of Science</em>, 331–49.
+</div>
+<div id="ref-flake2020" class="csl-entry" role="listitem">
+Flake, Jessica Kay, 和 Eiko I Fried. 2020. <span>《Measurement schmeasurement: Questionable measurement practices and how to avoid them》</span>. <em>Advances in Methods and Practices in Psychological Science</em> 3 (4): 456–65.
+</div>
+<div id="ref-frank2021" class="csl-entry" role="listitem">
+Frank, Michael C, Mika Braginsky, Daniel Yurovsky, 和 Virginia A Marchman. 2021. <em>Variability and consistency in early language learning: The Wordbank project</em>. MIT Press.
+</div>
+<div id="ref-furr2021" class="csl-entry" role="listitem">
+Furr, R Michael. 2021. <em>Psychometrics: an introduction</em>. SAGE publications.
+</div>
+<div id="ref-giere2004models" class="csl-entry" role="listitem">
+Giere, Ronald N. 2004. <span>《How models are used to represent reality》</span>. <em>Philosophy of Science</em> 71 (5): 742–52. <a href="https://doi.org/10.1086/425063">https://doi.org/10.1086/425063</a>.
+</div>
+<div id="ref-greenwald1998" class="csl-entry" role="listitem">
+Greenwald, Anthony G, Debbie E McGhee, 和 Jordan L K Schwartz. 1998. <span>《Measuring individual differences in implicit cognition: the implicit association test.》</span> <em>Journal of personality and social psychology</em> 74 (6): 1464.
+</div>
+<div id="ref-gwet2014" class="csl-entry" role="listitem">
+Gwet, Kilem L. 2014. <em>Handbook of inter-rater reliability: The definitive guide to measuring the extent of agreement among raters</em>. Advanced Analytics.
+</div>
+<div id="ref-hardcastle1995ss" class="csl-entry" role="listitem">
+Hardcastle, Gary L. 1995. <span>《S. S. Stevens and the Origins of Operationism》</span>. <em>Philosophy of Science</em> 62 (3): 404–24.
+</div>
+<div id="ref-heidelberger2004nature" class="csl-entry" role="listitem">
+Heidelberger, Michael. 2004. <em>Nature from within: Gustav Theodor Fechner and his psychophysical worldview</em>. University of Pittsburgh Press.
+</div>
+<div id="ref-herzog1981" class="csl-entry" role="listitem">
+Herzog, A Regula, 和 Jerald G Bachman. 1981. <span>《Effects of questionnaire length on response quality》</span>. <em>Public opinion quarterly</em> 45 (4): 549–59.
+</div>
+<div id="ref-jensen1979" class="csl-entry" role="listitem">
+Jensen, Arthur R, 和 Ella Munro. 1979. <span>《Reaction time, movement time, and intelligence》</span>. <em>Intelligence</em> 3 (2): 121–26.
+</div>
+<div id="ref-johnson2017" class="csl-entry" role="listitem">
+Johnson, David J, Christopher J Hopwood, Joseph Cesario, 和 Timothy J Pleskac. 2017. <span>《Advancing research on cognitive processes in social and personality psychology: A hierarchical drift diffusion model primer》</span>. <em>Social Psychological and Personality Science</em> 8 (4): 413–23.
+</div>
+<div id="ref-kane1992" class="csl-entry" role="listitem">
+Kane, Michael T. 1992. <span>《An argument-based approach to validity》</span>. <em>Psychological Bulletin</em> 112 (3): 527–35.
+</div>
+<div id="ref-kisch1965scales" class="csl-entry" role="listitem">
+Kisch, B. 1965. <em>Scales and Weights: A Historical Outline</em>. Yale studies in the history of science and medicine. Yale University Press.
+</div>
+<div id="ref-krantz2006additive" class="csl-entry" role="listitem">
+Krantz, David H, Robert Duncan Luce, Patrick Suppes, 和 Amos Tversky. 1971. <em>Foundations of measurement I: Additive and polynomial representations</em>. Courier Corporation.
+</div>
+<div id="ref-krosnick2018" class="csl-entry" role="listitem">
+Krosnick, Jon A. 2018. <span>《Improving question design to maximize reliability and validity》</span>. 收入 <em>The Palgrave handbook of survey research</em>, 编辑 David L. Vannette 和 Jon A. Krosnick, 95–101. Springer.
+</div>
+<div id="ref-krosnick2010" class="csl-entry" role="listitem">
+Krosnick, Jon A, 和 Stanley Presser. 2010. <span>《Question and Questionnaire Design》</span>. <em>Handbook of Survey Research</em>, 263.
+</div>
+<div id="ref-lage-castellanos2019" class="csl-entry" role="listitem">
+Lage-Castellanos, Agustin, Giancarlo Valente, Elia Formisano, 和 Federico De Martino. 2019. <span>《Methods for computing the maximum performance of computational models of fMRI responses》</span>. <em>PLoS computational biology</em> 15 (3): e1006397.
+</div>
+<div id="ref-lieberman1999" class="csl-entry" role="listitem">
+Lieberman, Joel D, Sheldon Solomon, Jeff Greenberg, 和 Holly A McGregor. 1999. <span>《A hot new way to measure aggression: Hot sauce allocation》</span>. <em>Aggressive Behavior: Official Journal of the International Society for Research on Aggression</em> 25 (5): 331–48.
+</div>
+<div id="ref-lucas1996" class="csl-entry" role="listitem">
+Lucas, Richard E, Ed Diener, 和 Eunkook Suh. 1996. <span>《Discriminant validity of well-being measures.》</span> <em>Journal of personality and social psychology</em> 71 (3): 616–28.
+</div>
+<div id="ref-luce2007foundations" class="csl-entry" role="listitem">
+Luce, Robert D., David H. Krantz, Patrick Suppes, 和 Amos Tversky. 1990. <em>Foundations of measurement III: Representation, axiomatization, and invariance</em>. Courier Corporation.
+</div>
+<div id="ref-luce1964simultaneous" class="csl-entry" role="listitem">
+Luce, Robert D., 和 John W. Tukey. 1964. <span>《Simultaneous conjoint measurement: A new type of fundamental measurement》</span>. <em>Journal of mathematical psychology</em> 1 (1): 1–27.
+</div>
+<div id="ref-marchman2008" class="csl-entry" role="listitem">
+Marchman, Virginia A, 和 Anne Fernald. 2008. <span>《Speed of word recognition and vocabulary knowledge in infancy predict cognitive and language outcomes in later childhood》</span>. <em>Developmental science</em> 11 (3): F9–16.
+</div>
+<div id="ref-matejka2016" class="csl-entry" role="listitem">
+Matejka, Justin, Michael Glueck, Tovi Grossman, 和 George Fitzmaurice. 2016. <span>《The effect of visual appearance on the performance of continuous sliders and visual analogue scales》</span>. 收入 <em>Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems</em>, 5421–32.
+</div>
+<div id="ref-maul2016philosophical" class="csl-entry" role="listitem">
+Maul, Andrew, David Torres Irribarra, 和 Mark Wilson. 2016. <span>《On the philosophical foundations of psychological measurement》</span>. <em>Measurement</em> 79: 311–20.
+</div>
+<div id="ref-mcgraw1996" class="csl-entry" role="listitem">
+McGraw, Kenneth O, 和 Seok P Wong. 1996. <span>《Forming inferences about some intraclass correlation coefficients.》</span> <em>Psychological methods</em> 1 (1): 30–46.
+</div>
+<div id="ref-michell1999measurement" class="csl-entry" role="listitem">
+Michell, Joel. 1999. <em>Measurement in psychology: A critical history of a methodological concept</em>. 卷 53. Cambridge University Press.
+</div>
+<div id="ref-moffitt2011" class="csl-entry" role="listitem">
+Moffitt, Terrie E, Louise Arseneault, Daniel Belsky, Nigel Dickson, Robert J Hancox, HonaLee Harrington, Renate Houts, 等. 2011. <span>《A gradient of childhood self-control predicts health, wealth, and public safety》</span>. <em>Proceedings of the national Academy of Sciences</em> 108 (7): 2693–98.
+</div>
+<div id="ref-moscati2018measuring" class="csl-entry" role="listitem">
+Moscati, Ivan. 2018. <em>Measuring Utility: From the Marginal Revolution to Behavioral Economics</em>. Oxford University Press.
+</div>
+<div id="ref-narens1986measurement" class="csl-entry" role="listitem">
+Narens, Louis, 和 Robert Duncan Luce. 1986. <span>《Measurement: The theory of numerical assignments.》</span> <em>Psychological Bulletin</em> 99 (2): 166–80.
+</div>
+<div id="ref-payne2001" class="csl-entry" role="listitem">
+Payne, B Keith. 2001. <span>《Prejudice and perception: the role of automatic and controlled processes in misperceiving a weapon.》</span> <em>Journal of personality and social psychology</em> 81 (2): 181–92.
+</div>
+<div id="ref-putnam1999threefold" class="csl-entry" role="listitem">
+Putnam, Hilary. 2000. <em>The threefold cord: mind, body, and world</em>. Columbia University Press.
+</div>
+<div id="ref-ross1989" class="csl-entry" role="listitem">
+Ross, Hildy S, 和 Susan P Lollis. 1989. <span>《A social relations analysis of toddler peer relationships》</span>. <em>Child Development</em> 60 (5): 1082–91.
+</div>
+<div id="ref-rumelhart1982" class="csl-entry" role="listitem">
+Rumelhart, David E, 和 Donald A Norman. 1982. <span>《Simulating a skilled typist: A study of skilled cognitive-motor performance》</span>. <em>Cognitive science</em> 6 (1): 1–36.
+</div>
+<div id="ref-sandvik1993" class="csl-entry" role="listitem">
+Sandvik, Ed, Ed Diener, 和 Larry Seidlitz. 1993. <span>《Subjective well-being: The convergence and stability of self-report and non-self-report measures》</span>. <em>Journal of personality</em> 61 (3): 317–42.
+</div>
+<div id="ref-schmuckler2001" class="csl-entry" role="listitem">
+Schmuckler, Mark A. 2001. <span>《What is ecological validity? A dimensional analysis》</span>. <em>Infancy</em> 2 (4): 419–36.
+</div>
+<div id="ref-shadish2002" class="csl-entry" role="listitem">
+Shadish, William, Thomas D Cook, 和 Donald T Campbell. 2002. <em>Experimental and quasi-experimental designs for generalized causal inference</em>. Boston, MA: Houghton Mifflin.
+</div>
+<div id="ref-shafto2012" class="csl-entry" role="listitem">
+Shafto, Patrick, Noah D Goodman, 和 Michael C Frank. 2012. <span>《Learning from others: The consequences of psychological reasoning for human learning》</span>. <em>Perspectives on Psychological Science</em> 7 (4): 341–51.
+</div>
+<div id="ref-sijtsma2009" class="csl-entry" role="listitem">
+Sijtsma, Klaas. 2009. <span>《On the use, the misuse, and the very limited usefulness of Cronbach’s alpha》</span>. <em>Psychometrika</em> 74 (1): 107–20.
+</div>
+<div id="ref-stevens1946" class="csl-entry" role="listitem">
+Stevens, S S. 1946. <span>《On the theory of scales of measurement》</span>. <em>Science</em> 103 (2684): 677–80.
+</div>
+<div id="ref-suppes2007foundations" class="csl-entry" role="listitem">
+Suppes, Patrick, David H Krantz, Robert Duncan Luce, 和 Amos Tversky. 1989. <em>Foundations of measurement II: Geometrical, threshold, and probabilistic representations</em>. Courier Corporation.
+</div>
+<div id="ref-sep-measurement-science" class="csl-entry" role="listitem">
+Tal, Eran. 2020. <span>《<span>Measurement in Science</span>》</span>. 收入 <em>The <span>Stanford</span> Encyclopedia of Philosophy</em>, 编辑 Edward N. Zalta, <span>F</span>all 2020. <a href="https://plato.stanford.edu/archives/fall2020/entries/measurement-science/" class="uri">https://plato.stanford.edu/archives/fall2020/entries/measurement-science/</a>.
+</div>
+<div id="ref-vanderweele2020outcome" class="csl-entry" role="listitem">
+VanderWeele, Tyler J, Maya B Mathur, 和 Ying Chen. 2020. <span>《Outcome-wide longitudinal designs for causal inference: a new template for empirical studies》</span>. <em>Statistical Science</em> 35 (3): 437–66.
+</div>
+<div id="ref-vincent2022" class="csl-entry" role="listitem">
+Vincent, James. 2022. <em>Beyond measure: The hidden history of measurement</em>. Faber &amp; Faber.
+</div>
+<div id="ref-voss2013" class="csl-entry" role="listitem">
+Voss, Andreas, Markus Nagler, 和 Veronika Lerche. 2013. <span>《Diffusion Models in Experimental Psychology》</span>. <em>Experimental Psychology</em> 60 (6): 385–402. <a href="https://doi.org/10.1027/1618-3169/a000218">https://doi.org/10.1027/1618-3169/a000218</a>.
+</div>
+<div id="ref-woodworth1938" class="csl-entry" role="listitem">
+Woodworth, R. S. 1938. <em>Experimental psychology</em>. Holt.
+</div>
+<div id="ref-zuo2019" class="csl-entry" role="listitem">
+Zuo, Xi-Nian, Ting Xu, 和 Michael Peter Milham. 2019. <span>《Harnessing reliability for neuroscience research》</span>. <em>Nature Human Behaviour</em> 3 (8): 768–71. <a href="https://doi.org/10.1038/s41562-019-0655-x">https://doi.org/10.1038/s41562-019-0655-x</a>.
+</div>
+</div>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./007-models.html" class="pagination-link" aria-label="模型">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./009-design.html" class="pagination-link" aria-label="设计">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

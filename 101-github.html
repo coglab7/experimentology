@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>附录 B — Git 和 GitHub – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./102-rmarkdown.html" rel="next">
+<link href="./100-instructors.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./100-instructors.html">附录</a></li><li class="breadcrumb-item"><a href="./101-github.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#引言" id="toc-引言" class="nav-link active" data-scroll-target="#引言"><span class="header-section-number">B.1</span> 引言</a></li>
+  <li><a href="#回顾基本-terminal-commands终端命令" id="toc-回顾基本-terminal-commands终端命令" class="nav-link" data-scroll-target="#回顾基本-terminal-commands终端命令"><span class="header-section-number">B.2</span> 回顾基本 terminal commands（终端命令）</a></li>
+  <li><a href="#安装-git" id="toc-安装-git" class="nav-link" data-scroll-target="#安装-git"><span class="header-section-number">B.3</span> 安装 Git</a>
+  <ul class="collapse">
+  <li><a href="#是否成功安装" id="toc-是否成功安装" class="nav-link" data-scroll-target="#是否成功安装"><span class="header-section-number">B.3.1</span> 是否成功安装？</a></li>
+  <li><a href="#其他版本" id="toc-其他版本" class="nav-link" data-scroll-target="#其他版本"><span class="header-section-number">B.3.2</span> 其他版本</a></li>
+  <li><a href="#设置你的姓名和邮箱" id="toc-设置你的姓名和邮箱" class="nav-link" data-scroll-target="#设置你的姓名和邮箱"><span class="header-section-number">B.3.3</span> 设置你的姓名和邮箱</a></li>
+  </ul></li>
+  <li><a href="#在-github-上创建-repo并-clone-到你的电脑" id="toc-在-github-上创建-repo并-clone-到你的电脑" class="nav-link" data-scroll-target="#在-github-上创建-repo并-clone-到你的电脑"><span class="header-section-number">B.4</span> 在 GitHub 上创建 repo，并 clone 到你的电脑</a>
+  <ul class="collapse">
+  <li><a href="#设置-authentication认证" id="toc-设置-authentication认证" class="nav-link" data-scroll-target="#设置-authentication认证"><span class="header-section-number">B.4.1</span> 设置 authentication（认证）</a></li>
+  <li><a href="#clone-这个-repo" id="toc-clone-这个-repo" class="nav-link" data-scroll-target="#clone-这个-repo"><span class="header-section-number">B.4.2</span> Clone 这个 repo</a></li>
+  </ul></li>
+  <li><a href="#做一些-commits" id="toc-做一些-commits" class="nav-link" data-scroll-target="#做一些-commits"><span class="header-section-number">B.5</span> 做一些 commits</a>
+  <ul class="collapse">
+  <li><a href="#更新-readme-文件" id="toc-更新-readme-文件" class="nav-link" data-scroll-target="#更新-readme-文件"><span class="header-section-number">B.5.1</span> 更新 README 文件</a></li>
+  <li><a href="#add-并-commit-修改到-git" id="toc-add-并-commit-修改到-git" class="nav-link" data-scroll-target="#add-并-commit-修改到-git"><span class="header-section-number">B.5.2</span> Add 并 commit 修改到 Git</a></li>
+  <li><a href="#向-repo-添加另一个文件并-commit" id="toc-向-repo-添加另一个文件并-commit" class="nav-link" data-scroll-target="#向-repo-添加另一个文件并-commit"><span class="header-section-number">B.5.3</span> 向 repo 添加另一个文件并 commit</a></li>
+  </ul></li>
+  <li><a href="#push-你的修改到-github" id="toc-push-你的修改到-github" class="nav-link" data-scroll-target="#push-你的修改到-github"><span class="header-section-number">B.6</span> Push 你的修改到 GitHub</a></li>
+  <li><a href="#对-repo-做更多修改" id="toc-对-repo-做更多修改" class="nav-link" data-scroll-target="#对-repo-做更多修改"><span class="header-section-number">B.7</span> 对 repo 做更多修改</a></li>
+  <li><a href="#回滚到先前版本" id="toc-回滚到先前版本" class="nav-link" data-scroll-target="#回滚到先前版本"><span class="header-section-number">B.8</span> 回滚到先前版本</a></li>
+  <li><a href="#什么不应该放到-git-上" id="toc-什么不应该放到-git-上" class="nav-link" data-scroll-target="#什么不应该放到-git-上"><span class="header-section-number">B.9</span> 什么不应该放到 Git 上</a></li>
+  <li><a href="#更多资源" id="toc-更多资源" class="nav-link" data-scroll-target="#更多资源"><span class="header-section-number">B.10</span> 更多资源</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./100-instructors.html">附录</a></li><li class="breadcrumb-item"><a href="./101-github.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-git" class="quarto-section-identifier">附录 B — Git 和 GitHub</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="学习目标">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>学习目标
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>解释 Git 和 GitHub 是什么</li>
+<li>在自己的电脑上设置 Git 和 GitHub</li>
+<li>学习如何修改 GitHub 上的 repository</li>
+<li>练习撤销你在 GitHub 上做过的一次修改</li>
+<li>学会如何告诉 Git 在项目中忽略哪些文件或文件夹</li>
+</ul>
+</div>
+</div>
+<section id="引言" class="level2 page-columns page-full" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="引言"><span class="header-section-number">B.1</span> 引言</h2>
+<p>你有没有把一份你<em>以为</em>是最终版的 manuscript 发给合作者，也许文件名叫 “Manuscript final”，结果对方发回一个更新版本，叫 “Manuscript final - JC”？于是你按要求修改，再发回去，文件名叫 “Manuscript final - JC FINAL”；与此同时，另一个合作者又发来邮件，附件叫 “Manuscript final - MF”，里面还有更多 edits？如果这听起来很熟悉，请继续读下去，我们来帮你！</p>
+<p>首先，让我们介绍 Git。</p>
+<p><strong>Git</strong> 是一种软件，你可以在自己的电脑上安装并本地运行。它允许你在处理文件时追踪文件变化。Git 能帮助你管理上面那种噩梦场景，因为它让你很容易保留同一文档的不同版本，也很容易在多台电脑上独自处理同一项目，并和其他人协作（无论你们是在不同时间工作，还是同时工作）！换句话说，Git 像一个 undo button，但带有标签，告诉你什么时候做了什么修改，并且有一条历史记录，可以追溯到你对项目做过的第一次修改。这使它非常适合协作项目。</p>
+<p>但 Git 作为 version control system，和 GitHub 结合起来会更强大：</p>
+<p><strong>GitHub</strong> 提供在线存储和共享 Git repositories 的服务。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 任何人都可以在 GitHub 上获得免费账号，而且 GitHub 为学生提供免费的 premium accounts（见 <a href="https://education.github.com/">这里</a>）。</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;“repo” 是 “repository” 的缩写。repo 就像一个包含文件的文件夹（这些文件通常作为某个项目的一部分彼此相关），并带有关联的随时间变化的修改历史。</p></div></div><p>为了描述 GitHub 最有用的一些功能，我们先把 GitHub 设定为一个地方：你可以在其中把工作存储在叫 repositories 的文件夹里。这些 repositories 位于“云端”，因为它们可以通过互联网（github.com）访问，因此你可以从任何设备访问它们。</p>
+<p><img src="images/git/cloud_1.png" class="img-fluid"></p>
+<p>例如，想象你的合作者有一个叫 “hello” 的项目。他们把所有代码、材料和分析都存储到 GitHub 上一个叫 “hello” 的 repository 中：</p>
+<p><img src="images/git/cloud_2.png" class="img-fluid"></p>
+<p>作为项目新成员，你需要把这个 repository 复制到自己的本地设备（例如 laptop）上，这样你就可以检查 repository 并做自己的修改。在 GitHub 语言里，把 repository 复制到自己设备上的初始步骤叫做 “cloning” 这个 repository：</p>
+<p><img src="images/git/cloud_3.png" class="img-fluid"></p>
+<p>一旦你对 “hello” repository 做了修改（例如添加或删除代码、添加或移除文件），这些修改会存在于你的 local repository 中，但你还需要采取步骤，让它们反映回“云端”，这样合作者才能看到这些修改。你需要做的第一步是 “add” 并 “commit” 你的修改。“Adding” 你的修改会为你所做的修改拍一张快照。“Committing” 你的修改会记录这些已添加的修改。注意，这些只是准备步骤，你的所有修改仍然是本地的：</p>
+<p><img src="images/git/cloud_4.png" class="img-fluid"></p>
+<p>现在，你已经准备好真正把修改分享到云端，让所有合作者看到你改了什么。这个步骤叫做 “pushing” 到 GitHub：</p>
+<p><img src="images/git/cloud_5.png" class="img-fluid"> 到目前为止，我们描述的是单个用户与 GitHub 的交互。虽然把 GitHub 用作追踪自己修改的方式已经是个好主意，但 GitHub 的真正潜力会在许多用户共同协作同一个项目时释放出来。这允许任何合作者随时 “pull” repository 的最新版本，跟踪谁在什么时候做了什么修改，并轻松 revert 到先前版本：</p>
+<p><img src="images/git/cloud_7.png" class="img-fluid"></p>
+<p>现在我们已经在概念层面介绍了 GitHub 的不同功能，下一节会是一个更实践的教程，介绍如何以上述方式使用 GitHub。</p>
+</section>
+<section id="回顾基本-terminal-commands终端命令" class="level2" data-number="B.2">
+<h2 data-number="B.2" class="anchored" data-anchor-id="回顾基本-terminal-commands终端命令"><span class="header-section-number">B.2</span> 回顾基本 terminal commands（终端命令）</h2>
+<p>本教程会在 Terminal 中操作。下面是一些需要知道的有用命令：</p>
+<p><img src="images/git/git_tutorial2.png" class="img-fluid"></p>
+<p>（更多见 <a href="https://github.com/0nn0/terminal-mac-cheatsheet">这里</a>）</p>
+</section>
+<section id="安装-git" class="level2" data-number="B.3">
+<h2 data-number="B.3" class="anchored" data-anchor-id="安装-git"><span class="header-section-number">B.3</span> 安装 Git</h2>
+<p>前往 <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a> 并安装 Git。</p>
+<p>（Windows 用户，本教程其余部分请打开 GitBash；Mac 用户请打开 Terminal。）</p>
+<section id="是否成功安装" class="level3" data-number="B.3.1">
+<h3 data-number="B.3.1" class="anchored" data-anchor-id="是否成功安装"><span class="header-section-number">B.3.1</span> 是否成功安装？</h3>
+<p>在 terminal 中输入：</p>
+<blockquote class="blockquote">
+<p><code>git --version</code></p>
+</blockquote>
+<p>查看当前已安装的 Git 版本。</p>
+<div class="cell">
+<pre class="marginfigure cell-code"><code>**Mac troubleshooting**
+
+try installing: Git version 1.8.4.2</code></pre>
+</div>
+</section>
+<section id="其他版本" class="level3" data-number="B.3.2">
+<h3 data-number="B.3.2" class="anchored" data-anchor-id="其他版本"><span class="header-section-number">B.3.2</span> 其他版本</h3>
+<p>本教程会关注如何从 terminal 使用 GitHub，但如果你更喜欢简单的点选体验，可以安装 GitHub <a href="https://desktop.github.com/">desktop app</a>。下面是桌面版外观截图：</p>
+<p><img src="images/git/desktop.png" class="img-fluid"></p>
+<p>其他选项包括 <a href="https://www.sourcetreeapp.com/">SourceTree</a>（免费）、<a href="https://www.git-tower.com/">Tower</a>（不免费，但功能强大，学生折扣约 ~$25）。也可以<a href="http://happygitwithr.com/">在 RStudio 中设置 Git pane</a>。</p>
+</section>
+<section id="设置你的姓名和邮箱" class="level3" data-number="B.3.3">
+<h3 data-number="B.3.3" class="anchored" data-anchor-id="设置你的姓名和邮箱"><span class="header-section-number">B.3.3</span> 设置你的姓名和邮箱</h3>
+<p>每个 Git commit 都会使用这些信息。输入：</p>
+<blockquote class="blockquote">
+<p><code>git config --global user.name "John Doe"</code></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><code>git config --global user.email johndoe@example.com</code></p>
+</blockquote>
+<p>还要运行一次下面这条命令（它确保 Git 以合理方式 push）：</p>
+<blockquote class="blockquote">
+<p><code>git config --global push.default simple</code></p>
+</blockquote>
+</section>
+</section>
+<section id="在-github-上创建-repo并-clone-到你的电脑" class="level2 page-columns page-full" data-number="B.4">
+<h2 data-number="B.4" class="anchored" data-anchor-id="在-github-上创建-repo并-clone-到你的电脑"><span class="header-section-number">B.4</span> 在 GitHub 上创建 repo，并 clone 到你的电脑</h2>
+<p>在 GitHub 上创建账号：<a href="https://github.com/" class="uri">https://github.com/</a>。</p>
+<p>在 <a href="https://github.com/new" class="uri">https://github.com/new</a> 创建一个新的空 public repository。</p>
+<p>把它命名为 ‘hello’，并确保勾选 “Add a README file” checkbox<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>。</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;供以后参考（现在可以忽略！）：你也可以把电脑上已有的任何 directory 变成 Git repo，方法是用 <code>cd</code> 进入该 directory，然后输入 <code>git init</code>。之后，当你想把这个 repo 放到 GitHub 上时，按步骤创建一个新 repo，但<em>不要用 readme 初始化</em>，然后在你电脑上的 directory 中输入下面内容（替换红色文字）：</p></div></div><div class="cell">
+<pre class="marginfigure cell-code"><code>
+**git remote add origin git@&lt;span&gt;github.&lt;/span&gt;com:&lt;span style="color: red;"&gt;your_user_name&lt;/span&gt;/&lt;span style="color: red;"&gt;repo_name&lt;/span&gt;.git**</code></pre>
+</div>
+<div class="cell">
+<pre class="marginfigure cell-code"><code>**git push -u origin main**</code></pre>
+</div>
+<section id="设置-authentication认证" class="level3" data-number="B.4.1">
+<h3 data-number="B.4.1" class="anchored" data-anchor-id="设置-authentication认证"><span class="header-section-number">B.4.1</span> 设置 authentication（认证）</h3>
+<p>GitHub 需要一种方式来知道你的电脑是否被授权读取或写入 repository。对于 public repositories，任何人都可以 clone（无需 authentication），但只有 authorized users（例如你和你添加的 collaborators）可以 push changes。对于 private repos，只有 authorized users 可以看到、clone 或 push 到 repo。</p>
+<p>根据你访问 GitHub 的方式，有几种 authentication 方法（所有选项在 <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github">这里</a> 有更详细说明，包括 <a href="https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/installing-and-authenticating-to-github-desktop/authenticating-to-github">GitHub Desktop</a> 的说明）。</p>
+<p>我们建议设置 SSH keys，因为每台电脑只需要设置一次，之后你就可以和 GitHub 交互，而不必输入密码或做任何特殊操作。为此，你需要先<a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys">检查自己是否已有合适的 SSH keys</a>，然后<a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">在需要时创建新 key</a>。最好接受 key 保存位置的默认设置。如果你不想每次输入密码，就不要输入 passphrase。最后，你需要<a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">把这个 SSH key 添加到 GitHub account</a>。</p>
+</section>
+<section id="clone-这个-repo" class="level3" data-number="B.4.2">
+<h3 data-number="B.4.2" class="anchored" data-anchor-id="clone-这个-repo"><span class="header-section-number">B.4.2</span> Clone 这个 repo</h3>
+<p>在你的 repository 网页上，点击绿色的 ‘Code’ 按钮，并选择 SSH 选项。复制其中的文本。</p>
+<p>使用 SSH keys 时，clone repo 应该使用 SSH 选项，它会以 “git@github” 开头。如果你使用不同 authentication method，你会<a href="https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories">使用 HTTPS 选项 clone</a>。</p>
+<p><img src="images/git/git_tutorial_ssh.png" class="img-fluid" style="width:50.0%"></p>
+<p>回到 Terminal（或 GitBash）。</p>
+<p>现在我们会把 hello folder clone 到你的电脑。为了本教程，我们把这个 folder clone 到 desktop。</p>
+<p>首先使用 <code>cd</code> 和 <code>ls</code> 导航到你的 desktop。（Mac 用户可以输入 <code>cd ~/Desktop</code> 到达那里。）</p>
+<p>然后输入（把 URL 替换成你上面复制的那个）：</p>
+<blockquote class="blockquote">
+<p><code>git clone git@github.com:[username]/hello.git</code></p>
+</blockquote>
+<p>现在你的 desktop 上会有一个叫 ‘hello’ 的 folder，其中包含一个叫 ‘Readme’ 的文件。</p>
+</section>
+</section>
+<section id="做一些-commits" class="level2 page-columns page-full" data-number="B.5">
+<h2 data-number="B.5" class="anchored" data-anchor-id="做一些-commits"><span class="header-section-number">B.5</span> 做一些 commits</h2>
+<p>什么是 “commits”？一个 commit 是项目在某个时间点的一张快照。每个 commit 都有作者、时间、一个唯一的长 ID（也叫 ‘SHA’ 或 ‘hash’），以及一条描述它做了什么修改的 message。</p>
+<section id="更新-readme-文件" class="level3 page-columns page-full" data-number="B.5.1">
+<h3 data-number="B.5.1" class="anchored" data-anchor-id="更新-readme-文件"><span class="header-section-number">B.5.1</span> 更新 README 文件</h3>
+<p>README 文件包含关于某个 directory 中其他文件的信息，通常应在 Git repo 中包含一个 README。你的 README 会从 markdown 渲染到 GitHub repository 的首页（示例见 <a href="https://github.com/gabrielecirulli/2048">这里</a> 和 <a href="https://raw.githubusercontent.com/gabrielecirulli/2048/master/README.md">这里</a>）。</p>
+<p>当你在 GitHub 上初始化 repo 时，网站创建了一个空 README 文件。我们来写点内容。</p>
+<p>在 text editor<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> 中打开 README 文件，写一两句话描述你的 repo，然后保存修改。（阅读 <a href="https://guides.github.com/features/mastering-markdown/">markdown basics</a>，并在格式化 README 时恰当使用。）</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;之后会有很多文件是简单 text files，文件类型是 <strong>.md</strong>、<strong>.rmd</strong> 等。你可以用 text editor 打开这些文件。虽然电脑自带默认编辑器（例如 Notepad、TextEdit），但我们建议下载 <a href="https://www.sublimetext.com">Sublime Text</a>，它免费，而且有很多未来会有帮助的强大工具。</p></div></div></section>
+<section id="add-并-commit-修改到-git" class="level3 page-columns page-full" data-number="B.5.2">
+<h3 data-number="B.5.2" class="anchored" data-anchor-id="add-并-commit-修改到-git"><span class="header-section-number">B.5.2</span> Add 并 commit 修改到 Git</h3>
+<p>在 Terminal 中输入下面命令，导航到 repo：</p>
+<blockquote class="blockquote">
+<p><code>cd hello</code></p>
+</blockquote>
+<p>如果输入：</p>
+<blockquote class="blockquote">
+<p><code>git status</code></p>
+</blockquote>
+<p>你会得到一条消息，告诉你 README 已被修改。</p>
+<p>现在我们会 <strong>add this file and commit it</strong><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>，让 Git 为我们所做的修改拍一张快照：</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;供以后参考（现在可以忽略！）：你可以用 <code>git add -p README.md</code> 只添加文件的一部分，并按照 terminal 窗口底部的说明操作。</p></div></div><blockquote class="blockquote">
+<p><code>git add README.md</code></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><code>git commit -m "update readme"</code></p>
+</blockquote>
+<p>（<code>-m</code> 放在 commit message 前面，用来描述你修改了什么。）</p>
+<p>如果现在输入：</p>
+<blockquote class="blockquote">
+<p><code>git status</code></p>
+</blockquote>
+<p>你会得到一条消息，告诉你所有内容都是 up to date（“nothing to commit, working tree clean”）。</p>
+</section>
+<section id="向-repo-添加另一个文件并-commit" class="level3 page-columns page-full" data-number="B.5.3">
+<h3 data-number="B.5.3" class="anchored" data-anchor-id="向-repo-添加另一个文件并-commit"><span class="header-section-number">B.5.3</span> 向 repo 添加另一个文件并 commit</h3>
+<p>使用 RStudio<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> 创建一个新的 R script，其中包含一行代码，例如 <code>print("hello world")</code>。把它作为 <strong>‘pset0.R’</strong> 保存到 <strong>hello</strong> folder 中。</p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;未来我们会使用 R 和 RStudio。如果你还没有下载这些，也可以打开 text editor 做同样的事。</p></div></div><p>然后回到 terminal，输入：</p>
+<blockquote class="blockquote">
+<p><code>git status</code></p>
+</blockquote>
+<p>这会告诉你存在一个叫 pset0.R 的文件，但 Git 还没有 track 它。<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;如果你发现一个叫 “.DS_Store” 的文件正在被 track，那是一个保存 folder preferences 的 Mac 文件。你可以按下面第 7 步描述，把它加到 .gitignore 文件中，让 Git 不再 track 它。</p></div></div><p>现在我们会 <strong>add this file and commit it</strong>（让 Git 开始 track 它）：</p>
+<blockquote class="blockquote">
+<p><code>git add -A</code></p>
+</blockquote>
+<p>（<code>-A</code> 表示我们会 add repo 中所有已发生变化的文件）</p>
+<blockquote class="blockquote">
+<p><code>git commit -m "initial commit of pset0.R"</code></p>
+</blockquote>
+</section>
+</section>
+<section id="push-你的修改到-github" class="level2" data-number="B.6">
+<h2 data-number="B.6" class="anchored" data-anchor-id="push-你的修改到-github"><span class="header-section-number">B.6</span> Push 你的修改到 GitHub</h2>
+<p>到目前为止，我们做的 <code>add</code> 和 <code>commit</code> 只影响你的本地电脑。要把修改放到 GitHub 上，使用 <code>push</code>：</p>
+<blockquote class="blockquote">
+<p><code>git push</code></p>
+</blockquote>
+<p>如果你前往自己的 GitHub account，现在就能看到更新后的文件。</p>
+<p>只有当 remote repository 和 local copy 处于相同状态时，你才能 push 到 remote repository；唯一例外是 commits 中包含的那些修改。如果只有你一个人从一台电脑修改 repo，这可能是真的，但这样就错过了 GitHub 用于协作的大量潜力。</p>
+<p>为了养成好习惯，我们建议你在开始修改文件之前，以及 push 修改之前，都先 pull（从 remote 获取 changes 到 local copy）。运行下面命令来 pull：</p>
+<blockquote class="blockquote">
+<p><code>git pull --rebase</code></p>
+</blockquote>
+<p>这会更新你的 local copy，使其与 remote 匹配，同时保留你已经 commit 的任何修改。（如果你有 uncommitted changes，会得到 error。）因此，如果你的 collaborator 做了 edits 或添加了 files 并 push 了这些 changes，当你 pull 时，你的 local copy 也会有这些 updates。</p>
+</section>
+<section id="对-repo-做更多修改" class="level2" data-number="B.7">
+<h2 data-number="B.7" class="anchored" data-anchor-id="对-repo-做更多修改"><span class="header-section-number">B.7</span> 对 repo 做更多修改</h2>
+<p>现在修改你的 pset0.R 文件（删除和/或添加一两行代码），然后保存。</p>
+<p>在 terminal 中输入：</p>
+<blockquote class="blockquote">
+<p><code>git status</code></p>
+</blockquote>
+<p>查看 <strong>pset0.R</strong> 自上次 commit 后已经被修改。</p>
+<p>要查看自上次 commit 以来的具体修改，输入：</p>
+<blockquote class="blockquote">
+<p><code>git diff</code></p>
+</blockquote>
+<p>然后 commit：</p>
+<blockquote class="blockquote">
+<p><code>git add -A</code></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><code>git commit -m "[describe change]"</code></p>
+</blockquote>
+<p>Push 到 GitHub 上的 repository：</p>
+<blockquote class="blockquote">
+<p><code>git push</code></p>
+</blockquote>
+<p>TIP：Commits 应该聚焦。尽量 commit 小块、bite-sized 的 changes，这些 changes 应该彼此相关、容易命名；其他 changes 则分开 commit。</p>
+<p>Commit messages 的 best practice 是确保你的 commit message 不太长，并且能放进这个句子：“当你 pull 这个 commit 时，它会 ______。”</p>
+</section>
+<section id="回滚到先前版本" class="level2" data-number="B.8">
+<h2 data-number="B.8" class="anchored" data-anchor-id="回滚到先前版本"><span class="header-section-number">B.8</span> 回滚到先前版本</h2>
+<p>有时你会想回到先前的 commit。方法如下：</p>
+<p>要查看先前 commits，输入：</p>
+<blockquote class="blockquote">
+<p><code>git log</code></p>
+</blockquote>
+<p>要更改显示 commits 的数量，在前面加一个 dash 输入你想看到的数量。例如，要查看最近三个 commits，输入：</p>
+<blockquote class="blockquote">
+<p><code>git log -3</code></p>
+</blockquote>
+<p>（你也可以在 GitHub 上查看 commit history。）</p>
+<p>如果需要查看 repo 的先前版本，可以使用 commits 附带的长 ID 数字（也叫 hashes 或 SHAs）来回滚到它们。如果某些东西坏了，而你不知道它是怎么坏的，这会非常有用。你可以回滚到程序还没坏的最后一个 commit，看看从那时起哪些文件发生了变化，以及如何变化。</p>
+<p>例如，假设我们想回滚到最初的 commit，以便运行当时的代码。我们来看最初的 commit。你可以输入 <code>git log</code>，然后按 space bar 向下滚动到最初的 commit。复制粘贴这个 commit 的 hash（按 ‘q’ 回到主 terminal 窗口），然后输入（把 hash 替换为你复制的那个）：</p>
+<blockquote class="blockquote">
+<p><code>git checkout a240f92a22cb8e9b1300bfa690e99ef07692151e</code></p>
+</blockquote>
+<p>或者只输入：</p>
+<blockquote class="blockquote">
+<p><code>git checkout a240f92</code></p>
+</blockquote>
+<p>（如果你提供 hash 的前 8-10 个字符，Git 足够聪明，能判断你想输入哪个 commit。）</p>
+<p>如果打开 desktop 上的 hello folder，你会注意到它现在处于你做出第一个 commit 之后的状态。</p>
+<p><span style="color: red;"><strong>IMPORTANT WARNING</strong></span>：检查完 checkout 后，请务必输入下面命令，回到你开始的地方 [main branch 上的 latest commit]：</p>
+<blockquote class="blockquote">
+<p><code>git checkout main</code></p>
+</blockquote>
+<p>要把文件 revert 到早期 commit 中的状态，输入（把 <code>0766c053</code> 替换为你复制的 hash 前 8-10 个字符）：</p>
+<blockquote class="blockquote">
+<p><code>git revert --no-commit 0766c053..HEAD</code></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><code>git commit -m "revert all changes since first commit"</code></p>
+</blockquote>
+<p>这本质上会拿走你自这个 commit 以来做过的所有 changes，撤销它们，然后把这个撤销保存为一个新的 commit。（你之前的 commits 仍然存在。）</p>
+<div class="cell">
+<pre class="marginfigure cell-code"><code>For more info on undoing things in Git, check:
+https://github.com/blog/2019-how-to-undo-almost-anything-with-git.</code></pre>
+</div>
+<p>如果你想 revert 某一个特定 commit（而不是某个 commit 之后的所有 commits），输入：</p>
+<blockquote class="blockquote">
+<p><code>git revert --no-commit 0766c053</code></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><code>git commit -m "revert the commit where I did xyz..."</code></p>
+</blockquote>
+<p>这些 reversions 也只是更多 commits，所以如果你 revert 了某个东西（并 commit 了它），但后来不想要这个 change，你可以 revert 那个进行 revert 的 commit，回到之前的状态。</p>
+</section>
+<section id="什么不应该放到-git-上" class="level2" data-number="B.9">
+<h2 data-number="B.9" class="anchored" data-anchor-id="什么不应该放到-git-上"><span class="header-section-number">B.9</span> 什么不应该放到 Git 上</h2>
+<p>有些东西你不想放到 Git 上：</p>
+<ul>
+<li><p>output files（由 repo 中其他文件确定性生成的文件，例如 LaTeX project repo 中生成的 PDFs）</p></li>
+<li><p>log files（例如 <code>.RData</code> 和 <code>.Rhistory</code>。你无法描述对它们做了什么 “changes”，而且不同人的 <code>.RData</code> 和 <code>.Rhistory</code> 文件总会冲突。）</p></li>
+<li><p>sensitive data（例如 human subject data 和 passwords）</p></li>
+<li><p>configuration files，这些文件包含与你自己电脑相关的配置（重要：如果你在 Mechanical Turk 上运行东西，确保你的 bin/mturk.properties 文件<strong>不要</strong>放到 Git 上，因为该文件包含 access key，可用于向 Amazon authenticate。）</p></li>
+</ul>
+<p>你可以把这些放进一个特殊的 .gitignore 文件，这样 Git 就不会建议你 add 它们；即使你试图 add，Git 也会提醒你不要添加。你可以在 Sublime Text 这样的 text editor 中创建这个 .gitignore 文件，并按需更新。</p>
+<p>你的 <code>.gitignore</code> 文件可能像这样（准确保存为 <code>.gitignore</code>，不要加文件扩展名）：</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R created files</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.Rproj</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.Rproj.user</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.Rhistory</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.Ruserdata</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.history</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.RData</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Image/output files unless otherwise specified</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.png</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.docx</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.doc</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.jpg</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.gif</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Misc Knit Files</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.aux</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.gz</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.log</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.rdx</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.rdb</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.knit.md</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>cache</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.results</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Other</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.httr<span class="sc">-</span>oauth</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>.DS_Store</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co"># MTurk credentials and data</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>auth.json</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>my<span class="sc">-</span>own<span class="sc">-</span>auth.json</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>mturk<span class="sc">/</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>mturk<span class="sc">-</span>and<span class="sc">-</span>gmail.txt</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Specific file keep</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>README.md</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="er">/</span>original....pdf</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>.Rproj.user</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="更多资源" class="level2" data-number="B.10">
+<h2 data-number="B.10" class="anchored" data-anchor-id="更多资源"><span class="header-section-number">B.10</span> 更多资源</h2>
+<ul>
+<li><p>GitHub 有许多有用指南，可用于学习 branches、pull requests、forking 等内容：<a href="https://guides.github.com/" class="uri">https://guides.github.com/</a> <a href="https://help.github.com/articles/good-resources-for-learning-git-and-github/" class="uri">https://help.github.com/articles/good-resources-for-learning-git-and-github/</a></p></li>
+<li><p>尽管本教程覆盖的内容可能显得 overwhelming，但你真正需要知道的命令其实只有少数几个；它们可以在这个方便的 <a href="https://rogerdudler.github.io/git-guide/files/git_cheat_sheet.pdf">cheatsheet</a> 上找到（旁边还有一些我们没有覆盖的命令）。</p></li>
+<li><p>在 <a href="https://education.github.com/" class="uri">https://education.github.com/</a> 申请 premium account，以获得免费的 private repos。</p></li>
+<li><p>对于想深入学习 Git 的学生，ProGit 是 Scott Chacon 写的一本详尽的 <a href="https://git-scm.com/book">open source book</a>。它可以在线查看，也可以下载为 ePub、Mobi 或 PDF 格式。</p></li>
+</ul>
+<p>致谢：感谢 Cayce Hook、Erin Bennett 和 Daniel Watson 为 Psych 251 创建了本教程的第一版！</p>
+<!-- ## NC: is there any benefit to using Gitbash or the Terminal as opposed to the GitHub Desktop GUI or the GitHub browser?-->
+
+
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./100-instructors.html" class="pagination-link" aria-label="教师指南">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./102-rmarkdown.html" class="pagination-link" aria-label="Quarto (and R Markdown)">
+        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; 估计 – Experimentology 中文版</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./006-inference.html" rel="next">
+<link href="./004-ethics.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c0caf6546007aa1a3f02f3b242844f27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a389896bfd29a960ac5f43d4bd43fa90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked slimcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./005-estimation.html">统计</a></li><li class="breadcrumb-item"><a href="./005-estimation.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Experimentology 中文版</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./001-experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">实验</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./002-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理论</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./003-replication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">重复验证</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./004-ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">统计</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./005-estimation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./006-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./007-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">模型</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">规划</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./008-measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">测量</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./009-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">设计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">抽样</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">执行</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./011-prereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">预注册</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./012-collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">数据收集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">项目管理</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">报告</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./014-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">写作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./015-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">可视化</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">元分析</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./017-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">结语</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./100-instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">教师指南</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./101-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git 和 GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./102-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quarto (and R Markdown)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./103-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse 工具集</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./104-ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">ggplot 绘图</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>本地中文版翻译稿。原作：<em>Experimentology: An Open Science Approach to Experimental Psychology Methods</em>，Michael C. Frank、Mika Braginsky、Julie Cachia、Nicholas A. Coles、Tom E. Hardwicke、Robert D. Hawkins、Maya B. Mathur 和 Rondeline Williams。</p>
+<p>本翻译稿为非官方中文翻译，仅用于本地阅读和翻译审校。公开发布前，需要再次核对原作许可、署名要求、非商业限制以及书中第三方材料的使用条件。</p>
+<p>原作许可见项目 README 和原书页面。</p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#估计一个数量" id="toc-估计一个数量" class="nav-link active" data-scroll-target="#估计一个数量"><span class="header-section-number">5.1</span> 估计一个数量</a>
+  <ul class="collapse">
+  <li><a href="#maximum-likelihood-estimation最大似然估计" id="toc-maximum-likelihood-estimation最大似然估计" class="nav-link" data-scroll-target="#maximum-likelihood-estimation最大似然估计"><span class="header-section-number">5.1.1</span> Maximum likelihood estimation（最大似然估计）</a></li>
+  <li><a href="#bayesian-estimation贝叶斯估计" id="toc-bayesian-estimation贝叶斯估计" class="nav-link" data-scroll-target="#bayesian-estimation贝叶斯估计"><span class="header-section-number">5.1.2</span> Bayesian estimation（贝叶斯估计）</a></li>
+  </ul></li>
+  <li><a href="#估计和比较效应" id="toc-估计和比较效应" class="nav-link" data-scroll-target="#估计和比较效应"><span class="header-section-number">5.2</span> 估计和比较效应</a>
+  <ul class="collapse">
+  <li><a href="#估计-treatment-effect处理效应" id="toc-估计-treatment-effect处理效应" class="nav-link" data-scroll-target="#估计-treatment-effect处理效应"><span class="header-section-number">5.2.1</span> 估计 treatment effect（处理效应）</a></li>
+  <li><a href="#effect-size效应量的测量" id="toc-effect-size效应量的测量" class="nav-link" data-scroll-target="#effect-size效应量的测量"><span class="header-section-number">5.2.2</span> Effect size（效应量）的测量</a></li>
+  <li><a href="#标准化-effect-sizes效应量的优缺点" id="toc-标准化-effect-sizes效应量的优缺点" class="nav-link" data-scroll-target="#标准化-effect-sizes效应量的优缺点"><span class="header-section-number">5.2.3</span> 标准化 effect sizes（效应量）的优缺点</a></li>
+  </ul></li>
+  <li><a href="#估计变量之间的关系" id="toc-估计变量之间的关系" class="nav-link" data-scroll-target="#估计变量之间的关系"><span class="header-section-number">5.3</span> 估计变量之间的关系</a></li>
+  <li><a href="#本章小结估计" id="toc-本章小结估计" class="nav-link" data-scroll-target="#本章小结估计"><span class="header-section-number">5.4</span> 本章小结：估计</a></li>
+  <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography"></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./005-estimation.html">统计</a></li><li class="breadcrumb-item"><a href="./005-estimation.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-estimation" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">估计</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="学习目标">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>学习目标
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>估计一次操纵的因果效应</li>
+<li>讨论 frequentist 和 Bayesian estimation 的差异</li>
+<li>推理 standardized effect sizes 及其优缺点</li>
+<li>量化变量之间的关系</li>
+</ul>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>在我们阅读的每一篇定量论文、参加的每一场定量报告、撰写的每一篇定量文章中，我们都应该问一个问题：<em>estimand 是什么</em>？Estimand 是探究对象——也就是我们组织数据、试图据此做出推断的精确数量。然而，社会科学家太常跳过定义 estimand 这一步。相反，他们会直接描述自己分析的数据和应用的统计程序。如果没有对 estimand 的陈述，读者就不可能知道这些程序是否合适。</p>
+<p>—<span class="citation" data-cites="lundberg2021">Lundberg, Johnson, 和 Stewart (<a href="#ref-lundberg2021" role="doc-biblioref">2021</a>, p.&nbsp;532)</span></p>
+</blockquote>
+<p>在本书第一部分，我们的目标是搭建一些理论想法，为我们处理实验设计和规划的方法提供动机。我们介绍了本书的论点，即实验是关于测量因果效应的；并开始讨论本书的几个主题：<span class="smallcaps">transparency</span>、<span class="smallcaps">measurement precision</span>、<span class="smallcaps">bias reduction</span> 和 <span class="smallcaps">generalizability</span>。</p>
+<p>现在，在第二部分——处理统计主题——我们会把这些想法与一个分析工具箱结合起来，用来<strong>估计</strong>效应并量化其大小（本章）、对这些估计与总体之间的关系做出<strong>推断</strong>（<a href="006-inference.html" class="quarto-xref"><span>章 6</span></a>），并在更复杂的情境中建立用于估计和推断的<strong>模型</strong>（<a href="007-models.html" class="quarto-xref"><span>章 7</span></a>）。虽然本书不会对统计学做广泛处理，但我们希望这些章节能为你开始分析实验数据提供一个基础——以及一种有立场的视角，并且重点放在 <span class="smallcaps">measurement precision</span> 上。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="案例研究">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>案例研究
+</div>
+</div>
+<section id="the-lady-tasting-tea品茶女士" class="level3 unnumbered callout-body-container callout-body">
+<h3 class="unnumbered anchored" data-anchor-id="the-lady-tasting-tea品茶女士">The Lady Tasting Tea（品茶女士）</h3>
+<p>现代统计推断的诞生，来自一个古老难题：如何最好地泡一杯茶。统计学家 Ronald Fisher 显然是在一次下午茶聚会上，听到一位女士宣称，她能分辨是茶先倒入牛奶，还是牛奶先倒入茶。Fisher 没有直接相信她的话，而是设计了一套实验和数据分析程序来检验她的主张。</p>
+<p>这位女士需要判断一组新的六杯茶，并把它们分成 milk-first 和 tea-first 两组。随后，她的数据会被分析，以判断她正确选择的水平是否超过了 chance 所预期的水平。虽然这个过程现在听起来像是烹饪真人秀里可能出现的普通实验，但它之所以在事后看起来平常，只是因为它为后来科学的开展方式设定了标准。</p>
+<p>这个实验中重要且不寻常的部分，是它如何处理潜在的 design confounds，例如哪杯茶先被准备、哪杯茶先被呈现，或者杯子由什么材料制成。先前的实验实践通常会尽量让所有杯子尽可能相同，以减少 confounds 的影响。Fisher 认识到，由于存在未观察到的 confounders，这种策略并不充分。只有通过随机化实验的所有其他方面，他才能对 treatment（milk then tea vs tea then milk）做出强因果推断。我们在 <a href="001-experiments.html" class="quarto-xref"><span>章 1</span></a>—the Lady Tasting Tea 实验中讨论过随机分派的因果力量；它是随机化实验普及过程中的一个关键 touchstone！</p>
+</section>
+</div>
+<section id="估计一个数量" class="level2 page-columns page-full" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="估计一个数量"><span class="header-section-number">5.1</span> 估计一个数量</h2>
+<p>如果实验是关于估计效应的，那么我们到底如何使用实验数据来做这些估计？在例子中，我们会设计 Fisher 实验的一个更现代版本（<a href="#fig-estimation-expt" class="quarto-xref">图&nbsp;<span>5.1</span></a>）。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;理解 Ronald Fisher、Karl Pearson 和其他早期统计推断先驱工作的一个重要背景是，他们都是 eugenics 的坚定支持者。Fisher 是 Cambridge Eugenics Society 的创始主席。Pearson 也许更糟，他是公开的 Social Darwinist，强烈相信 eugenic legislation。无论他们的科学内容如何（而且其中常常是错误的），这些观点在道德上都令人厌恶。</p></div></div><p>我们的因果理论是：茶的质量会受到 milk-tea ordering 的影响，所以我们会通过对 milk-first 和 tea-first 两种茶质量评分来检验这一点；它可以由类似 <a href="#fig-estimation-dag" class="quarto-xref">图&nbsp;<span>5.2</span></a> 的 DAG 表示。我们想 generalize 到的目标总体是所有喝茶者；为此，我们抽取一组喝茶者作为样本。实践中，我们可能会在一家咖啡馆做 field trial，接近顾客并邀请他们参加实验，交换条件是一杯免费茶。虽然这个样本量几乎肯定太小，无法得到精确估计，但为了这个例子，我们会抽样 18 名喝茶者——每个 condition 9 人。</p>
+<div id="fig-estimation-expt" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="A DAG with sample of tea drinkers within all tea drinkers pointing to milk first / tea first then to tea quality rating.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-estimation-expt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/tea-expt.png" class="img-fluid figure-img" style="width:58.0%" alt="A DAG with sample of tea drinkers within all tea drinkers pointing to milk first / tea first then to tea quality rating.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-estimation-expt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.1: 我们的茶实验结构。
+</figcaption>
+</figure>
+</div>
+
+<div class="no-row-height column-margin column-container"><div id="fig-estimation-dag" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A DAG with milk ordering pointing to tea quality.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-estimation-dag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/tea-dag.png" class="img-fluid figure-img" style="width:30.0%" alt="A DAG with milk ordering pointing to tea quality.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation-dag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.2: 表示我们关于茶质量因果理论的 directed acyclic graph。
+</figcaption>
+</figure>
+</div><div id="fn2"><p><sup>2</sup>&nbsp;从技术上说，随机化实验并不是 Fisher 发明的。也许最早的（某种程度上）随机化实验，是 1700 年代一项关于坏血病治疗的试验 <span class="citation" data-cites="dunn1997">(<a href="#ref-dunn1997" role="doc-biblioref">Dunn 1997</a>)</span>。<span class="citation" data-cites="peirce1884">Peirce 和 Jastrow (<a href="#ref-peirce1884" role="doc-biblioref">1884</a>)</span> 也报告了一个非常现代的随机化刺激呈现用法（通过洗牌）。尽管如此，Fisher 的统计工作确实让随机化实验在科学中普及，部分原因是他把它们与一套分析方法整合了起来。</p></div><div id="fn3"><p><sup>3</sup>&nbsp;现在我们会假定这些评分只是简单数值，不担心它们来自一个有界 rating scale（例如，不能超过 7）。如果你对 <strong>Likert scales</strong>（离散数值评分量表的名称；发音为 LICK-ert）感兴趣，我们会在 <a href="008-measurement.html" class="quarto-xref"><span>章 8</span></a> 中多谈一点。</p></div></div><p>作为操纵，我们遵循 Fisher，把参与者（他们当然应该 consent to participate）随机分派到两个 conditions 之一：milk-first 或 tea-first。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> 这是一个 between-participants design，所以每位参与者只得到一杯茶。他们收到茶并品尝。然后，作为我们的测量，我们要求他们在一个从 1（terrible）到 7（delicious）的连续量表上给茶评分。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-estimation-data" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot with points for tea-first and milk-first varying along rating.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-estimation-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/data.png" class="img-fluid figure-img" alt="A plot with points for tea-first and milk-first varying along rating.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.3: 茶品尝实验的示意数据。
+</figcaption>
+</figure>
+</div></div><p><a href="#fig-estimation-data" class="quarto-xref">图&nbsp;<span>5.3</span></a> 展示了我们实验中的一个示例数据集。最终，我们会想估计 milk-first preparation 对质量评分的效应（我们感兴趣的效应）。但现在，我们的目标是估计 milk-first 时茶的质量 <span class="citation" data-cites="kennedy2003">(一些数据提示，这实际上可能是更好的方法，至少对英国喝茶者来说如此; <a href="#ref-kennedy2003" role="doc-biblioref">Kennedy 2003</a>)</span>。更正式地说，我们想用 9 个 milk-first 茶判断的样本来估计一个无法直接观察的数字，即所有可能的 milk-first 杯茶的真实感知质量。出于很快会清楚的原因，我们把这个数字称为 <strong>population parameter</strong>（总体参数）。</p>
+<p>我们会尽量少用符号，但一些符号希望能让事情更清楚。我们会用 <span class="math inline">\(\theta_{M}\)</span>（“theta”）表示我们想估计的参数（population parameter），并用 <span class="math inline">\(\widehat{\theta}_{M}\)</span> 表示 <strong>sample estimate</strong>（样本估计量）。<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;统计学家用这样的 “hats” 表示来自特定样本的估计。记住这一点的一种方式是，“戴帽子的人”戴上帽子，是为了装扮成那个真实数量。</p></div></div><section id="maximum-likelihood-estimation最大似然估计" class="level3 page-columns page-full" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="maximum-likelihood-estimation最大似然估计"><span class="header-section-number">5.1.1</span> Maximum likelihood estimation（最大似然估计）</h3>
+<p>好吧，你可能会说，如果我们想估计 milk-first 质量，难道不应该直接取九杯 milk-first 茶评分的平均值吗？答案是：是的。但我们来展开这个选择：把样本均值作为我们的估计 <span class="math inline">\(\widehat{\theta}_{M}\)</span>，是一种叫做 <strong>maximum likelihood estimation</strong> 的估计方法的例子。一般来说，maximum likelihood estimation 是一个两步过程。</p>
+<p>首先，我们假定一个关于数据如何生成的模型。<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> 这个模型由某些 population parameters 来指定。在我们的例子中，模型再简单不过：我们只是假定存在某个平均茶质量水平，而测量值围绕它变动。让我们看一下 milk-first condition 中的数据，如 <a href="#fig-estimation-ml" class="quarto-xref">图&nbsp;<span>5.4</span></a> 所示。我们的观察值聚集在均值周围，但它们也显示出一些变异。有些更高，有些更低。这类变异是每个数据集的特征。可以通过 <strong>probability distribution</strong>（概率分布）来概括这种变异；它是一个描述可能数据集性质的数学对象。</p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;这里的 “model” 其实是我们在 <a href="001-experiments.html" class="quarto-xref"><span>章 1</span></a> 中讨论过的那类因果模型的一种形式化实例。当你更深入学习 causal modeling 时，通常要做的是为生成数据集的统计过程定义一个因果 “story”，同时使用 DAGs 和我们下面会定义的概率分布。</p></div><div id="fig-estimation-ml" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot with a bell curve over rating with the mean labelled theta_M.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-estimation-ml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/maximum-likelihood.png" class="img-fluid figure-img" alt="A plot with a bell curve over rating with the mean labelled theta_M.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation-ml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.4: Milk-first condition 数据的最佳拟合 normal distribution。
+</figcaption>
+</figure>
+</div></div>
+<p>这里我们唯一会讨论的 probability distribution，是无处不在的 <strong>normal distribution</strong>（有时也叫 “Gaussian distribution”）。Normal distribution 有两个 <strong>parameters</strong>（定义其形状的数字）：一个 <strong>mean</strong> 和一个 <strong>standard deviation</strong>。这两个参数定义了曲线形状。均值（<span class="math inline">\(\theta_M\)</span>）描述中心在哪里，标准差描述它有多宽。从技术上说，均值是来自这个分布的新样本的 <strong>expected value</strong>。我们对这些新样本数值的最佳猜测，是它们位于均值处。我们可以通过引入 <span class="math inline">\(E[M]\)</span> 来更正式地写出这一点，用它表示变量 <span class="math inline">\(M\)</span> 的 expectation。</p>
+<p>标准差 <span class="math inline">\(\sigma_M\)</span> 则是描述这些样本中预期 <strong>variation</strong> 的方式。更大的标准差意味着，我们预期样本平均会离均值更远。我们可以形式化地写成 <span class="math inline">\(\sigma_M = \sqrt{E[(M - \theta_M)^2]}\)</span>：标准差是单个样本与均值之间预期绝对距离；平方和平方根是计算距离所必需的。</p>
+<p>用 probability distribution 描述我们的数据集，为我们提供了一种方式：通过分布参数概括观察，并编码一个关于未来观察可能是什么样的假设。我们如何把 normal distribution 拟合到数据上？我们试图找到那些让观察数据尽可能 likely 的 population parameter 值。先从均值开始。</p>
+<div id="fig-estimation-ml2" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="A plot with a &quot;substantially worse curve&quot; and &quot;maximum likelihood curve&quot;, each point has dashed line to curve.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-estimation-ml2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/maximum-likelihood2.png" class="img-fluid figure-img" style="width:60.0%" alt="A plot with a &quot;substantially worse curve&quot; and &quot;maximum likelihood curve&quot;, each point has dashed line to curve.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-estimation-ml2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.5: 最佳拟合 normal distribution 与明显更差曲线的比较。
+</figcaption>
+</figure>
+</div>
+<p>例如，如果我们的样本均值是 <span class="math inline">\(\widehat{\theta}_{M} = 4.5\)</span>，那么什么底层 <span class="math inline">\(\theta_{M}\)</span> 值会让这些数据最可能出现？假设底层参数是 <span class="math inline">\(\theta_{M}=2.5\)</span>。那么，我们的样本均值大这么多就相当不可能。因此，基于这些数据，<span class="math inline">\(\widehat{\theta}_{M}=2.5\)</span> 是对 population parameter 的一个糟糕估计（<a href="#fig-estimation-ml2" class="quarto-xref">图&nbsp;<span>5.5</span></a>）。反过来，如果参数是 <span class="math inline">\(\theta_{M}=6.5\)</span>，那么我们的样本均值<em>小</em>这么多也有点不太可能。让这些数据最可能的 <span class="math inline">\(\widehat{\theta}_{M}\)</span> 值就是 <span class="math inline">\(4.5\)</span> 本身：样本均值！这就是为什么在这个案例中，样本均值是 maximum likelihood estimate。</p>
+<!-- The second parameter of the normal distribution is the standard deviation. The standard deviation is just exactly what its name says: the average absolute deviation between the mean and any given observation. We won't discuss how to estimate the standard deviation for your sample here; you can do this computation easily in any software package. What's important for now is just that the standard deviation gives us a way to describe the width of the normal distribution. Together, the mean and standard deviation fully describe a particular normal distribution, allowing us to summarise our knowledge about the data using just two parameters. -->
+<!-- Let's visualize our milk-first tea ratings. Since ratings on our scale are discrete, @fig-estimation-milk-first shows them as a histogram. Our estimate of the mean, $\widehat{\theta}_{M}$, is shown as a blue dashed line. -->
+</section>
+<section id="bayesian-estimation贝叶斯估计" class="level3 page-columns page-full" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="bayesian-estimation贝叶斯估计"><span class="header-section-number">5.1.2</span> Bayesian estimation（贝叶斯估计）</h3>
+<p>上面的 maximum likelihood estimation 例子 代表了一种估计参数的常见方法：研究者完全搁置自己关于这些值可能是什么的 prior expectations。这种方法是 <strong>frequentist</strong> statistical approach 的一个例子；它关注估计程序的长期表现。</p>
+<p>这种方法常常是有道理的，尤其是当我们对正在估计的值没有 prior expectations 时。但有时我们<em>确实</em>对这个值有相关信念。例如，在开展茶实验之前，我们并不知道 <span class="math inline">\(\theta_{M}\)</span> 究竟会是多少，但茶被持续评为非常糟（1）或完美（7）似乎都不太可能。对于会收到什么评分，我们有某种可以称为 <em>weak prior expectations</em> 的东西。</p>
+<p>当数据量很小时，这类预期最有用。记住，我们的目标是用样本数据估计 population parameter，而小数据集可能相当 noisy。考虑 prior expectations 可以帮助减弱噪声的影响。例如，如果实验中第一位参与者把茶评为 terrible，我们不会想马上跳到“这茶实际上很糟”的结论。相反，我们可能会推测这位参与者当天心情不好，或者刚刷过牙。另一方面，如果所有参与者都给茶很差的评分，数据就更有说服力；在那种情况下，我们也许会想告诉咖啡馆，他们供应的是不合格的茶。我们的 prior expectations 应在多大程度上调节结论，应随着样本数据量变化；数据很少时，prior expectations 应该有更大影响，但随着收集到更多数据，我们应当给数据更大权重。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-estimation-bayes" class="quarto-float quarto-figure quarto-figure-center anchored" alt="An equation of Bayes rule with posterior (left-hand side), likelihood (numerator 1st term), prior (numerator 2nd term).">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-estimation-bayes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/bayes.png" class="img-fluid figure-img" alt="An equation of Bayes rule with posterior (left-hand side), likelihood (numerator 1st term), prior (numerator 2nd term).">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation-bayes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.6: 带注释的 Bayes’s rule。
+</figcaption>
+</figure>
+</div></div><p>我们如何量化 prior expectations 与当前观察之间的这种权衡？可以通过对 <span class="math inline">\(\widehat{\theta}_{M}\)</span> 做 <strong>Bayesian estimation</strong>。Bayesian estimation 提供了一个有原则的框架，用来整合 prior beliefs 和数据。在数据稀疏或 prior beliefs 很强的情况下，这些估计技术会很有帮助。</p>
+<p>在 Bayesian estimation 中，我们观察到一些数据 <span class="math inline">\(d\)</span>，也就是实验中一组 response。现在我们可以使用 <strong>Bayes’s rule</strong>，这个来自基础概率论的工具，来估计这个数字（<a href="#fig-estimation-bayes" class="quarto-xref">图&nbsp;<span>5.6</span></a>）。这个等式的每一部分都有名字，值得熟悉。我们想计算的东西 <span class="math inline">\(p(\theta_{M} |\text{data})\)</span> 叫做 <strong>posterior probability</strong>——它告诉我们，在观察到数据之后，关于茶质量的 population parameter，我们应该相信什么。<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;我们把 posterior 标成 <span style="color: var(--violet);">purple</span>，表示 likelihood（<span style="color: var(--red);">red</span>）和 prior（<span style="color: var(--blue);">blue</span>）的结合。</p></div><div id="fn7"><p><sup>7</sup>&nbsp;非正式地说，<em>likelihood</em> 只是 probability 的同义词，但在 Bayesian estimation 中，<em>likelihood</em> 是一个技术术语，专门指在我们的假设给定时数据的概率。这种歧义可能有点让人困惑。</p></div></div><p>分子第一部分是 <span class="math inline">\(p(\text{data}|\theta_{M})\)</span>，也就是在我们关于参与者能力的假设下，观察到这些数据的概率。这一部分叫做 <strong>likelihood</strong>。<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> 这个项告诉我们，我们的假设与观察到的数据之间是什么关系——所以，如果我们认为茶质量很高（比如 <span class="math inline">\(\theta_{M} = 6.5\)</span>），那么观察到一堆低质量评分的概率就会相当低。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-estimation-bayes-curves" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot with bell curves for prior (shifted left), likelihood (shifted right), posterior (middle), and rating points.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-estimation-bayes-curves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/bayes-curves.png" class="img-fluid figure-img" alt="A plot with bell curves for prior (shifted left), likelihood (shifted right), posterior (middle), and rating points.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation-bayes-curves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.7: 带有强低值 prior 的茶评分 Bayesian inference。
+</figcaption>
+</figure>
+</div></div><p>分子中的第二项 <span class="math inline">\(p(\theta_{M} )\)</span> 叫做 <strong>prior</strong>。这一项编码我们对茶质量可能分布的信念。直觉上，如果我们认为茶很可能是高质量的，那么要说服我们它很糟，就需要更多证据。相反，如果我们认为它大概很糟，那么几个低评分也许就能说服我们。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-estimation-bayes-curves-weak" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot the same as 5.7 but prior curve is flatter.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-estimation-bayes-curves-weak-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/bayes-curves-weak.png" class="img-fluid figure-img" alt="A plot the same as 5.7 but prior curve is flatter.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation-bayes-curves-weak-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.8: 带有弱低值 prior 的茶评分 Bayesian inference。
+</figcaption>
+</figure>
+</div></div><p><a href="#fig-estimation-bayes-curves" class="quarto-xref">图&nbsp;<span>5.7</span></a> 展示了 prior 与数据结合的一个例子。在这个例子中，我们观察到 9 个评分后，看看 prior 会造成什么差异。如果我们一开始就假设茶很可能不好，那么 posterior mean（紫线）相对于 maximum likelihood estimate（红线）会被往下推。这个 prior 只作用在评分上——也就是茶质量的估计。之后，当我们讨论比较 milk-first 和 tea-first 评分以得到 experimental effect 估计时，我们可以考虑把 prior 放在茶的 <em>discrimination</em>（例如 experimental effect）上。</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-estimation-bayes-curves-moredata" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot the same as 5.7 but with more points, posterior curve is taller and closer to likelihood curve.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-estimation-bayes-curves-moredata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/bayes-curves-moredata.png" class="img-fluid figure-img" alt="A plot the same as 5.7 but with more points, posterior curve is taller and closer to likelihood curve.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation-bayes-curves-moredata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.9: 有强低值 prior 且数据更多时的茶评分 Bayesian inference。
+</figcaption>
+</figure>
+</div></div><p>Priors 通常不会像上面展示的那么强。<a href="#fig-estimation-bayes-curves-weak" class="quarto-xref">Figure&nbsp;<span>5.8</span></a> 展示了当我们有一个更弱的 prior 时图像如何变化；这个 prior 反映的是对评分分布更平、更分散的信念。现在 posterior mean（紫色）更接近 maximum likelihood mean（红色）。这种情况更常见——prior 编码的是一个弱假设：评分不会聚集在量表两端。</p>
+<p>当你有更多数据时，prior 的影响也会降低。在 <a href="#fig-estimation-bayes-curves-moredata" class="quarto-xref">图&nbsp;<span>5.9</span></a> 中，prior 与 <a href="#fig-estimation-bayes-curves" class="quarto-xref">图&nbsp;<span>5.7</span></a> 中相同，但我们有更多数据。因此，posterior distribution 更尖，也更接近数据——prior 带来的差异小得多。</p>
+<p>当你有强信念而数据不多时，Bayesian estimation 最重要。这可能是实验中只有少数参与者的情形；但当你有很多数据、却没有太多关于你关心的特定 units 的数据时，使用 Bayesian methods 也很好——而且也许更常见。例如，你可能有一个关于教育干预效果的大数据集，但关于它如何影响某个特定 subgroup 的数据并不多。在 flat prior（让任何值同等可能的 prior）下，或者当数据量趋近无穷时，Bayesian estimates 和 maximum likelihood estimates 会完全一致。</p>
+</section>
+</section>
+<section id="估计和比较效应" class="level2 page-columns page-full" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="估计和比较效应"><span class="header-section-number">5.2</span> 估计和比较效应</h2>
+<p>我们现在已经讲过如何用 frequentist 和 Bayesian methods 估计单个参数（milk-first tea 人群的均值）。但请回忆一下，我们真正想做的是估计自己感兴趣的 <strong>causal effect</strong>，也就是 milk-first vs tea-first effect。在本节中，我们会讨论如何估计这个效应，然后讨论如何使用 <strong>effect size</strong> measures 来比较不同实验之间的效应（以及这样做的一些优缺点）。<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;这种方法不必只用于 causal effect；它可以是任何 between-group difference。在当前例子中，我们可以确定地说这个效应是因果的，因为我们的实验使用了随机分派。</p></div></div><section id="估计-treatment-effect处理效应" class="level3 page-columns page-full" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="估计-treatment-effect处理效应"><span class="header-section-number">5.2.1</span> 估计 treatment effect（处理效应）</h3>
+<p>我们把关心的因果效应称为 <strong>treatment effect</strong>。<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> 实践中，估计 <span class="math inline">\(\beta\)</span>（一个描述 treatment effect 的参数）会是对我们前面所做工作的一个相当直接的扩展。</p>
+<div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;这是我们的操纵的效应——也就是我们有时称为 “intervention” 的东西。“Treatment” 是来自医学统计的术语，但现在在统计学中使用得更广。</p></div><div id="fig-estimation-data-difference" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot with points for tea-first (mean theta_T) and milk-first (mean theta_M) varying along rating, beta = theta_M - theta_T.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-estimation-data-difference-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/data-difference.png" class="img-fluid figure-img" alt="A plot with points for tea-first (mean theta_T) and milk-first (mean theta_M) varying along rating, beta = theta_M - theta_T.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation-data-difference-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.10: 从茶品尝数据中估计 average treatment effect。
+</figcaption>
+</figure>
+</div><div id="fn10"><p><sup>10</sup>&nbsp;为简单起见，我们假定每个 tea group 的标准差相等。</p></div></div>
+<p>在 maximum likelihood 框架中，我们可以假设每组（milk-first 和 tea-first）的评分都服从 normal distribution，但这些 normal distributions 可能有不同的均值和标准差。扩展上面引入的符号，我们把 tea-first 组的参数称为 <span class="math inline">\(\theta_{T}\)</span>（均值）和 <span class="math inline">\(\sigma\)</span>（标准差）。为了估计 treatment effect，我们提出一个模型：milk-first 评分服从均值为 <span class="math inline">\(\theta_{M} = \theta_{T} + \beta\)</span>、标准差为 <span class="math inline">\(\sigma\)</span> 的 normal distribution。<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> 这个等式说的是，milk-first 评分与 tea-first 评分有相同分布，只是平均值移动了 <span class="math inline">\(\beta\)</span>。这样设定模型后，我们就可以计算 <span class="math inline">\(\hat{\beta}\)</span>，也就是样本中 treatment effect 的估计。</p>
+<p>和单样本情形一样（只估计 milk-first 组的均值），maximum likelihood estimation 随后会通过寻找让数据在假定模型下最可能的 <span class="math inline">\(\beta\)</span> 值来进行。正如你可能预期的，这个估计 <span class="math inline">\(\widehat{\beta}\)</span> 最终就是样本均值之差，<span class="math inline">\(\widehat{\theta}_{M}-\widehat{\theta}_{T}\)</span>。这个差异如 <a href="#fig-estimation-data-difference" class="quarto-xref">图&nbsp;<span>5.10</span></a> 所示。</p>
+<p>在 Bayesian 框架中，我们会再次指定一个 prior <span class="math inline">\(p(\beta)\)</span>，编码我们关于 treatment effect 大小和方向的 prior beliefs。如果我们完全没有 prior beliefs，那么可以指定 flat prior，<span class="math inline">\(p(\beta) \propto 1\)</span>。<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> 如果我们相信 treatment effect 很可能有利于 milk-first pouring（<span class="math inline">\(\beta&gt;0\)</span>），可以指定 prior 是一个以某个正值为中心的 normal distribution（例如 <span class="math inline">\(\beta=0.5\)</span>）；这个 prior 的标准差会编码我们对 prior beliefs 有多确定。而且，如果我们对 treatment effect 的方向没有 prior beliefs，但认为它不太可能非常大，就可以指定一个以 <span class="math inline">\(0\)</span> 为中心的 normal prior，其效果是把估计 “shrink” 到更接近 <span class="math inline">\(0\)</span>。<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn11"><p><sup>11</sup>&nbsp;这个等式说的是，任何 <span class="math inline">\(\beta\)</span> 值的概率都 “proportional to” <span class="math inline">\(1\)</span>，也就是说无论 <span class="math inline">\(\beta\)</span> 取什么值，它都是常数（“flat”）。</p></div><div id="fn12"><p><sup>12</sup>&nbsp;这里讨论的变异性测量处理的是 statistical uncertainty，也就是反映我们只有有限样本量这一事实的不确定性。如果样本量是无限的，就不会有这种不确定性。不过 statistical uncertainty 只是其中一种不确定性。对一个估计整体 credibility 的更整体看法，还应考虑模型之外的其他东西，例如研究设计问题和 bias。</p></div></div><p>和上面的例子一样，如果我们有很多数据或 weak priors，maximum likelihood estimates 和 Bayesian estimates 会非常相似。只有当我们有 strong priors 或相对较少数据时，它们才会分歧。不过，我们之所以搭建这两个不同框架，是因为它们提供了非常不同的 inferential tools，下一章会看到这一点。</p>
+</section>
+<section id="effect-size效应量的测量" class="level3 page-columns page-full" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="effect-size效应量的测量"><span class="header-section-number">5.2.2</span> Effect size（效应量）的测量</h3>
+<p>一旦我们测量了某个东西，就需要决定如何向他人描述这个效应。有时，我们处理的是相当直观、容易描述的关系。例如，研究者可能会说，收到 milk-first tea 的人，平均比收到 tea-first tea 的人快五分钟喝完茶（即 <span class="math inline">\(\widehat{\beta} = 5\)</span> 分钟）。时间以分钟和秒这样的单位测量，因此我们对五分钟意味着什么有共同理解。</p>
+<p>但如果是参与者对茶质量的评分呢？这些评分来自我们设计的任意 7 点 rating scale。说喝 milk-first tea 的参与者比喝 tea-first tea 的参与者评分高 1 分（也就是 <span class="math inline">\(\widehat{\beta} = 1\)</span> 分），这是什么意思？它又如何与另一种量表上的 1 分变化相比，例如一个有类似 anchors（“terrible” 和 “delicious”）但使用 100 分评分系统的量表？</p>
+<p>为了提供一种描述这些关系的共同语言，一些研究者使用 <strong>standardized effect sizes</strong>。一种常见的 standardized effect size 是 Cohen’s <span class="math inline">\(d\)</span>，它提供两个均值之间差异的标准化估计。计算 Cohen’s <span class="math inline">\(d\)</span> 有很多不同方法 <span class="citation" data-cites="lakens2013">(<a href="#ref-lakens2013" role="doc-biblioref">Lakens 2013</a>)</span>，但所有方法通常都是下面公式的某种变体：</p>
+<p><span class="math display">\[
+d = \frac{\theta_{M} - \theta_{T}}{\sigma_{\text{pooled}}}
+\]</span></p>
+<p>其中，均值差（<span class="math inline">\(\theta_{T}\)</span> 和 <span class="math inline">\(\theta_{M}\)</span> 之间的差）除以 pooled standard deviation <span class="math inline">\(\sigma_{\text{pooled}}\)</span>。直觉上，你做的是把研究效应（<span class="math inline">\(\beta\)</span>）除以——也就是按它缩放——研究中个体之间的变异。<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn13"><p><sup>13</sup>&nbsp;Cohen’s <span class="math inline">\(d\)</span>，也称为 <strong>standardized mean difference</strong>（SMD），在更复杂的实验设计中应用起来可能很棘手，例如对每位参与者有多次测量的 within-participant designs。关于这个话题的指导，见 <span class="citation" data-cites="lakens2013">Lakens (<a href="#ref-lakens2013" role="doc-biblioref">2013</a>)</span>。</p></div></div><p>我们来为自己的喝茶研究计算这个测量。可以直接代入 <a href="#fig-estimation-data-difference" class="quarto-xref">图&nbsp;<span>5.10</span></a> 中看到的估计，并计算观察数据的标准差：</p>
+<p><span class="math display">\[\widehat{d} = \frac{\widehat{\theta}_{M} - \widehat{\theta}_{T}}{\widehat{\sigma}_{\text{pooled}}} = \frac{4.5- 3.5}{1.25} = \frac{1}{1.25} = 0.80\]</span> 换句话说，两个 conditions 之间差异的 effect size 是 <span class="math inline">\(0.8\)</span> 个标准差。这个过程如 <a href="#fig-estimation-es-calc" class="quarto-xref">图&nbsp;<span>5.11</span></a> 所示。</p>
+<div id="fig-estimation-es-calc" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="A plot the same as 5.10 along with difference between means on rating scale and on standardized effect size scale.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-estimation-es-calc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/es-calc.png" class="img-fluid figure-img" style="width:85.0%" alt="A plot the same as 5.10 along with difference between means on rating scale and on standardized effect size scale.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig margin-caption" id="fig-estimation-es-calc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.11: Effect size 计算示意图。
+</figcaption>
+</figure>
+</div>
+<p>我们先前说过，喝 milk-first tea 的人，其质量评分在 7 点量表上平均高 1 分（<span class="math inline">\(\beta = 1\)</span> 分）。Cohen’s <span class="math inline">\(d\)</span> 把我们评分量表的任意单位转换成一个 <strong>unitless</strong> 指标，它以数据中的变异为单位来测量。你可能会想：“我为什么要用标准差来描述东西？” 关键好处是，它让我们能够比较使用不同测量的研究中的效应大小。</p>
+<p>假设我们对茶研究做了一次 replication，并有两个变化：（1）我们研究的是一家美国咖啡馆的顾客，而不是英国咖啡馆的顾客；（2）我们使用 100 分 rating scale，而不是 7 分量表。想象一下，正如我们发现英国参与者在 7 分质量量表上给 milk-first tea 高 1 分，美国参与者在 100 分质量量表上也给 milk-first tea 高 1 分。很明显，由于量表不同，这些效应并不相同。但它们到底有多不同？</p>
+<p>一开始，按量表长度进行 normalize 似乎很合理。所以，也许英国实验参与者显示的是 1/7 的评分效应，而美国参与者显示的是 1/100 的评分效应。这种做法的问题在于，它预设来自两个不同 populations 的参与者以完全相同的方式使用两个不同量表！例如，也许美国参与者的判断非常 clumpy，大多集中在 50 附近（也许因为缺乏奶茶经验）。Standardized effect sizes 通过按照数据变异性缩放，绕开了这类问题。</p>
+<p>我们来计算 cross-cultural replication 的 effect size。想象喝 milk-first tea 的参与者给出的平均评分是 50/100，而喝 tea-first tea 的参与者平均评分为 49。但如果他们的变异性也相对更低，也许评分标准差只有 5。使用上面的公式：</p>
+<p><span class="math display">\[\widehat{d}_{\text{US}} = \frac{\widehat{\theta}_{M} - \widehat{\theta}_{T}}{\widehat{\sigma}_{\text{pooled}}} = \frac{50 - 49}{5} = \frac{1}{5}=  0.2\]</span></p>
+<p>Cohen’s <span class="math inline">\(d\)</span> 为 0.2 意味着，当茶是 milk-first 时，美国咖啡馆顾客的评分高出 <span class="math inline">\(0.2\)</span> 个标准差，远小于英国顾客中的 <span class="math inline">\(0.8\)</span> 个标准差差异。</p>
+<p>什么算大效应或小效应，并没有硬性规则，但人们常常回到 <span class="citation" data-cites="cohen1992">Cohen (<a href="#ref-cohen1992" role="doc-biblioref">1992</a>)</span> 建议的标准。按照这些标准，<span class="math inline">\(d = 0.8\)</span> 是 “large effect”，<span class="math inline">\(d = 0.2\)</span> 是 “small effect”。但这些 effect size 解读规范有些任意。这里的关键点是，美国和英国顾客在质量评分上的原始分数变化相同（<span class="math inline">\(\widehat{\beta} = 1\)</span>），而把差异标准化之后，我们就能表达这个差异在英国顾客中更大。</p>
+<p>Cohen’s <span class="math inline">\(d\)</span> 是研究者可以使用的许多 standardized effect sizes 之一。正如 Cohen’s <span class="math inline">\(d\)</span> 标准化组均值差异，也有一些 generalizations 允许 continuous treatment variables 或 covariate adjustment（例如 Pearson’s <em>r</em>，我们下面会讨论；<span class="math inline">\(r^2\)</span>；或 <span class="math inline">\(\eta^2\)</span>）。另外，还有一整套用于 binary variables 之间关系的 effect-size measures（例如 odds ratio）。我们会在全书中使用 effect sizes，但会以 Cohen’s <span class="math inline">\(d\)</span> 作为例子。<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn14"><p><sup>14</sup>&nbsp;如果你想了解其他类型的 effect size，可以看看 <span class="citation" data-cites="fritz2012">Fritz, Morris, 和 Richler (<a href="#ref-fritz2012" role="doc-biblioref">2012</a>)</span> 和 <span class="citation" data-cites="lakens2013">Lakens (<a href="#ref-lakens2013" role="doc-biblioref">2013</a>)</span>。</p></div></div></section>
+<section id="标准化-effect-sizes效应量的优缺点" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="标准化-effect-sizes效应量的优缺点"><span class="header-section-number">5.2.3</span> 标准化 effect sizes（效应量）的优缺点</h3>
+<p>标准化 effect size 有助于说明，7 分量表上的 1 分变化并不等同于 100 分量表上的 1 分变化。但说前者代表 <span class="math inline">\(0.8\)</span> 个标准差差异、后者代表 <span class="math inline">\(0.08\)</span> 个标准差差异，就一定更好吗？</p>
+<p>Effect sizes 让我们更容易跨研究比较结果。不同研究使用不同测量、不同研究设计和不同 populations。标准化给了我们一种 “common language”，用来描述这些多样情境中的估计关系。当我们想通过 meta-analysis 聚合并比较多个研究中的效应时，这种语言很有帮助。它在规划新研究时也很有帮助。当我们试图弄清楚一项研究需要跑多少参与者时，几乎所有 sample size planning 技术都会使用 standardized effect sizes 来确定需要多少数据才能可靠检测到效应。</p>
+<p>不过，标准化 effect sizes 也有局限。例如，如果两个 interventions 在同一个 outcome measure 上产生相同的绝对变化，但研究对象是 outcome 变异性显著不同的不同 populations，那么这两个 interventions 会产生不同的 standardized mean differences <span class="citation" data-cites="baguley2009">(<a href="#ref-baguley2009" role="doc-biblioref">Baguley 2009</a>)</span>（见 <a href="008-measurement.html" class="quarto-xref"><span>章 8</span></a> 中 <span class="smallcaps">深入</span> 框 “Reliability paradoxes!”）。</p>
+<p>想象我们再次开展茶实验，但这次使用 decaf tea，并聚焦儿童。也许对儿童和成人来说，milk-first tea 比 tea-first tea 好喝的程度是一样的。但作为一个规律，儿童的反应比成人更 variable。这种更高的变异水平会让我们在儿童中观察到比成人更小的 effect size。回想一下，我们的英国成人 SD 是 <span class="math inline">\(1.25\)</span>，effect size 是 <span class="math inline">\(d = 0.8\)</span>。想象儿童的 SD 是 <span class="math inline">\(2.5\)</span>。在这个情境下，即便茶在成人和儿童中都导致同样的 1 分绝对评分变化，儿童的 standardized effect size 看起来也只有一半大：</p>
+<p><span class="math display">\[\widehat{d}_{\text{kids}} = \frac{\widehat{\theta}_{M} - \widehat{\theta}_{T}}{\widehat{\sigma}_{\text{pooled}}} = \frac{5- 4}{2.5} = \frac{1}{2.5} =  0.4\]</span></p>
+<p>这个例子突出了标准化的一些挑战。如果我们关注成人和儿童都显示了 1 分评分水平变化（<span class="math inline">\(\widehat{\beta} = 1\)</span>）这一事实，就会得出结论：milk-first tea ordering 对成人和儿童同样更好。但如果我们关注 standardized effect sizes，就会得出结论：milk ordering effect 对成人来说是儿童的两倍大。</p>
+<p>那么，哪个更好：描述原始测量，还是 standardized effect sizes？ 一般来说，我们的回答是：“为什么不两个都要？” 但如果你只能选一个，我们建议考虑你使用的测量类型。对于那些产生 common measurement units、而且很可能已经在许多研究中被报告的测量，使用 raw scores <span class="citation" data-cites="baguley2009">(<a href="#ref-baguley2009" role="doc-biblioref">Baguley 2009</a>)</span>。例如，如果你的研究使用毫秒这样的物理单位（例如 reaction times）或计数（例如追踪词数这类 outcome 的研究），这些测量在跨研究比较时可能相当有用。报告原始测量也能让你检查测量是否合理——例如，70 毫秒的反应时快得不像人，而 10 秒的反应时可能极慢（至少对许多 speeded tasks 来说如此）。</p>
+<p>相比之下，对于测量以原始形式不太可能与其他研究比较，或者本身不太可能有意义的情形，我们建议使用 standardized effect sizes。例如，报告一个 intervention 对原始数学测试分数的效应，只有在读者知道测试有多少题、难度如何等情况下才有意义。在这种读者很难对你所使用的具体测量单位 “calibrated” 的情形中，standardized effect sizes 可能是报告发现的最佳方式 <span class="citation" data-cites="kelley2012">(<a href="#ref-kelley2012" role="doc-biblioref">Kelley 和 Preacher 2012</a>)</span>。</p>
+</section>
+</section>
+<section id="估计变量之间的关系" class="level2 page-columns page-full" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="估计变量之间的关系"><span class="header-section-number">5.3</span> 估计变量之间的关系</h2>
+
+<div class="no-row-height column-margin column-container"><div id="fig-estimation-corr" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A scatterplot of rating correlated with age.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-estimation-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/corr1.png" class="img-fluid figure-img" alt="A scatterplot of rating correlated with age.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.12: 年龄与 milk-first tea 评分之间的关系。
+</figcaption>
+</figure>
+</div><div id="fn15"><p><sup>15</sup>&nbsp;记住，这是一个 correlational relationship，这里不可能做因果推断。</p></div></div><p>到目前为止，我们的重点一直是估计单个效应，但有时我们也想估计两个不同变量之间的关系。扩展我们的例子，<a href="#fig-estimation-corr" class="quarto-xref">图&nbsp;<span>5.12</span></a> 展示了品茶者年龄与其 milk-first tea 评分之间的关系。总体上看，年轻人似乎不如年长者喜欢茶。<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> 我们如何量化这个结果？</p>
+<p>我们需要的第一个概念是 <strong>covariance</strong>。Covariance 捕捉的是，我们预期两个变量会在多大程度上沿同一方向偏离各自均值。这里我们看的是 milk-first tea 评分 <span class="math inline">\(M\)</span> 和参与者年龄 <span class="math inline">\(A\)</span>。可以把二者之间的 covariance 写成：</p>
+<p><span class="math display">\[\text{cov}(M, A) = E[(M - \theta_M) (A - \theta_A)]\]</span></p>
+<p>这个公式表达的是：每个观察在两个变量上分别偏离其 expectation（均值）多少，而这些偏离量的乘积的期望。<a href="#fig-estimation-corr2" class="quarto-xref">Figure&nbsp;<span>5.13</span></a> 展示了这些差异；对于每个点，把它们相乘就得到 covariation。<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn16"><p><sup>16</sup>&nbsp;这看起来有点棘手，但实际上与我们已经见过的基本概念非常相关。记得我们介绍标准差时，把它描述为从一个分布中来的新样本与该分布均值之间的预期距离。Covariance 与此非常相关：标准差就是 <span class="math inline">\(\sqrt{\text{cov}(X,X)}\)</span>，换句话说，是一个变量与自身 covariance 的平方根。</p></div><div id="fig-estimation-corr2" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A plot the same as 5.12 with each point having by segment to mean age (theta_A) and segment to mean rating (theta_M).">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-estimation-corr2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/estimation/corr2.png" class="img-fluid figure-img" alt="A plot the same as 5.12 with each point having by segment to mean age (theta_A) and segment to mean rating (theta_M).">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation-corr2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5.13: 估计年龄与 milk-first tea 评分之间的 covariation。
+</figcaption>
+</figure>
+</div></div>
+<p>这个 covariance 数字给了我们一个关于年龄和评分 co-vary 程度的估计，但它的单位有点奇怪：很难知道“预期偏离 1 point-year”到底意味着什么。我们可以用一个简单技巧来标准化其单位，把它变成一种很好的 effect size 形式——<strong>correlation coefficient</strong>（记作 <span class="math inline">\(r\)</span>）。记住，上面为了创建 effect sizes，我们除以变量的标准差。这里我们要做的，只是除以两个变量的标准差。</p>
+<p><span class="math display">\[r_{M,A} = \frac{\text{cov}(M,A)}{\sigma_M \sigma_A}\]</span> 换句话说，两个变量之间的 correlation 就是标准化后的 covariation。</p>
+<p>Correlation coefficient 是最常见的变量间关联测量。它的范围从 <span class="math inline">\(-1\)</span> 到 <span class="math inline">\(1\)</span>：<span class="math inline">\(-1\)</span> 表示两个变量完全沿相反方向 covary，<span class="math inline">\(1\)</span> 表示两个变量完美 covary。相关为 0 表示两个变量之间没有关联。不过，相关为 <span class="math inline">\(-1\)</span> 或 <span class="math inline">\(1\)</span> 并不意味着变量具有相同尺度：它只意味着它们 “move together”。</p>
+<p>关键的是，correlation 是一种 effect size。Correlations 可以跨不同测量和不同研究比较（包括实验研究和观察性研究），因此是非常有价值的 scale-free comparison tool。<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn17"><p><sup>17</sup>&nbsp;本节描述了一种看待 correlation coefficient 的方式：把它看作标准化的 covariation。关于理解 correlations 的各种不同方式，见 <span class="citation" data-cites="lee-rodgers1988">Lee Rodgers 和 Nicewander (<a href="#ref-lee-rodgers1988" role="doc-biblioref">1988</a>)</span> 的精彩讨论。</p></div></div></section>
+<section id="本章小结估计" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="本章小结估计"><span class="header-section-number">5.4</span> 本章小结：估计</h2>
+<p>在本章中，我们介绍了根据观察数据估计单个测量和 treatment effects 的想法。这些想法很简单，但它们为 hypothesis testing 和 modeling（接下来两章）奠定了基础。此外，我们搭建了 Bayesian 和 frequentist approaches 之间的区别；下一章会扩展这个区别，因为这些传统提供不同的 inferential tools。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="讨论问题">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>讨论问题
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>在本章中，你学习了 estimation；而在本书更一般的论证中，我们认为实验的目标是提供一个尽可能精确的 causal effect 估计。心理学作为一个领域，常常被批评过度关注 inference，而过少关注 estimation。在 <em>Psychological Science</em> 期刊中找一篇报告一个实验或一系列实验的文章，并阅读摘要。摘要是否提到对某个特定数量的估计？在研究摘要中报告估计可能有什么好处？</p></li>
+<li><p>用 <em>New England Journal of Medicine</em> 或 <em>Journal of the American Medical Association</em> 中的一篇论文做同样练习。找一篇论文，检查其中是否提到正在估计某个具体数量。（我们怀疑会有！）思考医学文章与心理学文章之间的这种对比。你如何理解领域之间的这种差异？</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="阅读材料">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>阅读材料
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>一本关于统计学历史和实践的优秀叙事性入门书：Salsburg, Daniel. <span class="citation" data-cites="salsburg2002">(<a href="#ref-salsburg2002" role="doc-biblioref">2002</a>)</span>. <em>The Lady Tasting Tea: How Statistics Revolutionized Science in the Twentieth Century</em>. Macmillan.</p></li>
+<li><p>一本采用与 chapters <a href="#sec-estimation" class="quarto-xref"><span>5</span></a>—<a href="007-models.html" class="quarto-xref"><span>7</span></a> 类似方法的开源统计学教材：Poldrack, Russell A. <span class="citation" data-cites="poldrack2024">(<a href="#ref-poldrack2024" role="doc-biblioref">2024</a>)</span>. <em>Statistical Thinking for the 21st Century</em>. Available free online at <a href="https://statsthinking21.org" class="uri">https://statsthinking21.org</a>.</p></li>
+</ul>
+</div>
+</div>
+
+
+</section>
+<section id="bibliography" class="level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-baguley2009" class="csl-entry" role="listitem">
+Baguley, Thom. 2009. <span>《Standardized or simple effect size: What should be reported?》</span> <em>British journal of psychology</em> 100 (3): 603–17.
+</div>
+<div id="ref-cohen1992" class="csl-entry" role="listitem">
+Cohen, Jacob. 1992. <span>《A power primer》</span>. <em>Psychological bulletin</em> 112 (1): 155–59.
+</div>
+<div id="ref-dunn1997" class="csl-entry" role="listitem">
+Dunn, Peter M. 1997. <span>《James Lind (1716-94) of Edinburgh and the treatment of scurvy》</span>. <em>Archives of Disease in Childhood-Fetal and Neonatal Edition</em> 76 (1): F64–65.
+</div>
+<div id="ref-fritz2012" class="csl-entry" role="listitem">
+Fritz, Catherine O, Peter E Morris, 和 Jennifer J Richler. 2012. <span>《Effect size estimates: current use, calculations, and interpretation.》</span> <em>Journal of experimental psychology: General</em> 141 (1): 2.
+</div>
+<div id="ref-kelley2012" class="csl-entry" role="listitem">
+Kelley, Ken, 和 Kristopher J Preacher. 2012. <span>《On effect size》</span>. <em>Psychological methods</em> 17 (2): 137.
+</div>
+<div id="ref-kennedy2003" class="csl-entry" role="listitem">
+Kennedy, Maeve. 2003. <span>《How to make a perfect cuppa: put milk in first》</span>. <em>How to make a perfect cuppa: put milk in first</em>. <a href="https://www.theguardian.com/uk/2003/jun/25/science.highereducation">https://www.theguardian.com/uk/2003/jun/25/science.highereducation</a>.
+</div>
+<div id="ref-lakens2013" class="csl-entry" role="listitem">
+Lakens, Daniël. 2013. <span>《Calculating and reporting effect sizes to facilitate cumulative science: a practical primer for t-tests and ANOVAs》</span>. <em>Frontiers in psychology</em> 4: 863.
+</div>
+<div id="ref-lee-rodgers1988" class="csl-entry" role="listitem">
+Lee Rodgers, Joseph, 和 W Alan Nicewander. 1988. <span>《Thirteen ways to look at the correlation coefficient》</span>. <em>The American Statistician</em> 42 (1): 59–66.
+</div>
+<div id="ref-lundberg2021" class="csl-entry" role="listitem">
+Lundberg, Ian, Rebecca Johnson, 和 Brandon M Stewart. 2021. <span>《What is your estimand? Defining the target quantity connects statistical evidence to theory》</span>. <em>American Sociological Review</em> 86 (3): 532–65.
+</div>
+<div id="ref-peirce1884" class="csl-entry" role="listitem">
+Peirce, Charles Sanders, 和 Joseph Jastrow. 1884. <span>《On small differences in sensation》</span>. <em>Memoirs of the National Academy of Sciences</em> 3.
+</div>
+<div id="ref-poldrack2024" class="csl-entry" role="listitem">
+Poldrack, Russell A. 2024. <em>Statistical Thinking for the 21st Century</em>. <a href="https://statsthinking21.org/">https://statsthinking21.org/</a>.
+</div>
+<div id="ref-salsburg2002" class="csl-entry" role="listitem">
+Salsburg, David. 2002. <em>The lady tasting tea: How statistics revolutionized science in the twentieth century</em>. Macmillan.
+</div>
+</div>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./004-ethics.html" class="pagination-link" aria-label="伦理">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">伦理</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./006-inference.html" class="pagination-link" aria-label="推断">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">推断</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
